@@ -1,0 +1,1 @@
+Erronkako komentazioak:
