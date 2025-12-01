@@ -15,16 +15,17 @@ function App() {
               <Nav.Link href="#home">Hasiera</Nav.Link>
               <Nav.Link href="#features">Erreserbak</Nav.Link>
               <Nav.Link href="#pricing">Prezioak</Nav.Link>
-              <Nav.Link href="#pricing">Plater motak</Nav.Link>
+              <Nav.Link href="#platerMota">Plater motak</Nav.Link>
             </Nav>
+            
             <Button variant="outline-light">Login</Button>
           </Navbar.Collapse>
         </Container>
       </Navbar>
 
-      {/* Contenido principal */}
+      {/*Main content*/}
       <Container>
-      
+
       </Container>
 
       {/* Footer */}
