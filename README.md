@@ -1,1 +1,1 @@
-Erronkako komentazioak:
+Erronkako repositorioa
