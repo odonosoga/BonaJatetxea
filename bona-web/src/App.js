@@ -1,33 +1,13 @@
 import React from 'react';
-import { Container, Navbar, Nav, Button, Image} from 'react-bootstrap';
+import { Container,} from 'react-bootstrap';
 import './App.css';
-
+import Header from './components/header';
+import Footer from './components/footer';
 function App() {
   return (
     <div className="App">
       {/* Navbar */}
-      <Navbar style={{ backgroundColor:'#ff8181', }} variant="dark" expand="lg" className="mb-4">
-        <Container>
-          
-          <Navbar.Brand href="#home" style={{ color: 'black', }}> <Image 
-              src="/BonaLogoa.png" 
-              alt="Bona Restaurant Logo"
-              width="auto"
-              height="60"
-              className="d-inline-block align-top me-2"
-            />Bona Web Gunea</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav  className="me-auto">
-              <Nav.Link style={{ color: 'black', }} href="#home">Hasiera</Nav.Link>
-              <Nav.Link style={{ color: 'black', }} href="#features">Erreserbak</Nav.Link>
-              <Nav.Link style={{ color: 'black', }} href="#platerMotak">Plater motak</Nav.Link>
-            </Nav>
-            
-            <Button style={{ color: 'black', }} variant="outline-dark">Login</Button>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <Header />
 
       {/*Main content*/}
       <Container>
@@ -35,43 +15,7 @@ function App() {
       </Container>
 
       {/* Footer */}
-      <footer style={{ backgroundColor:'#ff8181', }} className="py-4">
-        <Container>
-          <div className="text-center">
-            {/* Logo/Texto principal */}
-            <h4 className="mb-3">Bona Restaurant</h4>
-            
-            {/* Redes sociales centradas */}
-            <div className="social-links mb-4">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" 
-                 className="text-white mx-3 text-decoration-none">
-                <span className="fs-4">Facebook</span>
-              </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" 
-                 className="text-white mx-3 text-decoration-none">
-                <span className="fs-4">Instagram</span>
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" 
-                 className="text-white mx-3 text-decoration-none">
-                <span className="fs-4">Twitter</span>
-              </a>
-            </div>
-            
-            {/* Contacto */}
-            <div className="contact-info mb-4">
-              <p className="mb-1">Kale Nagusia, 123 - Donostia</p>
-              <p className="mb-1">943 123 456 | info@bonarestaurante.com</p>
-            </div>
-            
-            {/* Copyright */}
-            <div className="border-top border-black pt-3">
-              <p className="mb-0">
-                &copy; {new Date().getFullYear()} Bona Web Gunea.
-              </p>
-            </div>
-          </div>
-        </Container>
-      </footer>
+      <Footer />
     </div>
   );
 }
