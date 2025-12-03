@@ -11,10 +11,10 @@ function App() {
       <Header />
 
       {/*Main content*/}
-      <Container>
+     
         <Carousel />
 
-      </Container>
+
 
       {/* Footer */}
       <Footer />
