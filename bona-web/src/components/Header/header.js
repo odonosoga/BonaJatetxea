@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Container, Nav, Button, Image, Stack } from "react-bootstrap";
-import { BsPhone, BsClock, MapPin, BsInstagram, BsWhatsapp } from "react-icons/bs"; // npm install react-icons
-import "../App.css";
+import {BsClock} from "react-icons/bs"; // npm install react-icons
+import "../Header/header.css";
 
 const Header = () => {
   return (
@@ -53,7 +53,7 @@ const Header = () => {
             {/* Horario rápido */}
             <div className="text-dark d-none d-lg-flex align-items-center gap-2">
               <BsClock size={18} />
-              <small className="fw-medium">19:00–23:00</small>
+              <small className="fw-medium">12:00–16:00</small>
               <BsClock size={18} />
               <small className="fw-medium">19:00–23:00</small>
             </div>

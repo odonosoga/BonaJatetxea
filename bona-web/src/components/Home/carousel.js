@@ -1,7 +1,7 @@
 import React from "react";
-import car1 from "../img/car1.jpg";
-import car2 from "../img/car2.jpg";
-import car3 from "../img/car3.jpg";
+import car1 from "../../img/car1.jpg";
+import car2 from "../../img/car2.jpg";
+import car3 from "../../img/car3.jpg";
 
 const CustomCarousel = () => {
   return (
