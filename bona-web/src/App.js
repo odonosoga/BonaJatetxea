@@ -1,9 +1,8 @@
 import React from 'react';
-import { Container,} from 'react-bootstrap';
 import './App.css';
-import Header from './components/header';
-import Footer from './components/footer';
-import Carousel from './components/carousel';
+import Header from './components/Header/header';
+import Footer from './components/Footer/footer';
+import Carousel from './components/Home/carousel';
 function App() {
   return (
     <div className="App">
@@ -11,10 +10,10 @@ function App() {
       <Header />
 
       {/*Main content*/}
-      <Container>
+     
         <Carousel />
 
-      </Container>
+
 
       {/* Footer */}
       <Footer />

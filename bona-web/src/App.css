@@ -7,38 +7,6 @@
   pointer-events: none;
 }
 
-
-/* Color normal de los enlaces del navbar */
-.nav-link-custom {
-  color: black !important;
-  font-weight: 500;
-  transition: all 0.3s ease;   /* <- importante para que el hover sea suave */
-  position: relative;
-}
-
-/* Efecto hover */
-.nav-link-custom:hover {
-  color: #fff !important;                 /* cambia a blanco al hacer hover */
-  text-shadow: 0 0 8px rgba(0,0,0,0.4);
-}
-
-/* Bonus: subrayado elegante que crece desde el centro */
-.nav-link-custom::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 3px;
-  bottom: -6px;
-  left: 50%;
-  background-color: white;
-  transition: all 0.3s ease;
-  transform: translateX(-50%);
-}
-
-.nav-link-custom:hover::after {
-  width: 80%;
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
