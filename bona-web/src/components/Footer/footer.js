@@ -4,7 +4,7 @@ import { BsWhatsapp, BsInstagram, BsTwitterX } from "react-icons/bs";
 
 const Footer = () => {
   return (
-    <footer style={{ backgroundColor: "#ff8181" }} className="text-dark py-4 py-md-5">
+    <footer style={{  background: 'linear-gradient(135deg, #541412 0%, #C34F5A 100%)' }} className="text-dark py-4 py-md-5">
       <Container>
         <Row className="align-items-center justify-content-between">
           

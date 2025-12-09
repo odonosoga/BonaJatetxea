@@ -7,7 +7,7 @@ import "../Header/header.css";
 const Header = () => {
   return (
     <Navbar
-      style={{ backgroundColor: "#ff8181", minHeight: "97px" }}
+     style={{  background: 'linear-gradient(135deg, #C34F5A 0%, #541412 100%)' }}
       variant="dark"
       expand="lg"
       fixed="top"
@@ -47,12 +47,12 @@ const Header = () => {
           <Stack direction="horizontal" gap={3} className="align-items-center flex-wrap justify-content-center justify-content-lg-end">
             <div className="text-dark d-none d-lg-flex flex-column">
               <div className="d-flex align-items-center gap-2">
-                <BsClock size={18} />
-                <small className="fw-medium">12:00–16:00</small>
+                <BsClock size={18} className="text-white" />
+                <small className="fw-medium text-white">12:00–16:00</small>
               </div>
               <div className="d-flex align-items-center gap-2">
-                <BsClock size={18} />
-                <small className="fw-medium">19:00–23:00</small>
+                <BsClock size={18} className="text-white" />
+                <small className="fw-medium text-white">19:00–23:00</small>
               </div>
             </div>
             <Button variant="outline-dark" size="sm" className="ms-2">

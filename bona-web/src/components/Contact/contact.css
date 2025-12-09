@@ -1,46 +1,60 @@
 .contact-section {
-  background: linear-gradient(135deg, #fff 0%, #fdf2f2 100%);
-  min-height: 100vh;
+  background: linear-gradient(135deg, #F8D4BA 0%, #ffffff 100%);
+  min-height: 80vh;
 }
 
+/* Tarjeta lateral */
 .contact-card {
-  background: linear-gradient(135deg, #ff8181 0%, #ff9a9a 100%);
-  color: white;
+  background: linear-gradient(135deg, #C34F5A 0%, #D69F3A 100%);
+  color: #fff;
   border-radius: 20px !important;
 }
 
+/* Bloques de info */
 .contact-item {
   transition: all 0.3s ease;
+  background: rgba(248, 212, 186, 0.18);
+  border-left: 4px solid #D69F3A;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
 }
 
 .contact-item:hover {
   transform: translateX(5px);
+  background: rgba(248, 212, 186, 0.35);
 }
 
+/* Links dentro de info */
 .contact-item a {
-  color: white !important;
+  color: #fff !important;
+  font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .contact-item a:hover {
-  color: #ffebee !important;
+  color: #F8D4BA !important;
   text-decoration: underline !important;
 }
 
+/* Botón enviar */
 .btn-contact {
-  background: linear-gradient(45deg, #ff8181, #ff9a9a) !important;
-  border: none !important;
+  background: linear-gradient(45deg, #D69F3A, #C34F5A) !important;
+  border: 2px solid #541412 !important;
   border-radius: 12px !important;
   font-size: 1.1rem !important;
+  color: #fff !important;
+  font-weight: 600;
   transition: all 0.3s ease !important;
 }
 
 .btn-contact:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(255,129,129,0.4) !important;
+  box-shadow: 0 10px 25px rgba(84, 20, 18, 0.4) !important;
 }
 
-Form.Control:focus {
-  border-color: #ff8181 !important;
-  box-shadow: 0 0 0 0.2rem rgba(255,129,129,0.25) !important;
+/* Inputs */
+.form-control:focus {
+  border-color: #D69F3A !important;
+  box-shadow: 0 0 0 0.2rem rgba(214, 159, 58, 0.35) !important;
 }

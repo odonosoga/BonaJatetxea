@@ -1,0 +1,15 @@
+.bg-gradient {
+  background: linear-gradient(135deg, #fff 0%, #fdf2f2 100%);
+}
+
+.cta-button {
+  background: linear-gradient(45deg, #ff8181, #ff9a9a) !important;
+  border: none !important;
+  font-size: 1.2rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 15px 35px rgba(255,129,129,0.4) !important;
+}
