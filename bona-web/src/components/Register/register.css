@@ -1,0 +1,33 @@
+.register-section {
+  background: linear-gradient(135deg, #fff 0%, #fdf2f2 100%);
+  display: flex;
+}
+
+.register-form {
+  padding-top: 150px;
+  padding-bottom: 2rem;
+  width: 80%;
+}
+
+
+.register-section input[type="button"] 
+{
+  background: linear-gradient(135deg, #ff8181 0%, #ff9a9a 100%);
+  color: white;
+  min-height: 55px;
+  font-size: 19px;
+  border-radius: 5%;
+}
+.register-section img {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+
+
+
+
+
+
+
+
