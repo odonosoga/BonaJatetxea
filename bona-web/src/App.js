@@ -5,7 +5,7 @@ import Header from './components/Header/header';
 import Footer from './components/Footer/footer';
 import Home from './components/Home/home';
 import Contact from './components/Contact/contact';
-
+import Reserva from './components/Reservations/reservation';
 function App() {
   return (
     <Router>
@@ -16,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/kontaktua" element={<Contact />} />
+            <Route path="/erreserbak" element={<Reserva />}/>
           </Routes>
         </main>
 

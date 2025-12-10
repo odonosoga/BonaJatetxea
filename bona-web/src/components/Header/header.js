@@ -42,7 +42,8 @@ const Header = () => {
               Kontaktua
             </Nav.Link>
             {/* Otros enlaces futuros */}
-            <Nav.Link href="#erreserbak" className="nav-link-custom px-3">
+            <Nav.Link as={Link}
+              to="/erreserbak" className="nav-link-custom px-3">
               Erreserbak
             </Nav.Link>
             <Nav.Link href="#plater-motak" className="nav-link-custom px-3">

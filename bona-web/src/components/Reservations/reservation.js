@@ -103,27 +103,90 @@ const Reserva = () => {
                         {hasOpari && (
                             <div className="mt-3 d-flex align-items-center justify-content-center">
                                 <Form.Label className="me-2 mb-0">Sartu kodea</Form.Label>
-                                <Form.Control type="text" placeholder="OPARI-12345" style={{ maxWidth: "200px" }}/>
+                                <Form.Control type="text" placeholder="OPARI-12345" style={{ maxWidth: "200px" }} required/>
                             </div>
                         )}
                         </Form.Group>
                       </Col>
                     </Row>
                     <Row>
-                        <Col>
-                            <Form.Group>
-                                <Form.Label className="fw-medium">Telefonoa</Form.Label>
-                                <Form.Control type="tel" placeholder="666 123 456" />
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Form.Group className="mb-4">
-                                <Form.Label className="fw-medium">Mezua</Form.Label>
-                                <Form.Control as="textarea" rows={4} placeholder="Zure mezua..." />
-                            </Form.Group>
-                        </Col>
+                      <Col md={6} className="mb-3">
+                          <Form.Group>
+                            <Form.Label className="fw-medium">Sartu Izena</Form.Label>
+                            <Form.Control type="text" placeholder="Izena" required/>
+                          </Form.Group>
+                      </Col>
+                      <Col md={6} className="mb-3">
+                          <Form.Group className="mb-4">
+                            <Form.Label className="fw-medium">Sartu Abizena</Form.Label>
+                            <Form.Control type="text" placeholder="Abizena" required />
+                          </Form.Group>
+                      </Col>
                     </Row>
-
+                    <Row>
+                      <Col md={6} className="mb-3">
+                        <Form.Group>
+                          <Form.Label className="fw-medium">Pertsona kopurua</Form.Label>
+                          <Form.Control type="number" min={1} max={12} required/>
+                        </Form.Group>
+                      </Col>
+                      <Col md={6} className="mb-3">
+                        <Form.Group>
+                          <Form.Label className="fw-medium">Mugikor zenbakia</Form.Label>
+                          <Form.Control type="number" placeholder="123-45-67-89" required/>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className="mb-3">
+                        <p><strong>GARRANTZITSUA: Mesedez, egiaztatu mugikorraren zenbakia zuzena dela; izan ere, zenbaki okerra jasotzen badugu edo Whatsapp aktibatua ez badaukagu, erreserba bertan behera utzi beharko dugu segurtasunagatik</strong></p>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col md={6} className="mb-3">
+                        <Form.Group>
+                          <Form.Label className="fw-medium">data</Form.Label>
+                          <Form.Control type="date"></Form.Control>
+                        </Form.Group>
+                      </Col>
+                      <Col md={6} className="mb-3">
+                        <Form.Label className="fw-fw-medium">Ordua</Form.Label>
+                          <select className="form-select">
+                            <option selected>Selecciona una hora</option>
+                            <option>12:00</option>
+                            <option>12:45</option>
+                            <option>13:30</option>
+                            <option>14:15</option>
+                            <option>15:00</option>
+                            <option>15:45</option>
+                          </select>
+                          <select className="form-select">
+                            <option selected>Seleccione la zona del restaurante</option>
+                            <option>19:00</option>
+                            <option>19:45</option>
+                            <option>20:30</option>
+                            <option>21:15</option>
+                            <option>22:00</option>
+                            <option>22:45</option>
+                          </select>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col md={6} className="mb-3">
+                        <Form.Group>
+                          <Form.Label>Lokala: </Form.Label>
+                          <select className="form-select">
+                            <option selected>Seleccione la zona del restaurante</option>
+                            <option>19:00</option>
+                            <option>19:45</option>
+                            <option>20:30</option>
+                            <option>21:15</option>
+                            <option>22:00</option>
+                            <option>22:45</option>
+                          </select>
+                        </Form.Group>
+                      </Col>
+                    </Row>
                     <Button type="submit" className="w-100 btn-contact py-3 fw-bold">
                       Bidali mezua
                     </Button>
