@@ -1,19 +1,33 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { BsWhatsapp, BsInstagram, BsTwitterX } from "react-icons/bs";
+import "./footer.css";
 
 const Footer = () => {
   return (
-    <footer style={{  background: 'linear-gradient(135deg, #541412 0%, #C34F5A 100%)' }} className="text-dark py-4 py-md-5">
+    <footer
+      style={{
+        background: "linear-gradient(135deg, #541412 0%, #C34F5A 100%)",
+      }}
+      className="py-4 py-md-5 footer"
+    >
       <Container>
         <Row className="align-items-center justify-content-between">
-          
           {/* Izquierda - Info del restaurante */}
-          <Col xs={12} md={5} lg={4} className="text-center text-md-start mb-3 mb-md-0">
+          <Col
+            xs={12}
+            md={5}
+            lg={4}
+            className="text-center text-md-start mb-3 mb-md-0"
+          >
             <h4 className="fw-bold mb-2">Bona Jatetxea</h4>
             <p className="mb-0 small">
-              Kale Nagusia, 123 • Donostia<br />
-              <strong>943 123 456</strong> • info@bonarestaurante.com
+              Kale Nagusia, 123 • Donostia
+              <br />
+              <strong>943 123 456</strong> •{" "}
+              <a href="mailto:info@bonarestaurante.com">
+                info@bonarestaurante.com
+              </a>
             </p>
           </Col>
 
@@ -24,7 +38,7 @@ const Footer = () => {
                 href="https://wa.me/34666123456"
                 target="_blank"
                 rel="noreferrer"
-                className="text-dark text-decoration-none d-flex align-items-center gap-2 fw-bold"
+                className="text-decoration-none d-flex align-items-center gap-2 fw-bold"
               >
                 <BsWhatsapp size={26} />
                 <span className="d-none d-sm-inline">666 123 456</span>
@@ -34,7 +48,7 @@ const Footer = () => {
                 href="https://instagram.com/bona_jatetxea"
                 target="_blank"
                 rel="noreferrer"
-                className="text-dark text-decoration-none d-flex align-items-center gap-2 fw-bold"
+                className="text-decoration-none d-flex align-items-center gap-2 fw-bold"
               >
                 <BsInstagram size={26} />
                 <span>@bona_jatetxea</span>
@@ -44,7 +58,7 @@ const Footer = () => {
                 href="https://twitter.com/bona_jatetxea"
                 target="_blank"
                 rel="noreferrer"
-                className="text-dark text-decoration-none d-flex align-items-center gap-2 fw-bold"
+                className="text-decoration-none d-flex align-items-center gap-2 fw-bold"
               >
                 <BsTwitterX size={26} />
                 <span>@bona_jatetxea</span>
@@ -54,9 +68,10 @@ const Footer = () => {
         </Row>
 
         {/* Copyright - más discreto */}
-        <div className="text-center mt-4 pt-3 border-top border-dark">
+        <div className="text-center mt-4 pt-3 border-top footer-copy">
           <small className="fw-medium">
-            © {new Date().getFullYear()} Bona Jatetxea. Eskubide guztiak erreserbatuta.
+            © {new Date().getFullYear()} Bona Jatetxea. Eskubide guztiak
+            erreserbatuta.
           </small>
         </div>
       </Container>

@@ -1,4 +1,9 @@
-/* header.css */
+.header-top {
+  color: #F8D4BA;
+}
+
+
+/*Login botoia*/
 .nav-link-custom {
   color: #F8D4BA !important;
   font-weight: 500;
@@ -26,3 +31,22 @@
 .nav-link-custom:hover::after {
   width: 80%;
 }
+
+/*Login botoia*/
+.login-btn {
+  color: #F8D4BA !important;
+  border-color: #F8D4BA !important;
+  background-color: transparent;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.login-btn:hover,
+.login-btn:focus {
+  color: #541412 !important;           /* Texto oscuro para contraste */
+  border-color: #541412 !important;
+  background-color: #F8D4BA !important;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+}
+
+

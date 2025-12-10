@@ -67,7 +67,7 @@
             <Col lg={8}>
               <Card className="border-0 shadow-sm h-100">
                 <Card.Body className="p-4 p-lg-5">
-                  <h5 className="fw-bold mb-4">Erreserba edo kontsulta</h5>
+                  <h5 className="fw-bold mb-4">Kontsulta</h5>
                   <Form>
                     <Row>
                       <Col md={6} className="mb-3">

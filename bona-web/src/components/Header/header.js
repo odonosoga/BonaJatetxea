@@ -7,15 +7,17 @@ import "../Header/header.css";
 const Header = () => {
   return (
     <Navbar
-     style={{  background: 'linear-gradient(135deg, #C34F5A 0%, #541412 100%)' }}
+      style={{
+        background: "linear-gradient(135deg, #C34F5A 0%, #541412 100%)",
+      }}
       variant="dark"
       expand="lg"
       fixed="top"
-      className="shadow-sm"
+      className="shadow-sm header-top"
     >
       <Container fluid className="px-4">
         {/* Logo - Home */}
-        <Navbar.Brand as={Link} to="/" style={{ cursor: 'pointer' }}>
+        <Navbar.Brand as={Link} to="/" style={{ cursor: "pointer" }}>
           <Image
             src="/BonaLogoa.png"
             alt="Bona Restaurant Logo"
@@ -32,7 +34,11 @@ const Header = () => {
             <Nav.Link as={Link} to="/" className="nav-link-custom px-3">
               Hasiera
             </Nav.Link>
-            <Nav.Link as={Link} to="/kontaktua" className="nav-link-custom px-3">
+            <Nav.Link
+              as={Link}
+              to="/kontaktua"
+              className="nav-link-custom px-3"
+            >
               Kontaktua
             </Nav.Link>
             {/* Otros enlaces futuros */}
@@ -44,18 +50,22 @@ const Header = () => {
             </Nav.Link>
           </Nav>
 
-          <Stack direction="horizontal" gap={3} className="align-items-center flex-wrap justify-content-center justify-content-lg-end">
-            <div className="text-dark d-none d-lg-flex flex-column">
+          <Stack
+            direction="horizontal"
+            gap={3}
+            className="align-items-center flex-wrap justify-content-center justify-content-lg-end"
+          >
+            <div className="d-none d-lg-flex flex-column">
               <div className="d-flex align-items-center gap-2">
-                <BsClock size={18} className="text-white" />
-                <small className="fw-medium text-white">12:00–16:00</small>
+                <BsClock size={18} />
+                <small className="fw-medium">12:00–16:00</small>
               </div>
               <div className="d-flex align-items-center gap-2">
-                <BsClock size={18} className="text-white" />
-                <small className="fw-medium text-white">19:00–23:00</small>
+                <BsClock size={18} />
+                <small className="fw-medium">19:00–23:00</small>
               </div>
             </div>
-            <Button variant="outline-dark" size="sm" className="ms-2">
+            <Button variant="outline-dark" size="sm" className="login-btn ms-2 ">
               Login
             </Button>
           </Stack>
