@@ -1,0 +1,20 @@
+.footer {
+  color: #F8D4BA;
+}
+
+.footer a {
+  color: #F8D4BA;
+  text-decoration: none;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+/* Hover como el que indicas */
+.footer a:hover,
+.footer a:focus {
+  color: #D69F3A !important;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+}
+
+.footer-copy {
+  border-color: #F8D4BA !important;
+}

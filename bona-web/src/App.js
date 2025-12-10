@@ -1,23 +1,27 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/header';
 import Footer from './components/Footer/footer';
-import Carousel from './components/Home/carousel';
+import Home from './components/Home/home';
+import Contact from './components/Contact/contact';
+
 function App() {
   return (
-    <div className="App">
-      {/* Navbar */}
-      <Header />
+    <Router>
+      <div className="App">
+        <Header />
+        
+        <main >
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/kontaktua" element={<Contact />} />
+          </Routes>
+        </main>
 
-      {/*Main content*/}
-     
-        <Carousel />
-
-
-
-      {/* Footer */}
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
