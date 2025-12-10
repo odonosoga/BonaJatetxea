@@ -7,7 +7,7 @@ const Reserva = () => {
     const [hasOpari, setHasOpari] = useState(null);
     return (
         
-        <section id="kontaktua" className="pt-5 pb-2 contact-section p-0"> 
+        <section id="kontaktua" className=" pb-2 reservation-section"> 
         <Container>
           {/* Título */}
           <div className="text-center mb-5">
@@ -18,12 +18,12 @@ const Reserva = () => {
           <Row className="g-5">
             {/* Información de contacto */}
             <Col lg={4}>
-              <Card className="h-100 border-0 shadow-sm contact-card">
+              <Card className="h-100 border-0 shadow-sm reservation-card">
                 <Card.Body className="p-4">
                   <h5 className="fw-bold mb-4 text-center">Datuak</h5>
                   
                   {/* Dirección */}
-                  <div className="d-flex align-items-start mb-4 contact-item">
+                  <div className="d-flex align-items-start mb-4 reservation-item">
                     <BsGeoAlt className="mt-1 me-3 text-danger fs-4" />
                     <div>
                       <strong>Kale Nagusia, 123</strong><br />
@@ -32,7 +32,7 @@ const Reserva = () => {
                   </div>
 
                   {/* Teléfono */}
-                  <div className="d-flex align-items-start mb-4 contact-item">
+                  <div className="d-flex align-items-start mb-4 reservation-item">
                     <BsTelephone className="mt-1 me-3 text-danger fs-4" />
                     <div>
                       <a href="tel:+34943123456" className="text-decoration-none">
@@ -43,7 +43,7 @@ const Reserva = () => {
                   </div>
 
                   {/* Email */}
-                  <div className="d-flex align-items-start mb-4 contact-item">
+                  <div className="d-flex align-items-start mb-4 reservation-item">
                     <BsEnvelope className="mt-1 me-3 text-danger fs-4" />
                     <div>
                       <a href="mailto:info@bonarestaurante.com" className="text-decoration-none">
@@ -53,7 +53,7 @@ const Reserva = () => {
                   </div>
 
                   {/* Horario */}
-                  <div className="d-flex align-items-start contact-item">
+                  <div className="d-flex align-items-start reservation-item">
                     <BsClock className="mt-1 me-3 text-danger fs-4" />
                     <div>
                       <strong>Ordutegiak</strong>
@@ -187,6 +187,7 @@ const Reserva = () => {
                         </Form.Group>
                       </Col>
                     </Row>
+
                     <Button type="submit" className="w-100 btn-contact py-3 fw-bold">
                       Bidali mezua
                     </Button>

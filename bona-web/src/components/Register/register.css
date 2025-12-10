@@ -23,11 +23,8 @@
     margin-bottom: 0;
 }
 
-
-
-
-
-
-
-
-
+/* Inputen borderra */
+.form-control:focus {
+  border-color: #8d3236 !important;
+  box-shadow: 0 0 0 0.2rem rgba(228, 85, 75, 0.35) !important;
+}

@@ -1,82 +1,22 @@
+// Contact.js
 import React from "react";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
-import { BsTelephone, BsEnvelope, BsGeoAlt, BsClock } from "react-icons/bs";
 import "./contact.css";
 
 const Contact = () => {
   return (
-    <section id="kontaktua" className="pt-5 pb-2 contact-section ">
+    <section id="kontaktua" className="pb-2 contact-section">
       <Container>
         {/* Título */}
-        <div className="text-center mb-5">
-          <h2 className="display-5 fw-bold text-dark mb-3">Kontaktua</h2>
+        <div className="text-center mb-4">
+          
+          <h2 className="display-5 fw-bold text-dark mb-2">Kontaktua</h2>
           <p className="lead text-muted mb-0">
-            Gurekin harremanetan jar zaitez
+            Idatzi zure ideia, galdera edo eskaera eta harremanetan jarriko gara.
           </p>
         </div>
 
-        <Row className="g-5">
-          {/* Información de contacto */}
-          <Col lg={4}>
-            <Card className="h-100 border-0 shadow-sm contact-card">
-              <Card.Body className="p-4">
-                <h5 className="fw-bold mb-4 text-center">Datuak</h5>
-
-                {/* Dirección */}
-                <div className="d-flex align-items-start mb-4 contact-item"> 
-                  <BsGeoAlt className="mt-1 me-3 text-danger fs-4" />
-                  <div>
-                    <a href="tel:+34943123456" className="text-decoration-none">
-                      <strong>Kale Nagusia, 123</strong>
-                    </a>
-                    <br />
-                    <small className="text-muted">Donostia - San Sebastián</small>
-                  </div>
-                </div>
-
-                {/* Teléfono */}
-                <div className="d-flex align-items-start mb-4 contact-item">
-                  <BsTelephone className="mt-1 me-3 text-danger fs-4" />
-                  <div>
-                    <a href="tel:943123456" className="text-decoration-none">
-                      <strong>943 123 456</strong>
-                    </a>
-                    <br />
-                    <small className="text-muted">WhatsApp: 666 123 456</small>
-                  </div>
-                </div>
-
-                {/* Email */}
-                <div className="d-flex align-items-start mb-4 contact-item">
-                  <BsEnvelope className="mt-1 me-3 text-danger fs-4" />
-                  <div>
-                    <a
-                      href="mailto:info@bonarestaurante.com"
-                      className="text-decoration-none"
-                    >
-                      <strong>info@bonarestaurante.com</strong>
-                    </a>
-                  </div>
-                </div>
-
-                {/* Horario */}
-                <div className="d-flex align-items-start contact-item">
-                  <BsClock className="mt-1 me-3 text-danger fs-4" />
-                  <div>
-                    <strong>Ordutegiak</strong>
-                    <div>
-                      <small>12:00–16:00</small>
-                    </div>
-                    <div>
-                      <small>19:00–23:00</small>
-                    </div>
-                  </div>
-                </div>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          {/* Formulario */}
+        <Row className="g-5 justify-content-center">
           <Col lg={8}>
             <Card className="border-0 shadow-sm h-100">
               <Card.Body className="p-4 p-lg-5">
@@ -105,9 +45,21 @@ const Contact = () => {
                     </Col>
                   </Row>
 
-                  <Form.Group>
+                  <Form.Group className="mb-3">
                     <Form.Label className="fw-medium">Telefonoa</Form.Label>
                     <Form.Control type="tel" placeholder="666 123 456" />
+                  </Form.Group>
+
+                  {/* Motivo de la consulta */}
+                  <Form.Group className="mb-3">
+                    <Form.Label className="fw-medium">Zeri buruz?</Form.Label>
+                    <Form.Select>
+                      <option>Aukeratu aukera bat</option>
+                      <option>Informazio orokorra</option>
+                      <option>Hitzordu bat eskatu</option>
+                      <option>Aipu edo aurrekontua</option>
+                      <option>Beste bat</option>
+                    </Form.Select>
                   </Form.Group>
 
                   <Form.Group className="mb-4">
@@ -125,9 +77,24 @@ const Contact = () => {
                   >
                     Bidali mezua
                   </Button>
+
+                  {/* Microcopy debajo del botón */}
+                  <p className="text-center text-muted mt-3 mb-0" style={{ fontSize: "0.9rem" }}>
+                    Normalean 24-48 orduren buruan erantzuten dugu.
+                  </p>
                 </Form>
               </Card.Body>
             </Card>
+
+            {/* Bloque de confianza debajo de la card */}
+            <div className="text-center mt-4">
+              <p className="text-muted mb-1" style={{ fontSize: "0.95rem" }}>
+                Zalantzarik baduzu, lasai idatzi: laguntzeko gaude.
+              </p>
+              <p className="text-muted mb-0" style={{ fontSize: "0.85rem" }}>
+                Ez partekatu inoiz pasahitzik edo datu konfidentzialik mezu honetan.
+              </p>
+            </div>
           </Col>
         </Row>
       </Container>

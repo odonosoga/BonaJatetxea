@@ -1,42 +1,8 @@
 .contact-section {
   background: linear-gradient(135deg, #F8D4BA 0%, #ffffff 100%);
-  min-height: 80vh;
+  min-height: 127vh;
+  padding-top: 150px;
 }
-
-/* Tarjeta lateral */
-.contact-card {
-  background: linear-gradient(135deg, #C34F5A 0%, #541412 120%);
-  color: #F8D4BA !important;
-  border-radius: 20px !important;
-}
-
-/* Bloques de info */
-.contact-item {
-  transition: all 0.3s ease;
-  background: rgba(248, 212, 186, 0.18);
-  border-left: 4px solid #D69F3A;
-  padding: 0.75rem 1rem;
-  border-radius: 10px;
-  margin-bottom: 0.75rem;
-}
-
-.contact-item:hover {
-  transform: translateX(5px);
-  background: rgba(248, 212, 186, 0.35);
-}
-
-/* Links dentro de info */
-.contact-item a {
-  color: #F8D4BA !important;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.contact-item a:hover {
-  color: #D69F3A !important;
-  text-decoration: underline !important;
-}
-
 /* Botoia  */
 .btn-contact {
   background: #8d3236 !important;

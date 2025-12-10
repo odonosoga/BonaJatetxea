@@ -43,14 +43,18 @@ const Header = () => {
             </Nav.Link>
             {/* Otros enlaces futuros */}
             <Nav.Link as={Link}
+              to="/erreserbak"
+              className="nav-link-custom px-3">
+            <Nav.Link as={Link}
               to="/erreserbak" className="nav-link-custom px-3">
               Erreserbak
             </Nav.Link>
-            <Nav.Link href="#plater-motak" className="nav-link-custom px-3">
+            <Nav.Link as={Link}
+              to="/erregistroa"
+              className="nav-link-custom px-3">
               Plater motak
             </Nav.Link>
           </Nav>
-
           <Stack
             direction="horizontal"
             gap={3}
@@ -75,5 +79,4 @@ const Header = () => {
     </Navbar>
   );
 };
-
 export default Header;
