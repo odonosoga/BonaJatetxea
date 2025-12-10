@@ -5,8 +5,8 @@
 
 /* Tarjeta lateral */
 .contact-card {
-  background: linear-gradient(135deg, #C34F5A 0%, #D69F3A 100%);
-  color: #fff;
+  background: linear-gradient(135deg, #C34F5A 0%, #541412 120%);
+  color: #F8D4BA !important;
   border-radius: 20px !important;
 }
 
@@ -27,19 +27,19 @@
 
 /* Links dentro de info */
 .contact-item a {
-  color: #fff !important;
+  color: #F8D4BA !important;
   font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .contact-item a:hover {
-  color: #F8D4BA !important;
+  color: #D69F3A !important;
   text-decoration: underline !important;
 }
 
-/* Botón enviar */
+/* Botoia  */
 .btn-contact {
-  background: linear-gradient(45deg, #D69F3A, #C34F5A) !important;
+  background: #8d3236 !important;
   border: 2px solid #541412 !important;
   border-radius: 12px !important;
   font-size: 1.1rem !important;
@@ -53,8 +53,8 @@
   box-shadow: 0 10px 25px rgba(84, 20, 18, 0.4) !important;
 }
 
-/* Inputs */
+/* Inputen borderra */
 .form-control:focus {
-  border-color: #D69F3A !important;
-  box-shadow: 0 0 0 0.2rem rgba(214, 159, 58, 0.35) !important;
+  border-color: #8d3236 !important;
+  box-shadow: 0 0 0 0.2rem rgba(228, 85, 75, 0.35) !important;
 }
