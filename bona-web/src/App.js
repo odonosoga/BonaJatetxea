@@ -7,7 +7,6 @@ import Home from './components/Home/home';
 import Contact from './components/Contact/contact';
 import Reserva from './components/Reservations/reservation';
 import Register from './components/Register/register';
-import Reserva from './components/Reservations/reservation';
 function App() {
   return (
     <Router>

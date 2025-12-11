@@ -43,9 +43,6 @@ const Header = () => {
             </Nav.Link>
             {/* Otros enlaces futuros */}
             <Nav.Link as={Link}
-              to="/erreserbak"
-              className="nav-link-custom px-3">
-            <Nav.Link as={Link}
               to="/erreserbak" className="nav-link-custom px-3">
               Erreserbak
             </Nav.Link>
