@@ -1,5 +1,5 @@
 .register-section {
-  background: linear-gradient(135deg, #fff 0%, #fdf2f2 100%);
+  background: linear-gradient(135deg, #F8D4BA 0%, #ffffff 100%);
   display: flex;
 }
 
@@ -10,19 +10,26 @@
 }
 
 
-.register-section input[type="button"] 
-{
-  background: linear-gradient(135deg, #541412 0%, #ff9a9a 100%);
-  color: white;
-  min-height: 55px;
-  font-size: 19px;
-  border-radius: 5%;
+.btn-register {
+  background: #8d3236 !important;
+  border: 2px solid #541412 !important;
+  border-radius: 12px !important;
+  font-size: 1.1rem !important;
+  color: #fff !important;
+  font-weight: 600;
+  transition: all 0.3s ease !important;
+}
+
+.btn-register:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(84, 20, 18, 0.4) !important;
 }
 .register-section img {
     margin-top: 0;
     margin-bottom: 0;
 }
 
+/* Inputen borderra */
 .form-control:focus {
   border-color: #8d3236 !important;
   box-shadow: 0 0 0 0.2rem rgba(228, 85, 75, 0.35) !important;

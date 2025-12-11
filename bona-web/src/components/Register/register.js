@@ -91,7 +91,7 @@ const Register = () => {
                 <Row className="g-2 mt-3">
                   <Col>
                     <Form.Group className="d-flex justify-content-center">
-                      <Form.Control type="button" value="Erregistratu" className="w-50 fw-bold" />
+                      <Form.Control type="button" value="Erregistratu" className=" btn-register fw-bold " />
                     </Form.Group>
                   </Col>
                 </Row>
