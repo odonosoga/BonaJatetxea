@@ -1,11 +1,43 @@
-import React from "react";
-import { Navbar, Container, Nav, Button, Image, Stack } from "react-bootstrap";
+import React, { useRef, useState } from "react";
+import { Navbar, Container, Nav, Button, Image, Stack, Modal, Form, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom"; // ← NUEVO
 import { BsClock } from "react-icons/bs";
 import "../Header/header.css";
 
 const Header = () => {
+   const [login, setLogin] = useState(false);
+   const[email,setEmail] = useState("");
+   const[pasahitza,setPassword] = useState("");
+   const[error,setError] = useState("");
+
+
+
+  const handleShow = () => setLogin(true);
+  const handleClose = () => {
+    setLogin(false);
+    setError("");
+    setEmail("");
+    setPassword("");
+  };
+
+  const handleSubmit = (e) =>
+  {
+    e.preventDefault();
+
+    if(!email || !pasahitza)
+    {
+      setError("Mesedez, Emaila eta Pasahitza bete itzazu!!");
+      return;
+    }
+    handleClose();
+  };
+
+
+
   return (
+  <>
+
+
     <Navbar
       style={{
         background: "linear-gradient(135deg, #C34F5A 0%, #541412 100%)",
@@ -67,13 +99,38 @@ const Header = () => {
                 <small className="fw-medium">19:00–23:00</small>
               </div>
             </div>
-            <Button variant="outline-dark" size="sm" className="login-btn ms-2 ">
+            <Button variant="outline-dark" size="sm" className="login-btn ms-2 " id="btn" onClick={handleShow}>
               Login
             </Button>
           </Stack>
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    <Modal show={login} onHide={handleClose} centered>
+      <Modal.Header closeButton>
+        <Modal.Title>Saioa Hasi</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        {error && <Alert variant="danger">{error}</Alert>}
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="email">
+            <Form.Label>Email</Form.Label>
+            <Form.Control type="email" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}>
+            </Form.Control>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="pasahitza">
+            <Form.Label>Pasahitza</Form.Label>
+            <Form.Control type="password" placeholder="Pasahitza"  value={pasahitza} onChange={(e) => setPassword(e.target.value)}>
+
+            </Form.Control>
+          </Form.Group>
+          <Button variant="primary" type="submit" className="w-100">
+            Hasi
+          </Button>
+        </Form>
+      </Modal.Body>
+    </Modal>
+    </>
   );
 };
 export default Header;
