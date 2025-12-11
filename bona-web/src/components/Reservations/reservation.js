@@ -11,7 +11,7 @@ const Reserva = () => {
       <Container>
         {/* Título */}
         <div className="text-center mb-5">
-          <h2 className="display-5 fw-bold text-dark mb-3">Kontaktua</h2>
+          <h2 className="display-5 fw-bold text-dark mb-3">Erreserbak</h2>
           <p className="lead text-muted mb-0">Egin zure erreserba!</p>
         </div>
 
@@ -202,10 +202,10 @@ const Reserva = () => {
                             <Form.Check
                                   type="radio"
                                   name="ordua"
-                                  id="ordua-gauez"
-                                  label="Goizes"
-                                  value="goizes"
-                                  onChange={() => setTime('goizes')}
+                                  id="ordua-goizez"
+                                  label="Goizez"
+                                  value="goizez"
+                                  onChange={() => setTime('goizez')}
                               />
                               <Form.Check
                                   type="radio"
@@ -234,7 +234,7 @@ const Reserva = () => {
                         </Form.Group>
                       </Col>
                       <Col md={6} className="mb-3">
-                         {hasTimeMorningNight === 'goizes' && (
+                         {hasTimeMorningNight === 'goizez' && (
                             <div className=" d-flex align-items-center justify-content-center">
                               <Form.Group>
                                 <Form.Label>Hautatu ordua</Form.Label>

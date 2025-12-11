@@ -25,7 +25,7 @@ const Contact = () => {
                   <Row>
                     <Col md={6} className="mb-3">
                       <Form.Group>
-                        <Form.Label className="fw-medium">Izena</Form.Label>
+                        <Form.Label className="fw-medium d-flex align-items-start">Izena</Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Zure izena"
@@ -35,7 +35,7 @@ const Contact = () => {
                     </Col>
                     <Col md={6} className="mb-3">
                       <Form.Group>
-                        <Form.Label className="fw-medium">Emaila</Form.Label>
+                        <Form.Label className="fw-medium d-flex align-items-start">Emaila</Form.Label>
                         <Form.Control
                           type="email"
                           placeholder="email@adibidea.com"
@@ -46,13 +46,13 @@ const Contact = () => {
                   </Row>
 
                   <Form.Group className="mb-3">
-                    <Form.Label className="fw-medium">Telefonoa</Form.Label>
+                    <Form.Label className="fw-medium d-flex align-items-start">Telefonoa</Form.Label>
                     <Form.Control type="tel" placeholder="666 123 456" />
                   </Form.Group>
 
                   {/* Motivo de la consulta */}
                   <Form.Group className="mb-3">
-                    <Form.Label className="fw-medium">Zeri buruz?</Form.Label>
+                    <Form.Label className="fw-medium d-flex align-items-start">Zeri buruz?</Form.Label>
                     <Form.Select>
                       <option>Aukeratu aukera bat</option>
                       <option>Informazio orokorra</option>
@@ -63,7 +63,7 @@ const Contact = () => {
                   </Form.Group>
 
                   <Form.Group className="mb-4">
-                    <Form.Label className="fw-medium">Mezua</Form.Label>
+                    <Form.Label className="fw-medium d-flex align-items-start">Mezua</Form.Label>
                     <Form.Control
                       as="textarea"
                       rows={4}
