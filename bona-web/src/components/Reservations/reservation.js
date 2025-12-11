@@ -5,6 +5,7 @@ import "./reservation.css"
 
 const Reserva = () => {
     const [hasOpari, setHasOpari] = useState(null);
+    const [hasTimeMorningNight, setTime] = useState(null);
     return (
         
         <section id="kontaktua" className=" pb-2 reservation-section"> 
@@ -133,7 +134,7 @@ const Reserva = () => {
                       <Col md={6} className="mb-3">
                         <Form.Group>
                           <Form.Label className="fw-medium">Mugikor zenbakia</Form.Label>
-                          <Form.Control type="number" placeholder="123-45-67-89" required/>
+                          <Form.Control type="number" placeholder="123-45-67-89" pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}-[0-9]{2}" required/>
                         </Form.Group>
                       </Col>
                     </Row>
@@ -149,42 +150,76 @@ const Reserva = () => {
                           <Form.Control type="date"></Form.Control>
                         </Form.Group>
                       </Col>
-                      <Col md={6} className="mb-3">
-                        <Form.Label className="fw-fw-medium">Ordua</Form.Label>
-                          <select className="form-select">
-                            <option selected>Selecciona una hora</option>
-                            <option>12:00</option>
-                            <option>12:45</option>
-                            <option>13:30</option>
-                            <option>14:15</option>
-                            <option>15:00</option>
-                            <option>15:45</option>
-                          </select>
-                          <select className="form-select">
-                            <option selected>Seleccione la zona del restaurante</option>
-                            <option>19:00</option>
-                            <option>19:45</option>
-                            <option>20:30</option>
-                            <option>21:15</option>
-                            <option>22:00</option>
-                            <option>22:45</option>
-                          </select>
+                      <Col md={6} >
+                        <Form.Label className="fw-fw-medium">Noiz?</Form.Label>
+                          <div className="d-flex justify-content-center gap-3 mt-2">
+                            <Form.Check
+                                  type="radio"
+                                  name="ordua"
+                                  id="ordua-gauez"
+                                  label="Goizes"
+                                  value="goizes"
+                                  onChange={() => setTime('goizes')}
+                              />
+                              <Form.Check
+                                  type="radio"
+                                  name="ordua"
+                                  id="ordua-gauez"
+                                  label="Gauez"
+                                  value="gauez"
+                                  onChange={() => setTime('gauez')}
+                              />
+                          </div>
+                         
                       </Col>
                     </Row>
                     <Row>
                       <Col md={6} className="mb-3">
                         <Form.Group>
-                          <Form.Label>Lokala: </Form.Label>
+                          <Form.Label>Hautatu zein lokalen bazkalduko duzun </Form.Label>
                           <select className="form-select">
-                            <option selected>Seleccione la zona del restaurante</option>
-                            <option>19:00</option>
-                            <option>19:45</option>
-                            <option>20:30</option>
-                            <option>21:15</option>
-                            <option>22:00</option>
-                            <option>22:45</option>
+                            <option selected>- Lokala -</option>
+                            <option value="bona-center">Bona Center (Donostia)</option>
+                            <option value="bona-gros">Bona Gros (Donostia)</option>
+                            <option value="bona-anoeta">Bona Anoeta (Donostia)</option>
+                            <option value="bona-azpeitia">Bona Vitoria-Gazteiz</option>
+                            <option value="bona-arrasate">Bona Arrasate</option>
                           </select>
                         </Form.Group>
+                      </Col>
+                      <Col md={6} className="mb-3">
+                         {hasTimeMorningNight === 'goizes' && (
+                            <div className=" d-flex align-items-center justify-content-center">
+                              <Form.Group>
+                                <Form.Label>Hautatu ordua</Form.Label>
+                                <select className="form-select">
+                                  <option selected>- Ordua -</option>
+                                  <option>12:00</option>
+                                  <option>12:45</option>
+                                  <option>13:30</option>
+                                  <option>14:15</option>
+                                  <option>15:00</option>
+                                  <option>15:45</option>
+                                </select>
+                              </Form.Group>
+                            </div>
+                          )}
+                          {hasTimeMorningNight === 'gauez' && (
+                            <div className=" d-flex align-items-center justify-content-center">
+                              <Form.Group>
+                                <Form.Label>Hautatu ordua</Form.Label>
+                                <select className="form-select">
+                                  <option selected>- Ordua -</option>
+                                  <option>19:00</option>
+                                  <option>19:45</option>
+                                  <option>20:30</option>
+                                  <option>21:15</option>
+                                  <option>22:00</option>
+                                  <option>22:45</option>
+                                </select>
+                              </Form.Group>
+                            </div>
+                          )}
                       </Col>
                     </Row>
 
