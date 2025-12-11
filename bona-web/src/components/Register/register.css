@@ -12,7 +12,7 @@
 
 .register-section input[type="button"] 
 {
-  background: linear-gradient(135deg, #ff8181 0%, #ff9a9a 100%);
+  background: linear-gradient(135deg, #541412 0%, #ff9a9a 100%);
   color: white;
   min-height: 55px;
   font-size: 19px;
@@ -23,7 +23,6 @@
     margin-bottom: 0;
 }
 
-/* Inputen borderra */
 .form-control:focus {
   border-color: #8d3236 !important;
   box-shadow: 0 0 0 0.2rem rgba(228, 85, 75, 0.35) !important;
