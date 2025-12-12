@@ -77,7 +77,7 @@ const Header = () => {
                 Erreserbak
               </Nav.Link>
               <Nav.Link as={Link}
-                to="/erregistroa"
+                to="/menu"
                 className="nav-link-custom px-3">
                 Plater motak
               </Nav.Link>
