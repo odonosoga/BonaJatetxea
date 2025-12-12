@@ -4,6 +4,7 @@ import { BsTelephone, BsEnvelope, BsGeoAlt, BsClock } from "react-icons/bs";
 import heroImg from "../../img/reservation.jpg";
 import "./reservation.css";
 
+
 const HeroReserva = () => (
   <section className="hero-reserva" style={{
       backgroundImage: `url(${heroImg})`,
@@ -26,7 +27,17 @@ const HeroReserva = () => (
 const Reserva = () => {
   const [hasOpari, setHasOpari] = useState(null);
   const [hasTimeMorningNight, setTime] = useState(null);
-
+  const [validated, setValidated] = useState(false);
+  const handleSubmit = (event) => 
+  {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false)
+    {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    setValidated(true);
+  }
   return (
     <>
       <HeroReserva />
@@ -110,10 +121,10 @@ const Reserva = () => {
               <Card className="border-0 shadow-sm h-100">
                 <Card.Body className="p-4 p-lg-5">
                   <h5 className="fw-bold mb-4">Datuak bete</h5>
-                  <Form>
+                  <Form noValidate validated={validated} onSubmit={handleSubmit}>
                     <Row>
                       <Col md={6} className="mb-3">
-                        <Form.Group>
+                        <Form.Group controlId="email">
                           <Form.Label className="fw-medium">Emaila</Form.Label>
                           <Form.Control
                             type="text"
@@ -126,6 +137,9 @@ const Reserva = () => {
                             placeholder="sartu berriro"
                             required
                           />
+                            <Form.Control.Feedback type="invalid">
+                              Mesedez, sartu email bat.
+                            </Form.Control.Feedback>
                         </Form.Group>
                       </Col>
                       <Col md={6} className="mb-3">
@@ -177,8 +191,12 @@ const Reserva = () => {
                             placeholder="Izena"
                             required
                           />
+                          <Form.Control.Feedback type="invalid">
+                            Mesedez, sartu izena.
+                          </Form.Control.Feedback>
                         </Form.Group>
                       </Col>
+
                       <Col md={6} className="mb-3">
                         <Form.Group className="mb-4">
                           <Form.Label className="fw-medium">Sartu Abizena</Form.Label>
@@ -187,6 +205,9 @@ const Reserva = () => {
                             placeholder="Abizena"
                             required
                           />
+                        <Form.Control.Feedback type="invalid">
+                          Mesedez, sartu abizena.
+                        </Form.Control.Feedback>
                         </Form.Group>
                       </Col>
                     </Row>
@@ -228,7 +249,10 @@ const Reserva = () => {
                       <Col md={6} className="mb-3">
                         <Form.Group>
                           <Form.Label className="fw-medium">Data</Form.Label>
-                          <Form.Control type="date" />
+                          <Form.Control type="date" required/>
+                          <Form.Control.Feedback type="invalid">
+                            Hautatu data.
+                          </Form.Control.Feedback>
                         </Form.Group>
                       </Col>
                       <Col md={6}>
@@ -251,6 +275,9 @@ const Reserva = () => {
                             onChange={() => setTime("gauez")}
                           />
                         </div>
+                          <Form.Control.Feedback type="invalid">
+                            Aukeratu Goizes edo Gauez.
+                          </Form.Control.Feedback>
                       </Col>
                     </Row>
 
@@ -260,54 +287,92 @@ const Reserva = () => {
                           <Form.Label>
                             Hautatu zein lokalen bazkalduko duzun
                           </Form.Label>
-                          <select className="form-select">
-                            <option value="">- Lokala -</option>
-                            <option value="bona-center">Bona Center (Donostia)</option>
-                            <option value="bona-gros">Bona Gros (Donostia)</option>
-                            <option value="bona-anoeta">Bona Anoeta (Donostia)</option>
-                            <option value="bona-azpeitia">
-                              Bona Vitoria-Gazteiz
+                         <Form.Select
+                            required
+                            defaultValue=""
+                          >
+                            <option value="" disabled>
+                              - Lokala -
                             </option>
-                            <option value="bona-arrasate">Bona Arrasate</option>
-                          </select>
+                            <option value="bona-center">
+                              Bona Center - Nafarroa Hiribidea, 2, 20013 Donostia / San Sebastián, Gipuzkoa
+                            </option>
+                            <option value="bona-tolosa">
+                              Bona Tolosa - San Frantzisko Pasealekua Ibilbidea, 8, 20400 Tolosa, Gipuzkoa
+                            </option>
+                            <option value="bona-mutriku">
+                              Bona Mutriku - Erdiko Kalea, 23, 20830 Mutriku, Gipuzkoa
+                            </option>
+                            <option value="bona-gazteiz">
+                              Bona Vitoria-Gazteiz - Francia Kalea, 24, 01002 Vitoria-Gasteiz, Araba
+                            </option>
+                            <option value="bona-arrasate">
+                              Bona Bilbao - Ercilla Kalea, 22, Abando, 48009 Bilbao, Bizkaia
+                            </option>
+                            <option value="bona-estella">
+                              Bona Estella - Pl. los Fueros, 24, 31200 Estella, Navarra
+                            </option>
+                            <option value="bona-pamplona">
+                              Bona Pamploma - Av. del Ejército, 30, 31002 Pamplona, Navarra
+                            </option>
+                          </Form.Select>
+                          <Form.Control.Feedback type="invalid">
+                            Hautatu lokala.
+                          </Form.Control.Feedback>
                         </Form.Group>
                       </Col>
                       <Col md={6} className="mb-3">
                         {hasTimeMorningNight === "goizes" && (
                           <div className="d-flex align-items-center justify-content-center">
                             <Form.Group>
-                              <Form.Label>Hautatu ordua</Form.Label>
-                              <select className="form-select">
-                                <option value="">- Ordua -</option>
+                              <Form.Label>Hautatu ordua *</Form.Label>
+                              <Form.Select
+                                required
+                                defaultValue=""          // valor inicial vacío
+                              >
+                                <option value="" disabled>
+                                  - Ordua -
+                                </option>
                                 <option>12:00</option>
                                 <option>12:45</option>
                                 <option>13:30</option>
                                 <option>14:15</option>
                                 <option>15:00</option>
                                 <option>15:45</option>
-                              </select>
+                              </Form.Select>
+                              <Form.Control.Feedback type="invalid">
+                                Hautatu ordua.
+                              </Form.Control.Feedback>
                             </Form.Group>
                           </div>
                         )}
+
                         {hasTimeMorningNight === "gauez" && (
                           <div className="d-flex align-items-center justify-content-center">
                             <Form.Group>
-                              <Form.Label>Hautatu ordua</Form.Label>
-                              <select className="form-select">
-                                <option value="">- Ordua -</option>
+                              <Form.Label>Hautatu ordua *</Form.Label>
+                              <Form.Select
+                                required
+                                defaultValue=""
+                              >
+                                <option value="" disabled>
+                                  - Ordua -
+                                </option>
                                 <option>19:00</option>
                                 <option>19:45</option>
                                 <option>20:30</option>
                                 <option>21:15</option>
                                 <option>22:00</option>
                                 <option>22:45</option>
-                              </select>
+                              </Form.Select>
+                              <Form.Control.Feedback type="invalid">
+                                Hautatu ordua.
+                              </Form.Control.Feedback>
                             </Form.Group>
                           </div>
                         )}
                       </Col>
                     </Row>
-
                     <Button
                       type="submit"
                       className="w-100 btn-contact py-3 fw-bold"
