@@ -4,7 +4,7 @@ import './cta.css';
 
 const CTA = () => {
   return (
-    <section className="py-5 bg-gradient">
+    <section className="cta-section py-5">
       <Container>
         <Row className="justify-content-center text-center">
           <Col lg={8}>

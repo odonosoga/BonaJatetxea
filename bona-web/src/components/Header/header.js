@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, {useState } from "react";
 import { Navbar, Container, Nav, Button, Image, Stack, Modal, Form, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom"; // ← NUEVO
 import { BsClock } from "react-icons/bs";
@@ -104,7 +104,7 @@ const Header = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Modal show={login} onHide={handleClose} centered>
+      <Modal show={login} onHide={handleClose} centered >
         <Modal.Header closeButton>
           <Modal.Title>Saioa Hasi</Modal.Title>
         </Modal.Header>
@@ -122,10 +122,10 @@ const Header = () => {
 
               </Form.Control>
             </Form.Group>
-            <Form.Label className="d-flex justify-content-center">Ez daukazu kontua? {" "}<Link to="/erregistroa" className="text-primary" onClick={handleClose}> Erregistratu hemen
+            <Form.Label className="d-flex justify-content-center">Ez daukazu kontua? {" "}<Link to="/erregistroa" className="text-primary" onClick={handleClose}>  Erregistratu hemen
             </Link>
             </Form.Label>
-            <Button variant="primary" type="submit" className="w-100">
+            <Button variant="primary" type="submit" className="btn-login w-100">
               Hasi
             </Button>
           </Form>

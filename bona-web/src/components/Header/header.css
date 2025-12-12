@@ -49,4 +49,25 @@
   text-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
 }
 
+/*Login barruko gauzak*/
+
+/* Botoia  */
+.login-background{
+    background: linear-gradient(135deg, #F8D4BA 0%, #ffffff 160%);
+}
+.btn-login {
+  background: #8d3236 !important;
+  border: 2px solid #541412 !important;
+  border-radius: 12px !important;
+  font-size: 1.1rem !important;
+  color: #fff !important;
+  font-weight: 600;
+  transition: all 0.3s ease !important;
+}
+
+.btn-login:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(84, 20, 18, 0.4) !important;
+}
+
 

@@ -5,7 +5,7 @@ import './about.css';
 
 const About = () => {
   return (
-    <section className="py-5 bg-light">
+    <section className="about-section py-5">
       <Container>
         <Row className="justify-content-center text-center mb-5">
           <Col lg={8}>

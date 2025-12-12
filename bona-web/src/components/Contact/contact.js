@@ -1,21 +1,34 @@
 // Contact.js
 import React from "react";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
+import heroImg from "../../img/contact.png";
 import "./contact.css";
+
+
+const HeroReserva = () => (
+  <section className="hero-reserva" style={{
+      backgroundImage: `url(${heroImg})`,
+    }}>
+    <div className="hero-overlay">
+      <Container className="h-100">
+        <Row className="h-100 align-items-center justify-content-center">
+          <Col md={8} className="text-center text-white">
+            <h1 className="display-4 fw-bold mb-3">Egin zure kontsulta</h1>
+            <p className="lead mb-0">
+                Idatzi zure ideia, galdera edo eskaera eta harremanetan jarriko gara.
+            </p>
+          </Col>
+        </Row>  
+      </Container>
+    </div>
+  </section>
+);
 
 const Contact = () => {
   return (
+     <><HeroReserva />
     <section id="kontaktua" className="pb-2 contact-section">
       <Container>
-        {/* Título */}
-        <div className="text-center mb-4">
-          
-          <h2 className="display-5 fw-bold text-dark mb-2">Kontaktua</h2>
-          <p className="lead text-muted mb-0">
-            Idatzi zure ideia, galdera edo eskaera eta harremanetan jarriko gara.
-          </p>
-        </div>
-
         <Row className="g-5 justify-content-center">
           <Col lg={8}>
             <Card className="border-0 shadow-sm h-100">
@@ -99,6 +112,7 @@ const Contact = () => {
         </Row>
       </Container>
     </section>
+    </>
   );
 };
 

@@ -1,5 +1,10 @@
+.about-section{
+  background: linear-gradient(135deg, #F8D4BA 0%, #ffffff 100%);
+}
+
 .hover-card {
   transition: all 0.3s ease;
+  
 }
 
 .hover-card:hover {
