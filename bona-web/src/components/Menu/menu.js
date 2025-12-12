@@ -23,7 +23,21 @@ const Menu = () => {
                 <div className="menu-card p-4">
 
                     {/* Kozulekuko Platerak */}
-                    <h3 className="mb-3">Koilarako Platerak</h3>
+                    <div className="d-flex align-items-center justify-content-between mb-3 w-100">
+                        <div className="offset-5 d-flex justify-content-center">
+                            <h3>Koilarako Platerak</h3>
+                        </div>
+                        <div>
+                            <select className="form-select">
+                                <option>Prezio ↓</option>
+                                <option>Prezio ↑</option>
+                                <option>Alfabetikoki ↓</option>
+                                <option>Alfabetikoki ↑</option>
+                            </select>
+                        </div>
+                    </div>
+
+
                     <Row className="d-flex justify-content-center align-items-start mb-4 w-100">
                         <Col className="janari-col d-flex mb-3 mb-md-0">
                             <img src={sopa} alt="Sopa" className="div-img me-2" />
