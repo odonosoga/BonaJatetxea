@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "./menu.css";
-import sopa from "../../img/images.jpeg";
+import sopa from "../../img/cosa.jpg";
 import pollo from "../../img/pollo.jpg";
 import pescado from "../../img/pescado.jpeg";
 import pescado2 from "../../img/pescado2.jpg";
@@ -13,15 +13,33 @@ import pasta from "../../img/pasta.jpeg";
 import arroz from "../../img/arroz.jpg";
 import postre1 from "../../img/postre1.jpg";
 import postre2 from "../../img/postre2.jpg";
+import heroImg from "../../img/menu.jpeg";
+
+const HeroReserva = () => (
+  <section className="hero-reserva" style={{
+      backgroundImage: `url(${heroImg})`,
+    }}>
+    <div className="hero-overlay">
+      <Container className="h-100">
+        <Row className="h-100 align-items-center justify-content-center">
+          <Col md={8} className="text-center text-white">
+            <h1 className="display-4 fw-bold mb-3">Karta</h1>
+            <p className="lead mb-0">
+                Idatzi zure ideia, galdera edo eskaera eta harremanetan jarriko gara.
+            </p>
+          </Col>
+        </Row>  
+      </Container>
+    </div>
+  </section>
+);
 
 const Menu = () => {
     return (
+        <><HeroReserva />
         <section id="menua" className="menu-section">
             <Container fluid className="p-0 d-flex flex-column align-items-center">
-                <h2 className="text-center mb-4">Menu</h2>
-
                 <div className="menu-card p-4">
-
                     {/* Kozulekuko Platerak */}
                     <div className="d-flex align-items-center justify-content-between mb-3 w-100">
                         <div className="offset-5 d-flex justify-content-center">
@@ -182,6 +200,7 @@ const Menu = () => {
                 </div>
             </Container>
         </section>
+        </>
     );
 };
 
