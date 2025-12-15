@@ -1,6 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
+// App.js
+import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header/header';
 import Footer from './components/Footer/footer';
 import Home from './components/Home/home';
@@ -11,24 +10,19 @@ import Menu from './components/Menu/menu';
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Header />
-        <main >
-          <Routes>
-            <Route path="/" element={<Home />}/>
-            <Route path="/kontaktua" element={<Contact />} />
-            <Route path="/erreserbak" element={<Reserva />} />
-            <Route path="/erregistroa" element={<Register />} />
-            <Route path="/erreserbak" element={<Reserva />}/>
-            <Route path="/menu" element={<Menu />}/>
-
-          </Routes>
-        </main>
-
-        <Footer />
-      </div>
-    </Router>
+    <div className="App">
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />}/>
+          <Route path="/kontaktua" element={<Contact />} />
+          <Route path="/erreserbak" element={<Reserva />} />
+          <Route path="/erregistroa" element={<Register />} />
+          <Route path="/menu" element={<Menu />}/>
+        </Routes>
+      </main>
+      <Footer />
+    </div>
   );
 }
 
