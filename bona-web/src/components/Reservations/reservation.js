@@ -26,18 +26,26 @@ const HeroReserva = () => (
 
 const Reserva = () => {
   const [hasOpari, setHasOpari] = useState(null);
+  const [timeError, setTimeError] = useState(false);
   const [hasTimeMorningNight, setTime] = useState(null);
   const [validated, setValidated] = useState(false);
-  const handleSubmit = (event) => 
-  {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false)
-    {
+  const handleSubmit = (event) => {
+  const form = event.currentTarget;
+    if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
+
+    if (!hasTimeMorningNight) {
+      setTimeError(true);
+    } else {
+      setTimeError(false);
+    }
+
     setValidated(true);
-  }
+  };
+
+  
   return (
     <>
       <HeroReserva />
@@ -257,28 +265,42 @@ const Reserva = () => {
                         </Form.Group>
                       </Col>
                       <Col md={6}>
-                        <Form.Label className="fw-fw-medium">Noiz?</Form.Label>
-                        <div className="d-flex justify-content-center gap-3 mt-2">
-                          <Form.Check
-                            type="radio"
-                            name="ordua"
-                            id="ordua-goizes"
-                            label="Goizes"
-                            value="goizes"
-                            onChange={() => setTime("goizes")}
-                          />
-                          <Form.Check
-                            type="radio"
-                            name="ordua"
-                            id="ordua-gauez"
-                            label="Gauez"
-                            value="gauez"
-                            onChange={() => setTime("gauez")}
-                          />
-                        </div>
-                          <Form.Control.Feedback type="invalid">
-                            Aukeratu Goizes edo Gauez.
-                          </Form.Control.Feedback>
+                        <Form.Group className="mb-3" controlId="noiz">
+                          <Form.Label className="fw-medium text-center w-100">Noiz?</Form.Label>
+                          <div className="d-flex justify-content-center gap-3 mt-2">
+                            <Form.Check
+                              type="radio"
+                              name="ordua"
+                              id="ordua-goizez"
+                              label="Goizez"
+                              value="goizez"
+                              required
+                              isInvalid={timeError}
+                              onChange={() => {
+                                setTime("goizez");
+                                setTimeError(false);
+                              }}
+                            />
+                            <Form.Check
+                              type="radio"
+                              name="ordua"
+                              id="ordua-gauez"
+                              label="Gauez"
+                              value="gauez"
+                              required
+                              isInvalid={timeError}
+                              onChange={() => {
+                                setTime("gauez");
+                                setTimeError(false);
+                              }}
+                            />
+                          </div>
+                          {timeError && (
+                            <div className="invalid-feedback d-block text-center">
+                              Aukeratu Goizez edo Gauez.
+                            </div>
+                          )}
+                        </Form.Group>
                       </Col>
                     </Row>
 
@@ -323,13 +345,13 @@ const Reserva = () => {
                         </Form.Group>
                       </Col>
                       <Col md={6} className="mb-3">
-                        {hasTimeMorningNight === "goizes" && (
+                        {hasTimeMorningNight === "goizez" && (
                           <div className="d-flex align-items-center justify-content-center">
                             <Form.Group>
                               <Form.Label>Hautatu ordua *</Form.Label>
                               <Form.Select
                                 required
-                                defaultValue=""          // valor inicial vacío
+                                defaultValue=""  
                               >
                                 <option value="" disabled>
                                   - Ordua -
