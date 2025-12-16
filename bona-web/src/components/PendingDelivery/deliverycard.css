@@ -1,0 +1,25 @@
+.delivery-card {
+  border-radius: 16px !important;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.delivery-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+}
+
+.delivery-card .btn:hover {
+  transform: scale(1.05);
+}
+
+.delivery-card .card-header
+{
+  background-color: #8d3236;
+}
+
+@media (max-width: 576px) {
+  .delivery-card:hover {
+    transform: none;
+  }
+}

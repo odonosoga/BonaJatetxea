@@ -1,0 +1,48 @@
+.contact-section {
+  background: linear-gradient(135deg, #F8D4BA 0%, #ffffff 100%);
+  min-height: 105vh;
+  padding-top: 150px;
+}
+/* Botoia  */
+.btn-contact {
+  background: #8d3236 !important;
+  border: 2px solid #541412 !important;
+  border-radius: 12px !important;
+  font-size: 1.1rem !important;
+  color: #fff !important;
+  font-weight: 600;
+  transition: all 0.3s ease !important;
+}
+
+.btn-contact:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(84, 20, 18, 0.4) !important;
+}
+
+/* Inputen borderra */
+.form-control:focus {
+  border-color: #8d3236 !important;
+  box-shadow: 0 0 0 0.2rem rgba(228, 85, 75, 0.35) !important;
+}
+
+
+.hero-reserva {
+  position: relative;
+  height: 60vh;
+  min-height: 320px;
+ 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-top: 85px; 
+}
+
+.hero-reserva .hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.45),
+    rgba(0, 0, 0, 0.65)
+  );
+}
