@@ -1,6 +1,6 @@
 import React, {useState } from "react";
 import { Navbar, Container, Nav, Button, Image, Stack, Modal, Form, Alert } from "react-bootstrap";
-import { Link } from "react-router-dom"; // ← NUEVO
+import { Link } from "react-router-dom"; 
 import { BsClock } from "react-icons/bs";
 import "../Header/header.css";
 
@@ -80,6 +80,11 @@ const Header = () => {
                 to="/menu"
                 className="nav-link-custom px-3">
                 Plater motak
+              </Nav.Link>
+              <Nav.Link as={Link}
+                to="/ordutegia"
+                className="nav-link-custom px-3">
+                Ordutegia    
               </Nav.Link>
             </Nav>
             <Stack
