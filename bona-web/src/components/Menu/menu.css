@@ -1,0 +1,37 @@
+.menu-section {
+  background: linear-gradient(135deg, #F8D4BA 0%, #ffffff 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 80vh;
+  padding: 2rem 0;
+  padding-top: 120px; 
+}
+
+
+.menu-info {
+  width: 100%;           
+  max-width: 1200px;     
+  text-align: center;
+  padding: 2rem;         
+  margin: 0 auto;        
+}
+
+.menu-card {
+    min-width: 80%;               
+    background-color: #8d3236;      
+    border-radius: 15px; 
+    color: white;           
+}
+.menu-card img
+{
+  border-radius: 10%;
+  height: 200px;
+  width: 350px;
+  
+}
+
+
+
+

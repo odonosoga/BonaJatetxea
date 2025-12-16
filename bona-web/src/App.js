@@ -1,5 +1,5 @@
-import React from 'react';
-import './App.css';
+// App.js
+import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header/header';
 import Footer from './components/Footer/footer';
 <<<<<<< Updated upstream
@@ -17,7 +17,6 @@ import PendingDeliverys from './components/PendingDelivery/pendingdelivery';
 function App() {
   return (
     <div className="App">
-      {/* Navbar */}
       <Header />
 <<<<<<< Updated upstream
 

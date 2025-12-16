@@ -1,18 +1,21 @@
-/* Color normal de los enlaces del navbar */
+.header-top {
+  color: #F8D4BA;
+}
+
+
+/*Login botoia*/
 .nav-link-custom {
-  color: black !important;
+  color: #F8D4BA !important;
   font-weight: 500;
-  transition: all 0.3s ease;   /* <- importante para que el hover sea suave */
+  transition: all 0.3s ease;
   position: relative;
 }
 
-/* Efecto hover */
 .nav-link-custom:hover {
-  color: #fff !important;                 /* cambia a blanco al hacer hover */
+  color: #D69F3A !important;
   text-shadow: 0 0 8px rgba(0,0,0,0.4);
 }
 
-/* Bonus: subrayado elegante que crece desde el centro */
 .nav-link-custom::after {
   content: '';
   position: absolute;
@@ -20,7 +23,7 @@
   height: 3px;
   bottom: -6px;
   left: 50%;
-  background-color: white;
+  background-color: #D69F3A;
   transition: all 0.3s ease;
   transform: translateX(-50%);
 }
@@ -28,3 +31,43 @@
 .nav-link-custom:hover::after {
   width: 80%;
 }
+
+/*Login botoia*/
+.login-btn {
+  color: #F8D4BA !important;
+  border-color: #F8D4BA !important;
+  background-color: transparent;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.login-btn:hover,
+.login-btn:focus {
+  color: #541412 !important;           /* Texto oscuro para contraste */
+  border-color: #541412 !important;
+  background-color: #F8D4BA !important;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+}
+
+/*Login barruko gauzak*/
+
+/* Botoia  */
+.login-background{
+    background: linear-gradient(135deg, #F8D4BA 0%, #ffffff 160%);
+}
+.btn-login {
+  background: #8d3236 !important;
+  border: 2px solid #541412 !important;
+  border-radius: 12px !important;
+  font-size: 1.1rem !important;
+  color: #fff !important;
+  font-weight: 600;
+  transition: all 0.3s ease !important;
+}
+
+.btn-login:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(84, 20, 18, 0.4) !important;
+}
+
+
