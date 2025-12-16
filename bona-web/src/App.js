@@ -6,6 +6,7 @@ import Home from './components/Home/home';
 import Contact from './components/Contact/contact';
 import Reserva from './components/Reservations/reservation';
 import Register from './components/Register/register';
+import Schedule from './components/Schedule/Schedule';
 import Menu from './components/Menu/menu';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/erreserbak" element={<Reserva />} />
           <Route path="/erregistroa" element={<Register />} />
           <Route path="/menu" element={<Menu />}/>
+          <Route path="/ordutegia" element={<Schedule />} />
         </Routes>
       </main>
       <Footer />
