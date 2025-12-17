@@ -5,17 +5,15 @@ import "./register.css";
 import register from "../../img/register.jpg";
 
 const Register = () => {
-    const [validated, setValidated] = useState(false);
-    const handleSubmit = (event) => 
-    {
-      const form = event.currentTarget;
-      if (form.checkValidity() === false)
-      {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-      setValidated(true);
+  const [validated, setValidated] = useState(false);
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
     }
+    setValidated(true);
+  }
   return (
     <section id="erregistroa" className="register-section">
       <Container fluid className="p-0">
@@ -34,7 +32,7 @@ const Register = () => {
                       <Form.Label className="fw-medium d-flex align-items-start">Izena</Form.Label>
                       <Form.Control type="text" placeholder="Izena" className="w-100" required />
                       <Form.Control.Feedback type="invalid">
-                        Mesedez, sartu izena. 
+                        Mesedez, sartu izena.
                       </Form.Control.Feedback>
                     </Form.Group>
                   </Col>
@@ -159,7 +157,7 @@ const Register = () => {
               backgroundSize: "cover",
               backgroundPosition: "center",
               minHeight: "100%",
-             
+
             }}
           >
             {/* la columna ahora es solo background */}
