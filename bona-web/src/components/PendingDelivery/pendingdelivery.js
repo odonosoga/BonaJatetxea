@@ -13,7 +13,7 @@ const deliveriesMock = [
 
 const PendingDelivery = () => {
   return (
-    <section className="pendingdelivery-section py-5 bg-light min-vh-100">
+    <section className="pendingdelivery-section min-vh-100">
       <Container>
         <div className="d-flex justify-content-between align-items-center mb-4">
           <div>
