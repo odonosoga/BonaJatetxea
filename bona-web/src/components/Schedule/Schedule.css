@@ -48,6 +48,7 @@
 
 .schedule-table tbody td {
   vertical-align: middle;
+  font-size: 0.9rem;
 }
 
 /* Formularios */
@@ -80,6 +81,7 @@
 
 .schedule-save-button:hover {
   filter: brightness(1.05);
+  transform: translateY();
   box-shadow: 0 12px 30px rgba(84, 20, 18, 0.4);
 }
 

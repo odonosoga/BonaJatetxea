@@ -14,7 +14,7 @@ const CTA = () => {
             </p>
             <Button 
               as="a" 
-              href="/kontaktua" 
+              href="/erreserbak" 
               size="lg" 
               className="cta-button px-5 py-3 fw-bold rounded-pill"
             >
