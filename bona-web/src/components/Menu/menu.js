@@ -79,7 +79,7 @@ const Menu = () => {
                     </Row>
 
                     {/* Haragia */}
-                    <h3 className="mb-3">Haragia</h3>
+                    <h3 className="mb-3 text-center">Haragia</h3>
                     <Row className="d-flex justify-content-center align-items-start mb-4 w-100">
                         <Col className="janari-col d-flex mb-3 mb-md-0">
                             <img src={pollo} alt="Pollo" className="div-img me-2" />
@@ -103,7 +103,7 @@ const Menu = () => {
                     </Row>
 
                     {/* Arraina */}
-                    <h3 className="mb-3">Arraina</h3>
+                    <h3 className="mb-3 text-center">Arraina</h3>
                     <Row className="d-flex justify-content-center align-items-start mb-4 w-100">
                         <Col className="janari-col d-flex mb-3 mb-md-0">
                             <img src={pescado} alt="Pescado" className="div-img me-2" />
@@ -127,7 +127,7 @@ const Menu = () => {
                     </Row>
 
                     {/* Barazkiak */}
-                    <h3 className="mb-3">Barazkiak</h3>
+                    <h3 className="mb-3 text-center">Barazkiak</h3>
                     <Row className="d-flex justify-content-center align-items-start mb-4 w-100">
                         <Col className="janari-col d-flex mb-3 mb-md-0">
                             <img src={ensalada} alt="Ensalada" className="div-img me-2" />
@@ -152,7 +152,7 @@ const Menu = () => {
 
 
                     {/* Pasta eta Arroza */}
-                    <h3 className="mb-3">Pasta eta Arroza</h3>
+                    <h3 className="mb-3 text-center">Pasta eta Arroza</h3>
                     <Row className="d-flex justify-content-center align-items-start mb-4 w-100">
                         <Col className="janari-col d-flex mb-3 mb-md-0">
                             <img src={pasta} alt="Pasta" className="div-img me-2" />
@@ -175,7 +175,7 @@ const Menu = () => {
                     </Row>
 
                     {/* Postreak */}
-                    <h3 className="mb-3">Postreak</h3>
+                    <h3 className="mb-3 text-center">Postreak</h3>
                     <Row className="d-flex justify-content-center align-items-start mb-4 w-100">
                         <Col className="janari-col d-flex mb-3 mb-md-0">
                             <img src={postre1} alt="Postre 1" className="div-img me-2" />

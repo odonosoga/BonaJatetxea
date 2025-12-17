@@ -7,14 +7,14 @@ const Schedule = () => {
   const [workers, setWorkers] = useState([
     {
       id: 1,
-      name: "Trabajador 1",
-      role: "Camarero",
+      name: "Langile 1",
+      role: "Sukaldaria",
       monday: "12:00–16:00 / 19:00–23:00",
       tuesday: "12:00–16:00 / 19:00–23:00",
       wednesday: "Libre",
       thursday: "12:00–16:00 / 19:00–23:00",
       friday: "12:00–16:00 / 19:00–23:00",
-      saturday: "12:00–16:00",
+      saturday: "12:00–16:00 / 19:00–23:00",
       sunday: "Libre",
     },
   ]);
@@ -32,18 +32,20 @@ const Schedule = () => {
   });
 
   const handleChange = (e) => {
-    setNewWorker({
-      ...newWorker,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setNewWorker((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleAddWorker = (e) => {
     e.preventDefault();
+
     if (!newWorker.name || !newWorker.role) return;
 
-    setWorkers([
-      ...workers,
+    setWorkers((prev) => [
+      ...prev,
       {
         id: Date.now(),
         ...newWorker,
@@ -64,12 +66,12 @@ const Schedule = () => {
   };
 
   return (
-    <section id="schedule" className="schedule-section py-5 ">
+    <section id="schedule" className="schedule-section">
       <Container>
         <Row className="mb-4">
           <Col className="text-center">
-            <h2 className="fw-bold">Horarios de trabajadores</h2>
-            <p className="text-muted mb-0">
+            <h2 className="fw-bold mb-2 mt-5">Horarios de trabajadores</h2>
+            <p className="text-muted mb-4">
               Gestiona los turnos semanales de cada trabajador.
             </p>
           </Col>
@@ -78,22 +80,28 @@ const Schedule = () => {
         <Row className="g-4">
           {/* Tabla de horarios */}
           <Col lg={8}>
-            <Card className="border-0 shadow-sm h-100">
+            <Card className="border-0 shadow-sm h-100 schedule-card-table">
               <Card.Body className="p-3 p-lg-4">
                 <h5 className="fw-bold mb-3">Semana actual</h5>
                 <div className="table-responsive">
-                  <Table striped bordered hover size="sm">
+                  <Table
+                    striped
+                    bordered
+                    hover
+                    size="sm"
+                    className="schedule-table"
+                  >
                     <thead className="text-center align-middle">
                       <tr>
                         <th>Trabajador</th>
-                        <th>Rol</th>
-                        <th>Lunes</th>
-                        <th>Martes</th>
-                        <th>Miércoles</th>
-                        <th>Jueves</th>
-                        <th>Viernes</th>
-                        <th>Sábado</th>
-                        <th>Domingo</th>
+                        <th>Rola</th>
+                        <th>Astelehena</th>
+                        <th>Asteartea</th>
+                        <th>Asteazkena</th>
+                        <th>Osteguna</th>
+                        <th>Ostirala</th>
+                        <th>Larunbata</th>
+                        <th>Igandea</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -119,12 +127,15 @@ const Schedule = () => {
 
           {/* Formulario para añadir/editar horarios */}
           <Col lg={4}>
-            <Card className="border-0 shadow-sm h-100">
+            <Card className="border-0 shadow-sm h-100 schedule-card-form">
               <Card.Body className="p-3 p-lg-4">
                 <h5 className="fw-bold mb-3">Añadir trabajador</h5>
                 <Form onSubmit={handleAddWorker}>
+                  {/* Nombre */}
                   <Form.Group className="mb-3">
-                    <Form.Label>Nombre</Form.Label>
+                    <Form.Label className="schedule-form-label text-white">
+                      Nombre
+                    </Form.Label>
                     <Form.Control
                       type="text"
                       name="name"
@@ -132,28 +143,41 @@ const Schedule = () => {
                       onChange={handleChange}
                       placeholder="Nombre trabajador"
                       required
+                      className="schedule-form-input"
                     />
                   </Form.Group>
 
+                  {/* Rol */}
                   <Form.Group className="mb-3">
-                    <Form.Label>Rol</Form.Label>
-                    <Form.Control
-                      type="text"
+                    <Form.Label className="schedule-form-label text-white">
+                      Rol
+                    </Form.Label>
+                    <Form.Select
                       name="role"
                       value={newWorker.role}
                       onChange={handleChange}
-                      placeholder="Camarero, cocina..."
                       required
-                    />
+                      className="schedule-form-select"
+                    >
+                      <option value="">- Hautatu langilearen rola -</option>
+                      <option value="Sukaldaria">Sukaldaria</option>
+                      <option value="Zerbitzaria">Zerbitzaria</option>
+                      <option value="Banatzailea">Banatzailea</option>
+                      <option value="Garbitzailea">Garbitzailea</option>
+                    </Form.Select>
                   </Form.Group>
 
+                  {/* Astelehena */}
                   <Form.Group className="mb-2">
-                    <Form.Label>Lunes</Form.Label>
+                    <Form.Label className="schedule-form-label text-white">
+                      Astelehena
+                    </Form.Label>
                     <Form.Select
                       name="monday"
                       value={newWorker.monday}
                       onChange={handleChange}
                       required
+                      className="schedule-form-select"
                     >
                       <option value="">- Aukeratu -</option>
                       <option value="12:00–16:00 / 19:00–23:00">
@@ -163,14 +187,17 @@ const Schedule = () => {
                     </Form.Select>
                   </Form.Group>
 
-
+                  {/* Asteartea */}
                   <Form.Group className="mb-2">
-                    <Form.Label>Asteartea</Form.Label>
+                    <Form.Label className="schedule-form-label text-white">
+                      Asteartea
+                    </Form.Label>
                     <Form.Select
                       name="tuesday"
                       value={newWorker.tuesday}
                       onChange={handleChange}
                       required
+                      className="schedule-form-select"
                     >
                       <option value="">- Aukeratu -</option>
                       <option value="12:00–16:00 / 19:00–23:00">
@@ -180,13 +207,17 @@ const Schedule = () => {
                     </Form.Select>
                   </Form.Group>
 
+                  {/* Asteazkena */}
                   <Form.Group className="mb-2">
-                    <Form.Label>Miércoles</Form.Label>
+                    <Form.Label className="schedule-form-label text-white">
+                      Asteazkena
+                    </Form.Label>
                     <Form.Select
                       name="wednesday"
                       value={newWorker.wednesday}
                       onChange={handleChange}
                       required
+                      className="schedule-form-select"
                     >
                       <option value="">- Aukeratu -</option>
                       <option value="12:00–16:00 / 19:00–23:00">
@@ -196,72 +227,90 @@ const Schedule = () => {
                     </Form.Select>
                   </Form.Group>
 
+                  {/* Osteguna */}
                   <Form.Group className="mb-2">
-                    <Form.Label>Jueves</Form.Label>
+                    <Form.Label className="schedule-form-label text-white">
+                      Osteguna
+                    </Form.Label>
                     <Form.Select
-                        name="thursday"
-                        value={newWorker.thursday}
-                        onChange={handleChange}
-                        required
-                      >
-                        <option value="">- Aukeratu -</option>
-                        <option value="12:00–16:00 / 19:00–23:00">
-                          12:00–16:00 / 19:00–23:00
-                        </option>
-                        <option value="Libre">Libre</option>
-                      </Form.Select>
+                      name="thursday"
+                      value={newWorker.thursday}
+                      onChange={handleChange}
+                      required
+                      className="schedule-form-select"
+                    >
+                      <option value="">- Aukeratu -</option>
+                      <option value="12:00–16:00 / 19:00–23:00">
+                        12:00–16:00 / 19:00–23:00
+                      </option>
+                      <option value="Libre">Libre</option>
+                    </Form.Select>
                   </Form.Group>
 
+                  {/* Ostirala */}
                   <Form.Group className="mb-2">
-                    <Form.Label>Viernes</Form.Label>
+                    <Form.Label className="schedule-form-label text-white">
+                      Ostirala
+                    </Form.Label>
                     <Form.Select
-                        name="friday"
-                        value={newWorker.friday}
-                        onChange={handleChange}
-                        required
-                      >
-                        <option value="">- Aukeratu -</option>
-                        <option value="12:00–16:00 / 19:00–23:00">
-                          12:00–16:00 / 19:00–23:00
-                        </option>
-                        <option value="Libre">Libre</option>
-                      </Form.Select>
+                      name="friday"
+                      value={newWorker.friday}
+                      onChange={handleChange}
+                      required
+                      className="schedule-form-select"
+                    >
+                      <option value="">- Aukeratu -</option>
+                      <option value="12:00–16:00 / 19:00–23:00">
+                        12:00–16:00 / 19:00–23:00
+                      </option>
+                      <option value="Libre">Libre</option>
+                    </Form.Select>
                   </Form.Group>
 
+                  {/* Larunbata */}
                   <Form.Group className="mb-2">
-                    <Form.Label>Sábado</Form.Label>
+                    <Form.Label className="schedule-form-label text-white">
+                      Larunbata
+                    </Form.Label>
                     <Form.Select
-                        name="saturday"
-                        value={newWorker.saturday}
-                        onChange={handleChange}
-                        required
-                      >
-                        <option value="">- Aukeratu -</option>
-                        <option value="12:00–16:00 / 19:00–23:00">
-                          12:00–16:00 / 19:00–23:00
-                        </option>
-                        <option value="Libre">Libre</option>
-                      </Form.Select>
+                      name="saturday"
+                      value={newWorker.saturday}
+                      onChange={handleChange}
+                      required
+                      className="schedule-form-select"
+                    >
+                      <option value="">- Aukeratu -</option>
+                      <option value="12:00–16:00 / 19:00–23:00">
+                        12:00–16:00 / 19:00–23:00
+                      </option>
+                      <option value="Libre">Libre</option>
+                    </Form.Select>
                   </Form.Group>
 
+                  {/* Igandea */}
                   <Form.Group className="mb-3">
-                    <Form.Label>Domingo</Form.Label>
+                    <Form.Label className="schedule-form-label text-white">
+                      Igandea
+                    </Form.Label>
                     <Form.Select
-                        name="sunday"
-                        value={newWorker.sunday}
-                        onChange={handleChange}
-                        required
-                      >
-                        <option value="">- Aukeratu -</option>
-                        <option value="12:00–16:00 / 19:00–23:00">
-                          12:00–16:00 / 19:00–23:00
-                        </option>
-                        <option value="Libre">Libre</option>
-                      </Form.Select>
+                      name="sunday"
+                      value={newWorker.sunday}
+                      onChange={handleChange}
+                      required
+                      className="schedule-form-select"
+                    >
+                      <option value="">- Aukeratu -</option>
+                      <option value="12:00–16:00 / 19:00–23:00">
+                        12:00–16:00 / 19:00–23:00
+                      </option>
+                      <option value="Libre">Libre</option>
+                    </Form.Select>
                   </Form.Group>
 
-                  <Button type="submit" className="w-100 btn-contact fw-bold">
-                    Guardar horario
+                  <Button
+                    type="submit"
+                    className="w-100 schedule-save-button fw-bold">
+                    Gehitu langilea ordutegian
                   </Button>
                 </Form>
               </Card.Body>
