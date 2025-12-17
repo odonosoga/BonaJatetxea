@@ -87,7 +87,7 @@ const Header = () => {
                 <Nav.Link as={Link} to="/ordutegia" className="nav-link-custom px-3">
                   Ordutegia
                 </Nav.Link>
-                <Nav.Link as={Link} to="/bidalketak" className="nav-link-custom px-3">
+                <Nav.Link as={Link} to="/pendiente" className="nav-link-custom px-3">
                   Bidalketak
                 </Nav.Link>
               </Nav>
@@ -97,7 +97,7 @@ const Header = () => {
       </section>
 
       {/* Espacio para que el contenido no quede tapado */}
-      <div style={{ height: "140px" }}></div>
+      <div style={{ height: "0px" }}></div>
 
       {/* MODAL LOGIN */}
       <Modal show={login} onHide={handleCloseLogin} centered>
