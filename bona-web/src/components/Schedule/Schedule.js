@@ -7,8 +7,8 @@ const Schedule = () => {
   const [workers, setWorkers] = useState([
     {
       id: 1,
-      name: "Trabajador 1",
-      role: "Camarero",
+      name: "Langile 1",
+      role: "Sukaldaria",
       monday: "12:00–16:00 / 19:00–23:00",
       tuesday: "12:00–16:00 / 19:00–23:00",
       wednesday: "Libre",
@@ -66,12 +66,12 @@ const Schedule = () => {
   };
 
   return (
-    <section id="schedule" className="schedule-section py-5">
+    <section id="schedule" className="schedule-section">
       <Container>
         <Row className="mb-4">
           <Col className="text-center">
-            <h2 className="fw-bold">Horarios de trabajadores</h2>
-            <p className="text-muted mb-0">
+            <h2 className="fw-bold mb-2 mt-5">Horarios de trabajadores</h2>
+            <p className="text-muted mb-4">
               Gestiona los turnos semanales de cada trabajador.
             </p>
           </Col>
@@ -94,14 +94,14 @@ const Schedule = () => {
                     <thead className="text-center align-middle">
                       <tr>
                         <th>Trabajador</th>
-                        <th>Rol</th>
-                        <th>Lunes</th>
-                        <th>Martes</th>
-                        <th>Miércoles</th>
-                        <th>Jueves</th>
-                        <th>Viernes</th>
-                        <th>Sábado</th>
-                        <th>Domingo</th>
+                        <th>Rola</th>
+                        <th>Astelehena</th>
+                        <th>Asteartea</th>
+                        <th>Asteazkena</th>
+                        <th>Osteguna</th>
+                        <th>Ostirala</th>
+                        <th>Larunbata</th>
+                        <th>Igandea</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -133,7 +133,7 @@ const Schedule = () => {
                 <Form onSubmit={handleAddWorker}>
                   {/* Nombre */}
                   <Form.Group className="mb-3">
-                    <Form.Label className="schedule-form-label">
+                    <Form.Label className="schedule-form-label text-white">
                       Nombre
                     </Form.Label>
                     <Form.Control
@@ -149,7 +149,7 @@ const Schedule = () => {
 
                   {/* Rol */}
                   <Form.Group className="mb-3">
-                    <Form.Label className="schedule-form-label">
+                    <Form.Label className="schedule-form-label text-white">
                       Rol
                     </Form.Label>
                     <Form.Select
@@ -159,7 +159,7 @@ const Schedule = () => {
                       required
                       className="schedule-form-select"
                     >
-                      <option value="">- Hautatu langilearen rol -</option>
+                      <option value="">- Hautatu langilearen rola -</option>
                       <option value="Sukaldaria">Sukaldaria</option>
                       <option value="Zerbitzaria">Zerbitzaria</option>
                       <option value="Banatzailea">Banatzailea</option>
@@ -167,10 +167,10 @@ const Schedule = () => {
                     </Form.Select>
                   </Form.Group>
 
-                  {/* Lunes */}
+                  {/* Astelehena */}
                   <Form.Group className="mb-2">
-                    <Form.Label className="schedule-form-label">
-                      Lunes
+                    <Form.Label className="schedule-form-label text-white">
+                      Astelehena
                     </Form.Label>
                     <Form.Select
                       name="monday"
@@ -187,9 +187,9 @@ const Schedule = () => {
                     </Form.Select>
                   </Form.Group>
 
-                  {/* Martes */}
+                  {/* Asteartea */}
                   <Form.Group className="mb-2">
-                    <Form.Label className="schedule-form-label">
+                    <Form.Label className="schedule-form-label text-white">
                       Asteartea
                     </Form.Label>
                     <Form.Select
@@ -207,10 +207,10 @@ const Schedule = () => {
                     </Form.Select>
                   </Form.Group>
 
-                  {/* Miércoles */}
+                  {/* Asteazkena */}
                   <Form.Group className="mb-2">
-                    <Form.Label className="schedule-form-label">
-                      Miércoles
+                    <Form.Label className="schedule-form-label text-white">
+                      Asteazkena
                     </Form.Label>
                     <Form.Select
                       name="wednesday"
@@ -227,10 +227,10 @@ const Schedule = () => {
                     </Form.Select>
                   </Form.Group>
 
-                  {/* Jueves */}
+                  {/* Osteguna */}
                   <Form.Group className="mb-2">
-                    <Form.Label className="schedule-form-label">
-                      Jueves
+                    <Form.Label className="schedule-form-label text-white">
+                      Osteguna
                     </Form.Label>
                     <Form.Select
                       name="thursday"
@@ -247,10 +247,10 @@ const Schedule = () => {
                     </Form.Select>
                   </Form.Group>
 
-                  {/* Viernes */}
+                  {/* Ostirala */}
                   <Form.Group className="mb-2">
-                    <Form.Label className="schedule-form-label">
-                      Viernes
+                    <Form.Label className="schedule-form-label text-white">
+                      Ostirala
                     </Form.Label>
                     <Form.Select
                       name="friday"
@@ -267,10 +267,10 @@ const Schedule = () => {
                     </Form.Select>
                   </Form.Group>
 
-                  {/* Sábado */}
+                  {/* Larunbata */}
                   <Form.Group className="mb-2">
-                    <Form.Label className="schedule-form-label">
-                      Sábado
+                    <Form.Label className="schedule-form-label text-white">
+                      Larunbata
                     </Form.Label>
                     <Form.Select
                       name="saturday"
@@ -287,10 +287,10 @@ const Schedule = () => {
                     </Form.Select>
                   </Form.Group>
 
-                  {/* Domingo */}
+                  {/* Igandea */}
                   <Form.Group className="mb-3">
-                    <Form.Label className="schedule-form-label">
-                      Domingo
+                    <Form.Label className="schedule-form-label text-white">
+                      Igandea
                     </Form.Label>
                     <Form.Select
                       name="sunday"
@@ -309,9 +309,8 @@ const Schedule = () => {
 
                   <Button
                     type="submit"
-                    className="w-100 schedule-save-button fw-bold"
-                  >
-                    Guardar horario
+                    className="w-100 schedule-save-button fw-bold">
+                    Gehitu langilea ordutegian
                   </Button>
                 </Form>
               </Card.Body>

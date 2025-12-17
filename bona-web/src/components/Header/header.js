@@ -54,6 +54,7 @@ const Header = () => {
               <Nav.Link as={Link} to="/kontaktua" className="nav-link-custom px-3">Kontaktua</Nav.Link>
               <Nav.Link as={Link} to="/erreserbak" className="nav-link-custom px-3">Erreserbak</Nav.Link>
               <Nav.Link as={Link} to="/menu" className="nav-link-custom px-3">Plater motak</Nav.Link>
+              <Nav.Link as={Link} to="/ordutegia" className="nav-link-custom px-3">Ordutegia</Nav.Link>
             </Nav>
 
             <Stack direction="horizontal" gap={3} className="align-items-center flex-wrap justify-content-center justify-content-lg-end">
