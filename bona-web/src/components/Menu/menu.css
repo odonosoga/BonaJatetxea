@@ -19,7 +19,7 @@
 }
 
 .menu-card {
-    min-width: 80%;               
+    max-width: 80%;               
     background-color: #8d3236;      
     border-radius: 15px; 
     color: white;           

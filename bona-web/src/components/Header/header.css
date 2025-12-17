@@ -2,8 +2,6 @@
   color: #F8D4BA;
 }
 
-
-/*Login botoia*/
 .nav-link-custom {
   color: #F8D4BA !important;
   font-weight: 500;
@@ -32,7 +30,6 @@
   width: 80%;
 }
 
-/*Login botoia*/
 .login-btn {
   color: #F8D4BA !important;
   border-color: #F8D4BA !important;
@@ -43,15 +40,13 @@
 
 .login-btn:hover,
 .login-btn:focus {
-  color: #541412 !important;           /* Texto oscuro para contraste */
+  color: #541412 !important;          
   border-color: #541412 !important;
   background-color: #F8D4BA !important;
   text-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
 }
 
-/*Login barruko gauzak*/
 
-/* Botoia  */
 .login-background{
     background: linear-gradient(135deg, #F8D4BA 0%, #ffffff 160%);
 }
@@ -78,5 +73,10 @@
   background: #8d3236 !important;
   border:1px solid black;
 }
+.trash-icon {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
 
 

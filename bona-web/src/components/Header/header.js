@@ -5,6 +5,7 @@ import { BsClock } from "react-icons/bs";
 import { FaShoppingCart } from "react-icons/fa";
 import "../Header/header.css";
 import postre2 from "../../img/postre2.jpg";
+import { BsTrash3 } from "react-icons/bs";
 
 const Header = () => {
   const [login, setLogin] = useState(false);
@@ -20,6 +21,11 @@ const Header = () => {
     setEmail("");
     setPassword("");
   };
+
+  const handleRemoveItem = () => {
+    console.log("Producto eliminado");
+  };
+
 
   const handleShowCart = () => setCart(true);
   const handleCloseCart = () => setCart(false);
@@ -117,15 +123,19 @@ const Header = () => {
                 <Card className="mb-3 shadow-sm p-2" id="carrito">
                   <Row className="align-items-center g-0 d-flex justify-content-between">
                     <Col md={8} className="d-flex">
-                      <img src={postre2} alt="Postre" style={{ width: "100px", height: "100px", objectFit: "cover", marginRight: "10px" }} />
-                      <div className="d-flex flex-column justify-content-center">
-                        <label>Izena: Postre</label>
-                        <label>Cantidad: 1</label>
-                        <label>Precio: 5€</label>
+                      <img src={postre2} alt="Postre" style={{ width: "200px", height: "150px", objectFit: "cover", marginRight: "10px", borderRadius:"20px"}} />
+                      <div className="d-flex flex-column justify-content-center ms-4">
+                        <label className="fw-bold">Izena: Torrija</label>
+                        <label className="fw-bold">Cantidad: 1</label>
+                        <label className="fw-bold">Precio: 5€</label>
                       </div>
                     </Col>
                     <Col md={4} className="d-flex justify-content-end">
-                      <Button variant="danger" className="align-self-center">Eliminar</Button>
+                      <BsTrash3
+                        size={22}
+                        className="text-danger trash-icon me-2"
+                        onClick={() => handleRemoveItem()}
+                      />
                     </Col>
                   </Row>
                 </Card>
@@ -134,7 +144,6 @@ const Header = () => {
                 <div className="d-flex justify-content-center mt-3" id="konfirmatu">
                   <Button variant="success">Bidalketa Konfirmatu</Button>
                 </div>
-
               </Col>
             </Row>
           </Container>
