@@ -8,6 +8,7 @@ import Reserva from './components/Reservations/reservation';
 import Register from './components/Register/register';
 import Schedule from './components/Schedule/Schedule';
 import Menu from './components/Menu/menu';
+import Pd from './components/PendingDelivery/pendingdelivery';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/erreserbak" element={<Reserva />} />
           <Route path="/erregistroa" element={<Register />} />
           <Route path="/menu" element={<Menu />}/>
+          <Route path="/pendiente" element={<Pd />}/>
           <Route path="/ordutegia" element={<Schedule />} />
         </Routes>
       </main>
@@ -27,5 +29,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
