@@ -162,7 +162,7 @@ const Schedule = () => {
       <Container>
         <Row className="mb-4">
           <Col className="text-center">
-            <h2 className="fw-bold mb-2 mt-5">Langileen ordutegiak</h2>
+            <h2 className="fw-bold mb-2 mt-5 pt-5">Langileen ordutegiak</h2>
             <p className="text-muted mb-4">
               Langile bakoitzaren asteko txandak kudeatzen ditu.
             </p>
