@@ -57,10 +57,8 @@ const Menu = () => {
                 <Container fluid className="p-0 d-flex flex-column align-items-center">
                     <div className="menu-card p-4 w-100">
 
-                        {/* Entrantes */}
                         <h3 className="mb-3 text-center">Koilara Platerrak</h3>
                         <Row className="d-flex justify-content-center align-items-start mb-4 w-100">
-                            {/* Plato 1: Sopa */}
                             <Col className="janari-col d-flex mb-3 mb-md-0">
                                 <img src={sopa} alt="Sopa" className="div-img me-2" />
                                 <div className="d-flex flex-column justify-content-center align-items-start m-3">
@@ -89,7 +87,6 @@ const Menu = () => {
                                 </div>
                             </Col>
 
-                            {/* Plato 2: Crema */}
                             <Col className="d-flex">
                                 <img src={crema} alt="Crema" className="div-img me-2" />
                                 <div className="d-flex flex-column justify-content-center align-items-start m-3">
@@ -119,10 +116,8 @@ const Menu = () => {
                             </Col>
                         </Row>
 
-                        {/* Haragia */}
                         <h3 className="mb-3 text-center">Haragia</h3>
                         <Row className="d-flex justify-content-center align-items-start mb-4 w-100">
-                            {/* Pollo */}
                             <Col className="janari-col d-flex mb-3 mb-md-0">
                                 <img src={pollo} alt="Pollo" className="div-img me-2" />
                                 <div className="d-flex flex-column justify-content-center align-items-start m-3">
@@ -151,7 +146,6 @@ const Menu = () => {
                                 </div>
                             </Col>
 
-                            {/* Carne2 */}
                             <Col className="d-flex">
                                 <img src={carne2} alt="Carne 2" className="div-img me-2" />
                                 <div className="d-flex flex-column justify-content-center align-items-start m-3">
@@ -181,10 +175,8 @@ const Menu = () => {
                             </Col>
                         </Row>
 
-                        {/* Arraina */}
                         <h3 className="mb-3 text-center">Arraina</h3>
                         <Row className="d-flex justify-content-center align-items-start mb-4 w-100">
-                            {/* Pescado */}
                             <Col className="janari-col d-flex mb-3 mb-md-0">
                                 <img src={pescado} alt="Pescado" className="div-img me-2" />
                                 <div className="d-flex flex-column justify-content-center align-items-start m-3">
@@ -213,7 +205,6 @@ const Menu = () => {
                                 </div>
                             </Col>
 
-                            {/* Pescado2 */}
                             <Col className="d-flex">
                                 <img src={pescado2} alt="Pescado 2" className="div-img me-2" />
                                 <div className="d-flex flex-column justify-content-center align-items-start m-3">
@@ -243,10 +234,8 @@ const Menu = () => {
                             </Col>
                         </Row>
 
-                        {/* Barazkiak */}
                         <h3 className="mb-3 text-center">Barazkiak</h3>
                         <Row className="d-flex justify-content-center align-items-start mb-4 w-100">
-                            {/* Ensalada */}
                             <Col className="janari-col d-flex mb-3 mb-md-0">
                                 <img src={ensalada} alt="Ensalada" className="div-img me-2" />
                                 <div className="d-flex flex-column justify-content-center align-items-start m-3">
@@ -275,7 +264,6 @@ const Menu = () => {
                                 </div>
                             </Col>
 
-                            {/* Pisto */}
                             <Col className="d-flex">
                                 <img src={pisto} alt="Pisto" className="div-img me-2" />
                                 <div className="d-flex flex-column justify-content-center align-items-start m-3">
@@ -305,10 +293,8 @@ const Menu = () => {
                             </Col>
                         </Row>
 
-                        {/* Pasta eta Arroza */}
                         <h3 className="mb-3 text-center">Pasta eta Arroza</h3>
                         <Row className="d-flex justify-content-center align-items-start mb-4 w-100">
-                            {/* Pasta */}
                             <Col className="janari-col d-flex mb-3 mb-md-0">
                                 <img src={pasta} alt="Pasta" className="div-img me-2" />
                                 <div className="d-flex flex-column justify-content-center align-items-start m-3">
@@ -337,7 +323,6 @@ const Menu = () => {
                                 </div>
                             </Col>
 
-                            {/* Arroz */}
                             <Col className="d-flex">
                                 <img src={arroz} alt="Arroz" className="div-img me-2" />
                                 <div className="d-flex flex-column justify-content-center align-items-start m-3">
@@ -367,10 +352,8 @@ const Menu = () => {
                             </Col>
                         </Row>
 
-                        {/* Postreak */}
                         <h3 className="mb-3 text-center">Postreak</h3>
                         <Row className="d-flex justify-content-center align-items-start mb-4 w-100">
-                            {/* Postre1 */}
                             <Col className="janari-col d-flex mb-3 mb-md-0">
                                 <img src={postre1} alt="Postre 1" className="div-img me-2" />
                                 <div className="d-flex flex-column justify-content-center align-items-start m-3">
@@ -399,7 +382,6 @@ const Menu = () => {
                                 </div>
                             </Col>
 
-                            {/* Postre2 */}
                             <Col className="d-flex">
                                 <img src={postre2} alt="Postre 2" className="div-img me-2" />
                                 <div className="d-flex flex-column justify-content-center align-items-start m-3">

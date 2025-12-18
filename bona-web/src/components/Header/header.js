@@ -5,6 +5,8 @@ import { BsClock } from "react-icons/bs";
 import { FaShoppingCart } from "react-icons/fa";
 import "../Header/header.css";
 import postre2 from "../../img/postre2.jpg";
+import { Trash3 } from "react-bootstrap-icons";
+
 
 const Header = () => {
   const [login, setLogin] = useState(false);
@@ -154,10 +156,11 @@ const Header = () => {
                         src={postre2}
                         alt="Postre"
                         style={{
-                          width: "100px",
-                          height: "100px",
+                          width: "175px",
+                          height: "125px",
                           objectFit: "cover",
-                          marginRight: "10px"
+                          marginRight: "10px",
+                          borderRadius: "20px"
                         }}
                       />
                       <div className="d-flex flex-column justify-content-center">
@@ -167,9 +170,11 @@ const Header = () => {
                       </div>
                     </Col>
                     <Col md={4} className="d-flex justify-content-end">
-                      <Button variant="danger" className="align-self-center">
-                        Eliminar
-                      </Button>
+                      <div
+                        className="align-self-center trash-icon"
+                      >
+                        <Trash3 size={24} />
+                      </div>
                     </Col>
                   </Row>
                 </Card>
