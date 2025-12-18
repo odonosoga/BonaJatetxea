@@ -5,7 +5,7 @@
 }
 .card-header
 {
-  background-color: #8d3236;
+  background-color: #8d3236 !important;
 }
 
 .delivery-card:hover {

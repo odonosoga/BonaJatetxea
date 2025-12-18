@@ -17,7 +17,7 @@ const PendingDelivery = () => {
       <Container>
         <div className="d-flex justify-content-between align-items-center mb-4">
           <div>
-            <h2 className="fw-bold mb-1">Zain dauden eskaerak</h2>
+            <h2 className="fw-bold mb-1 pt-5">Zain dauden eskaerak</h2>
             <Badge bg="danger" className="fs-6">5 eskuragarri</Badge>
           </div>
           <div className="text-end">
