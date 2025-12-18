@@ -89,4 +89,22 @@
   box-shadow: 0 10px 25px rgba(84, 20, 18, 0.4) !important;
 }
 
+.trash-icon
+{
+  cursor: pointer;
+  color: #dc3545; 
+  transition: transform 0.2s ease, color 0.2s ease;
+}
 
+.konf-btn {
+  background: #8d3236 !important;
+  border: 2px solid #541412 !important;
+  border-radius: 12px !important;
+  font-weight: 600;
+  transition: all 0.3s ease !important;
+}
+
+.konf-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(84, 20, 18, 0.4) !important;
+}

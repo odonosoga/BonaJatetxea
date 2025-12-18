@@ -223,8 +223,8 @@ const Header = () => {
                 </Card>
 
                 <h4 className="text-center fw-bold mt-3">Totala: 5€</h4>
-                <div className="d-flex justify-content-center mt-3" id="konfirmatu">
-                  <Button variant="success">Bidalketa Konfirmatu</Button>
+                <div className=" d-flex justify-content-center mt-3">
+                  <Button className="konf-btn">Bidalketa Konfirmatu</Button>
                 </div>
               </Col>
             </Row>
