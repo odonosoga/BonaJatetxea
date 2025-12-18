@@ -176,7 +176,7 @@ const Header = () => {
                 Erregistratu hemen
               </Link>
             </Form.Label>
-            <Button variant="primary" type="submit" className="btn-login ">
+            <Button  type="submit" className="hasi-btn w-100 fw-bold">
               Hasi
             </Button>
           </Form>
