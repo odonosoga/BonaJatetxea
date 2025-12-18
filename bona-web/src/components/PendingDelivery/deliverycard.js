@@ -23,7 +23,7 @@ const DeliveryCard = ({ delivery }) => {
         <div className="mb-3">
           <div className="d-flex align-items-center gap-2 mb-1">
             <BsGeoAltFill size={14} className="text-muted" />
-            <small className="text-muted">{delivery.addres}</small>
+            <small className="text-muted">{delivery.adress}</small>
           </div>
           <div className="d-flex align-items-center gap-2">
             <BsClockFill size={14} className="text-muted" />

@@ -1,3 +1,4 @@
+/* Header section  */
 .header-section {
   background: linear-gradient(135deg, #C34F5A 0%, #541412 100%);
   color: #F8D4BA;
@@ -7,17 +8,7 @@
   z-index: 1050;
 }
 
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.navbar {
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
+/* Links  */
 .nav-link-custom {
   color: #F8D4BA !important;
   font-weight: 500;
@@ -46,12 +37,14 @@
   width: 80%;
 }
 
+/* Login botoia */
 .login-btn {
   color: #F8D4BA !important;
   border-color: #F8D4BA !important;
   background-color: transparent !important;
   font-weight: 500;
   transition: all 0.2s ease;
+  height: 30px;
 }
 
 .login-btn:hover {
@@ -60,14 +53,20 @@
   background-color: #F8D4BA !important;
 }
 
-#carrito {
-  border: 1px solid #541412;
+/* Karrito button */
+.karrito-btn {
+  color: #F8D4BA !important;
+  border-color: #F8D4BA !important;
+  background-color: transparent !important;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  height: 30px;
 }
 
-#konfirmatu button {
-  background: #8d3236 !important;
-  border: 1px solid #541412;
-  color: #fff !important;
+.karrito-btn:hover {
+   color: #541412 !important;
+  border-color: #541412 !important;
+  background-color: #F8D4BA !important;
 }
 .trash-icon {
   cursor: pointer;

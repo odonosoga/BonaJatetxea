@@ -14,6 +14,7 @@ const Header = () => {
   const [email, setEmail] = useState("");
   const [pasahitza, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [expanded, setExpanded] = useState(false);
 
   const handleShowLogin = () => setLogin(true);
   const handleCloseLogin = () => {
@@ -41,20 +42,23 @@ const Header = () => {
       <section className="header-section text-white shadow-sm">
         {/* TOPBAR */}
         <div className="topbar d-flex justify-content-between align-items-center px-4 py-2">
-          <div className="d-flex flex-column flex-sm-row align-items-center gap-3">
+          <div className="topbar-left d-flex flex-column flex-sm-row align-items-center gap-3">
             <Image src="/BonaLogoa.png" alt="Bona Restaurant Logo" height="70" />
-            <div className="d-flex align-items-center gap-2">
-              <BsClock size={18} />
-              <small>12:00–16:00</small>
-            </div>
-            <div className="d-flex align-items-center gap-2">
-              <BsClock size={18} />
-              <small>19:00–23:00</small>
-            </div>
           </div>
 
-          <div className="d-flex align-items-center gap-3">
-            <Button variant="outline-light" size="sm" onClick={handleShowCart}>
+          <div className="topbar-right d-flex align-items-center gap-3">
+            <div className="topbar-hours d-flex flex-column text-end me-2">
+              <div className="d-flex align-items-center gap-2 justify-content-end">
+                <BsClock size={18} />
+                <small>12:00–16:00</small>
+              </div>
+              <div className="d-flex align-items-center gap-2 justify-content-end">
+                <BsClock size={18} />
+                <small>19:00–23:00</small>
+              </div>
+            </div>
+
+            <Button className="karrito-btn" size="sm" onClick={handleShowCart}>
               <FaShoppingCart size={20} />
             </Button>
             <Button
@@ -69,27 +73,66 @@ const Header = () => {
         </div>
 
         {/* NAVBAR */}
-        <Navbar expand="lg" className="border-top border-dark-subtle">
+        <Navbar
+          expand="lg"
+          className="border-top border-dark-subtle"
+          expanded={expanded}
+          onToggle={(val) => setExpanded(val)}
+          collapseOnSelect
+        >
           <Container fluid className="px-4 nav-container">
-            <Navbar.Toggle aria-controls="bona-navbar-nav" />
+            <Navbar.Toggle
+              aria-controls="bona-navbar-nav"
+              onClick={() => setExpanded((prev) => !prev)}
+            />
             <Navbar.Collapse id="bona-navbar-nav">
               <Nav className="mx-auto text-center">
-                <Nav.Link as={Link} to="/" className="nav-link-custom px-3">
+                <Nav.Link
+                  as={Link}
+                  to="/"
+                  className="nav-link-custom px-3"
+                  onClick={() => setExpanded(false)}
+                >
                   Hasiera
                 </Nav.Link>
-                <Nav.Link as={Link} to="/kontaktua" className="nav-link-custom px-3">
+                <Nav.Link
+                  as={Link}
+                  to="/kontaktua"
+                  className="nav-link-custom px-3"
+                  onClick={() => setExpanded(false)}
+                >
                   Kontaktua
                 </Nav.Link>
-                <Nav.Link as={Link} to="/erreserbak" className="nav-link-custom px-3">
+                <Nav.Link
+                  as={Link}
+                  to="/erreserbak"
+                  className="nav-link-custom px-3"
+                  onClick={() => setExpanded(false)}
+                >
                   Erreserbak
                 </Nav.Link>
-                <Nav.Link as={Link} to="/menu" className="nav-link-custom px-3">
+                <Nav.Link
+                  as={Link}
+                  to="/menu"
+                  className="nav-link-custom px-3"
+                  onClick={() => setExpanded(false)}
+                >
                   Plater motak
                 </Nav.Link>
-                <Nav.Link as={Link} to="/ordutegia" className="nav-link-custom px-3">
+                <Nav.Link
+                  as={Link}
+                  to="/ordutegia"
+                  className="nav-link-custom px-3"
+                  onClick={() => setExpanded(false)}
+                >
                   Ordutegia
                 </Nav.Link>
-                <Nav.Link as={Link} to="/pendiente" className="nav-link-custom px-3">
+                <Nav.Link
+                  as={Link}
+                  to="/pendiente"
+                  className="nav-link-custom px-3"
+                  onClick={() => setExpanded(false)}
+                >
                   Bidalketak
                 </Nav.Link>
               </Nav>
@@ -133,7 +176,7 @@ const Header = () => {
                 Erregistratu hemen
               </Link>
             </Form.Label>
-            <Button variant="primary" type="submit" className="btn-login w-100">
+            <Button variant="primary" type="submit" className="btn-login ">
               Hasi
             </Button>
           </Form>
@@ -149,7 +192,7 @@ const Header = () => {
           <Container>
             <Row className="justify-content-center">
               <Col md={12}>
-                <Card className="mb-3 shadow-sm p-2" id="carrito">
+                <Card className="mb-3 shadow-sm p-2">
                   <Row className="align-items-center g-0 d-flex justify-content-between">
                     <Col md={8} className="d-flex">
                       <img
