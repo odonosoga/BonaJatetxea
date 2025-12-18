@@ -1,0 +1,27 @@
+.delivery-card {
+  border-radius: 16px !important;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+.card-header
+{
+  background-color: #8d3236;
+}
+
+.delivery-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+}
+
+/* Botoia  */
+.delivery-btn {
+  background: #8d3236 !important;
+  border: 2px solid #541412 !important;
+  transition: all 0.3s ease !important;
+}
+
+.delivery-btn:hover {
+  transform: translateY(-2px);
+}
+
+
