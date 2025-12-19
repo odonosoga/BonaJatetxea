@@ -4,11 +4,13 @@ import { BsTelephone, BsEnvelope, BsGeoAlt, BsClock } from "react-icons/bs";
 import heroImg from "../../img/reservation.jpg";
 import "./reservation.css";
 
-
 const HeroReserva = () => (
-  <section className="hero-reserva" style={{
+  <section
+    className="hero-reserva"
+    style={{
       backgroundImage: `url(${heroImg})`,
-    }}>
+    }}
+  >
     <div className="hero-overlay">
       <Container className="h-100">
         <Row className="h-100 align-items-center justify-content-center">
@@ -29,8 +31,9 @@ const Reserva = () => {
   const [timeError, setTimeError] = useState(false);
   const [hasTimeMorningNight, setTime] = useState(null);
   const [validated, setValidated] = useState(false);
+
   const handleSubmit = (event) => {
-  const form = event.currentTarget;
+    const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
@@ -45,7 +48,6 @@ const Reserva = () => {
     setValidated(true);
   };
 
-  
   return (
     <>
       <HeroReserva />
@@ -64,14 +66,19 @@ const Reserva = () => {
                     <div>
                       <strong>Kale Nagusia, 123</strong>
                       <br />
-                      <small className="text-muted">Donostia - San Sebastián</small>
+                      <small className="text-muted">
+                        Donostia - San Sebastián
+                      </small>
                     </div>
                   </div>
 
                   <div className="d-flex align-items-start mb-4 reservation-item">
                     <BsTelephone className="mt-1 me-3 text-danger fs-4" />
                     <div>
-                      <a href="tel:+34943123456" className="text-decoration-none">
+                      <a
+                        href="tel:+34943123456"
+                        className="text-decoration-none"
+                      >
                         <strong>943 123 456</strong>
                       </a>
                       <br />
@@ -103,23 +110,24 @@ const Reserva = () => {
                       </div>
                     </div>
                   </div>
+
                   {/* Mapa de localizaciones */}
-                <Row className="mt-4">
-                  <Col>
-                    <h5 className="fw-bold mb-3 text-center">
-                      Gure kokapenak mapan
-                    </h5>
-                    <div className="map-wrapper">
-                      <iframe
-                        src="https://www.google.com/maps/d/embed?mid=1AvqjeDnNLnJqmyiyI95GKL7igg_4LyQ&hl=es&ehbc=2E312F"
-                        allowFullScreen=""
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                        title="Mapa de restaurantes"
-                      ></iframe>
-                    </div>
-                  </Col>
-                </Row>
+                  <Row className="mt-4">
+                    <Col>
+                      <h5 className="fw-bold mb-3 text-center">
+                        Gure kokapenak mapan
+                      </h5>
+                      <div className="map-wrapper">
+                        <iframe
+                          src="https://www.google.com/maps/d/embed?mid=1AvqjeDnNLnJqmyiyI95GKL7igg_4LyQ&hl=es&ehbc=2E312F"
+                          allowFullScreen=""
+                          loading="lazy"
+                          referrerPolicy="no-referrer-when-downgrade"
+                          title="Mapa de restaurantes"
+                        ></iframe>
+                      </div>
+                    </Col>
+                  </Row>
                 </Card.Body>
               </Card>
             </Col>
@@ -129,27 +137,32 @@ const Reserva = () => {
               <Card className="border-0 shadow-sm h-100">
                 <Card.Body className="p-4 p-lg-5">
                   <h5 className="fw-bold mb-4">Datuak bete</h5>
-                  <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                  <Form
+                    noValidate
+                    validated={validated}
+                    onSubmit={handleSubmit}
+                  >
                     <Row>
                       <Col md={6} className="mb-3">
-                        <Form.Group controlId="email">
-                          <Form.Label className="fw-medium">Emaila</Form.Label>
-                          <Form.Control
-                            type="text"
-                            className="mb-3"
-                            placeholder="email@adibidea.com"
-                            required
-                          />
-                          <Form.Control
-                            type="text"
-                            placeholder="sartu berriro"
-                            required
-                          />
-                            <Form.Control.Feedback type="invalid">
-                              Mesedez, sartu email bat.
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
+                    <Form.Group controlId="email">
+                      <Form.Label className="fw-medium">Emaila</Form.Label>
+                      <Form.Control 
+                        type="email"  
+                        className="mb-3"                   
+                        placeholder="email@adibidea.com"
+                        required
+                      />
+                      <Form.Control
+                        type="email"                    
+                        placeholder="sartu berriro mesedez"
+                        required
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        Mesedez, sartu email baliozko bat.
+                      </Form.Control.Feedback>
+                    </Form.Group>
+                  </Col>
+
                       <Col md={6} className="mb-3">
                         <Form.Group>
                           <Form.Label className="fw-medium">
@@ -213,9 +226,9 @@ const Reserva = () => {
                             placeholder="Abizena"
                             required
                           />
-                        <Form.Control.Feedback type="invalid">
-                          Mesedez, sartu abizena.
-                        </Form.Control.Feedback>
+                          <Form.Control.Feedback type="invalid">
+                            Mesedez, sartu abizena.
+                          </Form.Control.Feedback>
                         </Form.Group>
                       </Col>
                     </Row>
@@ -223,20 +236,28 @@ const Reserva = () => {
                     <Row>
                       <Col md={6} className="mb-3">
                         <Form.Group>
-                          <Form.Label className="fw-medium">Pertsona kopurua</Form.Label>
-                          <Form.Control type="number" min={1} max={12} required />
+                          <Form.Label className="fw-medium">
+                            Pertsona kopurua
+                          </Form.Label>
+                          <Form.Control
+                            type="number"
+                            min={1}
+                            max={12}
+                            required
+                          />
                         </Form.Group>
                       </Col>
                       <Col md={6} className="mb-3">
                         <Form.Group>
-                          <Form.Label className="fw-medium">Mugikor zenbakia</Form.Label>
+                          <Form.Label className="fw-medium">
+                            Mugikor zenbakia
+                          </Form.Label>
                           <Form.Control
                             type="number"
                             placeholder="123-45-67-89"
                             pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}-[0-9]{2}"
                             required
                           />
-                          
                         </Form.Group>
                       </Col>
                     </Row>
@@ -254,19 +275,23 @@ const Reserva = () => {
                       </Col>
                     </Row>
 
+                    {/* Fila 1: Data (izq) + Noiz (dcha) */}
                     <Row>
                       <Col md={6} className="mb-3">
                         <Form.Group>
                           <Form.Label className="fw-medium">Data</Form.Label>
-                          <Form.Control type="date" required/>
+                          <Form.Control type="date" required />
                           <Form.Control.Feedback type="invalid">
                             Hautatu data.
                           </Form.Control.Feedback>
                         </Form.Group>
                       </Col>
-                      <Col md={6}>
+
+                      <Col md={6} className="mb-3">
                         <Form.Group className="mb-3" controlId="noiz">
-                          <Form.Label className="fw-medium text-center w-100">Noiz?</Form.Label>
+                          <Form.Label className="fw-medium text-center w-100">
+                            Noiz?
+                          </Form.Label>
                           <div className="d-flex justify-content-center gap-3 mt-2">
                             <Form.Check
                               type="radio"
@@ -304,98 +329,97 @@ const Reserva = () => {
                       </Col>
                     </Row>
 
+                    {/* Fila 2: Lokala (izq) + Ordua (dcha) */}
                     <Row>
-                      <Col md={6} className="mb-3">
-                        <Form.Group>
-                          <Form.Label>
-                            Hautatu zein lokalen bazkalduko duzun
-                          </Form.Label>
-                         <Form.Select
-                            required
-                            defaultValue=""
-                          >
-                            <option value="" disabled>
-                              - Lokala -
-                            </option>
-                            <option value="bona-center">
-                              Bona Center - Nafarroa Hiribidea, 2, 20013 Donostia / San Sebastián, Gipuzkoa
-                            </option>
-                            <option value="bona-tolosa">
-                              Bona Tolosa - San Frantzisko Pasealekua Ibilbidea, 8, 20400 Tolosa, Gipuzkoa
-                            </option>
-                            <option value="bona-mutriku">
-                              Bona Mutriku - Erdiko Kalea, 23, 20830 Mutriku, Gipuzkoa
-                            </option>
-                            <option value="bona-gazteiz">
-                              Bona Vitoria-Gazteiz - Francia Kalea, 24, 01002 Vitoria-Gasteiz, Araba
-                            </option>
-                            <option value="bona-arrasate">
-                              Bona Bilbao - Ercilla Kalea, 22, Abando, 48009 Bilbao, Bizkaia
-                            </option>
-                            <option value="bona-estella">
-                              Bona Estella - Pl. los Fueros, 24, 31200 Estella, Navarra
-                            </option>
-                            <option value="bona-pamplona">
-                              Bona Pamploma - Av. del Ejército, 30, 31002 Pamplona, Navarra
-                            </option>
-                          </Form.Select>
-                          <Form.Control.Feedback type="invalid">
-                            Hautatu lokala.
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
-                      <Col md={6} className="mb-3">
-                        {hasTimeMorningNight === "goizez" && (
-                          <div className="d-flex align-items-center justify-content-center">
-                            <Form.Group>
-                              <Form.Label>Hautatu ordua *</Form.Label>
-                              <Form.Select
-                                required
-                                defaultValue=""  
-                              >
-                                <option value="" disabled>
-                                  - Ordua -
-                                </option>
-                                <option>12:00</option>
-                                <option>12:45</option>
-                                <option>13:30</option>
-                                <option>14:15</option>
-                                <option>15:00</option>
-                                <option>15:45</option>
-                              </Form.Select>
-                              <Form.Control.Feedback type="invalid">
-                                Hautatu ordua.
-                              </Form.Control.Feedback>
-                            </Form.Group>
-                          </div>
-                        )}
+  {/* Hora: primero en móvil, a la derecha en md+ */}
+  <Col
+    xs={12}
+    md={6}
+    className="mb-3 order-1 order-md-2"
+  >
+    {hasTimeMorningNight && (
+      <Form.Group>
+        <Form.Label>Hautatu ordua *</Form.Label>
+        <Form.Select required defaultValue="">
+          <option value="" disabled>
+            - Ordua -
+          </option>
+          {hasTimeMorningNight === "goizez" && (
+            <>
+              <option>12:00</option>
+              <option>12:45</option>
+              <option>13:30</option>
+              <option>14:15</option>
+              <option>15:00</option>
+              <option>15:45</option>
+            </>
+          )}
+          {hasTimeMorningNight === "gauez" && (
+            <>
+              <option>19:00</option>
+              <option>19:45</option>
+              <option>20:30</option>
+              <option>21:15</option>
+              <option>22:00</option>
+              <option>22:45</option>
+            </>
+          )}
+        </Form.Select>
+        <Form.Control.Feedback type="invalid">
+          Hautatu ordua.
+        </Form.Control.Feedback>
+      </Form.Group>
+    )}
+  </Col>
 
-                        {hasTimeMorningNight === "gauez" && (
-                          <div className="d-flex align-items-center justify-content-center">
-                            <Form.Group>
-                              <Form.Label>Hautatu ordua *</Form.Label>
-                              <Form.Select
-                                required
-                                defaultValue=""
-                              >
-                                <option value="" disabled>
-                                  - Ordua -
-                                </option>
-                                <option>19:00</option>
-                                <option>19:45</option>
-                                <option>20:30</option>
-                                <option>21:15</option>
-                                <option>22:00</option>
-                                <option>22:45</option>
-                              </Form.Select>
-                              <Form.Control.Feedback type="invalid">
-                                Hautatu ordua.
-                              </Form.Control.Feedback>
-                            </Form.Group>
-                          </div>
-                        )}
-                      </Col>
-                    </Row>
+  {/* Lokala: segundo en móvil, a la izquierda en md+ */}
+  <Col
+    xs={12}
+    md={6}
+    className="mb-3 order-2 order-md-1"
+  >
+    <Form.Group>
+      <Form.Label>
+        Hautatu zein lokalen bazkalduko duzun
+      </Form.Label>
+      <Form.Select required defaultValue="">
+        <option value="" disabled>
+          - Lokala -
+        </option>
+        <option value="bona-center">
+          Bona Center - Nafarroa Hiribidea, 2, 20013 Donostia /
+          San Sebastián, Gipuzkoa
+        </option>
+        <option value="bona-tolosa">
+          Bona Tolosa - San Frantzisko Pasealekua Ibilbidea, 8,
+          20400 Tolosa, Gipuzkoa
+        </option>
+        <option value="bona-mutriku">
+          Bona Mutriku - Erdiko Kalea, 23, 20830 Mutriku, Gipuzkoa
+        </option>
+        <option value="bona-gazteiz">
+          Bona Vitoria-Gazteiz - Francia Kalea, 24, 01002
+          Vitoria-Gasteiz, Araba
+        </option>
+        <option value="bona-arrasate">
+          Bona Bilbao - Ercilla Kalea, 22, Abando, 48009 Bilbao,
+          Bizkaia
+        </option>
+        <option value="bona-estella">
+          Bona Estella - Pl. los Fueros, 24, 31200 Estella, Navarra
+        </option>
+        <option value="bona-pamplona">
+          Bona Pamploma - Av. del Ejército, 30, 31002 Pamplona,
+          Navarra
+        </option>
+      </Form.Select>
+      <Form.Control.Feedback type="invalid">
+        Hautatu lokala.
+      </Form.Control.Feedback>
+    </Form.Group>
+  </Col>
+</Row>
+
                     <Button
                       type="submit"
                       className="w-100 btn-contact py-3 fw-bold"

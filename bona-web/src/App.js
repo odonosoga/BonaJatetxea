@@ -16,7 +16,7 @@ function App() {
       <Header />
       <main>
         <Routes>
-          <Route path="/" element={<Home />}/>
+          <Route path="/BonaJatetxea" element={<Home />}/>
           <Route path="/kontaktua" element={<Contact />} />
           <Route path="/erreserbak" element={<Reserva />} />
           <Route path="/erregistroa" element={<Register />} />
