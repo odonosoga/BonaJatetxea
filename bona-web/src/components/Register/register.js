@@ -15,7 +15,7 @@
       setValidated(true);
     }
     return (
-      <section id="erregistroa" className="register-section">
+      <section id="erregistroa" className="register-section pt-5">
         <Container fluid className="p-0">
           <Row className="g-0">
             <Col
