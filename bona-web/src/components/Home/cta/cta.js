@@ -4,7 +4,7 @@ import './cta.css';
 
 const CTA = () => {
   return (
-    <section className="py-5 bg-gradient">
+    <section className="cta-section py-5">
       <Container>
         <Row className="justify-content-center text-center">
           <Col lg={8}>
@@ -14,7 +14,7 @@ const CTA = () => {
             </p>
             <Button 
               as="a" 
-              href="/kontaktua" 
+              href="/erreserbak" 
               size="lg" 
               className="cta-button px-5 py-3 fw-bold rounded-pill"
             >

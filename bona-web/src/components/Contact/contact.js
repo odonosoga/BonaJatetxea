@@ -1,104 +1,168 @@
 // Contact.js
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
+import heroImg from "../../img/contact.png";
 import "./contact.css";
 
-const Contact = () => {
-  return (
-    <section id="kontaktua" className="pb-2 contact-section">
-      <Container>
-        {/* Título */}
-        <div className="text-center mb-4">
-          
-          <h2 className="display-5 fw-bold text-dark mb-2">Kontaktua</h2>
-          <p className="lead text-muted mb-0">
-            Idatzi zure ideia, galdera edo eskaera eta harremanetan jarriko gara.
-          </p>
-        </div>
-
-        <Row className="g-5 justify-content-center">
-          <Col lg={8}>
-            <Card className="border-0 shadow-sm h-100">
-              <Card.Body className="p-4 p-lg-5">
-                <h5 className="fw-bold mb-4">Kontsulta</h5>
-                <Form>
-                  <Row>
-                    <Col md={6} className="mb-3">
-                      <Form.Group>
-                        <Form.Label className="fw-medium d-flex align-items-start">Izena</Form.Label>
-                        <Form.Control
-                          type="text"
-                          placeholder="Zure izena"
-                          required
-                        />
-                      </Form.Group>
-                    </Col>
-                    <Col md={6} className="mb-3">
-                      <Form.Group>
-                        <Form.Label className="fw-medium d-flex align-items-start">Emaila</Form.Label>
-                        <Form.Control
-                          type="email"
-                          placeholder="email@adibidea.com"
-                          required
-                        />
-                      </Form.Group>
-                    </Col>
-                  </Row>
-
-                  <Form.Group className="mb-3">
-                    <Form.Label className="fw-medium d-flex align-items-start">Telefonoa</Form.Label>
-                    <Form.Control type="tel" placeholder="666 123 456" />
-                  </Form.Group>
-
-                  {/* Motivo de la consulta */}
-                  <Form.Group className="mb-3">
-                    <Form.Label className="fw-medium d-flex align-items-start">Zeri buruz?</Form.Label>
-                    <Form.Select>
-                      <option>Aukeratu aukera bat</option>
-                      <option>Informazio orokorra</option>
-                      <option>Hitzordu bat eskatu</option>
-                      <option>Aipu edo aurrekontua</option>
-                      <option>Beste bat</option>
-                    </Form.Select>
-                  </Form.Group>
-
-                  <Form.Group className="mb-4">
-                    <Form.Label className="fw-medium d-flex align-items-start">Mezua</Form.Label>
-                    <Form.Control
-                      as="textarea"
-                      rows={4}
-                      placeholder="Zure mezua..."
-                    />
-                  </Form.Group>
-
-                  <Button
-                    type="submit"
-                    className="w-100 btn-contact py-3 fw-bold"
-                  >
-                    Bidali mezua
-                  </Button>
-
-                  {/* Microcopy debajo del botón */}
-                  <p className="text-center text-muted mt-3 mb-0" style={{ fontSize: "0.9rem" }}>
-                    Normalean 24-48 orduren buruan erantzuten dugu.
-                  </p>
-                </Form>
-              </Card.Body>
-            </Card>
-
-            {/* Bloque de confianza debajo de la card */}
-            <div className="text-center mt-4">
-              <p className="text-muted mb-1" style={{ fontSize: "0.95rem" }}>
-                Zalantzarik baduzu, lasai idatzi: laguntzeko gaude.
-              </p>
-              <p className="text-muted mb-0" style={{ fontSize: "0.85rem" }}>
-                Ez partekatu inoiz pasahitzik edo datu konfidentzialik mezu honetan.
-              </p>
-            </div>
+const HeroReserva = () => (
+  <section
+    className="hero-reserva"
+    style={{ backgroundImage: `url(${heroImg})` }}
+  >
+    <div className="hero-overlay">
+      <Container className="h-100">
+        <Row className="h-100 align-items-center justify-content-center">
+          <Col md={8} className="text-center text-white">
+            <h1 className="display-4 fw-bold mb-3">Egin zure kontsulta</h1>
+            <p className="lead mb-0">
+              Idatzi zure ideia, galdera edo eskaera eta harremanetan jarriko
+              gara.
+            </p>
           </Col>
         </Row>
       </Container>
-    </section>
+    </div>
+  </section>
+);
+
+const Contact = () => {
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+  };
+
+  return (
+    <>
+      <HeroReserva />
+      <section id="kontaktua" className="pb-2 contact-section">
+        <Container>
+          <Row className="g-5 justify-content-center">
+            <Col lg={8}>
+              <Card className="border-0 shadow-sm h-100">
+                <Card.Body className="p-4 p-lg-5">
+                  <h5 className="fw-bold mb-4">Kontsulta</h5>
+
+                  <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                    <Row>
+                      <Col md={6} className="mb-3">
+                        <Form.Group controlId="contactName">
+                          <Form.Label className="fw-medium d-flex align-items-start">
+                            Izena
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="Zure izena"
+                            required
+                          />
+                          <Form.Control.Feedback type="invalid">
+                            Mesedez, sartu izena.
+                          </Form.Control.Feedback>
+                        </Form.Group>
+                      </Col>
+
+                      <Col md={6} className="mb-3">
+                        <Form.Group controlId="contactEmail">
+                          <Form.Label className="fw-medium d-flex align-items-start">
+                            Emaila
+                          </Form.Label>
+                          <Form.Control
+                            type="email"
+                            placeholder="email@adibidea.com"
+                            required
+                          />
+                          <Form.Control.Feedback type="invalid">
+                            Mesedez, sartu email zuzen bat.
+                          </Form.Control.Feedback>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+
+                    <Form.Group className="mb-3" controlId="contactPhone">
+                      <Form.Label className="fw-medium d-flex align-items-start">
+                        Telefonoa
+                      </Form.Label>
+                      <Form.Control
+                        type="tel"
+                        placeholder="666 123 456"
+                      />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="contactReason">
+                      <Form.Label className="fw-medium d-flex align-items-start">
+                        Zeri buruz?
+                      </Form.Label>
+                      <Form.Select required>
+                        <option value="">Aukeratu aukera bat</option>
+                        <option>Informazio orokorra</option>
+                        <option>Hitzordu bat eskatu</option>
+                        <option>Aipu edo aurrekontua</option>
+                        <option>Beste bat</option>
+                      </Form.Select>
+                      <Form.Control.Feedback type="invalid">
+                        Mesedez, aukeratu kontsultaren gaia.
+                      </Form.Control.Feedback>
+                    </Form.Group>
+
+                    <Form.Group className="mb-4" controlId="contactMessage">
+                      <Form.Label className="fw-medium d-flex align-items-start">
+                        Mezua
+                      </Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows={4}
+                        placeholder="Zure mezua..."
+                        required
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        Mesedez, idatzi mezua.
+                      </Form.Control.Feedback>
+                    </Form.Group>
+
+                    <Button
+                      type="submit"
+                      className="w-100 btn-contact py-3 fw-bold"
+                    >
+                      Bidali mezua
+                    </Button>
+
+                    <p
+                      className="text-center text-muted mt-3 mb-0"
+                      style={{ fontSize: "0.9rem" }}
+                    >
+                      Normalean 24-48 orduren buruan erantzuten dugu.
+                    </p>
+                  </Form>
+                </Card.Body>
+              </Card>
+
+              <div className="text-center mt-4">
+                <p
+                  className="text-muted mb-1"
+                  style={{ fontSize: "0.95rem" }}
+                >
+                  Zalantzarik baduzu, lasai idatzi: laguntzeko gaude.
+                </p>
+                <p
+                  className="text-muted mb-0"
+                  style={{ fontSize: "0.85rem" }}
+                >
+                  Ez partekatu inoiz pasahitzik edo datu konfidentzialik mezu
+                  honetan.
+                </p>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+    </>
   );
 };
 

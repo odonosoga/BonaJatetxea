@@ -1,15 +1,19 @@
-.bg-gradient {
-  background: linear-gradient(135deg, #fff 0%, #fdf2f2 100%);
+.cta-section{
+  background: linear-gradient(135deg, #F8D4BA 0%, #ffffff 100%);
 }
 
+/* Botoia  */
 .cta-button {
-  background: linear-gradient(45deg, #ff8181, #ff9a9a) !important;
-  border: none !important;
-  font-size: 1.2rem !important;
+  background: #8d3236 !important;
+  border: 2px solid #541412 !important;
+  border-radius: 12px !important;
+  font-size: 1.1rem !important;
+  color: #fff !important;
+  font-weight: 600;
   transition: all 0.3s ease !important;
 }
 
 .cta-button:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 15px 35px rgba(255,129,129,0.4) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(84, 20, 18, 0.4) !important;
 }
