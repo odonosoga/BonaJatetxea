@@ -146,9 +146,15 @@ const Reserva = () => {
                       <Col md={6} className="mb-3">
                     <Form.Group controlId="email">
                       <Form.Label className="fw-medium">Emaila</Form.Label>
-                      <Form.Control
-                        type="email"                     // ← tipo email
+                      <Form.Control 
+                        type="email"  
+                        className="mb-3"                   
                         placeholder="email@adibidea.com"
+                        required
+                      />
+                      <Form.Control
+                        type="email"                    
+                        placeholder="sartu berriro mesedez"
                         required
                       />
                       <Form.Control.Feedback type="invalid">
