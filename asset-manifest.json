@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/BonaJatetxea/static/css/main.dbe54cec.css",
-    "main.js": "/BonaJatetxea/static/js/main.aa0a5a29.js",
+    "main.js": "/BonaJatetxea/static/js/main.e5389667.js",
     "static/js/453.c575770d.chunk.js": "/BonaJatetxea/static/js/453.c575770d.chunk.js",
     "static/media/crema.jpg": "/BonaJatetxea/static/media/crema.3ff2491afe379e1784ab.jpg",
     "static/media/pollo.jpg": "/BonaJatetxea/static/media/pollo.e778ca19ccab5ceba119.jpg",
@@ -24,11 +24,11 @@
     "static/media/menu.jpeg": "/BonaJatetxea/static/media/menu.c2d4686efcd5548248af.jpeg",
     "index.html": "/BonaJatetxea/index.html",
     "main.dbe54cec.css.map": "/BonaJatetxea/static/css/main.dbe54cec.css.map",
-    "main.aa0a5a29.js.map": "/BonaJatetxea/static/js/main.aa0a5a29.js.map",
+    "main.e5389667.js.map": "/BonaJatetxea/static/js/main.e5389667.js.map",
     "453.c575770d.chunk.js.map": "/BonaJatetxea/static/js/453.c575770d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.dbe54cec.css",
-    "static/js/main.aa0a5a29.js"
+    "static/js/main.e5389667.js"
   ]
 }
