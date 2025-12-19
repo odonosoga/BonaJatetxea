@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Navbar, Container, Nav, Button, Image, Modal, Form, Alert, Card, Row, Col } from "react-bootstrap";
+import { Navbar, Container, Nav, Button, Modal, Form, Alert, Card, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { BsClock } from "react-icons/bs";
 import { FaShoppingCart } from "react-icons/fa";
 import "../Header/header.css";
 import postre2 from "../../img/postre2.jpg";
+import BonaLogoa from "../../img/BonaLogoa.png";
 import { Trash3 } from "react-bootstrap-icons";
 
 
@@ -43,7 +44,8 @@ const Header = () => {
         {/* TOPBAR */}
         <div className="topbar d-flex justify-content-between align-items-center px-4 py-2">
           <div className="topbar-left d-flex flex-column flex-sm-row align-items-center gap-3">
-            <Image src="/BonaLogoa.png" alt="Bona Restaurant Logo" height="70" />
+             <img src={BonaLogoa} alt="Postre" height="90" style={{ marginLeft: "-25px"
+                        }} /> 
           </div>
 
           <div className="topbar-right d-flex align-items-center gap-3">
@@ -89,7 +91,7 @@ const Header = () => {
               <Nav className="mx-auto text-center">
                 <Nav.Link
                   as={Link}
-                  to="/"
+                  to="/BonaJatetxea"
                   className="nav-link-custom px-3"
                   onClick={() => setExpanded(false)}
                 >
