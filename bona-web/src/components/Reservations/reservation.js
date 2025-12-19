@@ -144,24 +144,19 @@ const Reserva = () => {
                   >
                     <Row>
                       <Col md={6} className="mb-3">
-                        <Form.Group controlId="email">
-                          <Form.Label className="fw-medium">Emaila</Form.Label>
-                          <Form.Control
-                            type="text"
-                            className="mb-3"
-                            placeholder="email@adibidea.com"
-                            required
-                          />
-                          <Form.Control
-                            type="text"
-                            placeholder="sartu berriro"
-                            required
-                          />
-                          <Form.Control.Feedback type="invalid">
-                            Mesedez, sartu email bat.
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
+                    <Form.Group controlId="email">
+                      <Form.Label className="fw-medium">Emaila</Form.Label>
+                      <Form.Control
+                        type="email"                     // ← tipo email
+                        placeholder="email@adibidea.com"
+                        required
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        Mesedez, sartu email baliozko bat.
+                      </Form.Control.Feedback>
+                    </Form.Group>
+                  </Col>
+
                       <Col md={6} className="mb-3">
                         <Form.Group>
                           <Form.Label className="fw-medium">
