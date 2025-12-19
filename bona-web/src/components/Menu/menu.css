@@ -6,32 +6,38 @@
   justify-content: flex-start;
   min-height: 80vh;
   padding: 2rem 0;
-  padding-top: 120px; 
+  padding-top: 120px;
 }
 
-
 .menu-info {
-  width: 100%;           
-  max-width: 1200px;     
+  width: 100%;
+  max-width: 1200px;
   text-align: center;
-  padding: 2rem;         
-  margin: 0 auto;        
+  padding: 2rem;
+  margin: 0 auto;
 }
 
 .menu-card {
-    max-width: 80%;               
-    background-color: #8d3236;      
-    border-radius: 15px; 
-    color: white;           
+  max-width: 80%;
+  background-color: #8d3236;
+  border-radius: 15px;
+  color: white;
 }
-.menu-card img
-{
+
+/* Todas las imágenes de la carta comparten tamaño y proporción */
+.menu-card img,
+.div-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
   border-radius: 10%;
-  height: 200px;
-  width: 350px;
-  
+  display: block;
 }
 
-
-
-
+/* En pantallas grandes, que no pasen de 300px de ancho */
+@media (min-width: 992px) {
+  .menu-card img,
+  .div-img {
+    max-width: 300px;    /* o 280, 320, lo que veas mejor */
+  }
+}
