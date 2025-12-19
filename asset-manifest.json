@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/BonaJatetxea/static/css/main.b213f4be.css",
+    "main.js": "/BonaJatetxea/static/js/main.119699d8.js",
+    "static/js/453.c575770d.chunk.js": "/BonaJatetxea/static/js/453.c575770d.chunk.js",
+    "static/media/crema.jpg": "/BonaJatetxea/static/media/crema.3ff2491afe379e1784ab.jpg",
+    "static/media/pollo.jpg": "/BonaJatetxea/static/media/pollo.e778ca19ccab5ceba119.jpg",
+    "static/media/car1.jpg": "/BonaJatetxea/static/media/car1.3e244b367b2b3515d03f.jpg",
+    "static/media/register.jpg": "/BonaJatetxea/static/media/register.ae589a067b5a51ebf4a5.jpg",
+    "static/media/pisto.jpg": "/BonaJatetxea/static/media/pisto.27968c2237cd6fdf4f56.jpg",
+    "static/media/car3.jpg": "/BonaJatetxea/static/media/car3.3bb915009f114140c256.jpg",
+    "static/media/carne2.jpg": "/BonaJatetxea/static/media/carne2.2b2605c07703d04b81cd.jpg",
+    "static/media/pasta.jpeg": "/BonaJatetxea/static/media/pasta.2b562fa44c880b1c6fb9.jpeg",
+    "static/media/pescado.jpeg": "/BonaJatetxea/static/media/pescado.c1403b9f1d4f383ba2e7.jpeg",
+    "static/media/postre1.jpg": "/BonaJatetxea/static/media/postre1.d28b8af8b2920e0d1285.jpg",
+    "static/media/ensalada.jpg": "/BonaJatetxea/static/media/ensalada.13c1b9e23a6628567951.jpg",
+    "static/media/arroz.jpg": "/BonaJatetxea/static/media/arroz.ec0d0b80b6a195386949.jpg",
+    "static/media/car2.jpg": "/BonaJatetxea/static/media/car2.72566c5801b56591f570.jpg",
+    "static/media/lentejas.jpg": "/BonaJatetxea/static/media/lentejas.b86729e7f3e160e6540b.jpg",
+    "static/media/BonaLogoa.png": "/BonaJatetxea/static/media/BonaLogoa.1a52cf3a45730a4450c1.png",
+    "static/media/reservation.jpg": "/BonaJatetxea/static/media/reservation.e649f62b93928fcf736a.jpg",
+    "static/media/postre2.jpg": "/BonaJatetxea/static/media/postre2.2353f593f19f9eb33826.jpg",
+    "static/media/contact.png": "/BonaJatetxea/static/media/contact.a408988e1a62119c2f30.png",
+    "static/media/menu.jpeg": "/BonaJatetxea/static/media/menu.c2d4686efcd5548248af.jpeg",
+    "index.html": "/BonaJatetxea/index.html",
+    "main.b213f4be.css.map": "/BonaJatetxea/static/css/main.b213f4be.css.map",
+    "main.119699d8.js.map": "/BonaJatetxea/static/js/main.119699d8.js.map",
+    "453.c575770d.chunk.js.map": "/BonaJatetxea/static/js/453.c575770d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b213f4be.css",
+    "static/js/main.119699d8.js"
+  ]
+}
