@@ -31,7 +31,7 @@ const Testimonials = () => {
           <Col lg={4}>
             <Card className="border-0 bg-transparent text-white h-100 testimonial-card">
               <Card.Body className="p-4">
-                <div className="stars mb-3">
+                <div className="stars mb-3 d-flex">
                   <BsStarFill className="text-warning me-1" />
                   <BsStarFill className="text-warning me-1" />
                   <BsStarFill className="text-warning me-1" />
@@ -49,7 +49,7 @@ const Testimonials = () => {
           <Col lg={4}>
             <Card className="border-0 bg-transparent text-white h-100 testimonial-card">
               <Card.Body className="p-4">
-                <div className="stars mb-3">
+                <div className="stars mb-3 d-flex">
                   <BsStarFill className="text-warning me-1" />
                   <BsStarFill className="text-warning me-1" />
                   <BsStarFill className="text-warning me-1" />
@@ -67,7 +67,7 @@ const Testimonials = () => {
           <Col lg={4}>
             <Card className="border-0 bg-transparent text-white h-100 testimonial-card">
               <Card.Body className="p-4">
-                <div className="stars mb-3">
+                <div className="stars mb-3 d-flex">
                   <BsStarFill className="text-warning me-1" />
                   <BsStarFill className="text-warning me-1" />
                   <BsStarFill className="text-warning me-1" />

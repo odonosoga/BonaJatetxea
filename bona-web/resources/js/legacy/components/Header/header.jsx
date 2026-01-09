@@ -62,6 +62,7 @@ const Header = () => {
               src={BonaLogoa}
               alt="BonaJatetxea Logo"
               height="90"
+              width={120}
               style={{ marginLeft: "-25px" }}
             />
           </div>
