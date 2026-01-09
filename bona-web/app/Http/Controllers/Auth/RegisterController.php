@@ -5,43 +5,44 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use App\Models\PendingRegistration;
+use App\Mail\VerifyRegistration;  // ← NUEVO: Mailable
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered; 
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
     public function store(RegisterRequest $request)
     {
-        // 1. Validación (Usa las reglas de tu RegisterRequest)
+        // 1. Validación (Usa las reglas de tu RegisterRequest) ✅ MANTENIDO
         $data = $request->validated();
 
-        // 2. Creación con todos los campos para evitar NULLs
-        $user = User::create([
-            'name'        => $data['name'] . ' ' . $data['surname'],
+        // 2. PENDING en vez de User directo (15 min expiry)
+        $pending = PendingRegistration::create([
+            'name'        => $data['name'],
+            'surname'     => $data['surname'],
             'email'       => $data['email'],
             'password'    => Hash::make($data['password']),
             'phone'       => $data['phone'],
             'birth_date'  => $data['birth_date'],
             'address'     => $data['address'],
             'postal_code' => $data['postal_code'],
-            'role'        => 'Bezero',
+            'expires_at'  => now()->addMinutes(15),  // 15 MIN
         ]);
 
-        Log::info('Usuario creado:', ['id' => $user->id]);
+        Log::info('Pending creado:', ['id' => $pending->id]);  // ✅ MANTENIDO
 
-        // 3. Envío de email automático
-        // Al disparar este evento, Laravel detecta el 'implements MustVerifyEmail' 
-        // del modelo User y envía el correo.
-        event(new Registered($user));
+        // 3. EMAIL BONITO CON MAILABLE (HTML renderizado)
+        Mail::to($data['email'])->send(new VerifyRegistration($pending));
 
-        // 4. Login automático en el servidor
-        Auth::login($user);
+        // 4. NO login. Alerta React en register page ✅
+        return back()->with('success', '✅ ¡Correo enviado! Verifica en 15 min.');
 
-        // 5. RESPUESTA PARA INERTIA (Clave para el Navbar)
-        // No devuelvas JSON. Al redirigir, Inertia vuelve a cargar los datos 
-        // compartidos (share) del Middleware y verá al usuario logueado.
-        return redirect()->route('home'); 
+        // 5. COMENTADO: Tu código viejo (ya NO se usa)
+        // Auth::login($user);
+        // return redirect()->route('home');
     }
 }

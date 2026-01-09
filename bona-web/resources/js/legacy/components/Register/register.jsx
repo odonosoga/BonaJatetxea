@@ -1,8 +1,9 @@
-import { Col, Container, Form, Row } from 'react-bootstrap';
+import { Col, Container, Form, Row, Alert, Modal } from 'react-bootstrap';
+import { useForm, usePage, router } from '@inertiajs/react';
 import register from '../../img/register.jpg';
 import './register.css';
-import { useForm } from '@inertiajs/react';
-import { useTranslation } from 'react-i18next';  // ← i18n
+import { useTranslation } from 'react-i18next';
+import { useState, useEffect } from 'react';
 
 const Register = () => {
     const { t } = useTranslation();
@@ -18,9 +19,27 @@ const Register = () => {
         password_confirmation: '',
     });
 
+    const { flash } = usePage().props;
+    const [showModal, setShowModal] = useState(false);
+
+    useEffect(() => {
+        if (flash?.success) {
+            setShowModal(true);
+        }
+    }, [flash]);
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        post('/erregistratu');
+        post('/erregistratu', {
+            onSuccess: () => {
+                setShowModal(true);
+            }
+        });
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        router.visit('/');
     };
 
     return (
@@ -30,8 +49,19 @@ const Register = () => {
                     <Col xs={12} md={6} className="d-flex justify-content-center order-md-1 order-1">
                         <div className="register-form">
                             <h2 className="fw-bold text-dark fs-4 mb-3 text-center">
-                                {t('register.title')}  {/* Erregistratu / Registrarse */}
+                                {t('register.title')}
                             </h2>
+
+                            {flash?.success && (
+                                <Alert variant="success" className="mb-3">
+                                    {flash.success} ⏰ 15 min
+                                </Alert>
+                            )}
+                            {flash?.error && (
+                                <Alert variant="danger" className="mb-3">
+                                    {flash.error}
+                                </Alert>
+                            )}
                             
                             <Form noValidate onSubmit={handleSubmit}>
                                 <Row className="g-2">
@@ -210,6 +240,40 @@ const Register = () => {
                     }} />
                 </Row>
             </Container>
+
+            {/* ✅ MODAL 100% i18n */}
+            <Modal show={showModal} onHide={handleCloseModal} centered size="md">
+                <Modal.Header closeButton className="bg-register text-white border-0">
+                    <Modal.Title className="fs-4 fw-bold">
+                        ✅ {t('register.modal.title')}
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="text-center py-4">
+                    <div className="mb-4">
+                        <i className="bi bi-envelope-check-fill fs-1 text-register"></i>
+                    </div>
+                    <h5 className="fw-bold text-dark mb-3">
+                        {t('register.modal.message')}
+                    </h5>
+                    <p className="text-muted mb-4">
+                        {t('register.modal.check_inbox')}
+                    </p>
+                    <div className="bg-light p-3 rounded-3 mb-4">
+                        <strong className="text-register">{data.email}</strong>
+                    </div>
+                    <p className="text-success fw-medium">
+                        {t('register.modal.timer')}
+                    </p>
+                </Modal.Body>
+                <Modal.Footer className="border-0 justify-content-center">
+                    <button 
+                        className="btn btn-register px-5 py-2" 
+                        onClick={handleCloseModal}
+                    >
+                        OK
+                    </button>
+                </Modal.Footer>
+            </Modal>
         </section>
     );
 };

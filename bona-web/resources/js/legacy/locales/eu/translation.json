@@ -270,29 +270,40 @@
     "badgeAvailable": "{{count}} eskuragarri",
     "lastUpdated": "Duela 2 min eguneratua"
   },
-  "register":{
-  "title": "Erregistratu",
-  "name": "Izena",
-  "name.placeholder": "Izena",
-  "surname": "Abizena",
-  "surname.placeholder": "Abizena",
-  "phone": "Telefonoa",
-  "phone.placeholder": "Telefonoa",
-  "birth_date": "Jaiotze-Data",
-  "address": "Helbidea",
-  "address.placeholder": "Helbidea",
-  "postal_code": "Posta Kodea",
-  "postal_code.placeholder": "Posta Kodea",
-  "email": "Email",
-  "email.placeholder": "Email",
-  "password": "Pasahitza",
-  "password.placeholder": "Pasahitza",
-  "password_confirmation": "Pasahitza Konfirmatu",
-  "password_confirmation.placeholder": "Pasahitza Konfirmatu",
-  "submit": "Erregistratu"
+
+  "register": {
+    "title": "Erregistratu",
+    "name": "Izena",
+    "name.placeholder": "Izena",
+    "surname": "Abizena",
+    "surname.placeholder": "Abizena",
+    "phone": "Telefonoa",
+    "phone.placeholder": "Telefonoa",
+    "birth_date": "Jaiotze-Data",
+    "address": "Helbidea",
+    "address.placeholder": "Helbidea",
+    "postal_code": "Posta Kodea",
+    "postal_code.placeholder": "Posta Kodea",
+    "email": "Email",
+    "email.placeholder": "Email",
+    "password": "Pasahitza",
+    "password.placeholder": "Pasahitza",
+    "password_confirmation": "Pasahitza Konfirmatu",
+    "password_confirmation.placeholder": "Pasahitza Konfirmatu",
+    "submit": "Erregistratu",
+
+    "modal": {
+      "title": "Erregistroa bidalia!",
+      "message": "Berifikazio emaila bidali dugu",
+      "check_inbox": "Sarrera ontzian (eta spam) begiratu:",
+      "timer": "15 minutu dituzu berifikatzeko"
+    }
+  }
 }
 
   
-}
+
+  
+
   
 
