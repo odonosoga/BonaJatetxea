@@ -1,0 +1,200 @@
+{
+  "nav": {
+    "home": "Hasiera",
+    "contact": "Kontaktua",
+    "reservations": "Erreserbak",
+    "menu": "Karta",
+    "schedule": "Ordutegia",
+    "delivery": "Bidalketak"
+  },
+  "hours": {
+    "lunch": "12:00–16:00",
+    "dinner": "19:00–23:00"
+  },
+  "login": {
+    "button": "Login",
+    "modalTitle": "Saioa Hasi",
+    "email": "Emaila",
+    "emailPlaceholder": "Emaila",
+    "password": "Pasahitza",
+    "passwordPlaceholder": "Pasahitza",
+    "noAccount": "Ez daukazu kontua?",
+    "registerHere": "Erregistratu hemen",
+    "submit": "Hasi",
+    "error": "Mesedez, Emaila eta Pasahitza bete itzazu!!"
+  },
+  "cart": {
+    "title": "Laburpena",
+    "itemName": "Izena",
+    "quantity": "Kopurua",
+    "price": "Prezioa",
+    "total": "Totala",
+    "confirmButton": "Bidalketa Konfirmatu"
+  },
+  
+  
+  "about": {
+    "title": "Guri buruz",
+    "description": "Donostiako bihotzean, 20 urte baino gehiagoko esperientziarekin. Euskal sukaldaritza goxoa, lehengoen errezetekin.",
+    "card1": {
+      "title": "Kalitatezko materia primak",
+      "text": "Tokiko arrantza eta barazkiak egunero merkatuetatik."
+    },
+    "card2": {
+      "title": "Familiarako giroa",
+      "text": "80 pertsonaentzako edukiera, ospakizunetarako perfektua."
+    },
+    "card3": {
+      "title": "Menu egokituak",
+      "text": "Celiacosen eta alergienen menua espezializatua."
+    }
+  },
+
+    "cta": {
+    "title": "Maizter egiteko ordua da!",
+    "description": "Astelehenetik osteguna %15 deskontua 2+ pertsonentarako",
+    "button": "Erreserba egin orain"
+  },
+    "testimonials": {
+    "title": "Zergatik aukeratu gure jatetxea?",
+    "subtitle": "Bezeroen iritziak",
+    "review1": {
+      "text": "Kokapen ezin hobea eta jatekoa... miresgarria!",
+      "author": "Marta G., Google"
+    },
+    "review2": {
+      "text": "Txuletoiaren puntua perfektua. Datorren astean bueltatuko gara.",
+      "author": "Iker B., Tripadvisor"
+    },
+    "review3": {
+      "text": "Langileak oso atseginak eta arreta handizkoa.",
+      "author": "Ana M., Facebook"
+    }
+  },
+    "contact": {
+    "heroTitle": "Egin zure kontsulta",
+    "heroText": "Idatzi zure ideia, galdera edo eskaera eta harremanetan jarriko gara.",
+    "formTitle": "Kontsulta",
+    "nameLabel": "Izena",
+    "namePlaceholder": "Zure izena",
+    "nameFeedback": "Mesedez, sartu izena.",
+    "emailLabel": "Emaila",
+    "emailPlaceholder": "email@adibidea.com",
+    "emailFeedback": "Mesedez, sartu email zuzen bat.",
+    "phoneLabel": "Telefonoa",
+    "phonePlaceholder": "666 123 456",
+    "reasonLabel": "Zeri buruz?",
+    "reasonPlaceholder": "Aukeratu aukera bat",
+    "reasonOptions": {
+      "info": "Informazio orokorra",
+      "appointment": "Hitzordu bat eskatu",
+      "quote": "Aipu edo aurrekontua",
+      "other": "Beste bat"
+    },
+    "reasonFeedback": "Mesedez, aukeratu kontsultaren gaia.",
+    "messageLabel": "Mezua",
+    "messagePlaceholder": "Zure mezua...",
+    "messageFeedback": "Mesedez, idatzi mezua.",
+    "submitButton": "Bidali mezua",
+    "responseTime": "Normalean 24-48 orduren buruan erantzuten dugu.",
+    "helpText": "Zalantzarik baduzu, lasai idatzi: laguntzeko gaude.",
+    "privacyText": "Ez partekatu inoiz pasahitzik edo datu konfidentzialik mezu honetan."
+  },
+    "reservation": {
+    "heroTitle": "Egin zure erreserba",
+    "heroText": "Bona jatetxeetako batean esperientzia berezia bizitzeko prest?",
+    "dataTitle": "Datuak",
+    "addressCity": "Donostia - San Sebastián",
+    "hoursTitle": "Ordutegiak",
+    "hoursLunch": "12:00–16:00",
+    "hoursDinner": "19:00–23:00",
+    "mapTitle": "Gure kokapenak mapan",
+    "formTitle": "Datuak bete",
+    "emailLabel": "Emaila",
+    "emailPlaceholder": "email@adibidea.com",
+    "emailConfirmPlaceholder": "sartu berriro mesedez",
+    "emailFeedback": "Mesedez, sartu email baliozko bat.",
+    "giftLabel": "Opari-kode bat duzu?",
+    "giftYes": "Bai",
+    "giftNo": "Ez",
+    "giftCodeLabel": "Sartu kodea",
+    "giftCodePlaceholder": "OPARI-12345",
+    "nameLabel": "Sartu Izena",
+    "namePlaceholder": "Izena",
+    "nameFeedback": "Mesedez, sartu izena.",
+    "surnameLabel": "Sartu Abizena",
+    "surnamePlaceholder": "Abizena",
+    "surnameFeedback": "Mesedez, sartu abizena.",
+    "peopleLabel": "Pertsona kopurua",
+    "mobileLabel": "Mugikor zenbakia",
+    "mobilePlaceholder": "123-45-67-89",
+    "importantNote": "GARRANTZITSUA: Mesedez, egiaztatu mugikorraren zenbakia zuzena dela; izan ere, zenbaki okerra jasotzen badugu edo Whatsapp aktibatua ez badaukagu, erreserba bertan behera utzi beharko dugu segurtasunagatik.",
+    "dateLabel": "Data",
+    "dateFeedback": "Hautatu data.",
+    "timeLabel": "Noiz?",
+    "timeMorning": "Goizez",
+    "timeNight": "Gauez",
+    "timeError": "Aukeratu Goizez edo Gauez.",
+    "hourLabel": "Hautatu ordua *",
+    "hourPlaceholder": "- Ordua -",
+    "hourFeedback": "Hautatu ordua.",
+    "locationLabel": "Hautatu zein lokalen bazkalduko duzun",
+    "locationPlaceholder": "- Lokala -",
+    "locationFeedback": "Hautatu lokala.",
+    "submitButton": "Bidali erreserba"
+  },
+    "menu": {
+    "heroTitle": "Karta",
+    "sectionStarters": "Zapore Platerrak",
+    "sectionMeat": "Haragia",
+    "sectionFish": "Arrainak",
+    "sectionVegetables": "Barazkiak",
+    "sectionPastaRice": "Pasta eta Arroza",
+    "sectionDesserts": "Postreak",
+    "labelName": "Izena",
+    "labelDescription": "Deskribapena",
+    "labelIngredients": "Osagaiak",
+    "labelPrice": "Prezioa",
+    "buttonAdd": "Gehitu"
+  },
+    "schedule": {
+    "title": "Langileen ordutegiak",
+    "description": "Langile bakoitzaren asteko txandak kudeatzen ditu.",
+    "tableWeek": "Aste hau",
+    "columnWorker": "Langilea",
+    "columnRole": "Rola",
+    "days": {
+      "monday": "Astelehena",
+      "tuesday": "Asteartea",
+      "wednesday": "Asteazkena",
+      "thursday": "Osteguna",
+      "friday": "Ostirala",
+      "saturday": "Larunbata",
+      "sunday": "Igandea"
+    },
+    "formTitle": "Langilea gehitu",
+    "nameLabel": "Izena",
+    "namePlaceholder": "Langilearen izena",
+    "roleLabel": "Rola",
+    "rolePlaceholder": "- Hautatu langilearen rola -",
+    "roleOptions": {
+      "cook": "Sukaldaria",
+      "waiter": "Zerbitzaria",
+      "delivery": "Banatzailea",
+      "cleaner": "Garbitzailea"
+    },
+    "daySelectPlaceholder": "- Aukeratu -",
+    "submitButton": "Gehitu langilea ordutegian"
+  },
+    "delivery": {
+    "pendingBadge": "ZAIN",
+    "itemsLabel": "Produktu kopurua",
+    "acceptButton": "Eskaera onartu"
+  },
+    "pending": {
+    "title": "Zain dauden eskaerak",
+    "badgeAvailable": "{{count}} eskuragarri",
+    "lastUpdated": "Duela 2 min eguneratua"
+  }
+  
+}
