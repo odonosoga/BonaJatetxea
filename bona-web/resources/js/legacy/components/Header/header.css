@@ -1,0 +1,110 @@
+/* Header section  */
+.header-section {
+  background: linear-gradient(135deg, #C34F5A 0%, #541412 100%);
+  color: #F8D4BA;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1050;
+}
+
+/* Links  */
+.nav-link-custom {
+  color: #F8D4BA !important;
+  font-weight: 500;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-link-custom:hover {
+  color: #D69F3A !important;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+}
+
+.nav-link-custom::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background-color: #D69F3A;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-link-custom:hover::after {
+  width: 80%;
+}
+
+/* Login botoia */
+.login-btn {
+  color: #F8D4BA !important;
+  border-color: #F8D4BA !important;
+  background-color: transparent !important;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  height: 30px;
+}
+
+.login-btn:hover {
+  color: #541412 !important;
+  border-color: #541412 !important;
+  background-color: #F8D4BA !important;
+}
+
+/* Karrito button */
+.karrito-btn {
+  color: #F8D4BA !important;
+  border-color: #F8D4BA !important;
+  background-color: transparent !important;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  height: 30px;
+}
+
+.karrito-btn:hover {
+   color: #541412 !important;
+  border-color: #541412 !important;
+  background-color: #F8D4BA !important;
+}
+.trash-icon {
+  cursor: pointer;
+  color: #dc3545; 
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+
+/*Hasi Btn*/
+.hasi-btn {
+  background: #8d3236 !important;
+  border: 2px solid #541412 !important;
+  border-radius: 12px !important;
+  font-weight: 600;
+  transition: all 0.3s ease !important;
+}
+
+.hasi-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(84, 20, 18, 0.4) !important;
+}
+
+.trash-icon
+{
+  cursor: pointer;
+  color: #dc3545; 
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.konf-btn {
+  background: #8d3236 !important;
+  border: 2px solid #541412 !important;
+  border-radius: 12px !important;
+  font-weight: 600;
+  transition: all 0.3s ease !important;
+}
+
+.konf-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(84, 20, 18, 0.4) !important;
+}

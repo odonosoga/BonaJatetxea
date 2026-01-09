@@ -1,0 +1,199 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "contact": "Contacto",
+    "reservations": "Reservas",
+    "menu": "Carta",
+    "schedule": "Horarios",
+    "delivery": "Envíos"
+  },
+  "hours": {
+    "lunch": "12:00–16:00",
+    "dinner": "19:00–23:00"
+  },
+  "login": {
+    "button": "Login",
+    "modalTitle": "Iniciar Sesión",
+    "email": "Email",
+    "emailPlaceholder": "Email",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Contraseña",
+    "noAccount": "¿No tienes cuenta?",
+    "registerHere": "Regístrate aquí",
+    "submit": "Iniciar",
+    "error": "¡Por favor, completa Email y Contraseña!"
+  },
+  "cart": {
+    "title": "Resumen",
+    "itemName": "Nombre",
+    "quantity": "Cantidad",
+    "price": "Precio",
+    "total": "Total",
+    "confirmButton": "Confirmar Pedido"
+  },
+
+  "about": {
+    "title": "Sobre nosotros",
+    "description": "En el corazón de Donostia, con más de 20 años de experiencia. Deliciosa cocina vasca con recetas tradicionales.",
+    "card1": {
+      "title": "Materias primas de calidad",
+      "text": "Pescado local y verduras frescas traídas diariamente del mercado."
+    },
+    "card2": {
+      "title": "Ambiente familiar",
+      "text": "Capacidad para 80 personas, perfecto para celebraciones."
+    },
+    "card3": {
+      "title": "Menús adaptados",
+      "text": "Menús especiales para celíacos y alérgicos."
+    }
+  },
+  
+    "cta": {
+    "title": "¡Es hora de reservar!",
+    "description": "De lunes a jueves 15% de descuento para 2 o más personas",
+    "button": "Reservar ahora"
+  },
+
+    "testimonials": {
+    "title": "¿Por qué elegir nuestro restaurante?",
+    "subtitle": "Opiniones de clientes",
+    "review1": {
+      "text": "Ubicación perfecta y la comida... ¡espectacular!",
+      "author": "Marta G., Google"
+    },
+    "review2": {
+      "text": "El punto del chuletón perfecto. Volveremos la próxima semana.",
+      "author": "Iker B., Tripadvisor"
+    },
+    "review3": {
+      "text": "El personal muy amable y atento.",
+      "author": "Ana M., Facebook"
+    }
+  },
+    "contact": {
+    "heroTitle": "Haz tu consulta",
+    "heroText": "Escribe tu idea, pregunta o solicitud y nos pondremos en contacto contigo.",
+    "formTitle": "Consulta",
+    "nameLabel": "Nombre",
+    "namePlaceholder": "Tu nombre",
+    "nameFeedback": "Por favor, introduce tu nombre.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "email@ejemplo.com",
+    "emailFeedback": "Por favor, introduce un email válido.",
+    "phoneLabel": "Teléfono",
+    "phonePlaceholder": "666 123 456",
+    "reasonLabel": "¿Sobre qué?",
+    "reasonPlaceholder": "Elige una opción",
+    "reasonOptions": {
+      "info": "Información general",
+      "appointment": "Solicitar una cita",
+      "quote": "Presupuesto o cotización",
+      "other": "Otro"
+    },
+    "reasonFeedback": "Por favor, selecciona el motivo de la consulta.",
+    "messageLabel": "Mensaje",
+    "messagePlaceholder": "Tu mensaje...",
+    "messageFeedback": "Por favor, escribe un mensaje.",
+    "submitButton": "Enviar mensaje",
+    "responseTime": "Normalmente respondemos en 24-48 horas.",
+    "helpText": "Si tienes cualquier duda, escribe sin compromiso: estamos para ayudarte.",
+    "privacyText": "Nunca compartas contraseñas ni datos confidenciales en este mensaje."
+  },
+    "reservation": {
+    "heroTitle": "Haz tu reserva",
+    "heroText": "¿Listo para vivir una experiencia única en Bona Jatetxea?",
+    "dataTitle": "Datos",
+    "addressCity": "Donostia - San Sebastián",
+    "hoursTitle": "Horarios",
+    "hoursLunch": "12:00–16:00",
+    "hoursDinner": "19:00–23:00",
+    "mapTitle": "Nuestras ubicaciones en el mapa",
+    "formTitle": "Rellena los datos",
+    "emailLabel": "Email",
+    "emailPlaceholder": "email@ejemplo.com",
+    "emailConfirmPlaceholder": "introduce de nuevo por favor",
+    "emailFeedback": "Por favor, introduce un email válido.",
+    "giftLabel": "¿Tienes un código de regalo?",
+    "giftYes": "Sí",
+    "giftNo": "No",
+    "giftCodeLabel": "Introduce el código",
+    "giftCodePlaceholder": "REGALO-12345",
+    "nameLabel": "Introduce Nombre",
+    "namePlaceholder": "Nombre",
+    "nameFeedback": "Por favor, introduce tu nombre.",
+    "surnameLabel": "Introduce Apellido",
+    "surnamePlaceholder": "Apellido",
+    "surnameFeedback": "Por favor, introduce tu apellido.",
+    "peopleLabel": "Número de personas",
+    "mobileLabel": "Número de móvil",
+    "mobilePlaceholder": "123-45-67-89",
+    "importantNote": "IMPORTANTE: Por favor, verifica que el número de móvil sea correcto; si recibimos un número equivocado o no tienes WhatsApp activado, tendremos que cancelar la reserva por seguridad.",
+    "dateLabel": "Fecha",
+    "dateFeedback": "Selecciona una fecha.",
+    "timeLabel": "¿Cuándo?",
+    "timeMorning": "Mediodía",
+    "timeNight": "Noche",
+    "timeError": "Elige Mediodía o Noche.",
+    "hourLabel": "Elige hora *",
+    "hourPlaceholder": "- Hora -",
+    "hourFeedback": "Selecciona una hora.",
+    "locationLabel": "Elige en qué local vas a comer",
+    "locationPlaceholder": "- Local -",
+    "locationFeedback": "Selecciona el local.",
+    "submitButton": "Enviar reserva"
+  },
+    "menu": {
+    "heroTitle": "Carta",
+    "sectionStarters": "Entrantes",
+    "sectionMeat": "Carnes",
+    "sectionFish": "Pescados",
+    "sectionVegetables": "Verduras",
+    "sectionPastaRice": "Pasta y Arroz",
+    "sectionDesserts": "Postres",
+    "labelName": "Nombre",
+    "labelDescription": "Descripción",
+    "labelIngredients": "Ingredientes",
+    "labelPrice": "Precio",
+    "buttonAdd": "Añadir"
+  },
+    "schedule": {
+    "title": "Horarios del personal",
+    "description": "Gestiona los turnos semanales de cada trabajador.",
+    "tableWeek": "Esta semana",
+    "columnWorker": "Trabajador",
+    "columnRole": "Rol",
+    "days": {
+      "monday": "Lunes",
+      "tuesday": "Martes",
+      "wednesday": "Miércoles",
+      "thursday": "Jueves",
+      "friday": "Viernes",
+      "saturday": "Sábado",
+      "sunday": "Domingo"
+    },
+    "formTitle": "Añadir trabajador",
+    "nameLabel": "Nombre",
+    "namePlaceholder": "Nombre del trabajador",
+    "roleLabel": "Rol",
+    "rolePlaceholder": "- Selecciona el rol del trabajador -",
+    "roleOptions": {
+      "cook": "Cocinero",
+      "waiter": "Camarero",
+      "delivery": "Repartidor",
+      "cleaner": "Limpiador"
+    },
+    "daySelectPlaceholder": "- Selecciona -",
+    "submitButton": "Añadir trabajador al horario"
+  },
+    "delivery": {
+    "pendingBadge": "PENDIENTE",
+    "itemsLabel": "Número de productos",
+    "acceptButton": "Aceptar pedido"
+  },
+    "pending": {
+    "title": "Pedidos pendientes",
+    "badgeAvailable": "{{count}} disponibles",
+    "lastUpdated": "Actualizado hace 2 min"
+  }
+}

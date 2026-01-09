@@ -1,0 +1,13 @@
+.text-white-50 {
+  color: rgba(255,255,255,0.75) !important;
+}
+
+.testimonial-card {
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+}

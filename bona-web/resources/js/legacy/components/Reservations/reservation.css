@@ -1,0 +1,104 @@
+.reservation-section {
+  background: linear-gradient(135deg, #F8D4BA 0%, #ffffff 100%);
+  padding-top: 190px;
+}
+
+/* Tarjeta lateral */
+.reservation-card {
+  background: linear-gradient(135deg, #C34F5A 0%, #541412 120%);
+  color: #F8D4BA !important;
+  border-radius: 20px !important;
+}
+
+/* Bloques de info */
+.reservation-item {
+  transition: all 0.3s ease;
+  background: rgba(248, 212, 186, 0.18);
+  border-left: 4px solid #D69F3A;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
+}
+
+.reservation-item:hover {
+  transform: translateX(5px);
+  background: rgba(248, 212, 186, 0.35);
+}
+
+/* Links dentro de info */
+.reservation-item a {
+  color: #F8D4BA !important;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.reservation-item a:hover {
+  color: #D69F3A !important;
+  text-decoration: underline !important;
+}
+
+/* Botoia  */
+.btn-reservation {
+  background: #8d3236 !important;
+  border: 2px solid #541412 !important;
+  border-radius: 12px !important;
+  font-size: 1.1rem !important;
+  color: #fff !important;
+  font-weight: 600;
+  transition: all 0.3s ease !important;
+}
+
+.btn-reservation:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(84, 20, 18, 0.4) !important;
+}
+
+/* Inputen borderra */
+.form-control:focus {
+  border-color: #8d3236 !important;
+  box-shadow: 0 0 0 0.2rem rgba(228, 85, 75, 0.35) !important;
+}
+
+/*Mapa*/
+
+.map-wrapper {
+  position: relative;
+  padding-bottom: 75%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+  margin-top: 2rem;
+}
+
+.map-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 130%;
+  border: 0;
+  margin-top: -67px;
+}
+
+
+.hero-reserva {
+  position: relative;
+  height: 60vh;
+  min-height: 320px;
+ 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-top: 85px; 
+}
+
+.hero-reserva .hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.45),
+    rgba(0, 0, 0, 0.65)
+  );
+}
+
