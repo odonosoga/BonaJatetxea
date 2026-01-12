@@ -1,0 +1,47 @@
+.delivery-card {
+  transition: all 0.3s ease;
+  overflow: hidden;
+  max-width: 400px; /* Limita el ancho del card */
+  margin: 20px auto; /* Centra el card horizontalmente */
+}
+
+.card-header {
+  background-color: #8d3236 !important;
+  display: flex;
+  flex-direction: column; /* Imagen arriba, nombre debajo */
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 1rem;
+}
+
+.card-header img {
+  width: 150px;       /* Cuadrada */
+  height: 150px;      /* Cuadrada */
+  object-fit: cover;  /* Mantiene proporción y recorta si hace falta */
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;     /* Centra horizontalmente */
+}
+
+.card-header h5 {
+  color: #ffffff;
+  margin: 0;
+  text-align: center;
+}
+
+.delivery-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+}
+
+/* Botón */
+.delivery-btn {
+  background: #8d3236 !important;
+  border: 2px solid #541412 !important;
+  transition: all 0.3s ease !important;
+}
+
+.delivery-btn:hover {
+  transform: translateY(-2px);
+}

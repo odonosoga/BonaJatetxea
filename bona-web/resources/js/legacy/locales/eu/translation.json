@@ -31,8 +31,6 @@
     "total": "Totala",
     "confirmButton": "Bidalketa Konfirmatu"
   },
-  
-  
   "about": {
     "title": "Guri buruz",
     "description": "Donostiako bihotzean, 20 urte baino gehiagoko esperientziarekin. Euskal sukaldaritza goxoa, lehengoen errezetekin.",
@@ -49,13 +47,12 @@
       "text": "Celiacosen eta alergienen menua espezializatua."
     }
   },
-
-    "cta": {
+  "cta": {
     "title": "Maizter egiteko ordua da!",
     "description": "Astelehenetik osteguna %15 deskontua 2+ pertsonentarako",
     "button": "Erreserba egin orain"
   },
-    "testimonials": {
+  "testimonials": {
     "title": "Zergatik aukeratu gure jatetxea?",
     "subtitle": "Bezeroen iritziak",
     "review1": {
@@ -71,7 +68,7 @@
       "author": "Ana M., Facebook"
     }
   },
-    "contact": {
+  "contact": {
     "heroTitle": "Egin zure kontsulta",
     "heroText": "Idatzi zure ideia, galdera edo eskaera eta harremanetan jarriko gara.",
     "formTitle": "Kontsulta",
@@ -100,7 +97,7 @@
     "helpText": "Zalantzarik baduzu, lasai idatzi: laguntzeko gaude.",
     "privacyText": "Ez partekatu inoiz pasahitzik edo datu konfidentzialik mezu honetan."
   },
-    "reservation": {
+  "reservation": {
     "heroTitle": "Egin zure erreserba",
     "heroText": "Bona jatetxeetako batean esperientzia berezia bizitzeko prest?",
     "dataTitle": "Datuak",
@@ -143,9 +140,9 @@
     "locationFeedback": "Hautatu lokala.",
     "submitButton": "Bidali erreserba"
   },
-    "menu": {
+  "menu": {
     "heroTitle": "Karta",
-    "sectionStarters": "Zapore Platerrak",
+    "sectionStarters": "Koilara Platerrak",
     "sectionMeat": "Haragia",
     "sectionFish": "Arrainak",
     "sectionVegetables": "Barazkiak",
@@ -157,7 +154,7 @@
     "labelPrice": "Prezioa",
     "buttonAdd": "Gehitu"
   },
-    "schedule": {
+  "schedule": {
     "title": "Langileen ordutegiak",
     "description": "Langile bakoitzaren asteko txandak kudeatzen ditu.",
     "tableWeek": "Aste hau",
@@ -186,15 +183,16 @@
     "daySelectPlaceholder": "- Aukeratu -",
     "submitButton": "Gehitu langilea ordutegian"
   },
-    "delivery": {
+  "delivery": {
     "pendingBadge": "ZAIN",
     "itemsLabel": "Produktu kopurua",
     "acceptButton": "Eskaera onartu"
   },
-    "pending": {
+  "pending": {
     "title": "Zain dauden eskaerak",
     "badgeAvailable": "{{count}} eskuragarri",
     "lastUpdated": "Duela 2 min eguneratua"
   }
-  
 }
+  
+
