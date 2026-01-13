@@ -13,9 +13,6 @@ return new class extends Migration
     {
         Schema::create('langileak', function (Blueprint $table) {
             $table->id('idLangile');
-            $table->string('izena');
-            $table->string('abizena');
-            $table->integer('adina');
             $table->string('mota');
             $table->timestamps();
         });
