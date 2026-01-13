@@ -44,7 +44,6 @@ const HeroReserva = () => {
 const Menu = () => {
   const { t } = useTranslation();
 
-  // Array de platos solo con la key y sección
   const [platos, setPlatos] = useState([
     { id: 1, img: sopa, key: "lentilSoup", section: t("menu.sectionStarters"), price: 5, cantidad: 1 },
     { id: 2, img: crema, key: "garlicCream", section: t("menu.sectionStarters"), price: 4, cantidad: 1 },
@@ -72,29 +71,31 @@ const Menu = () => {
 
       <section id="menua" className="menu-section">
         <Container fluid className="p-4 d-flex flex-column align-items-center">
-          {Object.keys(grouped).map((section) => (
-            <div key={section} className="w-100 mb-5">
-              <h3 className="text-center mb-4">{section}</h3>
-              <Row className="g-4 justify-content-center">
-                {grouped[section].map(dish => (
-                  <Col key={dish.id} md={6} lg={4}>
-                    <MenuCard 
-                      dish={{
-                        ...dish,
-                        name: t(`menu.dishes.${dish.key}.name`),
-                        description: t(`menu.dishes.${dish.key}.description`),
-                        ingredients: t(`menu.dishes.${dish.key}.ingredients`)
-                      }}
-                      cantidad={dish.cantidad} 
-                      setCantidad={(newCantidad) => {
-                        setPlatos(prev => prev.map(d => d.id === dish.id ? {...d, cantidad: newCantidad} : d));
-                      }} 
-                    />
-                  </Col>
-                ))}
-              </Row>
-            </div>
-          ))}
+          <div className="menu-cards-wrapper w-100">
+            {Object.keys(grouped).map((section) => (
+              <div key={section} className="mb-5">
+                <h3 className="text-center mb-4">{section}</h3>
+                <Row className="g-4 justify-content-center">
+                  {grouped[section].map(dish => (
+                    <Col key={dish.id} md={6} lg={4}>
+                      <MenuCard 
+                        dish={{
+                          ...dish,
+                          name: t(`menu.dishes.${dish.key}.name`),
+                          description: t(`menu.dishes.${dish.key}.description`),
+                          ingredients: t(`menu.dishes.${dish.key}.ingredients`)
+                        }}
+                        cantidad={dish.cantidad} 
+                        setCantidad={(newCantidad) => {
+                          setPlatos(prev => prev.map(d => d.id === dish.id ? {...d, cantidad: newCantidad} : d));
+                        }} 
+                      />
+                    </Col>
+                  ))}
+                </Row>
+              </div>
+            ))}
+          </div>
         </Container>
       </section>
     </>
