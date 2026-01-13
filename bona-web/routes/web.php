@@ -1,17 +1,15 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\Auth\RegisterController; // ← AÑADE ESTA LÍNEA
+use App\Http\Controllers\Auth\RegisterController;
 
-Route::get('/{any}', function () {
-    return Inertia::render('Legacy');
-})->where('any', '^(?!api).*$');
-// Ruta GET para mostrar el formulario
-Route::get('/erregistroa', function () {
-    return Inertia::render('Register');
-})->name('register');
+Route::get('/', fn () => Inertia::render('Legacy'));
 
-// Ruta POST para procesar el formulario
-Route::post('/erregistroa', [RegisterController::class, 'store'])->name('register.register');
+Route::get('/{any}', fn () => Inertia::render('Legacy'))
+    ->where('any', '^(?!api|erregistratu).*$');
 
+Route::get('/erregistratu', fn () => Inertia::render('Legacy'))
+    ->name('register');
+
+Route::post('/erregistratu', [RegisterController::class, 'store'])
+    ->name('register.store');
