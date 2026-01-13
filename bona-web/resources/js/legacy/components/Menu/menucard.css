@@ -1,10 +1,9 @@
-
-.delivery-card {
+.menu-card {
   transition: all 0.3s ease;
   overflow: hidden;
-  max-width: 500px;   
+  max-width: 500px;
   min-width: 250px;
-  height: 550px;      
+  height: 550px;
   display: flex;
   flex-direction: column;
   margin: 20px auto;
@@ -13,7 +12,7 @@
   max-height: 500px;
 }
 
-.card-header {
+.menu-card-header {
   background-color: #8d3236 !important;
   display: flex;
   flex-direction: column;
@@ -24,9 +23,9 @@
   flex: 0 0 auto;
 }
 
-.card-header img {
+.menu-card-header img {
   width: 100%;
-  max-width: 350px;   
+  max-width: 350px;
   height: 200px;
   object-fit: cover;
   border-radius: 8px;
@@ -34,7 +33,7 @@
   margin: 0 auto;
 }
 
-.card-header h5 {
+.menu-card-header h5 {
   color: #ffffff;
   margin: 0;
   text-align: center;
@@ -42,33 +41,34 @@
   font-weight: 600;
 }
 
-.card-body {
-  flex: 1 1 auto; 
+.menu-card-body {
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
+  justify-content: space-between;
+  background-color: white;
+  color: black;
 }
 
-.delivery-card:hover {
+.menu-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
 }
 
-.delivery-btn {
+.menu-btn {
   background: #8d3236 !important;
   border: 2px solid #541412 !important;
   transition: all 0.3s ease !important;
 }
 
-.delivery-btn:hover {
+.menu-btn:hover {
   transform: translateY(-2px);
 }
 
-
-.btn-outline-light {
-  background-color: #ffffff !important; 
-  border: 1px solid #000000 !important; 
-  color: #000000 !important;           
+.menu-botonkant {
+  background-color: #ffffff !important;
+  border: 1px solid #000000 !important;
+  color: #000000 !important;
   min-width: 35px;
   height: 35px;
   padding: 0;
@@ -80,19 +80,19 @@
   border-radius: 5px;
 }
 
-.card-body span {
+.menu-card-body span {
   font-weight: bold;
   min-width: 20px;
   text-align: center;
 }
 
 @media (max-width: 768px) {
-  .delivery-card {
+  .menu-card {
     max-width: 90%;
-    height: auto; 
+    height: auto;
   }
 
-  .card-header img {
+  .menu-card-header img {
     max-width: 150px;
     height: 150px;
   }

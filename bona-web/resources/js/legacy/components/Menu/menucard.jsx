@@ -7,13 +7,13 @@ const MenuCard = ({ dish, cantidad, setCantidad }) => {
   const { t } = useTranslation();
 
   return (
-    <Card className="delivery-card shadow-sm border-0 mb-4">
-      <Card.Header className="card-header">
+    <Card className="menu-card shadow-sm border-0 mb-4">
+      <Card.Header className="menu-card-header">
         <img src={dish.img} alt={dish.name} />
         <h5>{dish.name}</h5>
       </Card.Header>
 
-      <Card.Body className="d-flex flex-column">
+      <Card.Body className="d-flex flex-column menu-card-body">
         <div>
           <p className="mb-1">
             <strong>{t("menu.labelDescription")}:</strong> {dish.description}
@@ -27,22 +27,22 @@ const MenuCard = ({ dish, cantidad, setCantidad }) => {
         </div>
 
         <div className="d-flex justify-content-between align-items-center mt-auto">
-          <Button size="sm" className="delivery-btn fw-bold px-3 py-2">
+          <Button size="sm" className="menu-btn fw-bold px-3 py-2">
             {t("menu.buttonAdd")}
           </Button>
 
-          <div className="d-flex align-items-center gap-2">
-            <Button 
-              size="sm" 
-              className="btn-outline-light" 
+          <div className=" d-flex align-items-center gap-2">
+            <Button
+              size="sm"
+              className="menu-botonkant"
               onClick={() => setCantidad(cantidad > 1 ? cantidad - 1 : 1)}
             >
               -
             </Button>
             <span>{cantidad}</span>
-            <Button 
-              size="sm" 
-              className="btn-outline-light" 
+            <Button
+              size="sm"
+              className="menu-botonkant"
               onClick={() => setCantidad(cantidad + 1)}
             >
               +
