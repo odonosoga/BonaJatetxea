@@ -13,3 +13,4 @@ Route::get('/erregistratu', fn () => Inertia::render('Legacy'))
 
 Route::post('/erregistratu', [RegisterController::class, 'store'])
     ->name('register.store');
+
