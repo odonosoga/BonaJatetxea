@@ -4,18 +4,12 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-
 use App\Http\Controllers\ReservationController;
-
 
 Route::get('/', fn () => Inertia::render('Legacy'));
 
-Route::get('/erregistratu', fn () => Inertia::render('Legacy'))
-    ->name('register');
-
-Route::post('/erregistratu', [RegisterController::class, 'store'])
-    ->name('register.store');
-
+Route::get('/erregistratu', fn () => Inertia::render('Legacy'))->name('register');
+Route::post('/erregistratu', [RegisterController::class, 'store'])->name('register.store');
 
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
