@@ -192,7 +192,7 @@ const Register = () => {
                                                 Pasahitza
                                             </Form.Label>
                                             <Form.Control
-                                                type="text"
+                                                type="password"
                                                 value={data.password}
                                                 onChange={(e) => setData('password', e.target.value)}
                                                 placeholder="Pasahitza"
@@ -214,7 +214,7 @@ const Register = () => {
                                                 Pasahitza Konfirmatu
                                             </Form.Label>
                                             <Form.Control
-                                                type="text"
+                                                type="password"
                                                 value={data.password_confirmation}
                                                 onChange={(e) => setData('password_confirmation', e.target.value)}
                                                 placeholder="Pasahitza Konfirmatu"
