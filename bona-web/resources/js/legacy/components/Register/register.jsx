@@ -18,11 +18,11 @@ const Register = () => {
         password_confirmation: '',
     });
 
-   const handleSubmit = (e) => {
-    e.preventDefault();
-    // Cambia route(...) por la URL directa entre comillas
-    post('/erregistratu'); 
-};
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Cambia route(...) por la URL directa entre comillas
+        post('/erregistratu');
+    };
     return (
         <section id="erregistroa" className="register-section pt-5">
             <Container fluid className="p-0">
@@ -63,13 +63,13 @@ const Register = () => {
                                     <Col>
                                         <Form.Group>
                                             <Form.Label>Abizena</Form.Label>
-                                           <Form.Control
-                                               type="text"
-                                               value={data.surname}
-                                               onChange={(e) => setData('surname', e.target.value)}
-                                               placeholder="Abizena"
-                                               required
-                                           />
+                                            <Form.Control
+                                                type="text"
+                                                value={data.surname}
+                                                onChange={(e) => setData('surname', e.target.value)}
+                                                placeholder="Abizena"
+                                                required
+                                            />
 
                                             <Form.Control.Feedback type="invalid">
                                                 Mesedez, sartu abizena.
@@ -83,13 +83,13 @@ const Register = () => {
                                     <Col>
                                         <Form.Group>
                                             <Form.Label>Telefonoa</Form.Label>
-                                           <Form.Control
-                                               type="text"
-                                               value={data.phone}
-                                               onChange={(e) => setData('phone', e.target.value)}
-                                               placeholder="Telefonoa"
-                                               required
-                                           />
+                                            <Form.Control
+                                                type="text"
+                                                value={data.phone}
+                                                onChange={(e) => setData('phone', e.target.value)}
+                                                placeholder="Telefonoa"
+                                                required
+                                            />
 
                                             <Form.Control.Feedback type="invalid">
                                                 Mesedez, sartu telefonoa.
@@ -102,13 +102,13 @@ const Register = () => {
                                             <Form.Label>
                                                 Jaiotze-Data
                                             </Form.Label>
-                                         <Form.Control 
-  type="date"
-  value={data.birth_date}
-  onChange={(e) => setData('birth_date', e.target.value)}
-  placeholder="Jaiotze-Data"
-  required
-/>
+                                            <Form.Control
+                                                type="date"
+                                                value={data.birth_date}
+                                                onChange={(e) => setData('birth_date', e.target.value)}
+                                                placeholder="Jaiotze-Data"
+                                                required
+                                            />
 
                                             <Form.Control.Feedback type="invalid">
                                                 Hautatu jaiotze-data.
@@ -125,13 +125,13 @@ const Register = () => {
                                             <Form.Label className="fw-medium d-flex align-items-start">
                                                 Helbidea
                                             </Form.Label>
-                                          <Form.Control 
-  type="text"
-  value={data.address}
-  onChange={(e) => setData('address', e.target.value)}
-  placeholder="Helbidea"
-  required
-/>
+                                            <Form.Control
+                                                type="text"
+                                                value={data.address}
+                                                onChange={(e) => setData('address', e.target.value)}
+                                                placeholder="Helbidea"
+                                                required
+                                            />
 
                                             <Form.Control.Feedback type="invalid">
                                                 Mesedez, sartu helbidea.
@@ -145,13 +145,13 @@ const Register = () => {
                                             <Form.Label className="fw-medium d-flex align-items-start">
                                                 Posta Kodea
                                             </Form.Label>
-                                            <Form.Control 
-  type="text" 
-  value={data.postal_code}
-  onChange={(e) => setData('postal_code', e.target.value)}
-  placeholder="Posta Kodea" 
-  required 
-/>
+                                            <Form.Control
+                                                type="text"
+                                                value={data.postal_code}
+                                                onChange={(e) => setData('postal_code', e.target.value)}
+                                                placeholder="Posta Kodea"
+                                                required
+                                            />
 
                                             <Form.Control.Feedback type="invalid">
                                                 Mesedez, sartu posta kodea.
@@ -168,13 +168,13 @@ const Register = () => {
                                             <Form.Label className="fw-medium d-flex align-items-start">
                                                 Email
                                             </Form.Label>
-                                          <Form.Control 
-  type="text" 
-  value={data.email}
-  onChange={(e) => setData('email', e.target.value)}
-  placeholder="Email" 
-  required 
-/>
+                                            <Form.Control
+                                                type="text"
+                                                value={data.email}
+                                                onChange={(e) => setData('email', e.target.value)}
+                                                placeholder="Email"
+                                                required
+                                            />
 
                                             <Form.Control.Feedback type="invalid">
                                                 Mesedez, sartu email-a
@@ -191,13 +191,13 @@ const Register = () => {
                                             <Form.Label className="fw-medium d-flex align-items-start">
                                                 Pasahitza
                                             </Form.Label>
-                                        <Form.Control 
-  type="text" 
-  value={data.password}
-  onChange={(e) => setData('password', e.target.value)}
-  placeholder="Pasahitza" 
-  required 
-/>
+                                            <Form.Control
+                                                type="text"
+                                                value={data.password}
+                                                onChange={(e) => setData('password', e.target.value)}
+                                                placeholder="Pasahitza"
+                                                required
+                                            />
 
                                             <Form.Control.Feedback type="invalid">
                                                 Mesedez sartu Pasahitza.
@@ -213,13 +213,13 @@ const Register = () => {
                                             <Form.Label className="fw-medium d-flex align-items-start">
                                                 Pasahitza Konfirmatu
                                             </Form.Label>
-                                       <Form.Control 
-  type="text" 
-  value={data.password_confirmation}
-  onChange={(e) => setData('password_confirmation', e.target.value)}
-  placeholder="Pasahitza Konfirmatu" 
-  required 
-/>
+                                            <Form.Control
+                                                type="text"
+                                                value={data.password_confirmation}
+                                                onChange={(e) => setData('password_confirmation', e.target.value)}
+                                                placeholder="Pasahitza Konfirmatu"
+                                                required
+                                            />
 
                                             <Form.Control.Feedback type="invalid">
                                                 Mesedez, sartu pasahitza

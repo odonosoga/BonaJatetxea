@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./header.css"
 import {
   Navbar,
   Container,
@@ -12,62 +13,67 @@ import {
   Col,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useForm, usePage } from "@inertiajs/react";
 import { BsClock } from "react-icons/bs";
 import { FaShoppingCart } from "react-icons/fa";
-import "../Header/header.css";
-import postre2 from "../../img/postre2.jpg";
-import BonaLogoa from "../../img/BonaLogoa.png";
 import { Trash3 } from "react-bootstrap-icons";
 import { useTranslation } from "react-i18next";
+
+import BonaLogoa from "../../img/BonaLogoa.png";
+import postre2 from "../../img/postre2.jpg";
 
 const Header = () => {
   const { t, i18n } = useTranslation();
   const [login, setLogin] = useState(false);
   const [cart, setCart] = useState(false);
-  const [email, setEmail] = useState("");
-  const [pasahitza, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [expanded, setExpanded] = useState(false);
 
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-  };
+  const { auth } = usePage().props;
+
+  // Login con Inertia
+  const { data, setData, post, processing, errors, reset } = useForm({
+    email: "",
+    password: "",
+  });
 
   const handleShowLogin = () => setLogin(true);
   const handleCloseLogin = () => {
     setLogin(false);
-    setError("");
-    setEmail("");
-    setPassword("");
+    reset();
+  };
+
+  const handleSubmitLogin = (e) => {
+  e.preventDefault();
+
+  post("/login", {
+    onSuccess: () => {
+      handleCloseLogin();        
+      window.location.href = "/BonaJatetxea"; 
+    },
+  });
+};
+
+
+  const handleLogout = () => {
+    post("/logout");
   };
 
   const handleShowCart = () => setCart(true);
   const handleCloseCart = () => setCart(false);
 
-  const handleSubmitLogin = (e) => {
-    e.preventDefault();
-    if (!email || !pasahitza) {
-      setError(t("login.error"));
-      return;
-    }
-    handleCloseLogin();
-  };
+  const changeLanguage = (lng) => i18n.changeLanguage(lng);
 
   return (
     <>
+      {/* HEADER TOPBAR */}
       <section className="header-section text-white shadow-sm">
         <div className="topbar d-flex justify-content-between align-items-center px-4 py-2">
           <div className="topbar-left d-flex flex-column flex-sm-row align-items-center gap-3">
-            <img
-              src={BonaLogoa}
-              alt="BonaJatetxea Logo"
-              height="90"
-              width={120}
-              style={{ marginLeft: "-25px" }}
-            />
+            <img src={BonaLogoa} alt="Logo" height="90" width={120} />
           </div>
 
-          <div className="topbar-right d-flex align-items-center gap-3">
+          <div className="topbar-right d-flex align-items-center gap-2">
+            {/* Horario */}
             <div className="topbar-hours d-flex flex-column text-end me-2">
               <div className="d-flex align-items-center gap-2 justify-content-end">
                 <BsClock size={18} />
@@ -78,50 +84,37 @@ const Header = () => {
                 <small>{t("hours.dinner")}</small>
               </div>
             </div>
-            <Button
-              variant="outline-light"
-              size="sm"
-              className="lang-btn"
-              onClick={() => changeLanguage("es")}
-            >
-              ES
-            </Button>
-            <Button
-              variant="outline-light"
-              size="sm"
-              className="lang-btn"
-              onClick={() => changeLanguage("eu")}
-            >
-              EU
-            </Button>
 
+            {/* Idiomas */}
+            <Button variant="outline-light" size="sm" onClick={() => changeLanguage("es")}>ES</Button>
+            <Button variant="outline-light" size="sm" onClick={() => changeLanguage("eu")}>EU</Button>
+
+            {/* Carrito */}
             <Button className="karrito-btn" size="sm" onClick={handleShowCart}>
               <FaShoppingCart size={20} />
             </Button>
-            <Button
-              variant="outline-light"
-              size="sm"
-              className="login-btn"
-              onClick={handleShowLogin}
-            >
-              {t("login.button")}
-            </Button>
+
+            {/* Login / Logout */}
+            {!auth?.user ? (
+              <Button className="login-btn" size="sm" onClick={handleShowLogin}>
+                {t("login.button")}
+              </Button>
+            ) : (
+              <div className="d-flex align-items-center gap-2">
+                <span className="fw-bold">{auth.user.name}</span>
+                <Button className="login-btn" size="sm" onClick={handleLogout}>
+                  Logout
+                </Button>
+              </div>
+            )}
           </div>
         </div>
 
-        <Navbar
-          expand="lg"
-          className="border-top border-dark-subtle"
-          expanded={expanded}
-          onToggle={(val) => setExpanded(val)}
-          collapseOnSelect
-        >
+        {/* NAVBAR */}
+        <Navbar expand="lg" className="border-top border-dark-subtle" expanded={expanded} onToggle={(val) => setExpanded(val)}>
           <Container fluid className="px-4 nav-container">
-            <Navbar.Toggle
-              aria-controls="bona-navbar-nav"
-              onClick={() => setExpanded((prev) => !prev)}
-            />
-            <Navbar.Collapse id="bona-navbar-nav">
+            <Navbar.Toggle />
+            <Navbar.Collapse>
               <Nav className="mx-auto text-center">
                 <Nav.Link as={Link} to="/BonaJatetxea" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
                   {t("nav.home")}
@@ -155,32 +148,31 @@ const Header = () => {
           <Modal.Title>{t("login.modalTitle")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {error && <Alert variant="danger">{error}</Alert>}
+          {errors.email && <Alert variant="danger">{errors.email}</Alert>}
           <Form onSubmit={handleSubmitLogin}>
             <Form.Group className="mb-3" controlId="email">
               <Form.Label>{t("login.email")}</Form.Label>
               <Form.Control
                 type="email"
-                placeholder={t("login.emailPlaceholder")}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={data.email}
+                onChange={(e) => setData("email", e.target.value)}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="pasahitza">
+            <Form.Group className="mb-3" controlId="password">
               <Form.Label>{t("login.password")}</Form.Label>
               <Form.Control
                 type="password"
-                placeholder={t("login.passwordPlaceholder")}
-                value={pasahitza}
-                onChange={(e) => setPassword(e.target.value)}
+                value={data.password}
+                onChange={(e) => setData("password", e.target.value)}
               />
             </Form.Group>
             <Form.Label className="d-flex justify-content-center">
-              {t("login.noAccount")} <Link to="/erregistroa" className="text-primary" onClick={handleCloseLogin}>
+              {t("login.noAccount")}{" "}
+              <Link to="/erregistroa" className="text-primary" onClick={handleCloseLogin}>
                 {t("login.registerHere")}
               </Link>
             </Form.Label>
-            <Button type="submit" className="hasi-btn w-100 fw-bold">
+            <Button type="submit" className="hasi-btn w-100 fw-bold" disabled={processing}>
               {t("login.submit")}
             </Button>
           </Form>
@@ -202,13 +194,7 @@ const Header = () => {
                       <img
                         src={postre2}
                         alt="Postre"
-                        style={{
-                          width: "175px",
-                          height: "125px",
-                          objectFit: "cover",
-                          marginRight: "10px",
-                          borderRadius: "20px",
-                        }}
+                        style={{ width: "175px", height: "125px", objectFit: "cover", marginRight: "10px", borderRadius: "20px" }}
                       />
                       <div className="d-flex flex-column justify-content-center">
                         <label>{t("cart.itemName")}: Postre</label>
@@ -224,13 +210,9 @@ const Header = () => {
                   </Row>
                 </Card>
 
-                <h4 className="text-center fw-bold mt-3">
-                  {t("cart.total")}: 5€
-                </h4>
+                <h4 className="text-center fw-bold mt-3">{t("cart.total")}: 5€</h4>
                 <div className="d-flex justify-content-center mt-3">
-                  <Button className="konf-btn">
-                    {t("cart.confirmButton")}
-                  </Button>
+                  <Button className="konf-btn">{t("cart.confirmButton")}</Button>
                 </div>
               </Col>
             </Row>
