@@ -8,7 +8,7 @@
   z-index: 1050;
 }
 
-/* Links  */
+/* NAVBAR LINKS */
 .nav-link-custom {
   color: #F8D4BA !important;
   font-weight: 500;
@@ -21,8 +21,9 @@
   text-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
 }
 
+/* Activo + línea inferior */
 .nav-link-custom::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -6px;
   left: 50%;
@@ -33,69 +34,90 @@
   transform: translateX(-50%);
 }
 
-.nav-link-custom:hover::after {
-  width: 80%;
+.nav-link-custom:hover::after,
+.nav-link-custom.active::after {
+  width: 80% !important;
+  background: linear-gradient(90deg, #D69F3A, #F8D4BA) !important;
 }
 
-/* Login botoia */
-.login-btn {
+.nav-link-custom.active {
+  color: #D69F3A !important;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  font-weight: 600 !important;
+}
+
+/* Animación línea */
+@keyframes activeSlide {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 80%;
+  }
+}
+
+.nav-link-custom.active::after {
+  animation: activeSlide 0.4s ease;
+}
+
+/* BOTONES HEADER (login, carrito, user) */
+.header-btn {
   color: #F8D4BA !important;
   border-color: #F8D4BA !important;
   background-color: transparent !important;
   font-weight: 500;
-  transition: all 0.2s ease;
-  height: 30px;
+  transition: all 0.3s ease;
+  height: 32px;
+  border-radius: 999px !important;
+  padding-inline: 12px;
 }
 
-.login-btn:hover {
+.header-btn:hover,
+.header-btn:focus {
   color: #541412 !important;
-  border-color: #541412 !important;
-  background-color: #F8D4BA !important;
-}
-
-/* Karrito button */
-.karrito-btn {
-  color: #F8D4BA !important;
   border-color: #F8D4BA !important;
-  background-color: transparent !important;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  height: 30px;
-}
-
-.karrito-btn:hover {
-   color: #541412 !important;
-  border-color: #541412 !important;
   background-color: #F8D4BA !important;
-}
-.trash-icon {
-  cursor: pointer;
-  color: #dc3545; 
-  transition: transform 0.2s ease, color 0.2s ease;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.35);
 }
 
-
-/*Hasi Btn*/
-.hasi-btn {
-  background: #8d3236 !important;
-  border: 2px solid #541412 !important;
-  border-radius: 12px !important;
-  font-weight: 600;
-  transition: all 0.3s ease !important;
+/* Dropdown usuario */
+.user-dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.hasi-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(84, 20, 18, 0.4) !important;
+.user-dropdown-menu {
+  background-color: #2c181a;
+  border-radius: 12px;
+  border: 1px solid rgba(248, 212, 186, 0.6);
+  min-width: 220px;
+  padding: 8px 0;
 }
 
-.trash-icon
-{
-  cursor: pointer;
-  color: #dc3545; 
-  transition: transform 0.2s ease, color 0.2s ease;
+.user-dropdown-menu .dropdown-item {
+  color: #F8D4BA;
+  font-size: 0.9rem;
+  padding: 8px 16px;
 }
 
+.user-dropdown-menu .dropdown-item:hover {
+  background-color: rgba(248, 212, 186, 0.12);
+  color: #D69F3A;
+}
+
+.user-dropdown-menu .dropdown-header {
+  color: #D69F3A;
+  font-size: 0.8rem;
+}
+
+/* Horas en topbar */
+.topbar-hours small {
+  font-size: 0.8rem;
+}
+
+/* Botones modales */
+.hasi-btn,
 .konf-btn {
   background: #8d3236 !important;
   border: 2px solid #541412 !important;
@@ -104,7 +126,28 @@
   transition: all 0.3s ease !important;
 }
 
+.hasi-btn:hover,
 .konf-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 25px rgba(84, 20, 18, 0.4) !important;
+}
+
+/* Icono papelera */
+.trash-icon {
+  cursor: pointer;
+  color: #dc3545;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+/* Responsive: quitar línea en móvil */
+@media (max-width: 991px) {
+  .nav-link-custom::after,
+  .nav-link-custom.active::after {
+    display: none !important;
+  }
+
+  .nav-link-custom.active {
+    background: rgba(214, 159, 58, 0.2) !important;
+    border-radius: 8px;
+  }
 }

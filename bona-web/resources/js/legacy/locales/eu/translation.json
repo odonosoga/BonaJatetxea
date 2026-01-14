@@ -1,11 +1,13 @@
 {
   "nav": {
     "home": "Hasiera",
-    "contact": "Kontaktua",
-    "reservations": "Erreserbak",
+    "contact": "Kontaktu",
+    "reservations": "Erreserbak", 
     "menu": "Karta",
     "schedule": "Ordutegia",
-    "delivery": "Bidalketak"
+    "delivery": "Entrega",
+    "account": "Kontua",
+    "language": "Hizkuntza"
   },
   "hours": {
     "lunch": "12:00–16:00",

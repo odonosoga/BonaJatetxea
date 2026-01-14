@@ -1,11 +1,13 @@
 {
   "nav": {
     "home": "Inicio",
-    "contact": "Contacto",
+    "contact": "Contacto", 
     "reservations": "Reservas",
-    "menu": "Carta",
-    "schedule": "Horario",
-    "delivery": "Repartos"
+    "menu": "Menú",
+    "schedule": "Horarios",
+    "delivery": "Delivery",
+    "account": "Cuenta",
+    "language": "Idioma"
   },
   "hours": {
     "lunch": "12:00–16:00",

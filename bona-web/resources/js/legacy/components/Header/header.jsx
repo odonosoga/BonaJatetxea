@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./header.css"
+import React, { useState, useEffect } from "react";
+import "./header.css";
 import {
   Navbar,
   Container,
@@ -11,12 +11,20 @@ import {
   Card,
   Row,
   Col,
+  Dropdown,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useForm, usePage } from "@inertiajs/react";
 import { BsClock } from "react-icons/bs";
-import { FaShoppingCart } from "react-icons/fa";
-import { Trash3 } from "react-bootstrap-icons";
+import { FaShoppingCart, FaUser } from "react-icons/fa";
+import { 
+  Trash3, 
+  Globe, 
+  Key, 
+  PersonFill, 
+  BoxArrowRight,
+  FilePersonFill 
+} from "react-bootstrap-icons";
 import { useTranslation } from "react-i18next";
 
 import BonaLogoa from "../../img/BonaLogoa.png";
@@ -29,8 +37,24 @@ const Header = () => {
   const [expanded, setExpanded] = useState(false);
 
   const { auth } = usePage().props;
+  const location = useLocation();
 
-  // Login con Inertia
+  // Marca activo el enlace del navbar
+  useEffect(() => {
+    const navLinks = document.querySelectorAll(".nav-link-custom");
+    navLinks.forEach((link) => link.classList.remove("active"));
+
+    const currentPath = location.pathname;
+    const currentLink = Array.from(navLinks).find((link) => {
+      const href = link.getAttribute("href") || "";
+      return href === currentPath || href.includes(currentPath.split("/")[1] || "");
+    });
+
+    if (currentLink) {
+      currentLink.classList.add("active");
+    }
+  }, [location.pathname]);
+
   const { data, setData, post, processing, errors, reset } = useForm({
     email: "",
     password: "",
@@ -43,16 +67,15 @@ const Header = () => {
   };
 
   const handleSubmitLogin = (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  post("/login", {
-    onSuccess: () => {
-      handleCloseLogin();        
-      window.location.href = "/BonaJatetxea"; 
-    },
-  });
-};
-
+    post("/login", {
+      onSuccess: () => {
+        handleCloseLogin();
+        window.location.href = "/BonaJatetxea";
+      },
+    });
+  };
 
   const handleLogout = () => {
     post("/logout");
@@ -72,9 +95,9 @@ const Header = () => {
             <img src={BonaLogoa} alt="Logo" height="90" width={120} />
           </div>
 
-          <div className="topbar-right d-flex align-items-center gap-2">
+          <div className="topbar-right d-flex align-items-center gap-3">
             {/* Horario */}
-            <div className="topbar-hours d-flex flex-column text-end me-2">
+            <div className="topbar-hours d-none d-md-flex flex-column text-end me-2">
               <div className="d-flex align-items-center gap-2 justify-content-end">
                 <BsClock size={18} />
                 <small>{t("hours.lunch")}</small>
@@ -85,53 +108,152 @@ const Header = () => {
               </div>
             </div>
 
-            {/* Idiomas */}
-            <Button variant="outline-light" size="sm" onClick={() => changeLanguage("es")}>ES</Button>
-            <Button variant="outline-light" size="sm" onClick={() => changeLanguage("eu")}>EU</Button>
+            {/* Dropdown de IDIOMAS - Siempre visible */}
+            <Dropdown align="end">
+              <Dropdown.Toggle
+                id="dropdown-language"
+                variant="outline-light"
+                size="sm"
+                className="header-btn language-dropdown-toggle d-inline-flex align-items-center"
+              >
+                <Globe size={18} className="me-2" />
+                <span className="d-none d-sm-inline">{t("nav.language")}</span>
+              </Dropdown.Toggle>
 
-            {/* Carrito */}
-            <Button className="karrito-btn" size="sm" onClick={handleShowCart}>
-              <FaShoppingCart size={20} />
-            </Button>
+              <Dropdown.Menu className="language-dropdown-menu">
+                <Dropdown.Item onClick={() => changeLanguage("es")}>
+                  <span className="d-flex align-items-center">
+                    <Globe className="me-2" size={16} />
+                    Castellano
+                  </span>
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => changeLanguage("eu")}>
+                  <span className="d-flex align-items-center">
+                    <Globe className="me-2" size={16} />
+                    Euskara
+                  </span>
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
 
-            {/* Login / Logout */}
-            {!auth?.user ? (
-              <Button className="login-btn" size="sm" onClick={handleShowLogin}>
-                {t("login.button")}
-              </Button>
-            ) : (
-              <div className="d-flex align-items-center gap-2">
-                <span className="fw-bold">{auth.user.name}</span>
-                <Button className="login-btn" size="sm" onClick={handleLogout}>
-                  Logout
-                </Button>
-              </div>
-            )}
+            {/* Dropdown de CUENTA - Siempre visible */}
+            <Dropdown align="end">
+              <Dropdown.Toggle
+                id="dropdown-user"
+                variant="outline-light"
+                size="sm"
+                className="header-btn user-dropdown-toggle d-inline-flex align-items-center"
+              >
+                <FaUser size={18} className="me-2" />
+                <span className="">
+                  {auth?.user ? auth.user.name : t("nav.account")}
+                </span>
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu className="user-dropdown-menu">
+                {/* Carrito */}
+                <Dropdown.Item onClick={handleShowCart}>
+                  <span className="d-flex align-items-center">
+                    <FaShoppingCart className="me-2" size={16} />
+                    {t("cart.title")}
+                  </span>
+                </Dropdown.Item>
+                <Dropdown.Divider />
+
+                {/* Login / Logout */}
+                {!auth?.user ? (
+                  <>
+                    <Dropdown.Item onClick={handleShowLogin}>
+                      <span className="d-flex align-items-center">
+                        <Key className="me-2" size={16} />
+                        {t("login.button")}
+                      </span>
+                    </Dropdown.Item>
+                    <Dropdown.Item as={Link} to="/erregistroa">
+                      <span className="d-flex align-items-center">
+                        <FilePersonFill className="me-2" size={16} />
+                        {t("login.registerHere")}
+                      </span>
+                    </Dropdown.Item>
+                  </>
+                ) : (
+                  <>
+                    <Dropdown.Item disabled>
+                      <span className="d-flex align-items-center">
+                        <PersonFill className="me-2" size={16} />
+                        {auth.user.name}
+                      </span>
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={handleLogout}>
+                      <span className="d-flex align-items-center">
+                        <BoxArrowRight className="me-2" size={16} />
+                        Logout
+                      </span>
+                    </Dropdown.Item>
+                  </>
+                )}
+              </Dropdown.Menu>
+            </Dropdown>
           </div>
         </div>
 
         {/* NAVBAR */}
-        <Navbar expand="lg" className="border-top border-dark-subtle" expanded={expanded} onToggle={(val) => setExpanded(val)}>
+        <Navbar
+          expand="lg"
+          className="border-top border-dark-subtle"
+          expanded={expanded}
+          onToggle={(val) => setExpanded(val)}
+        >
           <Container fluid className="px-4 nav-container">
-            <Navbar.Toggle />
-            <Navbar.Collapse>
+            <Navbar.Toggle aria-controls="main-navbar" />
+            <Navbar.Collapse id="main-navbar">
               <Nav className="mx-auto text-center">
-                <Nav.Link as={Link} to="/BonaJatetxea" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
+                <Nav.Link
+                  as={Link}
+                  to="/BonaJatetxea"
+                  className="nav-link-custom px-3"
+                  onClick={() => setExpanded(false)}
+                >
                   {t("nav.home")}
                 </Nav.Link>
-                <Nav.Link as={Link} to="/kontaktua" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
+                <Nav.Link
+                  as={Link}
+                  to="/kontaktua"
+                  className="nav-link-custom px-3"
+                  onClick={() => setExpanded(false)}
+                >
                   {t("nav.contact")}
                 </Nav.Link>
-                <Nav.Link as={Link} to="/erreserbak" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
+                <Nav.Link
+                  as={Link}
+                  to="/erreserbak"
+                  className="nav-link-custom px-3"
+                  onClick={() => setExpanded(false)}
+                >
                   {t("nav.reservations")}
                 </Nav.Link>
-                <Nav.Link as={Link} to="/menu" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
+                <Nav.Link
+                  as={Link}
+                  to="/menu"
+                  className="nav-link-custom px-3"
+                  onClick={() => setExpanded(false)}
+                >
                   {t("nav.menu")}
                 </Nav.Link>
-                <Nav.Link as={Link} to="/ordutegia" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
+                <Nav.Link
+                  as={Link}
+                  to="/ordutegia"
+                  className="nav-link-custom px-3"
+                  onClick={() => setExpanded(false)}
+                >
                   {t("nav.schedule")}
                 </Nav.Link>
-                <Nav.Link as={Link} to="/pendiente" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
+                <Nav.Link
+                  as={Link}
+                  to="/pendiente"
+                  className="nav-link-custom px-3"
+                  onClick={() => setExpanded(false)}
+                >
                   {t("nav.delivery")}
                 </Nav.Link>
               </Nav>
@@ -140,6 +262,7 @@ const Header = () => {
         </Navbar>
       </section>
 
+      {/* Espaciador para header fijo */}
       <div style={{ height: "0px" }}></div>
 
       {/* MODAL LOGIN */}
@@ -168,11 +291,19 @@ const Header = () => {
             </Form.Group>
             <Form.Label className="d-flex justify-content-center">
               {t("login.noAccount")}{" "}
-              <Link to="/erregistroa" className="text-primary" onClick={handleCloseLogin}>
+              <Link
+                to="/erregistroa"
+                className="text-primary ms-1"
+                onClick={handleCloseLogin}
+              >
                 {t("login.registerHere")}
               </Link>
             </Form.Label>
-            <Button type="submit" className="hasi-btn w-100 fw-bold" disabled={processing}>
+            <Button
+              type="submit"
+              className="hasi-btn w-100 fw-bold"
+              disabled={processing}
+            >
               {t("login.submit")}
             </Button>
           </Form>
@@ -194,7 +325,13 @@ const Header = () => {
                       <img
                         src={postre2}
                         alt="Postre"
-                        style={{ width: "175px", height: "125px", objectFit: "cover", marginRight: "10px", borderRadius: "20px" }}
+                        style={{
+                          width: "175px",
+                          height: "125px",
+                          objectFit: "cover",
+                          marginRight: "10px",
+                          borderRadius: "20px",
+                        }}
                       />
                       <div className="d-flex flex-column justify-content-center">
                         <label>{t("cart.itemName")}: Postre</label>
@@ -210,9 +347,13 @@ const Header = () => {
                   </Row>
                 </Card>
 
-                <h4 className="text-center fw-bold mt-3">{t("cart.total")}: 5€</h4>
+                <h4 className="text-center fw-bold mt-3">
+                  {t("cart.total")}: 5€
+                </h4>
                 <div className="d-flex justify-content-center mt-3">
-                  <Button className="konf-btn">{t("cart.confirmButton")}</Button>
+                  <Button className="konf-btn">
+                    {t("cart.confirmButton")}
+                  </Button>
                 </div>
               </Col>
             </Row>
