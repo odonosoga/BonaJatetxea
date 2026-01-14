@@ -1,20 +1,3 @@
-// PÁGINA: Reserva / Erreserbak
-// Traducciones necesarias: reservation.heroTitle, reservation.heroText, 
-// reservation.infoTitle, reservation.address, reservation.city, reservation.phone, 
-// reservation.whatsapp, reservation.email, reservation.hoursTitle, reservation.hoursLunch, 
-// reservation.hoursDinner, reservation.mapTitle, reservation.formTitle, 
-// reservation.emailLabel, reservation.emailPlaceholder, reservation.emailRepeatPlaceholder, 
-// reservation.emailFeedback, reservation.giftCodeQuestion, reservation.giftCodeYes, 
-// reservation.giftCodeNo, reservation.giftCodeInputLabel, reservation.giftCodePlaceholder, 
-// reservation.nameLabel, reservation.namePlaceholder, reservation.nameFeedback, 
-// reservation.surnameLabel, reservation.surnamePlaceholder, reservation.surnameFeedback, 
-// reservation.peopleLabel, reservation.phoneLabel, reservation.phonePlaceholder, 
-// reservation.phoneWarning, reservation.dateLabel, reservation.dateFeedback, 
-// reservation.timeQuestion, reservation.timeMorning, reservation.timeEvening, 
-// reservation.timeError, reservation.hourLabel, reservation.hourPlaceholder, 
-// reservation.hourFeedback, reservation.locationLabel, reservation.locationPlaceholder, 
-// reservation.locationFeedback, reservation.submitButton
-
 import { useState } from "react";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import { BsTelephone, BsEnvelope, BsGeoAlt, BsClock } from "react-icons/bs";
