@@ -8,14 +8,16 @@ use App\Http\Controllers\ReservationController;
 
 Route::get('/', fn () => Inertia::render('Legacy'));
 
-Route::get('/erregistratu', fn () => Inertia::render('Legacy'))->name('register');
-Route::post('/erregistratu', [RegisterController::class, 'store'])->name('register.store');
+// ✅ RUTAS REALES PRIMERO
+Route::get('/erregistroa', fn () => Inertia::render('Register'))  // ← CAMBIADO
+    ->name('register');
+Route::post('/erregistroa', [RegisterController::class, 'store'])  // ← CAMBIADO    
+    ->name('register.store');
 
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
+Route::post('/erreserbak/validate', [ReservationController::class, 'store']);
 
-Route::post('/erreserbak/validate', [ReservationController::class, 'store'])
-    ->name('erreserbak.validate');
-
+// ✅ FALLBACK ÚLTIMO
 Route::get('/{any}', fn () => Inertia::render('Legacy'))
-    ->where('any', '^(?!api|erregistratu).*$');
+    ->where('any', '.*');
