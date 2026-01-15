@@ -17,13 +17,13 @@ import { Link, useLocation } from "react-router-dom";
 import { useForm, usePage } from "@inertiajs/react";
 import { BsClock } from "react-icons/bs";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
-import { 
-  Trash3, 
-  Globe, 
-  Key, 
-  PersonFill, 
+import {
+  Trash3,
+  Globe,
+  Key,
+  PersonFill,
   BoxArrowRight,
-  FilePersonFill 
+  FilePersonFill,
 } from "react-bootstrap-icons";
 import { useTranslation } from "react-i18next";
 
@@ -31,13 +31,23 @@ import BonaLogoa from "../../img/BonaLogoa.png";
 import postre2 from "../../img/postre2.jpg";
 
 const Header = () => {
+  // props globales de Inertia
+  const { auth, flash } = usePage().props;
+  const user = auth?.user;
+  const role = user?.role || null;
+
   const { t, i18n } = useTranslation();
   const [login, setLogin] = useState(false);
   const [cart, setCart] = useState(false);
   const [expanded, setExpanded] = useState(false);
-
-  const { auth } = usePage().props;
   const location = useLocation();
+
+  // Abrir modal si viene require_auth desde Laravel
+  useEffect(() => {
+    if (flash?.require_auth) {
+      setLogin(true);
+    }
+  }, [flash?.require_auth]);
 
   // Marca activo el enlace del navbar
   useEffect(() => {
@@ -47,7 +57,10 @@ const Header = () => {
     const currentPath = location.pathname;
     const currentLink = Array.from(navLinks).find((link) => {
       const href = link.getAttribute("href") || "";
-      return href === currentPath || href.includes(currentPath.split("/")[1] || "");
+      return (
+        href === currentPath ||
+        href.includes(currentPath.split("/")[1] || "")
+      );
     });
 
     if (currentLink) {
@@ -108,7 +121,7 @@ const Header = () => {
               </div>
             </div>
 
-            {/* Dropdown de IDIOMAS - Siempre visible */}
+            {/* Dropdown de IDIOMAS */}
             <Dropdown align="end">
               <Dropdown.Toggle
                 id="dropdown-language"
@@ -136,7 +149,7 @@ const Header = () => {
               </Dropdown.Menu>
             </Dropdown>
 
-            {/* Dropdown de CUENTA - Siempre visible */}
+            {/* Dropdown de CUENTA */}
             <Dropdown align="end">
               <Dropdown.Toggle
                 id="dropdown-user"
@@ -145,9 +158,7 @@ const Header = () => {
                 className="header-btn user-dropdown-toggle d-inline-flex align-items-center"
               >
                 <FaUser size={18} className="me-2" />
-                <span className="">
-                  {auth?.user ? auth.user.name : t("nav.account")}
-                </span>
+                <span>{auth?.user ? auth.user.name : t("nav.account")}</span>
               </Dropdown.Toggle>
 
               <Dropdown.Menu className="user-dropdown-menu">
@@ -216,6 +227,7 @@ const Header = () => {
                 >
                   {t("nav.home")}
                 </Nav.Link>
+
                 <Nav.Link
                   as={Link}
                   to="/kontaktua"
@@ -224,14 +236,25 @@ const Header = () => {
                 >
                   {t("nav.contact")}
                 </Nav.Link>
+
                 <Nav.Link
                   as={Link}
                   to="/erreserbak"
                   className="nav-link-custom px-3"
-                  onClick={() => setExpanded(false)}
+                  onClick={(e) => {
+                    if (!auth?.user || role !== "Bezero") {
+                      e.preventDefault();      
+                      setLogin(true);    
+                      return;
+                    }
+                    setExpanded(false);
+                  }}
                 >
                   {t("nav.reservations")}
                 </Nav.Link>
+
+
+                
                 <Nav.Link
                   as={Link}
                   to="/menu"
@@ -240,32 +263,39 @@ const Header = () => {
                 >
                   {t("nav.menu")}
                 </Nav.Link>
-                <Nav.Link
-                  as={Link}
-                  to="/ordutegia"
-                  className="nav-link-custom px-3"
-                  onClick={() => setExpanded(false)}
-                >
-                  {t("nav.schedule")}
-                </Nav.Link>
-                <Nav.Link
-                  as={Link}
-                  to="/pendiente"
-                  className="nav-link-custom px-3"
-                  onClick={() => setExpanded(false)}
-                >
-                  {t("nav.delivery")}
-                </Nav.Link>
+
+                
+                {role !== "Bezero" && (
+                  <>
+                    <Nav.Link
+                      as={Link}
+                      to="/ordutegia"
+                      className="nav-link-custom px-3"
+                      onClick={() => setExpanded(false)}
+                    >
+                      {t("nav.schedule")}
+                    </Nav.Link>
+
+                    <Nav.Link
+                      as={Link}
+                      to="/pendiente"
+                      className="nav-link-custom px-3"
+                      onClick={() => setExpanded(false)}
+                    >
+                      {t("nav.delivery")}
+                    </Nav.Link>
+                  </>
+                )}
               </Nav>
             </Navbar.Collapse>
           </Container>
         </Navbar>
       </section>
 
-      {/* Espaciador para header fijo */}
+      
       <div style={{ height: "0px" }}></div>
 
-      {/* MODAL LOGIN */}
+      
       <Modal show={login} onHide={handleCloseLogin} centered>
         <Modal.Header closeButton>
           <Modal.Title>{t("login.modalTitle")}</Modal.Title>
@@ -310,7 +340,7 @@ const Header = () => {
         </Modal.Body>
       </Modal>
 
-      {/* MODAL CARRITO */}
+      
       <Modal show={cart} onHide={handleCloseCart} centered size="lg">
         <Modal.Header closeButton>
           <Modal.Title>{t("cart.title")}</Modal.Title>

@@ -17,7 +17,16 @@ class HandleInertiaRequests extends Middleware
 
     public function share(Request $request): array
     {
-        // Generar la frase inspiradora
+        return array_merge(parent::share($request), [
+        'auth' => [
+            'user' => $request->user(),
+        ],
+        'flash' => [
+            'require_auth' => $request->session()->get('require_auth'),
+            'errors'       => $request->session()->get('errors'),
+        ],
+        ]);
+
         [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
 
         return [
@@ -29,8 +38,7 @@ class HandleInertiaRequests extends Middleware
                 'message' => trim($message),
                 'author' => trim($author),
             ],
-
-            // 🔐 Compartimos el usuario logueado con el Frontend
+            
             'auth' => [
                 'user' => $request->user() ? [
                     'id' => $request->user()->id,
