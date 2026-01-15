@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller; // <--- IMPORT MUY IMPORTANTE
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +12,7 @@ class AuthenticatedSessionController extends Controller
     public function store(Request $request)
     {
         $credentials = $request->validate([
-            'email' => 'required|email',
+            'email'    => 'required|email',
             'password' => 'required',
         ]);
 
@@ -24,7 +24,18 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->back();
+        $user = $request->user();
+        $role = $user->role ?? null;
+
+        if ($role === 'Langile') {
+            return redirect('/ordutegia');          // nav.schedule
+        }
+
+        if ($role === 'Bezero') {
+            return redirect('/BonaJatetxea');       // página principal cliente
+        }
+
+        return redirect('/');
     }
 
     // Logout

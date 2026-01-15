@@ -20,12 +20,9 @@ Route::get('/erreserbak', [ReservationController::class, 'index'])
 Route::post('/erreserbak/validate', [ReservationController::class, 'store'])
     ->name('erreserbak.validate');
 
+Route::get('/ordutegia', fn () => Inertia::render('Schedule'));
 
-Route::get('/ordutegia', fn () => Inertia::render('Schedule'))
-    ->middleware('canSeeStaffPages');
-
-Route::get('/pendiente', fn () => Inertia::render('PendingDelivery'))
-    ->middleware('canSeeStaffPages');
+Route::get('/pendiente', fn () => Inertia::render('PendingDelivery'));
 
 Route::get('/{any}', fn () => Inertia::render('Legacy'))
     ->where('any', '^(?!api|erregistratu).*$');

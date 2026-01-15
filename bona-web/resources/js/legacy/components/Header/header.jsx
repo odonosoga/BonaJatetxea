@@ -84,8 +84,8 @@ const Header = () => {
 
     post("/login", {
       onSuccess: () => {
+        // Laravel redirige según el rol (Langile -> /ordutegia, Bezero -> /BonaJatetxea, etc.)
         handleCloseLogin();
-        window.location.href = "/BonaJatetxea";
       },
     });
   };
@@ -219,6 +219,7 @@ const Header = () => {
             <Navbar.Toggle aria-controls="main-navbar" />
             <Navbar.Collapse id="main-navbar">
               <Nav className="mx-auto text-center">
+                {/* Inicio: todos */}
                 <Nav.Link
                   as={Link}
                   to="/BonaJatetxea"
@@ -228,6 +229,7 @@ const Header = () => {
                   {t("nav.home")}
                 </Nav.Link>
 
+                {/* Contacto: todos */}
                 <Nav.Link
                   as={Link}
                   to="/kontaktua"
@@ -237,24 +239,7 @@ const Header = () => {
                   {t("nav.contact")}
                 </Nav.Link>
 
-                <Nav.Link
-                  as={Link}
-                  to="/erreserbak"
-                  className="nav-link-custom px-3"
-                  onClick={(e) => {
-                    if (!auth?.user || role !== "Bezero") {
-                      e.preventDefault();      
-                      setLogin(true);    
-                      return;
-                    }
-                    setExpanded(false);
-                  }}
-                >
-                  {t("nav.reservations")}
-                </Nav.Link>
-
-
-                
+                {/* MENU / KARTA: todos */}
                 <Nav.Link
                   as={Link}
                   to="/menu"
@@ -264,8 +249,39 @@ const Header = () => {
                   {t("nav.menu")}
                 </Nav.Link>
 
-                
-                {role !== "Bezero" && (
+                {/* RESERVAS: solo Bezero */}
+                {role === "Bezero" && (
+                  <Nav.Link
+                    as={Link}
+                    to="/erreserbak"
+                    className="nav-link-custom px-3"
+                    onClick={(e) => {
+                      if (!auth?.user || role !== "Bezero") {
+                        e.preventDefault();
+                        setLogin(true);
+                        return;
+                      }
+                      setExpanded(false);
+                    }}
+                  >
+                    {t("nav.reservations")}
+                  </Nav.Link>
+                )}
+
+                {/* LANGILE: solo Horario */}
+                {role === "Langile" && (
+                  <Nav.Link
+                    as={Link}
+                    to="/ordutegia"
+                    className="nav-link-custom px-3"
+                    onClick={() => setExpanded(false)}
+                  >
+                    {t("nav.schedule")}
+                  </Nav.Link>
+                )}
+
+                {/* Otros roles de staff (no Bezero ni Langile): Horario + Entrega */}
+                {role !== "Bezero" && role !== "Langile" && auth?.user && (
                   <>
                     <Nav.Link
                       as={Link}
@@ -275,7 +291,6 @@ const Header = () => {
                     >
                       {t("nav.schedule")}
                     </Nav.Link>
-
                     <Nav.Link
                       as={Link}
                       to="/pendiente"
@@ -292,10 +307,10 @@ const Header = () => {
         </Navbar>
       </section>
 
-      
+      {/* Espaciador para header fijo */}
       <div style={{ height: "0px" }}></div>
 
-      
+      {/* MODAL LOGIN */}
       <Modal show={login} onHide={handleCloseLogin} centered>
         <Modal.Header closeButton>
           <Modal.Title>{t("login.modalTitle")}</Modal.Title>
@@ -340,7 +355,7 @@ const Header = () => {
         </Modal.Body>
       </Modal>
 
-      
+      {/* MODAL CARRITO */}
       <Modal show={cart} onHide={handleCloseCart} centered size="lg">
         <Modal.Header closeButton>
           <Modal.Title>{t("cart.title")}</Modal.Title>
