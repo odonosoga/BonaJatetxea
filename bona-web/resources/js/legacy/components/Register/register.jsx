@@ -1,18 +1,18 @@
 import { Col, Container, Form, Row } from 'react-bootstrap';
 import register from '../../img/register.jpg';
 import './register.css';
-
 import { useForm } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';  // ← i18n
 
 const Register = () => {
-    // Asegúrate de que los nombres coincidan exactamente con el value y setData
+    const { t } = useTranslation();
     const { data, setData, post, processing, errors } = useForm({
         name: '',
         surname: '',
         phone: '',
         birth_date: '',
         address: '',
-        postal_code: '', // Usar guion bajo si así lo prefieres
+        postal_code: '',
         email: '',
         password: '',
         password_confirmation: '',
@@ -20,212 +20,168 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Cambia route(...) por la URL directa entre comillas
         post('/erregistratu');
     };
+
     return (
         <section id="erregistroa" className="register-section pt-5">
             <Container fluid className="p-0">
                 <Row className="g-0">
-                    <Col
-                        xs={12}
-                        md={6}
-                        className="d-flex justify-content-center order-md-1 order-1"
-                    >
+                    <Col xs={12} md={6} className="d-flex justify-content-center order-md-1 order-1">
                         <div className="register-form">
                             <h2 className="fw-bold text-dark fs-4 mb-3 text-center">
-                                Erregistratu
+                                {t('register.title')}  {/* Erregistratu / Registrarse */}
                             </h2>
-                            <Form
-                                noValidate
-                                onSubmit={handleSubmit}
-                            >
+                            
+                            <Form noValidate onSubmit={handleSubmit}>
                                 <Row className="g-2">
                                     <Col>
-                                        <Form.Group>
+                                        <Form.Group className="mb-3">
                                             <Form.Label className="fw-medium d-flex align-items-start">
-                                                Izena
+                                                {t('register.name')}
                                             </Form.Label>
                                             <Form.Control
                                                 type="text"
                                                 value={data.name}
                                                 onChange={(e) => setData('name', e.target.value)}
-                                                placeholder="Izena"
-                                                required
+                                                isInvalid={!!errors.name}
+                                                placeholder={t('register.name.placeholder')}
                                             />
-
-                                            <Form.Control.Feedback type="invalid">
-                                                Mesedez, sartu izena.
-                                            </Form.Control.Feedback>
-                                            {errors.name && <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>}
+                                            <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
                                         </Form.Group>
                                     </Col>
                                     <Col>
-                                        <Form.Group>
-                                            <Form.Label>Abizena</Form.Label>
+                                        <Form.Group className="mb-3">
+                                            <Form.Label className="fw-medium">
+                                                {t('register.surname')}
+                                            </Form.Label>
                                             <Form.Control
                                                 type="text"
                                                 value={data.surname}
                                                 onChange={(e) => setData('surname', e.target.value)}
-                                                placeholder="Abizena"
-                                                required
+                                                isInvalid={!!errors.surname}
+                                                placeholder={t('register.surname.placeholder')}
                                             />
-
-                                            <Form.Control.Feedback type="invalid">
-                                                Mesedez, sartu abizena.
-                                            </Form.Control.Feedback>
-                                            {errors.surname && <Form.Control.Feedback type="invalid">{errors.surname}</Form.Control.Feedback>}
+                                            <Form.Control.Feedback type="invalid">{errors.surname}</Form.Control.Feedback>
                                         </Form.Group>
                                     </Col>
                                 </Row>
 
                                 <Row className="g-2 mt-1">
                                     <Col>
-                                        <Form.Group>
-                                            <Form.Label>Telefonoa</Form.Label>
+                                        <Form.Group className="mb-3">
+                                            <Form.Label className="fw-medium">
+                                                {t('register.phone')}
+                                            </Form.Label>
                                             <Form.Control
-                                                type="text"
+                                                type="tel"
                                                 value={data.phone}
                                                 onChange={(e) => setData('phone', e.target.value)}
-                                                placeholder="Telefonoa"
-                                                required
+                                                isInvalid={!!errors.phone}
+                                                placeholder={t('register.phone.placeholder')}
                                             />
-
-                                            <Form.Control.Feedback type="invalid">
-                                                Mesedez, sartu telefonoa.
-                                            </Form.Control.Feedback>
-                                            {errors.phone && <Form.Control.Feedback type="invalid">{errors.phone}</Form.Control.Feedback>}
+                                            <Form.Control.Feedback type="invalid">{errors.phone}</Form.Control.Feedback>
                                         </Form.Group>
                                     </Col>
                                     <Col>
-                                        <Form.Group>
-                                            <Form.Label>
-                                                Jaiotze-Data
+                                        <Form.Group className="mb-3">
+                                            <Form.Label className="fw-medium">
+                                                {t('register.birth_date')}
                                             </Form.Label>
                                             <Form.Control
                                                 type="date"
                                                 value={data.birth_date}
                                                 onChange={(e) => setData('birth_date', e.target.value)}
-                                                placeholder="Jaiotze-Data"
-                                                required
+                                                isInvalid={!!errors.birth_date}
                                             />
-
-                                            <Form.Control.Feedback type="invalid">
-                                                Hautatu jaiotze-data.
-                                            </Form.Control.Feedback>
-                                            {errors.birth_date && <Form.Control.Feedback type="invalid">{errors.birth_date}</Form.Control.Feedback>}
-
+                                            <Form.Control.Feedback type="invalid">{errors.birth_date}</Form.Control.Feedback>
                                         </Form.Group>
                                     </Col>
                                 </Row>
 
                                 <Row className="g-2 mt-1">
                                     <Col>
-                                        <Form.Group>
+                                        <Form.Group className="mb-3">
                                             <Form.Label className="fw-medium d-flex align-items-start">
-                                                Helbidea
+                                                {t('register.address')}
                                             </Form.Label>
                                             <Form.Control
                                                 type="text"
                                                 value={data.address}
                                                 onChange={(e) => setData('address', e.target.value)}
-                                                placeholder="Helbidea"
-                                                required
+                                                isInvalid={!!errors.address}
+                                                placeholder={t('register.address.placeholder')}
                                             />
-
-                                            <Form.Control.Feedback type="invalid">
-                                                Mesedez, sartu helbidea.
-                                            </Form.Control.Feedback>
-                                            {errors.address && <Form.Control.Feedback type="invalid">{errors.address}</Form.Control.Feedback>}
-
+                                            <Form.Control.Feedback type="invalid">{errors.address}</Form.Control.Feedback>
                                         </Form.Group>
                                     </Col>
                                     <Col>
-                                        <Form.Group>
+                                        <Form.Group className="mb-3">
                                             <Form.Label className="fw-medium d-flex align-items-start">
-                                                Posta Kodea
+                                                {t('register.postal_code')}
                                             </Form.Label>
                                             <Form.Control
                                                 type="text"
                                                 value={data.postal_code}
                                                 onChange={(e) => setData('postal_code', e.target.value)}
-                                                placeholder="Posta Kodea"
-                                                required
+                                                isInvalid={!!errors.postal_code}
+                                                placeholder={t('register.postal_code.placeholder')}
                                             />
-
-                                            <Form.Control.Feedback type="invalid">
-                                                Mesedez, sartu posta kodea.
-                                            </Form.Control.Feedback>
-                                            {errors.postal_code && <Form.Control.Feedback type="invalid">{errors.postal_code}</Form.Control.Feedback>}
-
+                                            <Form.Control.Feedback type="invalid">{errors.postal_code}</Form.Control.Feedback>
                                         </Form.Group>
                                     </Col>
                                 </Row>
 
                                 <Row className="g-2 mt-1">
                                     <Col>
-                                        <Form.Group>
+                                        <Form.Group className="mb-3">
                                             <Form.Label className="fw-medium d-flex align-items-start">
-                                                Email
+                                                {t('register.email')}
                                             </Form.Label>
                                             <Form.Control
-                                                type="text"
+                                                type="email"
                                                 value={data.email}
                                                 onChange={(e) => setData('email', e.target.value)}
-                                                placeholder="Email"
-                                                required
+                                                isInvalid={!!errors.email}
+                                                placeholder={t('register.email.placeholder')}
                                             />
-
-                                            <Form.Control.Feedback type="invalid">
-                                                Mesedez, sartu email-a
-                                            </Form.Control.Feedback>
-                                            {errors.email && <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>}
-
+                                            <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
                                         </Form.Group>
                                     </Col>
                                 </Row>
 
                                 <Row className="g-2 mt-1">
                                     <Col>
-                                        <Form.Group>
+                                        <Form.Group className="mb-3">
                                             <Form.Label className="fw-medium d-flex align-items-start">
-                                                Pasahitza
+                                                {t('register.password')}
                                             </Form.Label>
                                             <Form.Control
                                                 type="password"
                                                 value={data.password}
                                                 onChange={(e) => setData('password', e.target.value)}
-                                                placeholder="Pasahitza"
-                                                required
+                                                isInvalid={!!errors.password}
+                                                placeholder={t('register.password.placeholder')}
                                             />
-
-                                            <Form.Control.Feedback type="invalid">
-                                                Mesedez sartu Pasahitza.
-                                            </Form.Control.Feedback>
-                                            {errors.password && <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>}
+                                            <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
                                         </Form.Group>
                                     </Col>
                                 </Row>
 
                                 <Row className="g-2 mt-1">
                                     <Col>
-                                        <Form.Group>
+                                        <Form.Group className="mb-3">
                                             <Form.Label className="fw-medium d-flex align-items-start">
-                                                Pasahitza Konfirmatu
+                                                {t('register.password_confirmation')}
                                             </Form.Label>
                                             <Form.Control
                                                 type="password"
                                                 value={data.password_confirmation}
                                                 onChange={(e) => setData('password_confirmation', e.target.value)}
-                                                placeholder="Pasahitza Konfirmatu"
-                                                required
+                                                isInvalid={!!errors.password_confirmation}
+                                                placeholder={t('register.password_confirmation.placeholder')}
                                             />
-
-                                            <Form.Control.Feedback type="invalid">
-                                                Mesedez, sartu pasahitza
-                                                berriro.
-                                            </Form.Control.Feedback>
-                                            {errors.password_confirmation && <Form.Control.Feedback type="invalid">{errors.password_confirmation}</Form.Control.Feedback>}
+                                            <Form.Control.Feedback type="invalid">{errors.password_confirmation}</Form.Control.Feedback>
                                         </Form.Group>
                                     </Col>
                                 </Row>
@@ -235,7 +191,7 @@ const Register = () => {
                                         <Form.Group className="d-flex justify-content-center">
                                             <Form.Control
                                                 type="submit"
-                                                value="Erregistratu"
+                                                value={t('register.submit')}
                                                 disabled={processing}
                                                 className="btn-register fw-bold w-100 py-3"
                                             />
@@ -246,19 +202,12 @@ const Register = () => {
                         </div>
                     </Col>
 
-                    <Col
-                        xs={12}
-                        md={6}
-                        className="order-md-2 order-2"
-                        style={{
-                            backgroundImage: `url(${register})`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',
-                            minHeight: '100%',
-                        }}
-                    >
-                        {/* la columna ahora es solo background */}
-                    </Col>
+                    <Col xs={12} md={6} className="order-md-2 order-2" style={{
+                        backgroundImage: `url(${register})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        minHeight: '100%',
+                    }} />
                 </Row>
             </Container>
         </section>

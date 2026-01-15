@@ -37,7 +37,7 @@
 .nav-link-custom:hover::after,
 .nav-link-custom.active::after {
   width: 80% !important;
-  background: linear-gradient(90deg, #D69F3A, #F8D4BA) !important;
+  background: #D69F3A !important;
 }
 
 .nav-link-custom.active {

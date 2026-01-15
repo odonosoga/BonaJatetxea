@@ -269,5 +269,27 @@
     "title": "Pedidos pendientes",
     "badgeAvailable": "{{count}} disponibles",
     "lastUpdated": "Actualizado hace 2 min"
-  }
+  },
+  "register": {
+  "title": "Registrarse",
+  "name": "Nombre",
+  "name.placeholder": "Nombre",
+  "surname": "Apellidos",
+  "surname.placeholder": "Apellidos", 
+  "phone": "Teléfono",
+  "phone.placeholder": "Teléfono",
+  "birth_date": "Fecha de Nacimiento",
+  "address": "Dirección",
+  "address.placeholder": "Dirección",
+  "postal_code": "Código Postal",
+  "postal_code.placeholder": "Código Postal",
+  "email": "Email",
+  "email.placeholder": "Email",
+  "password": "Contraseña",
+  "password.placeholder": "Contraseña",
+  "password_confirmation": "Confirmar Contraseña",
+  "password_confirmation.placeholder": "Confirmar Contraseña",
+  "submit": "Registrarse"
+}
+
 }
