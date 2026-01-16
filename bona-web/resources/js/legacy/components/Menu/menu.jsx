@@ -45,23 +45,29 @@ const Menu = () => {
   const { t } = useTranslation();
 
   const [platos, setPlatos] = useState([
-    { id: 1, img: sopa, key: "lentilSoup", section: t("menu.sectionStarters"), price: 5, cantidad: 1 },
-    { id: 2, img: crema, key: "garlicCream", section: t("menu.sectionStarters"), price: 4, cantidad: 1 },
-    { id: 3, img: pollo, key: "roastChicken", section: t("menu.sectionMeat"), price: 8, cantidad: 1 },
-    { id: 4, img: carne2, key: "beefTenderloin", section: t("menu.sectionMeat"), price: 10, cantidad: 1 },
-    { id: 5, img: pescado, key: "grilledFish", section: t("menu.sectionFish"), price: 12, cantidad: 1 },
-    { id: 6, img: pescado2, key: "bakedSalmon", section: t("menu.sectionFish"), price: 14, cantidad: 1 },
-    { id: 7, img: ensalada, key: "mixedSalad", section: t("menu.sectionVegetables"), price: 5, cantidad: 1 },
-    { id: 8, img: pisto, key: "homemadePisto", section: t("menu.sectionVegetables"), price: 6, cantidad: 1 },
-    { id: 9, img: pasta, key: "spaghettiBolognese", section: t("menu.sectionPastaRice"), price: 7, cantidad: 1 },
-    { id: 10, img: arroz, key: "seafoodPaella", section: t("menu.sectionPastaRice"), price: 6, cantidad: 1 },
-    { id: 11, img: postre1, key: "grandmaCake", section: t("menu.sectionDesserts"), price: 3, cantidad: 1 },
-    { id: 12, img: postre2, key: "frenchToast", section: t("menu.sectionDesserts"), price: 4, cantidad: 1 },
+    { id: 1, img: sopa, sectionKey: "starters", key: "lentilSoup", price: 5, cantidad: 1 },
+    { id: 2, img: crema, sectionKey: "starters", key: "garlicCream", price: 4, cantidad: 1 },
+    { id: 3, img: pollo, sectionKey: "meat", key: "roastChicken", price: 8, cantidad: 1 },
+    { id: 4, img: carne2, sectionKey: "meat", key: "beefTenderloin", price: 10, cantidad: 1 },
+    { id: 5, img: pescado, sectionKey: "fish", key: "grilledFish", price: 12, cantidad: 1 },
+    { id: 6, img: pescado2, sectionKey: "fish", key: "bakedSalmon", price: 14, cantidad: 1 },
+    { id: 7, img: ensalada, sectionKey: "vegetables", key: "mixedSalad", price: 5, cantidad: 1 },
+    { id: 8, img: pisto, sectionKey: "vegetables", key: "homemadePisto", price: 6, cantidad: 1 },
+    { id: 9, img: pasta, sectionKey: "pastaRice", key: "spaghettiBolognese", price: 7, cantidad: 1 },
+    { id: 10, img: arroz, sectionKey: "pastaRice", key: "seafoodPaella", price: 6, cantidad: 1 },
+    { id: 11, img: postre1, sectionKey: "desserts", key: "grandmaCake", price: 3, cantidad: 1 },
+    { id: 12, img: postre2, sectionKey: "desserts", key: "frenchToast", price: 4, cantidad: 1 },
   ]);
 
+  // ✅ TRADUCE sectionKey → sectionName
   const grouped = platos.reduce((acc, dish) => {
-    if (!acc[dish.section]) acc[dish.section] = [];
-    acc[dish.section].push(dish);
+    const sectionKey = dish.sectionKey;
+    const sectionName = t(`menu.section${sectionKey.charAt(0).toUpperCase() + sectionKey.slice(1)}`);
+    
+    if (!acc[sectionName]) {
+      acc[sectionName] = [];
+    }
+    acc[sectionName].push(dish);
     return acc;
   }, {});
 
@@ -72,11 +78,12 @@ const Menu = () => {
       <section id="menua" className="menu-section">
         <Container fluid className="p-4 d-flex flex-column align-items-center">
           <div className="menu-cards-wrapper w-100">
-            {Object.keys(grouped).map((section) => (
-              <div key={section} className="mb-5">
-                <h3 className="text-center mb-4">{section}</h3>
+            {Object.keys(grouped).map((sectionName) => (
+              <div key={sectionName} className="mb-5">
+                {/* ✅ sectionName YA TRADUCIDO */}
+                <h3 className="text-center mb-4">{sectionName}</h3>
                 <Row className="g-4 justify-content-center">
-                  {grouped[section].map(dish => (
+                  {grouped[sectionName].map(dish => (
                     <Col key={dish.id} md={6} lg={4}>
                       <MenuCard 
                         dish={{
