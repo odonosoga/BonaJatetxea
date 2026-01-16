@@ -20,7 +20,7 @@ function App() {
         <main>
           <Suspense fallback={<div>Cargando...</div>}>
             <Routes>
-              <Route path="/BonaJatetxea" element={<Home />} />
+              <Route path="/" element={<Home />} />
               <Route path="/kontaktua" element={<Contact />} />
               <Route path="/erreserbak" element={<Reserva />} />
               <Route path="/erregistroa" element={<Register />} />
