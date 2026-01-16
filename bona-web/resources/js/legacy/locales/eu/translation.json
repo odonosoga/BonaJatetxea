@@ -1,0 +1,309 @@
+{
+  "nav": {
+    "home": "Hasiera",
+    "contact": "Kontaktu",
+    "reservations": "Erreserbak", 
+    "menu": "Karta",
+    "schedule": "Ordutegia",
+    "delivery": "Delivery",
+    "account": "Kontua",
+    "language": "Hizkuntza"
+  },
+  "hours": {
+    "lunch": "12:00–16:00",
+    "dinner": "19:00–23:00"
+  },
+  "login": {
+    "button": "Login",
+    "modalTitle": "Saioa Hasi",
+    "email": "Emaila",
+    "emailPlaceholder": "Emaila",
+    "password": "Pasahitza",
+    "passwordPlaceholder": "Pasahitza",
+    "noAccount": "Ez daukazu kontua?",
+    "registerHere": "Erregistratu hemen",
+    "submit": "Hasi",
+    "error": "Mesedez, Emaila eta Pasahitza bete itzazu!!"
+  },
+  "cart": {
+    "title": "Laburpena",
+    "itemName": "Izena",
+    "quantity": "Kopurua",
+    "price": "Prezioa",
+    "total": "Totala",
+    "confirmButton": "Bidalketa Konfirmatu"
+  },
+  "about": {
+    "title": "Guri buruz",
+    "description": "Donostiako bihotzean, 20 urte baino gehiagoko esperientziarekin. Euskal sukaldaritza goxoa, lehengoen errezetekin.",
+    "card1": {
+      "title": "Kalitatezko materia primak",
+      "text": "Tokiko arrantza eta barazkiak egunero merkatuetatik."
+    },
+    "card2": {
+      "title": "Familiarako giroa",
+      "text": "80 pertsonaentzako edukiera, ospakizunetarako perfektua."
+    },
+    "card3": {
+      "title": "Menu egokituak",
+      "text": "Celiacosen eta alergienen menua espezializatua."
+    }
+  },
+  "cta": {
+    "title": "Maizter egiteko ordua da!",
+    "description": "Astelehenetik osteguna %15 deskontua 2+ pertsonentarako",
+    "button": "Erreserba egin orain"
+  },
+  "testimonials": {
+    "title": "Zergatik aukeratu gure jatetxea?",
+    "subtitle": "Bezeroen iritziak",
+    "review1": {
+      "text": "Kokapen ezin hobea eta jatekoa... miresgarria!",
+      "author": "Marta G., Google"
+    },
+    "review2": {
+      "text": "Txuletoiaren puntua perfektua. Datorren astean bueltatuko gara.",
+      "author": "Iker B., Tripadvisor"
+    },
+    "review3": {
+      "text": "Langileak oso atseginak eta arreta handizkoa.",
+      "author": "Ana M., Facebook"
+    }
+  },
+  "contact": {
+    "heroTitle": "Egin zure kontsulta",
+    "heroText": "Idatzi zure ideia, galdera edo eskaera eta harremanetan jarriko gara.",
+    "formTitle": "Kontsulta",
+    "nameLabel": "Izena",
+    "namePlaceholder": "Zure izena",
+    "nameFeedback": "Mesedez, sartu izena.",
+    "emailLabel": "Emaila",
+    "emailPlaceholder": "email@adibidea.com",
+    "emailFeedback": "Mesedez, sartu email zuzen bat.",
+    "phoneLabel": "Telefonoa",
+    "phonePlaceholder": "666 123 456",
+    "reasonLabel": "Zeri buruz?",
+    "reasonPlaceholder": "Aukeratu aukera bat",
+    "reasonOptions": {
+      "info": "Informazio orokorra",
+      "appointment": "Hitzordu bat eskatu",
+      "quote": "Aipu edo aurrekontua",
+      "other": "Beste bat"
+    },
+    "reasonFeedback": "Mesedez, aukeratu kontsultaren gaia.",
+    "messageLabel": "Mezua",
+    "messagePlaceholder": "Zure mezua...",
+    "messageFeedback": "Mesedez, idatzi mezua.",
+    "submitButton": "Bidali mezua",
+    "responseTime": "Normalean 24-48 orduren buruan erantzuten dugu.",
+    "helpText": "Zalantzarik baduzu, lasai idatzi: laguntzeko gaude.",
+    "privacyText": "Ez partekatu inoiz pasahitzik edo datu konfidentzialik mezu honetan."
+  },
+  "reservation": {
+    "heroTitle": "Egin zure erreserba",
+    "heroText": "Goza ezazu esperientzia gastronomiko paregabea Bona jatetxean.",
+
+    "infoTitle": "Harremanetarako informazioa",
+    "address": "Nafarroa Hiribidea, 2",
+    "city": "20013 Donostia / San Sebastián, Gipuzkoa",
+    "phone": "+34 943 123 456",
+    "whatsapp": "+34 600 987 654",
+    "email": "info@bonarestaurante.com",
+    "hoursTitle": "Ordutegia",
+    "hoursLunch": "Bazkaria: 12:00 - 16:00",
+    "hoursDinner": "Afaria: 19:00 - 23:00",
+    "mapTitle": "Aurkitu gaitzazu mapan",
+
+    "formTitle": "Erreserba inprimakia",
+    "emailLabel": "Posta elektronikoa",
+    "emailPlaceholder": "Sartu zure posta elektronikoa",
+    "emailRepeatPlaceholder": "Errepikatu zure posta elektronikoa",
+    "emailFeedback": "Mesedez, sartu helbide elektroniko baliodun bat.",
+
+    "giftCodeQuestion": "Opari kode bat duzu?",
+    "giftCodeYes": "Bai",
+    "giftCodeNo": "Ez",
+    "giftCodeInputLabel": "Opari kodea:",
+    "giftCodePlaceholder": "Sartu zure kodea",
+    
+    "nameLabel": "Izena",
+    "namePlaceholder": "Zure izena",
+    "nameFeedback": "Mesedez, sartu zure izena.",
+    "surnameLabel": "Abizenak",
+    "surnamePlaceholder": "Zure abizenak",
+    "surnameFeedback": "Mesedez, sartu zure abizenak.",
+    
+    "peopleLabel": "Pertsona kopurua",
+    "phoneLabel": "Harremanetarako telefonoa",
+    "phonePlaceholder": "Adib. +34 600 999 888",
+    "phoneWarning": "Garrantzitsua da telefono zenbakia egokia izatea erreserba berresteko.",
+
+    "dateLabel": "Data",
+    "dateFeedback": "Aukeratu baliozko data bat.",
+
+    "timeQuestion": "Bazkaria edo afaria?",
+    "timeMorning": "Bazkaria",
+    "timeEvening": "Afaria",
+    "timeError": "Aukeratu ordutegi bat.",
+    "hourLabel": "Ordua",
+    "hourPlaceholder": "Aukeratu ordua",
+    "hourFeedback": "Mesedez, aukeratu ordu bat.",
+
+    "locationLabel": "Jatetxea",
+    "locationPlaceholder": "Aukeratu jatetxea",
+    "locationFeedback": "Aukeratu jatetxe baliodun bat.",
+
+    "submitButton": "Bidali erreserba"
+  },
+  "menu": {
+    "heroTitle": "Karta",
+    "sectionStarters": "Koilarazko platerak",
+    "sectionMeat": "Haragiak",
+    "sectionFish": "Arrainak",
+    "sectionVegetables": "Barazkiak",
+    "sectionPastaRice": "Pasta eta arroza",
+    "sectionDesserts": "Postreak",
+    "labelName": "Izena",
+    "labelDescription": "Deskribapena",
+    "labelIngredients": "Osagaiak",
+    "labelPrice": "Prezioa",
+    "buttonAdd": "Gehitu",
+    "dishes": {
+      "lentilSoup": {
+        "name": "Lenteja zopak",
+        "description": "Lekalez egindako zopabero eta elikagarria",
+        "ingredients": "Lentejak, azenarioa, patata, tipula, baratxuria"
+      },
+      "garlicCream": {
+        "name": "Barazki krematsua",
+        "description": "Barazki freskoekin egindako krema leuna",
+        "ingredients": "Azenarioa, kalabazina, patata, tipula"
+      },
+      "roastChicken": {
+        "name": "Oilasko errea",
+        "description": "Labean poliki egositako oilasko samurra eta zaporetsua",
+        "ingredients": "Oilaskoa, olibaren olioa, gatza, piperbeltza, baratxuria"
+      },
+      "beefTenderloin": {
+        "name": "Txahal solomoa patata purearekin",
+        "description": "Labean egindako solomoa, patata pure krematsuarekin lagunduta",
+        "ingredients": "Txahal solomoa, gatza, piperbeltza, olibaren olioa, patata, gurina, esnea"
+      },
+      "grilledFish": {
+        "name": "Plantxako arraina",
+        "description": "Eguneko arrain freskoa plantxan egina",
+        "ingredients": "Arraina, limoia, olibaren olioa, gatza"
+      },
+      "bakedSalmon": {
+        "name": "Labeko izokina",
+        "description": "Izokina labean egina, belar freskoekin",
+        "ingredients": "Izokina, limoia, baratxuria, olibaren olioa"
+      },
+      "mixedSalad": {
+        "name": "Entsalada mistoa",
+        "description": "Letxuga, tomatea eta tipulaz egindako nahasketa freskoa",
+        "ingredients": "Letxuga, tomatea, tipula, oliba, olibaren olioa"
+      },
+      "homemadePisto": {
+        "name": "Etxeko pistoa",
+        "description": "Barazki gisatu tradizionala",
+        "ingredients": "Tomatea, kalabazina, piperra, tipula, olibaren olioa"
+      },
+      "spaghettiBolognese": {
+        "name": "Boloniar espagetiak",
+        "description": "Etxeko saltsa boloniarrarekin egindako pasta",
+        "ingredients": "Espagetiak, haragia, tomatea, tipula, baratxuria"
+      },
+      "seafoodPaella": {
+        "name": "Itsaskizko paella",
+        "description": "Arroza eta itsaskiekin egindako paella tradizionala",
+        "ingredients": "Arroza, ganbak, muskuiluak, kalamarra, piperrak, baratxuria, olibaren olioa, gatza, azafraia"
+      },
+      "grandmaCake": {
+        "name": "Amonaren tarta",
+        "description": "Gaileta eta kremarekin egindako tarta goxoa",
+        "ingredients": "Maria gailetak, esnea, azukrea, arrautzak, gurina, bainila esentzia"
+      },
+      "frenchToast": {
+        "name": "Torrija",
+        "description": "Krema-itxurako torrija, koko izozkiarekin lagunduta",
+        "ingredients": "Ogia, esnea, azukrea, kanela, arrautzak, olibaren olioa, limoizko azalaren zatiak"
+      }
+    }
+    },
+  "schedule": {
+    "title": "Langileen ordutegiak",
+    "description": "Langile bakoitzaren asteko txandak kudeatzen ditu.",
+    "tableWeek": "Aste hau",
+    "columnWorker": "Langilea",
+    "columnRole": "Rola",
+    "days": {
+      "monday": "Astelehena",
+      "tuesday": "Asteartea",
+      "wednesday": "Asteazkena",
+      "thursday": "Osteguna",
+      "friday": "Ostirala",
+      "saturday": "Larunbata",
+      "sunday": "Igandea"
+    },
+    "formTitle": "Langilea gehitu",
+    "nameLabel": "Izena",
+    "namePlaceholder": "Langilearen izena",
+    "roleLabel": "Rola",
+    "rolePlaceholder": "- Hautatu langilearen rola -",
+    "roleOptions": {
+      "cook": "Sukaldaria",
+      "waiter": "Zerbitzaria",
+      "delivery": "Banatzailea",
+      "cleaner": "Garbitzailea"
+    },
+    "daySelectPlaceholder": "- Aukeratu -",
+    "submitButton": "Gehitu langilea ordutegian"
+  },
+  "delivery": {
+    "pendingBadge": "ZAIN",
+    "itemsLabel": "Produktu kopurua",
+    "acceptButton": "Eskaera onartu"
+  },
+  "pending": {
+    "title": "Zain dauden eskaerak",
+    "badgeAvailable": "{{count}} eskuragarri",
+    "lastUpdated": "Duela 2 min eguneratua"
+  },
+
+  "register": {
+    "title": "Erregistratu",
+    "name": "Izena",
+    "name.placeholder": "Izena",
+    "surname": "Abizena",
+    "surname.placeholder": "Abizena",
+    "phone": "Telefonoa",
+    "phone.placeholder": "Telefonoa",
+    "birth_date": "Jaiotze-Data",
+    "address": "Helbidea",
+    "address.placeholder": "Helbidea",
+    "postal_code": "Posta Kodea",
+    "postal_code.placeholder": "Posta Kodea",
+    "email": "Email",
+    "email.placeholder": "Email",
+    "password": "Pasahitza",
+    "password.placeholder": "Pasahitza",
+    "password_confirmation": "Pasahitza Konfirmatu",
+    "password_confirmation.placeholder": "Pasahitza Konfirmatu",
+    "submit": "Erregistratu",
+
+    "modal": {
+      "title": "Erregistroa bidalia!",
+      "message": "Berifikazio emaila bidali dugu",
+      "check_inbox": "Sarrera ontzian (eta spam) begiratu:",
+      "timer": "15 minutu dituzu berifikatzeko"
+    }
+  }
+}
+
+  
+
+  
+
+  
+

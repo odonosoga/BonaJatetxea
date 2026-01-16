@@ -1,0 +1,300 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "contact": "Contacto", 
+    "reservations": "Reservas",
+    "menu": "Carta",
+    "schedule": "Horarios",
+    "delivery": "Delivery",
+    "account": "Cuenta",
+    "language": "Idioma"
+  },
+  "hours": {
+    "lunch": "12:00–16:00",
+    "dinner": "19:00–23:00"
+  },
+  "login": {
+    "button": "Login",
+    "modalTitle": "Iniciar sesión",
+    "email": "Email",
+    "emailPlaceholder": "Email",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Contraseña",
+    "noAccount": "¿No tienes cuenta?",
+    "registerHere": "Regístrate aquí",
+    "submit": "Entrar",
+    "error": "Por favor, completa el Email y la Contraseña"
+  },
+  "cart": {
+    "title": "Resumen",
+    "itemName": "Nombre",
+    "quantity": "Cantidad",
+    "price": "Precio",
+    "total": "Total",
+    "confirmButton": "Confirmar pedido"
+  },
+  "about": {
+    "title": "Sobre nosotros",
+    "description": "En el corazón de Donostia, con más de 20 años de experiencia. Cocina vasca tradicional, con recetas de siempre.",
+    "card1": {
+      "title": "Materia prima de calidad",
+      "text": "Pescado y verduras locales traídos a diario desde los mercados."
+    },
+    "card2": {
+      "title": "Ambiente familiar",
+      "text": "Capacidad para 80 personas, ideal para celebraciones."
+    },
+    "card3": {
+      "title": "Menús adaptados",
+      "text": "Menús especializados para celíacos y personas con alergias."
+    }
+  },
+  "cta": {
+    "title": "¡Es momento de reservar!",
+    "description": "De lunes a jueves 15% de descuento para grupos de 2 o más personas",
+    "button": "Reservar ahora"
+  },
+  "testimonials": {
+    "title": "¿Por qué elegir nuestro restaurante?",
+    "subtitle": "Opiniones de nuestros clientes",
+    "review1": {
+      "text": "Ubicación perfecta y la comida… ¡espectacular!",
+      "author": "Marta G., Google"
+    },
+    "review2": {
+      "text": "El punto del chuletón era perfecto. Volveremos la próxima semana.",
+      "author": "Iker B., Tripadvisor"
+    },
+    "review3": {
+      "text": "El personal es muy amable y atento.",
+      "author": "Ana M., Facebook"
+    }
+  },
+  "contact": {
+    "heroTitle": "Haz tu consulta",
+    "heroText": "Escribe tu idea, pregunta o solicitud y nos pondremos en contacto contigo.",
+    "formTitle": "Consulta",
+    "nameLabel": "Nombre",
+    "namePlaceholder": "Tu nombre",
+    "nameFeedback": "Por favor, introduce tu nombre.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "email@ejemplo.com",
+    "emailFeedback": "Por favor, introduce un email válido.",
+    "phoneLabel": "Teléfono",
+    "phonePlaceholder": "666 123 456",
+    "reasonLabel": "¿Sobre qué?",
+    "reasonPlaceholder": "Selecciona una opción",
+    "reasonOptions": {
+      "info": "Información general",
+      "appointment": "Solicitar una cita",
+      "quote": "Presupuesto o propuesta",
+      "other": "Otro"
+    },
+    "reasonFeedback": "Por favor, selecciona el motivo de la consulta.",
+    "messageLabel": "Mensaje",
+    "messagePlaceholder": "Tu mensaje...",
+    "messageFeedback": "Por favor, escribe el mensaje.",
+    "submitButton": "Enviar mensaje",
+    "responseTime": "Normalmente respondemos en un plazo de 24–48 horas.",
+    "helpText": "Si tienes cualquier duda, escríbenos: estamos aquí para ayudarte.",
+    "privacyText": "Nunca compartas contraseñas ni datos confidenciales en este formulario."
+  },
+  "reservation": {
+    "heroTitle": "Reserva tu mesa",
+    "heroText": "Disfruta de una experiencia gastronómica única en Bona Restaurante.",
+
+    "infoTitle": "Información de contacto",
+    "address": "Nafarroa Hiribidea, 2",
+    "city": "20013 Donostia / San Sebastián, Gipuzkoa",
+    "phone": "+34 943 123 456",
+    "whatsapp": "+34 600 987 654",
+    "email": "info@bonarestaurante.com",
+    "hoursTitle": "Horario",
+    "hoursLunch": "Comidas: 12:00 - 16:00",
+    "hoursDinner": "Cenas: 19:00 - 23:00",
+    "mapTitle": "Encuéntranos en el mapa",
+
+    "formTitle": "Formulario de reserva",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "Introduce tu correo electrónico",
+    "emailRepeatPlaceholder": "Repite tu correo electrónico",
+    "emailFeedback": "Por favor, introduce un correo válido.",
+
+    "giftCodeQuestion": "¿Tienes un código regalo?",
+    "giftCodeYes": "Sí",
+    "giftCodeNo": "No",
+    "giftCodeInputLabel": "Código regalo:",
+    "giftCodePlaceholder": "Introduce tu código",
+    
+    "nameLabel": "Nombre",
+    "namePlaceholder": "Tu nombre",
+    "nameFeedback": "Por favor, introduce tu nombre.",
+    "surnameLabel": "Apellidos",
+    "surnamePlaceholder": "Tus apellidos",
+    "surnameFeedback": "Por favor, introduce tus apellidos.",
+
+    "peopleLabel": "Número de personas",
+    "phoneLabel": "Teléfono de contacto",
+    "phonePlaceholder": "Ej. +34 600 999 888",
+    "phoneWarning": "Es importante que el teléfono sea correcto para confirmar la reserva.",
+
+    "dateLabel": "Fecha",
+    "dateFeedback": "Selecciona una fecha válida.",
+
+    "timeQuestion": "¿Comida o cena?",
+    "timeMorning": "Comida",
+    "timeEvening": "Cena",
+    "timeError": "Selecciona una franja horaria.",
+    "hourLabel": "Hora",
+    "hourPlaceholder": "Selecciona una hora",
+    "hourFeedback": "Por favor, selecciona una hora.",
+
+    "locationLabel": "Local",
+    "locationPlaceholder": "Elige el restaurante",
+    "locationFeedback": "Selecciona un local válido.",
+
+    "submitButton": "Enviar reserva"
+  },
+  "menu": {
+    "heroTitle": "Carta",
+    "sectionStarters": "Platos de cuchara",
+    "sectionMeat": "Carnes",
+    "sectionFish": "Pescados",
+    "sectionVegetables": "Verduras",
+    "sectionPastaRice": "Pasta y arroz",
+    "sectionDesserts": "Postres",
+    "labelName": "Nombre",
+    "labelDescription": "Descripción",
+    "labelIngredients": "Ingredientes",
+    "labelPrice": "Precio",
+    "buttonAdd": "Añadir",
+    "dishes": {
+      "lentilSoup": {
+        "name": "Sopa de lentejas",
+        "description": "Sopa de legumbres caliente y nutritiva",
+        "ingredients": "Lentejas, zanahoria, patata, cebolla, ajo"
+      },
+      "garlicCream": {
+        "name": "Crema de verduras",
+        "description": "Crema suave elaborada con verduras frescas",
+        "ingredients": "Zanahoria, calabacín, patata, cebolla"
+      },
+      "roastChicken": {
+        "name": "Pollo asado",
+        "description": "Pollo jugoso y sabroso horneado lentamente",
+        "ingredients": "Pollo, aceite de oliva, sal, pimienta, ajo"
+      },
+      "beefTenderloin": {
+        "name": "Solomillo de ternera con puré de patata",
+        "description": "Solomillo al horno acompañado de puré de patatas",
+        "ingredients": "Solomillo de ternera, sal, pimienta, aceite de oliva, patata, mantequilla, leche"
+      },
+      "grilledFish": {
+        "name": "Pescado a la plancha",
+        "description": "Pescado fresco del día hecho a la plancha",
+        "ingredients": "Pescado, limón, aceite de oliva, sal"
+      },
+      "bakedSalmon": {
+        "name": "Salmón al horno",
+        "description": "Salmón al horno con hierbas frescas",
+        "ingredients": "Salmón, limón, ajo, aceite de oliva"
+      },
+      "mixedSalad": {
+        "name": "Ensalada mixta",
+        "description": "Mezcla fresca de lechuga, tomate y cebolla",
+        "ingredients": "Lechuga, tomate, cebolla, aceitunas, aceite de oliva"
+      },
+      "homemadePisto": {
+        "name": "Pisto casero",
+        "description": "Guiso tradicional de verduras",
+        "ingredients": "Tomate, calabacín, pimiento, cebolla, aceite de oliva"
+      },
+      "spaghettiBolognese": {
+        "name": "Espaguetis a la boloñesa",
+        "description": "Pasta con salsa boloñesa casera",
+        "ingredients": "Espaguetis, carne, tomate, cebolla, ajo"
+      },
+      "seafoodPaella": {
+        "name": "Paella de marisco",
+        "description": "Paella tradicional con arroz y marisco",
+        "ingredients": "Arroz, gambas, mejillones, calamar, pimientos, ajo, aceite de oliva, sal, azafrán"
+      },
+      "grandmaCake": {
+        "name": "Tarta de la abuela",
+        "description": "Deliciosa tarta de galleta y crema",
+        "ingredients": "Galletas María, leche, azúcar, huevos, mantequilla, esencia de vainilla"
+      },
+      "frenchToast": {
+        "name": "Torrija",
+        "description": "Torrija cremosa acompañada de helado de coco",
+        "ingredients": "Pan, leche, azúcar, canela, huevos, aceite de oliva, piel de limón"
+      }
+    }
+  },
+  "schedule": {
+    "title": "Horarios del personal",
+    "description": "Gestiona los turnos semanales de cada trabajador.",
+    "tableWeek": "Esta semana",
+    "columnWorker": "Trabajador",
+    "columnRole": "Rol",
+    "days": {
+      "monday": "Lunes",
+      "tuesday": "Martes",
+      "wednesday": "Miércoles",
+      "thursday": "Jueves",
+      "friday": "Viernes",
+      "saturday": "Sábado",
+      "sunday": "Domingo"
+    },
+    "formTitle": "Añadir trabajador",
+    "nameLabel": "Nombre",
+    "namePlaceholder": "Nombre del trabajador",
+    "roleLabel": "Rol",
+    "rolePlaceholder": "- Selecciona el rol del trabajador -",
+    "roleOptions": {
+      "cook": "Cocinero",
+      "waiter": "Camarero",
+      "delivery": "Repartidor",
+      "cleaner": "Personal de limpieza"
+    },
+    "daySelectPlaceholder": "- Seleccionar -",
+    "submitButton": "Añadir trabajador al horario"
+  },
+  "delivery": {
+    "pendingBadge": "PENDIENTE",
+    "itemsLabel": "Número de productos",
+    "acceptButton": "Aceptar pedido"
+  },
+  "pending": {
+    "title": "Pedidos pendientes",
+    "badgeAvailable": "{{count}} disponibles",
+    "lastUpdated": "Actualizado hace 2 min"
+  },
+  "register": {
+    "title": "Registrarse",
+    "name": "Nombre",
+    "name.placeholder": "Nombre",
+    "surname": "Apellidos",
+    "surname.placeholder": "Apellidos", 
+    "phone": "Teléfono",
+    "phone.placeholder": "Teléfono",
+    "birth_date": "Fecha de Nacimiento",
+    "address": "Dirección",
+    "address.placeholder": "Dirección",
+    "postal_code": "Código Postal",
+    "postal_code.placeholder": "Código Postal",
+    "email": "Email",
+    "email.placeholder": "Email",
+    "password": "Contraseña",
+    "password.placeholder": "Contraseña",
+    "password_confirmation": "Confirmar Contraseña",
+    "password_confirmation.placeholder": "Confirmar Contraseña",
+    "submit": "Registrarse",
+    "modal": {
+      "title": "¡Registro enviado!",
+      "message": "Hemos enviado un email de verificación",
+      "check_inbox": "Revisa tu bandeja de entrada (y spam) en:",
+      "timer": "Tienes 15 minutos para verificarlo"
+    }
+  }
+}

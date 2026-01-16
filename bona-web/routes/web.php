@@ -2,18 +2,49 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Laravel\Fortify\Features;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\ReservationController;
+use App\Models\PendingRegistration;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
-    return Inertia::render('welcome', [
-        'canRegister' => Features::enabled(Features::registration()),
+Route::get('/', fn () => Inertia::render('Legacy'))->name('home');
+
+Route::get('/erregistratu', fn () => Inertia::render('Legacy'))->name('register');
+Route::post('/erregistratu', [RegisterController::class, 'store'])->name('register.store');
+
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
+
+Route::get('/erreserbak', [ReservationController::class, 'index'])->name('erreserbak.index');
+Route::post('/erreserbak/validate', [ReservationController::class, 'store'])->name('erreserbak.validate');
+
+
+Route::get('/registration/verify/{id}/{hash}', function ($id, $hash) {
+    $pending = PendingRegistration::findOrFail($id);
+
+    if ($pending->expires_at->isPast() || sha1($pending->email) !== $hash) {
+        return redirect('/erregistratu')->with('error', '❌ Enlace expirado');
+    }
+
+    $user = User::create([
+        'name'        => $pending->name . ' ' . ($pending->surname ?? ''),
+        'email'       => $pending->email,
+        'password'    => $pending->password,
+        'phone'       => $pending->phone,
+        'birth_date'  => $pending->birth_date,
+        'address'     => $pending->address,
+        'postal_code' => $pending->postal_code,
+        'role'        => 'Bezero',
+        'email_verified_at' => now(),
     ]);
-})->name('home');
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
-});
+    $pending->delete();
+    Auth::login($user);
 
-require __DIR__.'/settings.php';
+    return redirect('/')->with('success', '✅ Verificado! Bienvenido');
+})->name('registration.verify');
+
+Route::get('/{any}', fn () => Inertia::render('Legacy'))
+    ->where('any', '^(?!api|erregistratu|registration).*$');

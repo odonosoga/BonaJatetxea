@@ -3,33 +3,37 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { cn, toUrl } from '@/lib/utils';
 import { useActiveUrl } from '@/hooks/use-active-url';
-import { edit as editAppearance } from '@/routes/appearance';
-import { edit } from '@/routes/profile';
-import { show } from '@/routes/two-factor';
-import { edit as editPassword } from '@/routes/user-password';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import { type PropsWithChildren } from 'react';
 
+// URLs simples en lugar de imports desde "@/routes/*"
+const profileUrl = '/settings/profile';
+const passwordUrl = '/settings/password';
+const appearanceUrl = '/settings/appearance';
+// const twoFactorUrl = '/settings/two-factor';
+
 const sidebarNavItems: NavItem[] = [
     {
         title: 'Profile',
-        href: edit(),
+        href: profileUrl,
         icon: null,
     },
     {
         title: 'Password',
-        href: editPassword(),
+        href: passwordUrl,
         icon: null,
     },
+    /*
     {
         title: 'Two-Factor Auth',
-        href: show(),
+        href: twoFactorUrl,
         icon: null,
     },
+    */
     {
         title: 'Appearance',
-        href: editAppearance(),
+        href: appearanceUrl,
         icon: null,
     },
 ];
@@ -37,7 +41,7 @@ const sidebarNavItems: NavItem[] = [
 export default function SettingsLayout({ children }: PropsWithChildren) {
     const { urlIsActive } = useActiveUrl();
 
-    // When server-side rendering, we only render the layout on the client...
+    // Cuando se renderiza en el servidor, solo renderizamos el layout en cliente
     if (typeof window === 'undefined') {
         return null;
     }
@@ -51,7 +55,10 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
 
             <div className="flex flex-col lg:flex-row lg:space-x-12">
                 <aside className="w-full max-w-xl lg:w-48">
-                    <nav className="flex flex-col space-y-1 space-x-0" aria-label="Settings">
+                    <nav
+                        className="flex flex-col space-y-1 space-x-0"
+                        aria-label="Settings"
+                    >
                         {sidebarNavItems.map((item, index) => (
                             <Button
                                 key={`${toUrl(item.href)}-${index}`}

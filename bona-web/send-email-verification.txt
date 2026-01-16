@@ -1,0 +1,16 @@
+[90m= [39m[34;4mApp\Models\User[39;24m {#6256
+    [34mid[39m: [35m6[39m,
+    [34mname[39m: "[32mIgor[39m",
+    [34memail[39m: "[32migarciaga23wg@ikzubirimanteo.com[39m",
+    [34memail_verified_at[39m: [36mnull[39m,
+    #[33mpassword[39m: "[32m$2y$12$hfkO62OmHUuD0Ap.Z9a4SOBAinIDPsU/bH28KNjfOr7JJ9hjuO662[39m",
+    [34mphone[39m: [36mnull[39m,
+    [34mbirth_date[39m: [36mnull[39m,
+    [34maddress[39m: [36mnull[39m,
+    [34mpostal_code[39m: [36mnull[39m,
+    [34mrole[39m: "[32mBezero[39m",
+    #[33mremember_token[39m: [36mnull[39m,
+    [34mcreated_at[39m: "[32m2026-01-15 08:39:22[39m",
+    [34mupdated_at[39m: "[32m2026-01-15 08:39:22[39m",
+  }
+
