@@ -24,8 +24,8 @@ const About = () => {
         <Row className="g-4">
           <Col lg={4}>
             <Card className="border-0 shadow h-100 rounded-4 hover-card">
-              <Card.Body className="text-center p-5">
-                <BsStarFill className="text-warning fs-1 mb-3" />
+              <Card.Body className="text-center p-5 d-flex flex-column align-items-center">
+                <BsStarFill className=" text-warning fs-1 mb-3" />
                 <h5 className="fw-bold mb-3">
                   {t("about.card1.title")}
                 </h5>
@@ -37,8 +37,8 @@ const About = () => {
           </Col>
           <Col lg={4}>
             <Card className="border-0 shadow h-100 rounded-4 hover-card">
-              <Card.Body className="text-center p-5">
-                <BsStarFill className="text-warning fs-1 mb-3" />
+              <Card.Body className="text-center p-5 d-flex flex-column align-items-center">
+                <BsStarFill className=" text-warning fs-1 mb-3" />
                 <h5 className="fw-bold mb-3">
                   {t("about.card2.title")}
                 </h5>
@@ -50,8 +50,8 @@ const About = () => {
           </Col>
           <Col lg={4}>
             <Card className="border-0 shadow h-100 rounded-4 hover-card">
-              <Card.Body className="text-center p-5">
-                <BsStarFill className="text-warning fs-1 mb-3" />
+              <Card.Body className="text-center p-5 d-flex flex-column align-items-center">
+                <BsStarFill className=" text-warning fs-1 mb-3" />
                 <h5 className="fw-bold mb-3">
                   {t("about.card3.title")}
                 </h5>

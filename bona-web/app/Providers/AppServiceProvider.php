@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Providers;
-
+use Inertia\Inertia;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Inertia::share('auth', function () {
+        return [
+            'user' => Auth::user()
+                ? [
+                    'id'   => Auth::id(),
+                    'name' => Auth::user()->name,
+                    'role' => Auth::user()->role,
+                  ]
+                : null,
+        ];
+    });
+
     }
 }

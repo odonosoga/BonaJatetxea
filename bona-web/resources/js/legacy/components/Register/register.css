@@ -34,3 +34,43 @@
   border-color: #8d3236 !important;
   box-shadow: 0 0 0 0.2rem rgba(228, 85, 75, 0.35) !important;
 }
+
+/* ✅ MODAL colores de la página */
+.modal-content {
+    border-radius: 16px !important;
+    border: none !important;
+    box-shadow: 0 20px 60px rgba(141, 50, 54, 0.15) !important;
+}
+
+.bg-register {
+    background: linear-gradient(135deg, #8d3236 0%, #a83f42 100%) !important;
+    border-radius: 16px 16px 0 0 !important;
+}
+
+.text-register {
+    color: #8d3236 !important;
+}
+
+.btn-register {
+    background: #8d3236 !important;
+    border: 2px solid #541412 !important;
+    border-radius: 12px !important;
+    font-size: 1.1rem !important;
+    color: #fff !important;
+    font-weight: 600;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-register:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(84, 20, 18, 0.4) !important;
+    color: #fff !important;
+}
+
+/* Icono email */
+.bi-envelope-check-fill {
+    color: #8d3236;
+}
+

@@ -29,3 +29,10 @@ PARA INICIAR PROYECTO LARAVEL REACT:
 en dos terminales diferentes: 
   1.npm run dev
   2.php artisan serve
+
+
+PARA QUE LA BASE DE DATOS SE ELIMINEN LOS EMAIL SIN VERIFICAR 
+* * * * * cd /ruta-a-tu-proyecto && php artisan schedule:run >> /dev/null 2>&1 (EN SERVER)
+php artisan schedule:work (EN DEV)
+
+main
