@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
         }
 
         if ($role === 'Bezero') {
-            return redirect('/BonaJatetxea');   
+            return redirect('/');   
         }
 
         return redirect('/');                 
