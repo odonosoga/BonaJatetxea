@@ -245,7 +245,7 @@ const Header = () => {
       {/* Inicio: todos (no Langile) */}
       <Nav.Link
         as={Link}
-        to="/BonaJatetxea"
+        to="/"
         className="nav-link-custom px-3"
         onClick={() => setExpanded(false)}
       >
