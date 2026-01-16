@@ -20,18 +20,14 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
 Route::get('/erreserbak', [ReservationController::class, 'index'])->name('erreserbak.index');
 Route::post('/erreserbak/validate', [ReservationController::class, 'store'])->name('erreserbak.validate');
 
-Route::get('/ordutegia', fn () => Inertia::render('Schedule'));
-Route::get('/pendiente', fn () => Inertia::render('PendingDelivery'));
 
-// ✅ VERIFY RUTA CORREGIDA (mueve ANTES del catch-all)
 Route::get('/registration/verify/{id}/{hash}', function ($id, $hash) {
     $pending = PendingRegistration::findOrFail($id);
-    
-    // ✅ FIX: usa expires_at correcto
+
     if ($pending->expires_at->isPast() || sha1($pending->email) !== $hash) {
         return redirect('/erregistratu')->with('error', '❌ Enlace expirado');
     }
-    
+
     $user = User::create([
         'name'        => $pending->name . ' ' . ($pending->surname ?? ''),
         'email'       => $pending->email,
@@ -43,13 +39,12 @@ Route::get('/registration/verify/{id}/{hash}', function ($id, $hash) {
         'role'        => 'Bezero',
         'email_verified_at' => now(),
     ]);
-    
+
     $pending->delete();
     Auth::login($user);
-    
+
     return redirect('/')->with('success', '✅ Verificado! Bienvenido');
 })->name('registration.verify');
 
-// ✅ Catch-all DESPUÉS
 Route::get('/{any}', fn () => Inertia::render('Legacy'))
     ->where('any', '^(?!api|erregistratu|registration).*$');

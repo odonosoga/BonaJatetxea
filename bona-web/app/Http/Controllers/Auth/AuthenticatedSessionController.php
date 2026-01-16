@@ -28,15 +28,16 @@ class AuthenticatedSessionController extends Controller
         $role = $user->role ?? null;
 
         if ($role === 'Langile') {
-            return redirect('/ordutegia');          // nav.schedule
+            return redirect('/ordutegia');     
         }
 
         if ($role === 'Bezero') {
-            return redirect('/BonaJatetxea');       // página principal cliente
+            return redirect('/BonaJatetxea');   
         }
 
-        return redirect('/');
+        return redirect('/');                 
     }
+
 
     // Logout
     public function destroy(Request $request)

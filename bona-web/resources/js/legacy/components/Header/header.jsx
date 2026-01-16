@@ -84,8 +84,8 @@ const Header = () => {
 
     post("/login", {
       onSuccess: () => {
-        // Laravel redirige según el rol (Langile -> /ordutegia, Bezero -> /BonaJatetxea, etc.)
         handleCloseLogin();
+        window.location.reload();
       },
     });
   };
@@ -218,90 +218,104 @@ const Header = () => {
           <Container fluid className="px-4 nav-container">
             <Navbar.Toggle aria-controls="main-navbar" />
             <Navbar.Collapse id="main-navbar">
-              <Nav className="mx-auto text-center">
-                {/* Inicio: todos */}
-                <Nav.Link
-                  as={Link}
-                  to="/BonaJatetxea"
-                  className="nav-link-custom px-3"
-                  onClick={() => setExpanded(false)}
-                >
-                  {t("nav.home")}
-                </Nav.Link>
+<Nav className="mx-auto text-center">
+  {role === "Langile" && auth?.user ? (
+    // LANGILE: solo Horario + Pendiente
+    <>
+      <Nav.Link
+        as={Link}
+        to="/ordutegia"
+        className="nav-link-custom px-3"
+        onClick={() => setExpanded(false)}
+      >
+        {t("nav.schedule")}
+      </Nav.Link>
+      <Nav.Link
+        as={Link}
+        to="/pendiente"
+        className="nav-link-custom px-3"
+        onClick={() => setExpanded(false)}
+      >
+        {t("nav.delivery")}
+      </Nav.Link>
+    </>
+  ) : (
+    // RESTO DE USUARIOS
+    <>
+      {/* Inicio: todos (no Langile) */}
+      <Nav.Link
+        as={Link}
+        to="/BonaJatetxea"
+        className="nav-link-custom px-3"
+        onClick={() => setExpanded(false)}
+      >
+        {t("nav.home")}
+      </Nav.Link>
 
-                {/* Contacto: todos */}
-                <Nav.Link
-                  as={Link}
-                  to="/kontaktua"
-                  className="nav-link-custom px-3"
-                  onClick={() => setExpanded(false)}
-                >
-                  {t("nav.contact")}
-                </Nav.Link>
+      {/* Contacto: todos (no Langile) */}
+      <Nav.Link
+        as={Link}
+        to="/kontaktua"
+        className="nav-link-custom px-3"
+        onClick={() => setExpanded(false)}
+      >
+        {t("nav.contact")}
+      </Nav.Link>
 
-                {/* MENU / KARTA: todos */}
-                <Nav.Link
-                  as={Link}
-                  to="/menu"
-                  className="nav-link-custom px-3"
-                  onClick={() => setExpanded(false)}
-                >
-                  {t("nav.menu")}
-                </Nav.Link>
+      {/* Menú / Karta: todos (no Langile) */}
+      <Nav.Link
+        as={Link}
+        to="/menu"
+        className="nav-link-custom px-3"
+        onClick={() => setExpanded(false)}
+      >
+        {t("nav.menu")}
+      </Nav.Link>
 
-                {/* RESERVAS: solo Bezero */}
-                {role === "Bezero" && (
-                  <Nav.Link
-                    as={Link}
-                    to="/erreserbak"
-                    className="nav-link-custom px-3"
-                    onClick={(e) => {
-                      if (!auth?.user || role !== "Bezero") {
-                        e.preventDefault();
-                        setLogin(true);
-                        return;
-                      }
-                      setExpanded(false);
-                    }}
-                  >
-                    {t("nav.reservations")}
-                  </Nav.Link>
-                )}
+      {/* Reservas: solo Bezero */}
+      {role === "Bezero" && (
+        <Nav.Link
+          as={Link}
+          to="/erreserbak"
+          className="nav-link-custom px-3"
+          onClick={(e) => {
+            if (!auth?.user || role !== "Bezero") {
+              e.preventDefault();
+              setLogin(true);
+              return;
+            }
+            setExpanded(false);
+          }}
+        >
+          {t("nav.reservations")}
+        </Nav.Link>
+      )}
 
-                {/* LANGILE: solo Horario */}
-                {role === "Langile" && (
-                  <Nav.Link
-                    as={Link}
-                    to="/ordutegia"
-                    className="nav-link-custom px-3"
-                    onClick={() => setExpanded(false)}
-                  >
-                    {t("nav.schedule")}
-                  </Nav.Link>
-                )}
+      {/* Otros roles de staff distintos de Bezero y Langile (si los tienes) */}
+      {role !== "Bezero" && role !== "Langile" && auth?.user && (
+        <>
+          <Nav.Link
+            as={Link}
+            to="/ordutegia"
+            className="nav-link-custom px-3"
+            onClick={() => setExpanded(false)}
+          >
+            {t("nav.schedule")}
+          </Nav.Link>
+          <Nav.Link
+            as={Link}
+            to="/pendiente"
+            className="nav-link-custom px-3"
+            onClick={() => setExpanded(false)}
+          >
+            {t("nav.delivery")}
+          </Nav.Link>
+        </>
+      )}
+    </>
+  )}
+</Nav>
 
-                {/* Otros roles de staff (no Bezero ni Langile): Horario + Entrega */}
-                {role !== "Bezero" && role !== "Langile" && auth?.user && (
-                  <>
-                    <Nav.Link
-                      as={Link}
-                      to="/ordutegia"
-                      className="nav-link-custom px-3"
-                      onClick={() => setExpanded(false)}
-                    >
-                      {t("nav.schedule")}
-                    </Nav.Link>
-                    <Nav.Link
-                      as={Link}
-                      to="/pendiente"
-                      className="nav-link-custom px-3"
-                      onClick={() => setExpanded(false)}
-                    >
-                      {t("nav.delivery")}
-                    </Nav.Link>
-                  </>
-                )}
-              </Nav>
             </Navbar.Collapse>
           </Container>
         </Navbar>
