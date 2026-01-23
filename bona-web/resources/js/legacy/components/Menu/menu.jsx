@@ -18,12 +18,12 @@ import postre1 from "../../img/postre1.jpg";
 import postre2 from "../../img/postre2.jpg";
 import MenuCard from './menucard';
 
-const HeroReserva = () => {
+const HeroMenu = () => {
   const { t } = useTranslation();
 
   return (
     <section
-      className="hero-reserva"
+      className="hero-menu"
       style={{ backgroundImage: `url(${heroImg})` }}
     >
       <div className="hero-overlay">
@@ -73,7 +73,7 @@ const Menu = () => {
 
   return (
     <>
-      <HeroReserva />
+      <HeroMenu />
 
       <section id="menua" className="menu-section">
         <Container fluid className="p-4 d-flex flex-column align-items-center">

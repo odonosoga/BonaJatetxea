@@ -498,7 +498,7 @@ const Reserva = () => {
 
                     <Button
                       type="submit"
-                      className="w-100 btn-contact py-3 fw-bold"
+                      className="w-100 btn-reservation py-3 fw-bold"
                       disabled={processing}
                     >
                       {t('reservation.submitButton')}
