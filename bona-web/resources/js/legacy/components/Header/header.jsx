@@ -273,6 +273,23 @@ const Header = () => {
         {t("nav.menu")}
       </Nav.Link>
 
+                                        {role === 'Bezero' && (
+                                            <Nav.Link
+                                                as={Link}
+                                                href="/erreserba"
+                                                className="nav-link-custom px-3"
+                                                onClick={(e) => {
+                                                    if (!auth?.user || role !== 'Bezero') {
+                                                        e.preventDefault();
+                                                        setLogin(true);
+                                                        return;
+                                                    }
+                                                    setExpanded(false);
+                                                }}
+                                            >
+                                                {t('nav.reservations')}
+                                            </Nav.Link>
+                                        )}
       {/* Reservas: solo Bezero */}
       {role === "Bezero" && (
         <Nav.Link
