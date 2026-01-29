@@ -67,7 +67,7 @@ const Header = () => {
         }
     };
 
-<<<<<<< HEAD
+
     // Ejecutar inmediatamente
     updateActiveLink();
     
@@ -77,15 +77,16 @@ const Header = () => {
     // Cleanup
     return () => window.removeEventListener('popstate', updateActiveLink);
 }, []);
-=======
+
   const handleLogout = () => {
-    post("/logout", {
-      onSuccess: () => {
-        window.location.href = '/';
-      },
-    });
-  };
->>>>>>> 17c077b (no se que hay)
+  post("/logout", {
+    onSuccess: () => {
+      window.location.href = '/';
+    },
+  });
+};
+
+
 
     const handleShowLogin = () => setLogin(true);
     const handleCloseLogin = () => {
@@ -101,10 +102,6 @@ const Header = () => {
                 window.location.reload();
             },
         });
-    };
-
-    const handleLogout = () => {
-        post('/logout');
     };
 
     const handleShowCart = () => setCart(true);
