@@ -8,7 +8,12 @@ class Langile extends Model
 {
     protected $table = 'langileak';
     protected $primaryKey = 'idLangile';
-    protected $fillable = ['mota'];
+    protected $fillable = ['mota', 'user_id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 
     public function lokalenKokapenak()
     {

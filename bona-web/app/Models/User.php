@@ -54,4 +54,9 @@ class User extends Authenticatable implements MustVerifyEmail
             'two_factor_confirmed_at' => 'datetime',
         ];
     }
+    public function langile()
+    {
+        return $this->hasOne(Langile::class, 'user_id', 'id');
+    }
+
 }
