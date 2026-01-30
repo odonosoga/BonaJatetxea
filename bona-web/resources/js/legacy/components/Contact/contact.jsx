@@ -1,17 +1,7 @@
-// PÁGINA: Contact / Kontaktua
-// Traducciones necesarias: contact.heroTitle, contact.heroText, contact.formTitle,
-// contact.nameLabel, contact.namePlaceholder, contact.nameFeedback,
-// contact.emailLabel, contact.emailPlaceholder, contact.emailFeedback,
-// contact.phoneLabel, contact.phonePlaceholder,
-// contact.reasonLabel, contact.reasonPlaceholder, contact.reasonOptions.*,
-// contact.reasonFeedback,
-// contact.messageLabel, contact.messagePlaceholder, contact.messageFeedback,
-// contact.submitButton,
-// contact.responseTime, contact.helpText, contact.privacyText
-
-import React, { useState } from "react";
+import React from "react"; // Quitamos useState porque Inertia maneja el estado
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { useForm, usePage } from '@inertiajs/react'; // ✅ Inertia
 import heroImg from "../../img/contact.png";
 import "./contact.css";
 
@@ -43,18 +33,23 @@ const HeroReserva = () => {
 
 const Contact = () => {
   const { t } = useTranslation();
-  const [validated, setValidated] = useState(false);
+  // Obtenemos errores y mensajes flash desde Inertia (props globales)
+  const { errors, flash } = usePage().props;
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
+  // ✅ Inicializamos useForm de Inertia
+  const { data, setData, post, processing, reset } = useForm({
+    name: '',
+    email: '',
+    phone: '',
+    reason: '',
+    message: '',
+  });
 
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-    setValidated(true);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    post('/kontaktua');
   };
+  
 
   return (
     <>
@@ -67,7 +62,14 @@ const Contact = () => {
                 <Card.Body className="p-4 p-lg-5">
                   <h5 className="fw-bold mb-4">{t("contact.formTitle")}</h5>
 
-                  <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                  {/* ✅ Mensaje de éxito si existe en flash.success */}
+                  {flash?.success && (
+                    <div className="alert alert-success mb-4">
+                        {flash.success}
+                    </div>
+                  )}
+
+                  <Form noValidate onSubmit={handleSubmit}>
                     <Row>
                       <Col md={6} className="mb-3">
                         <Form.Group controlId="contactName">
@@ -77,10 +79,13 @@ const Contact = () => {
                           <Form.Control
                             type="text"
                             placeholder={t("contact.namePlaceholder")}
+                            value={data.name} // ✅ Bind Inertia
+                            onChange={(e) => setData('name', e.target.value)} // ✅ Update Inertia
+                            isInvalid={!!errors.name} // ✅ Error de Laravel
                             required
                           />
                           <Form.Control.Feedback type="invalid">
-                            {t("contact.nameFeedback")}
+                            {errors.name || t("contact.nameFeedback")}
                           </Form.Control.Feedback>
                         </Form.Group>
                       </Col>
@@ -93,10 +98,13 @@ const Contact = () => {
                           <Form.Control
                             type="email"
                             placeholder={t("contact.emailPlaceholder")}
+                            value={data.email}
+                            onChange={(e) => setData('email', e.target.value)}
+                            isInvalid={!!errors.email}
                             required
                           />
                           <Form.Control.Feedback type="invalid">
-                            {t("contact.emailFeedback")}
+                            {errors.email || t("contact.emailFeedback")}
                           </Form.Control.Feedback>
                         </Form.Group>
                       </Col>
@@ -109,14 +117,25 @@ const Contact = () => {
                       <Form.Control
                         type="tel"
                         placeholder={t("contact.phonePlaceholder")}
+                        value={data.phone}
+                        onChange={(e) => setData('phone', e.target.value)}
+                        isInvalid={!!errors.phone}
                       />
+                       <Form.Control.Feedback type="invalid">
+                            {errors.phone}
+                      </Form.Control.Feedback>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="contactReason">
                       <Form.Label className="fw-medium d-flex align-items-start">
                         {t("contact.reasonLabel")}
                       </Form.Label>
-                      <Form.Select required>
+                      <Form.Select 
+                        required
+                        value={data.reason}
+                        onChange={(e) => setData('reason', e.target.value)}
+                        isInvalid={!!errors.reason}
+                      >
                         <option value="">{t("contact.reasonPlaceholder")}</option>
                         <option value="info">{t("contact.reasonOptions.info")}</option>
                         <option value="appointment">{t("contact.reasonOptions.appointment")}</option>
@@ -124,7 +143,7 @@ const Contact = () => {
                         <option value="other">{t("contact.reasonOptions.other")}</option>
                       </Form.Select>
                       <Form.Control.Feedback type="invalid">
-                        {t("contact.reasonFeedback")}
+                        {errors.reason || t("contact.reasonFeedback")}
                       </Form.Control.Feedback>
                     </Form.Group>
 
@@ -136,18 +155,22 @@ const Contact = () => {
                         as="textarea"
                         rows={4}
                         placeholder={t("contact.messagePlaceholder")}
+                        value={data.message}
+                        onChange={(e) => setData('message', e.target.value)}
+                        isInvalid={!!errors.message} 
                         required
                       />
                       <Form.Control.Feedback type="invalid">
-                        {t("contact.messageFeedback")}
+                        {errors.message}  
                       </Form.Control.Feedback>
                     </Form.Group>
 
                     <Button
                       type="submit"
                       className="w-100 btn-contact py-3 fw-bold"
+                      disabled={processing} 
                     >
-                      {t("contact.submitButton")}
+                      {processing ? 'Bidaltzen...' : t("contact.submitButton")}
                     </Button>
 
                     <p

@@ -8,6 +8,7 @@ use App\Http\Controllers\ReservationController;
 use App\Models\PendingRegistration;
 use App\Models\User;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\KontsultaController;
 use Illuminate\Support\Facades\Auth;
 
 // ============================================================================
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', fn () => Inertia::render('home'))->name('home');
 Route::get('/menu', fn () => Inertia::render('menu'));
 Route::get('/kontaktua', fn () => Inertia::render('contact'));
+Route::post('/kontaktua', [KontsultaController::class, 'store'])->name('kontaktua.store');  
 Route::get('/ordutegia', fn () => Inertia::render('schedule'));
 Route::get('/bidalketak', fn () => Inertia::render('pendingdelivery'));
 Route::get('/erreserba', fn () => Inertia::render('reservation'));
