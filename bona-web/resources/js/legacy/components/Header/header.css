@@ -113,7 +113,7 @@
 /* Ítem de registro destacado dentro del dropdown */
 /* Ítem de registro destacado dentro del dropdown */
 .dropdown-register-cta {
-  background-color: #F8D4BA !important; /* Dorado (Cambiado para que destaque más que el crema) */
+  background-color: #F8D4BA !important; 
   color: #541412 !important; 
   border-radius: 8px;
   font-weight: 700 !important;
@@ -121,8 +121,9 @@
   display: block;
   text-align: start;
   width: 92%;           /* Un poco menos de ancho para centrar el bloque mejor */
-  margin: 8px auto;     /* 'auto' lo centra horizontalmente en el menú */
-  
+  margin: 8px auto;  
+  text-decoration: none;
+  padding:5px ;
   /* AJUSTE DE CONTENIDO INTERNO */
   padding-left: 8px !important; /* Ajusta este valor para mover el texto/icono a la izquierda */
   border: none !important;

@@ -196,7 +196,7 @@ const Header = () => {
                                                 {t('login.button')}
                                             </span>
                                         </Dropdown.Item>
-                                        <Dropdown.Item as={Link} href="/erregistroa">
+                                        <Dropdown.Item class="dropdown-register-cta" as={Link} href="/erregistroa">
                                             <span className="d-flex align-items-center">
                                                 <FilePersonFill className="me-2" size={16} />
                                                 {t('login.registerHere')}
