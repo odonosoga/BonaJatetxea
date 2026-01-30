@@ -24,6 +24,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { BsClock } from 'react-icons/bs';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
+import { RiDashboardFill } from "react-icons/ri";
 import './header.css';
 
 import BonaLogoa from '../../img/BonaLogoa.png';
@@ -67,14 +68,8 @@ const Header = () => {
         }
     };
 
-
-    // Ejecutar inmediatamente
     updateActiveLink();
-    
-    // Escuchar cambios de URL (SPA navigation)
     window.addEventListener('popstate', updateActiveLink);
-    
-    // Cleanup
     return () => window.removeEventListener('popstate', updateActiveLink);
 }, []);
 
@@ -85,8 +80,6 @@ const Header = () => {
     },
   });
 };
-
-
 
     const handleShowLogin = () => setLogin(true);
     const handleCloseLogin = () => {
@@ -211,6 +204,20 @@ const Header = () => {
                                                 {auth.user.name}
                                             </span>
                                         </Dropdown.Item>
+                                        
+                                        {/* NUEVO: Dashboard solo para admin */}
+                                        {role === 'Admin' && (
+    <>
+        <Dropdown.Divider />
+        <Dropdown.Item as={Link} href="/admin">
+            <span className="d-flex align-items-center">
+                <RiDashboardFill className="me-2" size={16} />
+                Dashboard
+            </span>
+        </Dropdown.Item>
+    </>
+)}
+                                        
                                         <Dropdown.Item onClick={handleLogout}>
                                             <span className="d-flex align-items-center">
                                                 <BoxArrowRight className="me-2" size={16} />

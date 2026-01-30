@@ -298,7 +298,37 @@
       "check_inbox": "Sarrera ontzian (eta spam) begiratu:",
       "timer": "15 minutu dituzu berifikatzeko"
     }
+  },
+
+  "admin": {
+    "title": "Admin Panela",
+    "panelTitle": "Admin Panela",
+    "workers": "Langileak",
+    "customers": "Bezeroak",
+    "workerManagement": "Langileen Kudeaketa",
+    "customerManagement": "Bezeroen Kudeaketa",
+    "newWorker": "Langile Berria",
+    "name": "Izena",
+    "email": "E-posta",
+    "password": "Pasahitza",
+    "position": "Postua",
+    "phone": "Telefonoa",
+    "address": "Helbidea",
+    "postalCode": "Posta Kodea",
+    "birthDate": "Jaiotze Data",
+    "addWorker": "Langilea Gehitu",
+    "creating": "Sortzen...",
+    "edit": "Editatu",
+    "delete": "Ezabatu",
+    "actions": "Ekintzak",
+    "confirmDelete": "Ziur zaude erabiltzaile hau ezabatu nahi duzula?",
+    "noCustomers": "Bezeroik ez dago erregistratuta.",
+    "editUser": "Erabiltzailea Editatu:",
+    "cancel": "Utzi",
+    "saveChanges": "Aldaketak Gorde",
+    "saving": "Guardatzen..."
   }
+
 }
 
   
