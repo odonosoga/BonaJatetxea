@@ -10,7 +10,16 @@ class LokalenKokapenakSeeder extends Seeder
 {
     public function run(): void
     {
-        $langile = Langile::first(); // cualquiera
+        // Intentamos obtener el primer trabajador
+        $langile = Langile::first();
+
+        // SI NO EXISTE NINGUNO, lo creamos para que no explote la línea 32
+       if (!$langile) {
+            // Esto creará un registro con los valores por defecto de la DB
+            // Si tienes campos obligatorios, pon los nombres correctos aquí
+            $langile = new Langile();
+            $langile->save(); 
+        }
 
         $lokalak = [
             'Bona Center - Nafarroa Hiribidea, 2, 20013 Donostia / San Sebastián, Gipuzkoa',
@@ -24,7 +33,7 @@ class LokalenKokapenakSeeder extends Seeder
 
         foreach ($lokalak as $kokapena) {
             Lokala::create([
-                'idLangile' => $langile->idLangile,
+                'idLangile' => $langile->idLangile, // Ahora ya no será null
                 'kokapena'  => $kokapena,
             ]);
         }
