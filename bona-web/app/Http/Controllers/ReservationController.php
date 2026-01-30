@@ -16,7 +16,7 @@ class ReservationController extends Controller
                 ->with('require_auth', true);
         }
 
-        return Inertia::render('Erreserbak'); // componente React de reservas
+        return Inertia::render('Erreserbak');
     }
 
     public function store(ErreserbaRequest $request)
@@ -31,14 +31,15 @@ class ReservationController extends Controller
         $data = $request->validated();
 
         Erreserba::create([
-            'user_id'      => Auth::id(),
-            'idLokala'     => $data['location'],
-            'data'         => $data['date'],
-            'ordua'        => $data['hour'],
-            'pertsona_Kop' => $data['people'],
+            'idUser'        => Auth::id(), 
+            'idLokala'      => $data['location'],
+            'data'          => $data['date'],
+            'ordua'         => $data['hour'],
+            'pertsona_Kop'  => $data['people'],
         ]);
 
         return back()->with('success', 'Erreserba ondo bidali da!');
     }
+
 }
 
