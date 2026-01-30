@@ -1,0 +1,85 @@
+/* admin.css - Estilo unificado con Register */
+
+.admin-section {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-top: 160px;
+}
+
+/* Sidebar estilo Burdeos Register */
+.admin-sidebar {
+    background: linear-gradient(160deg, #8d3236 0%, #541412 100%);
+    box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+    min-height: 100vh;
+}
+
+.admin-nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-size: 1.1rem;
+    padding: 15px 20px !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.admin-nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff !important;
+    transform: translateX(5px);
+}
+
+.admin-nav-link.active {
+    background: #fff !important;
+    color: #8d3236 !important;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Inputs estilo Register */
+.form-control {
+    border-radius: 10px !important;
+    padding: 12px 15px !important;
+    border: 1px solid #dee2e6;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #8d3236 !important;
+    box-shadow: 0 0 0 0.2rem rgba(141, 50, 54, 0.25) !important;
+}
+
+/* Botón Register */
+.btn-register {
+    background: #8d3236 !important;
+    border: 2px solid #541412 !important;
+    border-radius: 12px !important;
+    font-size: 1rem !important;
+    color: #fff !important;
+    font-weight: 600;
+    transition: all 0.3s ease !important;
+    padding: 10px 20px;
+}
+
+.btn-register:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(84, 20, 18, 0.3) !important;
+    background: #a83f42 !important;
+}
+
+/* Modal Headers */
+.bg-register {
+    background: linear-gradient(135deg, #8d3236 0%, #a83f42 100%) !important;
+    color: white;
+}
+
+/* Badges y Tablas */
+.badge-warning {
+    background-color: #fff3cd !important;
+    color: #856404 !important;
+    border: 1px solid #ffeeba;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #fff5f5; /* Tono rojizo muy suave al hover */
+}

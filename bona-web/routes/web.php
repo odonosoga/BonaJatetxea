@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ReservationController;
 use App\Models\PendingRegistration;
 use App\Models\User;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Auth;
 
 // ============================================================================
@@ -22,7 +23,7 @@ Route::get('/bidalketak', fn () => Inertia::render('pendingdelivery'));
 Route::get('/erreserba', fn () => Inertia::render('reservation'));
 
 // Registro (YA FUNCIONA)
-Route::get('/erregistratu', fn () => Inertia::render('Legacy'))->name('register');  // ← Legacy = Register
+Route::get('/erregistratu', fn () => Inertia::render('Register'))->name('register');
 Route::post('/erregistratu', [RegisterController::class, 'store'])->name('register.store');
 
 // Login/Logout (YA FUNCIONA)
@@ -63,7 +64,27 @@ Route::get('/registration/verify/{id}/{hash}', function ($id, $hash) {
 Route::get('/erregistroa', fn () => Inertia::render('register'));
 
 // ============================================================================
+// ⭐ GRUPO ADMIN COMPLETO (PROTEGIDO + DASHBOARD)
+// ============================================================================
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    // ✅ CORREGIDO: Dashboard principal (busca pages/admin.jsx)
+    Route::get('/', fn() => Inertia::render('admin', [
+        'users' => User::with('langile')->orderBy('name')->paginate(20)
+    ]))->name('dashboard');
+    
+    // CRUD Users (mantiene compatibilidad)
+    Route::get('/users/langile', [UserController::class, 'indexLangile'])->name('users.langile.index');
+    Route::get('/users/bezero', [UserController::class, 'indexBezero'])->name('users.bezero.index');
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    
+    // ⭐ CREAR NUEVO LANGILE (tu método existente)
+    Route::post('/users/langile', [UserController::class, 'storeLangile'])->name('users.langile.store');
+});
+
+// ============================================================================
 // ✅ 404 CATCH-ALL (BAJA PRIORIDAD - AL FINAL)
 // ============================================================================
 Route::get('/{any}', fn () => Inertia::render('legacy'))
-    ->where('any', '^(?!api|login|logout|erregistratu|registration|erreserbak).*$');
+    ->where('any', '^(?!api|login|logout|erregistratu|registration|erreserbak|admin).*$');
