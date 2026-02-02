@@ -325,5 +325,22 @@
     "cancel": "Cancelar",
     "saveChanges": "Guardar Cambios",
     "saving": "Guardando..."
+  },
+
+     "carousel": {
+    "title": "Bona Jatetxea",
+    "hours": {
+      "monThu": "Lun-Jue",
+      "friSat": "Vie-Sáb", 
+      "sun": "Dom"
+    },
+    "login": "Login",
+    "reserve": "Reserva",
+    "contact": "Teléfono: 945 123 456 | Gasteiz, Araba",
+    "prev": "Anterior",
+    "next": "Siguiente",
+    "slide1": "Slide 1",
+    "slide2": "Slide 2",
+    "slide3": "Slide 3"
   }
 }
