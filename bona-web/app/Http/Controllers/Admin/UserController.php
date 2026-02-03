@@ -7,10 +7,24 @@ use App\Models\User;
 use App\Models\Langile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class UserController extends Controller
 {
-    // ★ TU MÉTODO EXISTENTE (lo mantengo intacto)
+    // ✅ MÉTODO PRINCIPAL (CORREGIDO: Carga TODOS los usuarios)
+    public function index()
+    {
+        // CAMBIO CLAVE: Usamos get() en lugar de paginate() para traer TODOS los registros.
+        // React se encarga de paginarlos de 10 en 10.
+        $allUsers = User::with('langile')->orderBy('name')->get();
+
+        // Envolvemos en 'data' para mantener compatibilidad con admin.jsx (que espera users.data)
+        return Inertia::render('admin', [
+            'users' => ['data' => $allUsers]
+        ]);
+    }
+
+    // ✅ TU MÉTODO EXISTENTE (intacto)
     public function storeLangile(Request $request)
     {
         $data = $request->validate([
@@ -39,27 +53,10 @@ class UserController extends Controller
             'mota' => $data['mota'],
         ]);
 
-        return redirect()->back()->with('success', 'Langile creado correctamente.');
+        return back()->with('success', 'Langile creado correctamente.');
     }
 
-    // ★ NUEVOS MÉTODOS CRUD (listados y editar)
-    public function indexBezero()
-    {
-        $users = User::where('role', 'Bezero')->orderBy('name')->paginate(10);
-        return view('admin.users.bezero.index', compact('users'));
-    }
-
-    public function indexLangile()
-    {
-        $users = User::where('role', 'Langile')->with('langile')->orderBy('name')->paginate(10);
-        return view('admin.users.langile.index', compact('users'));
-    }
-
-    public function edit(User $user)
-    {
-        return view('admin.users.edit', compact('user'));
-    }
-
+    // ✅ UPDATE (intacto)
     public function update(Request $request, User $user)
     {
         $data = $request->validate([
@@ -78,10 +75,10 @@ class UserController extends Controller
             $user->langile()->updateOrCreate(['user_id' => $user->id], ['mota' => $request->mota]);
         }
 
-        $route = $user->role === 'Bezero' ? 'admin.users.indexBezero' : 'admin.users.indexLangile';
-        return redirect()->route($route)->with('success', 'Usuario actualizado correctamente.');
+        return back()->with('success', 'Usuario actualizado correctamente.');
     }
 
+    // ✅ DESTROY (intacto)
     public function destroy(User $user)
     {
         if ($user->role === 'Langile') {
@@ -89,7 +86,6 @@ class UserController extends Controller
         }
         $user->delete();
 
-        $route = $user->role === 'Bezero' ? 'admin.users.indexBezero' : 'admin.users.indexLangile';
-        return redirect()->route($route)->with('success', 'Usuario eliminado correctamente.');
+        return back()->with('success', 'Usuario eliminado correctamente.');
     }
 }

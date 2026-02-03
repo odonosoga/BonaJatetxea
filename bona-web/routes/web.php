@@ -69,15 +69,10 @@ Route::get('/erregistroa', fn () => Inertia::render('register'));
 // ⭐ GRUPO ADMIN COMPLETO (PROTEGIDO + DASHBOARD)
 // ============================================================================
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-    // ✅ CORREGIDO: Dashboard principal (busca pages/admin.jsx)
-    Route::get('/', fn() => Inertia::render('admin', [
-        'users' => User::with('langile')->orderBy('name')->paginate(20)
-    ]))->name('dashboard');
+    // ✅ Principal: carga TODOS los usuarios para React tabs
+    Route::get('/', [UserController::class, 'index'])->name('users.index');
     
-    // CRUD Users (mantiene compatibilidad)
-    Route::get('/users/langile', [UserController::class, 'indexLangile'])->name('users.langile.index');
-    Route::get('/users/bezero', [UserController::class, 'indexBezero'])->name('users.bezero.index');
-    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    // CRUD Users (para React)
     Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
     
