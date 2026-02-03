@@ -45,43 +45,49 @@ const Header = () => {
         password: '',
     });
 
+    // 🎯 LISTENER PARA ABRIR MODAL DESDE CAROUSEL (NUEVO)
     useEffect(() => {
         if (flash?.require_auth) {
             setLogin(true);
         }
+
+        // ← AÑADIDO: Escucha evento del carousel
+        const handleOpenLogin = () => setLogin(true);
+        document.addEventListener('open-login-modal', handleOpenLogin);
+        
+        return () => document.removeEventListener('open-login-modal', handleOpenLogin);
     }, [flash?.require_auth]);
 
-     useEffect(() => {
-    const updateActiveLink = () => {
-        const navLinks = document.querySelectorAll('.nav-link-custom');
-        navLinks.forEach((link) => link.classList.remove('active'));
+    useEffect(() => {
+        const updateActiveLink = () => {
+            const navLinks = document.querySelectorAll('.nav-link-custom');
+            navLinks.forEach((link) => link.classList.remove('active'));
 
-        const currentPath = window.location.pathname;
+            const currentPath = window.location.pathname;
 
-        const currentLink = Array.from(navLinks).find((link) => {
-            const href = link.getAttribute('href') || '';
-            return href === currentPath;
+            const currentLink = Array.from(navLinks).find((link) => {
+                const href = link.getAttribute('href') || '';
+                return href === currentPath;
+            });
+
+            if (currentLink) {
+                currentLink.classList.add('active');
+            }
+        };
+
+        updateActiveLink();
+        window.addEventListener('popstate', updateActiveLink);
+        return () => window.removeEventListener('popstate', updateActiveLink);
+    }, []);
+
+    const handleLogout = () => {
+        post("/logout", {
+            onSuccess: () => {
+                window.location.href = '/';
+            },
         });
-
-        if (currentLink) {
-            currentLink.classList.add('active');
-        }
     };
 
-    updateActiveLink();
-    window.addEventListener('popstate', updateActiveLink);
-    return () => window.removeEventListener('popstate', updateActiveLink);
-}, []);
-
-  const handleLogout = () => {
-  post("/logout", {
-    onSuccess: () => {
-      window.location.href = '/';
-    },
-  });
-};
-
-    const handleShowLogin = () => setLogin(true);
     const handleCloseLogin = () => {
         setLogin(false);
         reset();
@@ -183,7 +189,7 @@ const Header = () => {
 
                                 {!auth?.user ? (
                                     <>
-                                        <Dropdown.Item onClick={handleShowLogin}>
+                                        <Dropdown.Item onClick={() => setLogin(true)}>
                                             <span className="d-flex align-items-center">
                                                 <Key className="me-2" size={16} />
                                                 {t('login.button')}
@@ -207,16 +213,16 @@ const Header = () => {
                                         
                                         {/* NUEVO: Dashboard solo para admin */}
                                         {role === 'Admin' && (
-    <>
-        <Dropdown.Divider />
-        <Dropdown.Item as={Link} href="/admin">
-            <span className="d-flex align-items-center">
-                <RiDashboardFill className="me-2" size={16} />
-                Dashboard
-            </span>
-        </Dropdown.Item>
-    </>
-)}
+                                            <>
+                                                <Dropdown.Divider />
+                                                <Dropdown.Item as={Link} href="/admin">
+                                                    <span className="d-flex align-items-center">
+                                                        <RiDashboardFill className="me-2" size={16} />
+                                                        Dashboard
+                                                    </span>
+                                                </Dropdown.Item>
+                                            </>
+                                        )}
                                         
                                         <Dropdown.Item onClick={handleLogout}>
                                             <span className="d-flex align-items-center">

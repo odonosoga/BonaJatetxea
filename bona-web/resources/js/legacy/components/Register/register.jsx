@@ -43,7 +43,7 @@ const Register = () => {
     };
 
     return (
-        <section id="erregistroa" className="register-section pt-5">
+        <section id="erregistroa" className="register-section">
             <Container fluid className="p-0">
                 <Row className="g-0">
                     <Col xs={12} md={6} className="d-flex justify-content-center order-md-1 order-1">
