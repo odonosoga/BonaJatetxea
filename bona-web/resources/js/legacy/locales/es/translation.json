@@ -296,5 +296,74 @@
       "check_inbox": "Revisa tu bandeja de entrada (y spam) en:",
       "timer": "Tienes 15 minutos para verificarlo"
     }
+  },
+
+  "admin": {
+  "title": "Panel de Administración",
+  "panelTitle": "Admin Panel",
+  "workers": "Trabajadores",
+  "customers": "Clientes",
+  "workerManagement": "Gestión de Trabajadores",
+  "customerManagement": "Gestión de Clientes",
+  "newWorker": "Añadir Nuevo Trabajador",
+  "addWorker": "Añadir Trabajador",
+  "creating": "Creando...",
+  "editUser": "Editar Usuario",
+  "saveChanges": "Guardar Cambios",
+  "saving": "Guardando...",
+  "cancel": "Cancelar",
+  "delete": "Eliminar",
+  "edit": "Editar",
+  "confirmDelete": "¿Estás seguro de que quieres eliminar este usuario? Esta acción no se puede deshacer.",
+  "passwordsDontMatch": "Las contraseñas no coinciden",
+  "noWorkers": "No hay trabajadores registrados",
+  "noCustomers": "No hay clientes registrados",
+  "noResults": "No se encontraron resultados",
+  "searchByName": "Buscar por nombre...",
+  "name": "Nombre",
+  "email": "Correo Electrónico",
+  "password": "Contraseña",
+  "confirmPassword": "Confirmar Contraseña",
+  "phone": "Teléfono",
+  "birthDate": "Fecha de Nacimiento",
+  "workerType": "Tipo de Trabajador",
+  "selectType": "Seleccionar tipo...",
+  "position": "Puesto",
+  "address": "Dirección",
+  "postalCode": "Código Postal",
+  "actions": "Acciones"
+},
+
+     "carousel": {
+    "title": "Bona Jatetxea",
+    "hours": {
+      "monThu": "Lun-Jue",
+      "friSat": "Vie-Sáb", 
+      "sun": "Dom"
+    },
+    "login": "Login",
+    "reserve": "Reserva",
+    "contact": "Teléfono: 945 123 456 | Gasteiz, Araba",
+    "prev": "Anterior",
+    "next": "Siguiente",
+    "slide1": "Slide 1",
+    "slide2": "Slide 2",
+    "slide3": "Slide 3"
+  },
+   "profile": {
+    "title": "Tu perfil",
+    "subtitle": "Aquí puedes ver y actualizar tus datos personales",
+    "name": "Nombre y apellidos",
+    "phone": "Teléfono",
+    "birthDate": "Fecha de nacimiento",
+    "address": "Dirección",
+    "postalCode": "Código postal",
+    "edit": "Cambiar datos",
+    "cancel": "Cancelar",
+    "save": "Guardar cambios",
+    "saving": "Guardando..."
   }
-}
+  }
+  
+
+

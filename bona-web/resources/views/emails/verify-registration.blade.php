@@ -4,156 +4,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <style>
-        /* Reset y base */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 20px;
+            color: #1f2937;
+            background-color: #f9fafb;
+            padding: 24px;
             min-height: 100vh;
         }
-        
-        /* Container principal */
         .container {
             max-width: 600px;
             margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
             overflow: hidden;
-            position: relative;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
-        
-        /* Header con imagen */
         .header {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
-            padding: 40px 30px;
+            background: #8d3236;
+            color: #ffffff;
+            padding: 32px 32px 24px;
             text-align: center;
         }
-        
-        .logo-section {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-        }
-        
-        .subtitle {
-            font-size: 16px;
-            opacity: 0.95;
-            font-weight: 400;
-        }
-        
-        /* Contenido principal */
+        .logo { font-size: 28px; font-weight: 600; margin-bottom: 4px; }
+        .header-subtitle { font-size: 16px; opacity: 0.9; }
         .content {
-            padding: 50px 40px;
+            padding: 40px 32px;
             text-align: center;
         }
-        
         .greeting {
             font-size: 20px;
-            margin-bottom: 30px;
-            color: #2c3e50;
+            margin-bottom: 24px;
+            color: #111827;
         }
-        
-        .greeting strong {
-            color: #28a745;
-            font-weight: 600;
-        }
-        
+        .greeting strong { color: #1e40af; }
         .instruction {
-            font-size: 18px;
-            margin-bottom: 35px;
-            color: #555;
-            font-weight: 400;
+            font-size: 16px;
+            margin-bottom: 32px;
+            color: #4b5563;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        
-        /* Botón principal */
         .verify-btn {
             display: inline-block;
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white !important;
-            padding: 18px 50px;
-            border-radius: 12px;
+            background: #8d3236;
+            color: #ffffff !important;
+            padding: 16px 32px;
+            border-radius: 8px;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 18px;
-            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.3);
-            transition: all 0.3s ease;
-            border: none;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .verify-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(40, 167, 69, 0.4);
-            background: linear-gradient(135deg, #218838 0%, #1ea085 100%);
-            color: white !important;
-        }
-        
-        /* Expiración */
-        .expiry {
-            background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
-            color: #212529;
-            padding: 12px 25px;
-            border-radius: 10px;
             font-weight: 600;
             font-size: 16px;
-            display: inline-block;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(255, 193, 7, 0.3);
+            border: none;
+            transition: background 0.2s;
+            margin-bottom: 24px;
         }
-        
-        /* Footer */
-        .footer {
-            background: #f8f9fa;
-            padding: 30px;
-            text-align: center;
-            color: #6c757d;
+        .verify-btn:hover {
+            background: #8d3236;
+            color: #ffffff !important;
+        }
+        .expiry {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 12px 20px;
+            border-radius: 8px;
             font-size: 14px;
-            border-top: 1px solid #e9ecef;
+            font-weight: 500;
+            border-left: 4px solid #f59e0b;
+            margin-bottom: 32px;
         }
-        
-        .footer strong {
-            color: #495057;
+        .footer {
+            background: #f9fafb;
+            padding: 32px;
+            text-align: center;
+            color: #6b7280;
+            font-size: 14px;
+            border-top: 1px solid #e5e7eb;
         }
-        
-        /* Responsive */
+        .footer-address { font-size: 13px; margin-top: 8px; }
         @media (max-width: 600px) {
-            body { padding: 10px; }
-            .content { padding: 40px 25px; }
-            .header { padding: 30px 20px; }
-            .verify-btn { padding: 16px 40px; font-size: 16px; }
-            .footer { padding: 25px 20px; }
+            body { padding: 16px; }
+            .content, .header { padding-left: 24px; padding-right: 24px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <div class="header">
-            <div class="logo-section">BonaJatetxea</div>
-            <div class="subtitle">Egiaztatu zure kontua</div>
+            <div class="logo">BonaJatetxea</div>
+            <div class="header-subtitle">Egiaztatu zure kontua</div>
         </div>
         
-        <!-- Contenido -->
         <div class="content">
             <p class="greeting">
                 Kaixo <strong>{{ $pending->name }} {{ $pending->surname ?? '' }}!</strong>
             </p>
             
             <p class="instruction">
-                Egin klik botoian zure kontua egiaztatzeko eta lehen erreserba egiteko.
+                Zure kontua egiaztatzeko eta BonaJatetxeako zerbitzu guztiak erabiltzeko, egin klik beheko botoian.
             </p>
             
             <a href="{{ route('registration.verify', [$pending->id, sha1($pending->email)]) }}" 
-               class="verify-btn" 
-               style="text-decoration: none;">
+               class="verify-btn">
                 Kontua Egiaztatu
             </a>
             
@@ -162,10 +116,13 @@
             </div>
         </div>
         
-        <!-- Footer -->
         <div class="footer">
-            <p>Erregistroa ez baduzu eskatua, alde batera utzi mezu hau.</p>
-            <p><strong>BonaJatetxea</strong><br>Nafarroa Hiribidea, 2 - 20013 Donostia<br>Gipuzkoa</p>
+            <p>Erregistro hau ez baduzu eskatua, mesedez alde batera utzi mezu hau.</p>
+            <p class="footer-address">
+                <strong>BonaJatetxea</strong><br>
+                Nafarroa Hiribidea, 2 - 20013 Donostia<br>
+                Gipuzkoa | bonajatetxea@gmail.com
+            </p>
         </div>
     </div>
 </body>

@@ -298,6 +298,73 @@
       "check_inbox": "Sarrera ontzian (eta spam) begiratu:",
       "timer": "15 minutu dituzu berifikatzeko"
     }
+  },
+
+  "admin": {
+  "title": "Administrazio Panela",
+  "panelTitle": "Admin Panela",
+  "workers": "Langileak",
+  "customers": "Bezeroak",
+  "workerManagement": "Langileen Kudeaketa",
+  "customerManagement": "Bezeroen Kudeaketa",
+  "newWorker": "Langile Berria Gehitu",
+  "addWorker": "Langilea Gehitu",
+  "creating": "Sortzen...",
+  "editUser": "Erabiltzailea Editatu",
+  "saveChanges": "Aldaketak Gorde",
+  "saving": "Gordetzen...",
+  "cancel": "Utzi",
+  "delete": "Ezabatu",
+  "edit": "Editatu",
+  "confirmDelete": "Ziur zaude erabiltzaile hau ezabatu nahi duzula? Ekintza hau ezin da desegin.",
+  "passwordsDontMatch": "Pasahitzak ez datoz bat",
+  "noWorkers": "Ez dago langilerik erregistratuta",
+  "noCustomers": "Ez dago bezerorik erregistratuta",
+  "noResults": "Ez da emaitzarik aurkitu",
+  "searchByName": "Bilatu izenaren arabera...",
+  "name": "Izena",
+  "email": "Posta Elektronikoa",
+  "password": "Pasahitza",
+  "confirmPassword": "Pasahitza Baieztatu",
+  "phone": "Telefonoa",
+  "birthDate": "Jaiotze Data",
+  "workerType": "Langile Mota",
+  "selectType": "Mota aukeratu...",
+  "position": "Postua",
+  "address": "Helbidea",
+  "postalCode": "Posta Kodea",
+  "actions": "Ekintzak"
+},
+
+  "carousel": {
+  "title": "Bona Jatetxea",
+  "hours": {
+    "monThu": "Asteleh.-Osteg.",
+    "friSat": "Ostir.-Lar.", 
+    "sun": "Ig."
+  },
+  "login": "Login",
+  "reserve": "Erreserbatu",
+  "contact": "Telefonoa: 945 123 456 | Gasteiz, Araba",
+  "prev": "Aurrekoa",
+  "next": "Hurrengoa",
+  "slide1": "Irristatze 1",
+  "slide2": "Irristatze 2", 
+  "slide3": "Irristatze 3"
+},
+
+  "profile": {
+    "title": "Zure Perofila",
+    "subtitle": "Hemen zure datu pertsonalak ikusi eta eguneratu ditzakezu",
+    "name": "Izena abizenak",
+    "phone": "Telefono",
+    "birthDate": "Jaioteguna",
+    "address": " Norabidea",
+    "postalCode": "Posta-kodea",
+    "edit": "Aldatu datuak",
+    "cancel": "Ezeztatu",
+    "save": "Gorde aldaketak",
+    "saving": "Gordetzen..."
   }
 }
 

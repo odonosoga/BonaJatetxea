@@ -18,8 +18,8 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: "es",                    // idioma inicial
-    fallbackLng: "es",
+    lng: "eu",                    // idioma inicial
+    fallbackLng: "eu",
     interpolation: {
       escapeValue: false
     }

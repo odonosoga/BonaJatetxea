@@ -30,19 +30,14 @@ class RegisterController extends Controller
             'birth_date'  => $data['birth_date'],
             'address'     => $data['address'],
             'postal_code' => $data['postal_code'],
-            'expires_at'  => now()->addMinutes(15),  // 15 MIN
+            'expires_at'  => now()->addMinutes(15), 
         ]);
 
-        Log::info('Pending creado:', ['id' => $pending->id]);  // ✅ MANTENIDO
+        Log::info('Pending creado:', ['id' => $pending->id]);  
 
-        // 3. EMAIL BONITO CON MAILABLE (HTML renderizado)
         Mail::to($data['email'])->send(new VerifyRegistration($pending));
 
-        // 4. NO login. Alerta React en register page ✅
         return back()->with('success', '✅ ¡Correo enviado! Verifica en 15 min.');
 
-        // 5. COMENTADO: Tu código viejo (ya NO se usa)
-        // Auth::login($user);
-        // return redirect()->route('home');
     }
 }

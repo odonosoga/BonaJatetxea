@@ -12,6 +12,7 @@ import Schedule from './components/Schedule/Schedule';
 import Menu from './components/Menu/menu';
 import Pd from './components/PendingDelivery/pendingdelivery';
 
+
 function App() {
   return (
     <I18nextProvider i18n={i18n}>
