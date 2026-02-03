@@ -1,20 +1,26 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Mail\ContactConfirmation;
+
 use App\Http\Requests\KontsultaRequest;
+use App\Mail\ContactConfirmation;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\ContactMessage;
 
 class KontsultaController extends Controller
 {
     public function store(KontsultaRequest $request)
-    {
-        $data = $request->validated();
-
-        Mail::to($data['email'])->send(new ContactConfirmation($data));
-
-        return back()->with('success', 'Zure mezua ondo bidali da.');
-    }
+{
+    $data = $request->validated();
+    
+    // 🎯 EMPRESA: contact-recived.blade.php
+    Mail::to('bonajatetxea@gmail.com')
+        ->send(new ContactConfirmation($data, 'emails.contact-recived'));
+    
+    // 📧 CLIENTE: contact-confirmation.blade.php  
+    Mail::to($data['email'])
+        ->send(new ContactConfirmation($data, 'emails.contact-confirmation'));
+    
+    return back()->with('success', 'Zure kontsulta ondo bidali da!');
+}
 
 }

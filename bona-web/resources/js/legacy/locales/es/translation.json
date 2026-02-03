@@ -350,4 +350,45 @@
     "slide2": "Slide 2",
     "slide3": "Slide 3"
   }
+    "title": "Panel Admin",
+    "panelTitle": "Admin Panel",
+    "workers": "Trabajadores",
+    "customers": "Clientes",
+    "workerManagement": "Gestión de Trabajadores",
+    "customerManagement": "Gestión de Clientes",
+    "newWorker": "Nuevo Trabajador",
+    "name": "Nombre",
+    "email": "Email",
+    "password": "Contraseña",
+    "position": "Puesto",
+    "phone": "Teléfono",
+    "address": "Dirección",
+    "postalCode": "Código Postal",
+    "birthDate": "F. Nacimiento",
+    "addWorker": "Añadir Langile",
+    "creating": "Creando...",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "actions": "Acciones",
+    "confirmDelete": "¿Estás seguro de eliminar este usuario?",
+    "noCustomers": "No hay clientes registrados.",
+    "editUser": "Editar Usuario:",
+    "cancel": "Cancelar",
+    "saveChanges": "Guardar Cambios",
+    "saving": "Guardando..."
+  },
+  "profile": {
+    "title": "Tu perfil",
+    "subtitle": "Aquí puedes ver y actualizar tus datos personales",
+    "name": "Nombre",
+    "phone": "Teléfono",
+    "birthDate": "Fecha de nacimiento",
+    "address": "Dirección",
+    "postalCode": "Código postal",
+    "edit": "Cambiar datos",
+    "cancel": "Cancelar",
+    "save": "Guardar cambios",
+    "saving": "Guardando..."
+  }
+
 }

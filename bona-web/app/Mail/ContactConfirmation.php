@@ -10,26 +10,18 @@ use Illuminate\Queue\SerializesModels;
 
 class ContactConfirmation extends Mailable
 {
-    use Queueable, SerializesModels;
-
     public $data;
+    public $view;  
 
-    public function __construct(array $data)
+    public function __construct(array $data, $view = 'emails.contact-confirmation')
     {
         $this->data = $data;
-    }
-
-    public function envelope(): Envelope
-    {
-        return new Envelope(
-            subject: 'BonaJatetxea - Zure kontsulta jasota',
-        );
+        $this->view = $view; 
     }
 
     public function content(): Content
     {
-        return new Content(
-            view: 'emails.contact-confirmation',
-        );
+        return new Content(view: $this->view);  
     }
 }
+

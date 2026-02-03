@@ -24,14 +24,14 @@ import {
 import { useTranslation } from 'react-i18next';
 import { BsClock } from 'react-icons/bs';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
-import { RiDashboardFill } from "react-icons/ri";
+import { RiDashboardFill } from 'react-icons/ri';
 import './header.css';
 
 import BonaLogoa from '../../img/BonaLogoa.png';
 import postre2 from '../../img/postre2.jpg';
 
 const Header = () => {
-    const { auth, flash, url } = usePage().props;
+    const { auth, flash } = usePage().props;
     const user = auth?.user;
     const role = user?.role || null;
 
@@ -62,9 +62,18 @@ const Header = () => {
         const updateActiveLink = () => {
             const navLinks = document.querySelectorAll('.nav-link-custom');
             navLinks.forEach((link) => link.classList.remove('active'));
+    useEffect(() => {
+        const updateActiveLink = () => {
+            const navLinks = document.querySelectorAll('.nav-link-custom');
+            navLinks.forEach((link) => link.classList.remove('active'));
 
             const currentPath = window.location.pathname;
+            const currentPath = window.location.pathname;
 
+            const currentLink = Array.from(navLinks).find((link) => {
+                const href = link.getAttribute('href') || '';
+                return href === currentPath;
+            });
             const currentLink = Array.from(navLinks).find((link) => {
                 const href = link.getAttribute('href') || '';
                 return href === currentPath;
@@ -74,7 +83,15 @@ const Header = () => {
                 currentLink.classList.add('active');
             }
         };
+            if (currentLink) {
+                currentLink.classList.add('active');
+            }
+        };
 
+        updateActiveLink();
+        window.addEventListener('popstate', updateActiveLink);
+        return () => window.removeEventListener('popstate', updateActiveLink);
+    }, []);
         updateActiveLink();
         window.addEventListener('popstate', updateActiveLink);
         return () => window.removeEventListener('popstate', updateActiveLink);
@@ -82,6 +99,13 @@ const Header = () => {
 
     const handleLogout = () => {
         post("/logout", {
+            onSuccess: () => {
+                window.location.href = '/';
+            },
+        });
+    };
+    const handleLogout = () => {
+        post('/logout', {
             onSuccess: () => {
                 window.location.href = '/';
             },
@@ -114,12 +138,7 @@ const Header = () => {
             <section className="header-section text-white shadow-sm">
                 <div className="topbar d-flex justify-content-between align-items-center px-4 py-2">
                     <div className="topbar-left d-flex flex-column flex-sm-row align-items-center gap-3">
-                        <img
-                            src={BonaLogoa}
-                            alt="Logo"
-                            height="90"
-                            width={120}
-                        />
+                        <img src={BonaLogoa} alt="Logo" height="90" width={120} />
                     </div>
 
                     <div className="topbar-right d-flex align-items-center gap-3">
@@ -134,6 +153,7 @@ const Header = () => {
                             </div>
                         </div>
 
+                        {/* Dropdown idioma */}
                         <Dropdown align="end">
                             <Dropdown.Toggle
                                 id="dropdown-language"
@@ -142,11 +162,8 @@ const Header = () => {
                                 className="header-btn language-dropdown-toggle d-inline-flex align-items-center"
                             >
                                 <Globe size={18} className="me-2" />
-                                <span className="d-none d-sm-inline">
-                                    {t('nav.language')}
-                                </span>
+                                <span className="d-none d-sm-inline">{t('nav.language')}</span>
                             </Dropdown.Toggle>
-
                             <Dropdown.Menu className="language-dropdown-menu">
                                 <Dropdown.Item onClick={() => changeLanguage('es')}>
                                     <span className="d-flex align-items-center">
@@ -163,6 +180,7 @@ const Header = () => {
                             </Dropdown.Menu>
                         </Dropdown>
 
+                        {/* Dropdown usuario */}
                         <Dropdown align="end">
                             <Dropdown.Toggle
                                 id="dropdown-user"
@@ -171,11 +189,7 @@ const Header = () => {
                                 className="header-btn user-dropdown-toggle d-inline-flex align-items-center"
                             >
                                 <FaUser size={18} className="me-2" />
-                                <span>
-                                    {auth?.user
-                                        ? auth.user.name
-                                        : t('nav.account')}
-                                </span>
+                                <span>{auth?.user ? auth.user.name : t('nav.account')}</span>
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu className="user-dropdown-menu">
@@ -187,7 +201,7 @@ const Header = () => {
                                 </Dropdown.Item>
                                 <Dropdown.Divider />
 
-                                {!auth?.user ? (
+                                {auth?.user ? (
                                     <>
                                         <Dropdown.Item onClick={() => setLogin(true)}>
                                             <span className="d-flex align-items-center">
@@ -205,13 +219,14 @@ const Header = () => {
                                 ) : (
                                     <>
                                         <Dropdown.Item disabled>
+                                        {/* ✅ PERFIL CLICABLE - URL DIRECTA */}
+                                        <Dropdown.Item as={Link} href="/profile">
                                             <span className="d-flex align-items-center">
                                                 <PersonFill className="me-2" size={16} />
                                                 {auth.user.name}
                                             </span>
                                         </Dropdown.Item>
-                                        
-                                        {/* NUEVO: Dashboard solo para admin */}
+
                                         {role === 'Admin' && (
                                             <>
                                                 <Dropdown.Divider />
@@ -224,10 +239,36 @@ const Header = () => {
                                             </>
                                         )}
                                         
+                                            <>
+                                                <Dropdown.Divider />
+                                                <Dropdown.Item as={Link} href="/admin">
+                                                    <span className="d-flex align-items-center">
+                                                        <RiDashboardFill className="me-2" size={16} />
+                                                        Dashboard
+                                                    </span>
+                                                </Dropdown.Item>
+                                            </>
+                                        )}
+
                                         <Dropdown.Item onClick={handleLogout}>
                                             <span className="d-flex align-items-center">
                                                 <BoxArrowRight className="me-2" size={16} />
-                                                Logout
+                                                {t('nav.logout') || 'Logout'}
+                                            </span>
+                                        </Dropdown.Item>
+                                    </>
+                                ) : (
+                                    <>
+                                        <Dropdown.Item onClick={handleShowLogin}>
+                                            <span className="d-flex align-items-center">
+                                                <Key className="me-2" size={16} />
+                                                {t('login.button')}
+                                            </span>
+                                        </Dropdown.Item>
+                                        <Dropdown.Item className="dropdown-register-cta" as={Link} href="/erregistroa">
+                                            <span className="d-flex align-items-center">
+                                                <FilePersonFill className="me-2" size={16} />
+                                                {t('login.registerHere')}
                                             </span>
                                         </Dropdown.Item>
                                     </>
@@ -237,7 +278,7 @@ const Header = () => {
                     </div>
                 </div>
 
-                {/* NAVBAR */}
+                {/* NAVBAR - SIN CAMBIOS */}
                 <Navbar
                     expand="lg"
                     className="border-top border-dark-subtle"
@@ -269,33 +310,15 @@ const Header = () => {
                                     </>
                                 ) : (
                                     <>
-                                        <Nav.Link
-                                            as={Link}
-                                            href="/"
-                                            className="nav-link-custom px-3"
-                                            onClick={() => setExpanded(false)}
-                                        >
+                                        <Nav.Link as={Link} href="/" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
                                             {t('nav.home')}
                                         </Nav.Link>
-
-                                        <Nav.Link
-                                            as={Link}
-                                            href="/kontaktua"
-                                            className="nav-link-custom px-3"
-                                            onClick={() => setExpanded(false)}
-                                        >
+                                        <Nav.Link as={Link} href="/kontaktua" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
                                             {t('nav.contact')}
                                         </Nav.Link>
-
-                                        <Nav.Link
-                                            as={Link}
-                                            href="/menu"
-                                            className="nav-link-custom px-3"
-                                            onClick={() => setExpanded(false)}
-                                        >
+                                        <Nav.Link as={Link} href="/menu" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
                                             {t('nav.menu')}
                                         </Nav.Link>
-
                                         {role === 'Bezero' && (
                                             <Nav.Link
                                                 as={Link}
@@ -313,29 +336,16 @@ const Header = () => {
                                                 {t('nav.reservations')}
                                             </Nav.Link>
                                         )}
-
-                                        {role !== 'Bezero' &&
-                                            role !== 'Langile' &&
-                                            auth?.user && (
-                                                <>
-                                                    <Nav.Link
-                                                        as={Link}
-                                                        href="/ordutegia"
-                                                        className="nav-link-custom px-3"
-                                                        onClick={() => setExpanded(false)}
-                                                    >
-                                                        {t('nav.schedule')}
-                                                    </Nav.Link>
-                                                    <Nav.Link
-                                                        as={Link}
-                                                        href="/bidalketak"
-                                                        className="nav-link-custom px-3"
-                                                        onClick={() => setExpanded(false)}
-                                                    >
-                                                        {t('nav.delivery')}
-                                                    </Nav.Link>
-                                                </>
-                                            )}
+                                        {role !== 'Bezero' && role !== 'Langile' && auth?.user && (
+                                            <>
+                                                <Nav.Link as={Link} href="/ordutegia" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
+                                                    {t('nav.schedule')}
+                                                </Nav.Link>
+                                                <Nav.Link as={Link} href="/bidalketak" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
+                                                    {t('nav.delivery')}
+                                                </Nav.Link>
+                                            </>
+                                        )}
                                     </>
                                 )}
                             </Nav>
@@ -344,26 +354,20 @@ const Header = () => {
                 </Navbar>
             </section>
 
-            <div style={{ height: '0px' }}></div>
-
-            {/* MODAL LOGIN */}
+            {/* MODALES SIN CAMBIOS */}
             <Modal show={login} onHide={handleCloseLogin} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>{t('login.modalTitle')}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {errors.email && (
-                        <Alert variant="danger">{errors.email}</Alert>
-                    )}
+                    {errors.email && <Alert variant="danger">{errors.email}</Alert>}
                     <Form onSubmit={handleSubmitLogin}>
                         <Form.Group className="mb-3" controlId="email">
                             <Form.Label>{t('login.email')}</Form.Label>
                             <Form.Control
                                 type="email"
                                 value={data.email}
-                                onChange={(e) =>
-                                    setData('email', e.target.value)
-                                }
+                                onChange={(e) => setData('email', e.target.value)}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="password">
@@ -371,33 +375,22 @@ const Header = () => {
                             <Form.Control
                                 type="password"
                                 value={data.password}
-                                onChange={(e) =>
-                                    setData('password', e.target.value)
-                                }
+                                onChange={(e) => setData('password', e.target.value)}
                             />
                         </Form.Group>
                         <Form.Label className="d-flex justify-content-center">
                             {t('login.noAccount')}{' '}
-                            <Link
-                                href="/erregistroa"
-                                className="ms-1 text-primary"
-                                onClick={handleCloseLogin}
-                            >
+                            <Link href="/erregistroa" className="ms-1 text-primary" onClick={handleCloseLogin}>
                                 {t('login.registerHere')}
                             </Link>
                         </Form.Label>
-                        <Button
-                            type="submit"
-                            className="hasi-btn fw-bold w-100"
-                            disabled={processing}
-                        >
+                        <Button type="submit" className="hasi-btn fw-bold w-100" disabled={processing}>
                             {t('login.submit')}
                         </Button>
                     </Form>
                 </Modal.Body>
             </Modal>
 
-            {/* MODAL CARRITO */}
             <Modal show={cart} onHide={handleCloseCart} centered size="lg">
                 <Modal.Header closeButton>
                     <Modal.Title>{t('cart.title')}</Modal.Title>
@@ -421,35 +414,21 @@ const Header = () => {
                                                 }}
                                             />
                                             <div className="d-flex flex-column justify-content-center">
-                                                <label>
-                                                    {t('cart.itemName')}: Postre
-                                                </label>
-                                                <label>
-                                                    {t('cart.quantity')}: 1
-                                                </label>
-                                                <label>
-                                                    {t('cart.price')}: 5€
-                                                </label>
+                                                <label>{t('cart.itemName')}: Postre</label>
+                                                <label>{t('cart.quantity')}: 1</label>
+                                                <label>{t('cart.price')}: 5€</label>
                                             </div>
                                         </Col>
-                                        <Col
-                                            md={4}
-                                            className="d-flex justify-content-end"
-                                        >
+                                        <Col md={4} className="d-flex justify-content-end">
                                             <div className="align-self-center trash-icon">
                                                 <Trash3 size={24} />
                                             </div>
                                         </Col>
                                     </Row>
                                 </Card>
-
-                                <h4 className="fw-bold mt-3 text-center">
-                                    {t('cart.total')}: 5€
-                                </h4>
+                                <h4 className="fw-bold mt-3 text-center">{t('cart.total')}: 5€</h4>
                                 <div className="d-flex justify-content-center mt-3">
-                                    <Button className="konf-btn">
-                                        {t('cart.confirmButton')}
-                                    </Button>
+                                    <Button className="konf-btn">{t('cart.confirmButton')}</Button>
                                 </div>
                             </Col>
                         </Row>

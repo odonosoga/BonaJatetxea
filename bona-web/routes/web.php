@@ -5,6 +5,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ProfileController;
 use App\Models\PendingRegistration;
 use App\Models\User;
 use App\Http\Controllers\Admin\UserController;
@@ -35,6 +36,11 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
 // Reservas (YA FUNCIONA)
 Route::get('/erreserbak', [ReservationController::class, 'index'])->name('erreserbak.index');
 Route::post('/erreserbak/validate', [ReservationController::class, 'store'])->name('erreserbak.validate');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+});
 
 // Verificación email (YA FUNCIONA)
 Route::get('/registration/verify/{id}/{hash}', function ($id, $hash) {

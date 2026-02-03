@@ -79,9 +79,9 @@ const Contact = () => {
                           <Form.Control
                             type="text"
                             placeholder={t("contact.namePlaceholder")}
-                            value={data.name} // ✅ Bind Inertia
-                            onChange={(e) => setData('name', e.target.value)} // ✅ Update Inertia
-                            isInvalid={!!errors.name} // ✅ Error de Laravel
+                            value={data.name} 
+                            onChange={(e) => setData('name', e.target.value)} 
+                            isInvalid={!!errors.name}   
                             required
                           />
                           <Form.Control.Feedback type="invalid">
