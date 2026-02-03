@@ -45,35 +45,27 @@ const Header = () => {
         password: '',
     });
 
-    // 🎯 LISTENER PARA ABRIR MODAL DESDE CAROUSEL (NUEVO)
+    // Auto-open login modal
     useEffect(() => {
         if (flash?.require_auth) {
             setLogin(true);
         }
-
-        // ← AÑADIDO: Escucha evento del carousel
-        const handleOpenLogin = () => setLogin(true);
-        document.addEventListener('open-login-modal', handleOpenLogin);
-        
-        return () => document.removeEventListener('open-login-modal', handleOpenLogin);
     }, [flash?.require_auth]);
 
+    // Listen for carousel login events
     useEffect(() => {
-        const updateActiveLink = () => {
-            const navLinks = document.querySelectorAll('.nav-link-custom');
-            navLinks.forEach((link) => link.classList.remove('active'));
+        const handleOpenLogin = () => setLogin(true);
+        document.addEventListener('open-login-modal', handleOpenLogin);
+        return () => document.removeEventListener('open-login-modal', handleOpenLogin);
+    }, []);
+
+    // Active nav link highlighting
     useEffect(() => {
         const updateActiveLink = () => {
             const navLinks = document.querySelectorAll('.nav-link-custom');
             navLinks.forEach((link) => link.classList.remove('active'));
 
             const currentPath = window.location.pathname;
-            const currentPath = window.location.pathname;
-
-            const currentLink = Array.from(navLinks).find((link) => {
-                const href = link.getAttribute('href') || '';
-                return href === currentPath;
-            });
             const currentLink = Array.from(navLinks).find((link) => {
                 const href = link.getAttribute('href') || '';
                 return href === currentPath;
@@ -83,27 +75,12 @@ const Header = () => {
                 currentLink.classList.add('active');
             }
         };
-            if (currentLink) {
-                currentLink.classList.add('active');
-            }
-        };
 
         updateActiveLink();
         window.addEventListener('popstate', updateActiveLink);
         return () => window.removeEventListener('popstate', updateActiveLink);
     }, []);
-        updateActiveLink();
-        window.addEventListener('popstate', updateActiveLink);
-        return () => window.removeEventListener('popstate', updateActiveLink);
-    }, []);
 
-    const handleLogout = () => {
-        post("/logout", {
-            onSuccess: () => {
-                window.location.href = '/';
-            },
-        });
-    };
     const handleLogout = () => {
         post('/logout', {
             onSuccess: () => {
@@ -153,7 +130,7 @@ const Header = () => {
                             </div>
                         </div>
 
-                        {/* Dropdown idioma */}
+                        {/* Language Dropdown */}
                         <Dropdown align="end">
                             <Dropdown.Toggle
                                 id="dropdown-language"
@@ -180,7 +157,7 @@ const Header = () => {
                             </Dropdown.Menu>
                         </Dropdown>
 
-                        {/* Dropdown usuario */}
+                        {/* User Dropdown - CORREGIDO */}
                         <Dropdown align="end">
                             <Dropdown.Toggle
                                 id="dropdown-user"
@@ -193,6 +170,7 @@ const Header = () => {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu className="user-dropdown-menu">
+                                {/* Carrito siempre visible */}
                                 <Dropdown.Item onClick={handleShowCart}>
                                     <span className="d-flex align-items-center">
                                         <FaShoppingCart className="me-2" size={16} />
@@ -201,25 +179,9 @@ const Header = () => {
                                 </Dropdown.Item>
                                 <Dropdown.Divider />
 
+                                {/* Usuario logueado */}
                                 {auth?.user ? (
                                     <>
-                                        <Dropdown.Item onClick={() => setLogin(true)}>
-                                            <span className="d-flex align-items-center">
-                                                <Key className="me-2" size={16} />
-                                                {t('login.button')}
-                                            </span>
-                                        </Dropdown.Item>
-                                        <Dropdown.Item className="dropdown-register-cta" as={Link} href="/erregistroa">
-                                            <span className="d-flex align-items-center">
-                                                <FilePersonFill className="me-2" size={16} />
-                                                {t('login.registerHere')}
-                                            </span>
-                                        </Dropdown.Item>
-                                    </>
-                                ) : (
-                                    <>
-                                        <Dropdown.Item disabled>
-                                        {/* ✅ PERFIL CLICABLE - URL DIRECTA */}
                                         <Dropdown.Item as={Link} href="/profile">
                                             <span className="d-flex align-items-center">
                                                 <PersonFill className="me-2" size={16} />
@@ -238,18 +200,8 @@ const Header = () => {
                                                 </Dropdown.Item>
                                             </>
                                         )}
-                                        
-                                            <>
-                                                <Dropdown.Divider />
-                                                <Dropdown.Item as={Link} href="/admin">
-                                                    <span className="d-flex align-items-center">
-                                                        <RiDashboardFill className="me-2" size={16} />
-                                                        Dashboard
-                                                    </span>
-                                                </Dropdown.Item>
-                                            </>
-                                        )}
 
+                                        <Dropdown.Divider />
                                         <Dropdown.Item onClick={handleLogout}>
                                             <span className="d-flex align-items-center">
                                                 <BoxArrowRight className="me-2" size={16} />
@@ -258,8 +210,9 @@ const Header = () => {
                                         </Dropdown.Item>
                                     </>
                                 ) : (
+                                    /* Sin usuario */
                                     <>
-                                        <Dropdown.Item onClick={handleShowLogin}>
+                                        <Dropdown.Item onClick={() => setLogin(true)}>
                                             <span className="d-flex align-items-center">
                                                 <Key className="me-2" size={16} />
                                                 {t('login.button')}
@@ -278,7 +231,7 @@ const Header = () => {
                     </div>
                 </div>
 
-                {/* NAVBAR - SIN CAMBIOS */}
+                {/* NAVBAR */}
                 <Navbar
                     expand="lg"
                     className="border-top border-dark-subtle"
@@ -354,7 +307,7 @@ const Header = () => {
                 </Navbar>
             </section>
 
-            {/* MODALES SIN CAMBIOS */}
+            {/* Login Modal */}
             <Modal show={login} onHide={handleCloseLogin} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>{t('login.modalTitle')}</Modal.Title>
@@ -391,6 +344,7 @@ const Header = () => {
                 </Modal.Body>
             </Modal>
 
+            {/* Cart Modal */}
             <Modal show={cart} onHide={handleCloseCart} centered size="lg">
                 <Modal.Header closeButton>
                     <Modal.Title>{t('cart.title')}</Modal.Title>
