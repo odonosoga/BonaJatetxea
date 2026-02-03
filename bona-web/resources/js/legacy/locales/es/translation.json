@@ -260,16 +260,27 @@
     "daySelectPlaceholder": "- Seleccionar -",
     "submitButton": "Añadir trabajador al horario"
   },
-  "delivery": {
-    "pendingBadge": "PENDIENTE",
-    "itemsLabel": "Número de productos",
-    "acceptButton": "Aceptar pedido"
+
+ "delivery": {
+    "zain": "PENDIENTE",
+    "itemsLabel": "Número de productos", 
+    "acceptButton": "Aceptar pedido",
+    "bidalketan": "EN REPARTO",
+    "inDelivery": "En reparto",
+    "status": "Estado: {{status}}"
   },
   "pending": {
     "title": "Pedidos pendientes",
     "badgeAvailable": "{{count}} disponibles",
-    "lastUpdated": "Actualizado hace 2 min"
+    "lastUpdated": "Actualizado hace 2 min",
+    "zainTitle": " Pedidos pendientes",
+    "bidalketaTitle": " Pedidos en reparto",
+    "loading": "Cargando pedidos...",
+    "autoRefresh": "Auto-refresh 10s",
+    "noZain": "No hay pedidos pendientes",
+    "noBidalketa": "No hay pedidos en reparto"
   },
+
   "register": {
     "title": "Registrarse",
     "name": "Nombre",

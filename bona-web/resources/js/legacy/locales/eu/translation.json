@@ -261,14 +261,23 @@
     "submitButton": "Gehitu langilea ordutegian"
   },
   "delivery": {
-    "pendingBadge": "ZAIN",
+    "zain": "ZAIN",
     "itemsLabel": "Produktu kopurua",
-    "acceptButton": "Eskaera onartu"
+    "acceptButton": "Onartu eskaera",
+    "bidalketan": "BIDALKETAN",
+    "inDelivery": "Bidalketan",
+    "status": "Egoera: {{status}}"
   },
   "pending": {
-    "title": "Zain dauden eskaerak",
-    "badgeAvailable": "{{count}} eskuragarri",
-    "lastUpdated": "Duela 2 min eguneratua"
+    "title": "Eskaerak",
+    "badgeAvailable": "{{count}} zain",
+    "lastUpdated": "Orain 2 min",
+    "zainTitle": " Zain dauden eskaerak",
+    "bidalketaTitle": " Bidalketan dauden eskaerak",
+    "loading": "Kargatzen eskaerak...",
+    "autoRefresh": "Auto-refresh 10s",
+    "noZain": "Ez dago eskaerarik zain",
+    "noBidalketa": "Ez dago bidalketarik"
   },
 
   "register": {

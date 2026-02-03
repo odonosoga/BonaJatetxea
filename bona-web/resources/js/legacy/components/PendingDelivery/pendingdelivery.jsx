@@ -24,14 +24,14 @@ const PendingDelivery = () => {
 
   useEffect(() => {
     fetchOrders();
-    const interval = setInterval(fetchOrders, 10000); // Auto-refresh 10s
+    const interval = setInterval(fetchOrders, 10000);
     return () => clearInterval(interval);
   }, []);
 
   const handleAccept = async (id) => {
     try {
       await axios.patch(`/eskaerak/${id}`, {
-        eskaerarenEgoera: 'bidalketan'  // ✅ A bidalketan
+        eskaerarenEgoera: 'bidalketan'
       });
       fetchOrders();
     } catch (error) {
@@ -39,7 +39,6 @@ const PendingDelivery = () => {
     }
   };
 
-  // ✅ TUS ESTADOS EXACTOS
   const zainOrders = Array.isArray(orders) ? orders.filter(o => o.eskaerarenEgoera === 'zain') : [];
   const bidalketanOrders = Array.isArray(orders) ? orders.filter(o => o.eskaerarenEgoera === 'bidalketan') : [];
 
@@ -48,7 +47,7 @@ const PendingDelivery = () => {
       <Container className="min-vh-100 d-flex align-items-center justify-content-center">
         <div className="text-center">
           <div className="spinner-border text-danger" role="status"></div>
-          <div className="mt-2">Kargatzen eskaerak...</div>
+          <div className="mt-2">{t('pending.loading')}</div>
         </div>
       </Container>
     );
@@ -59,17 +58,18 @@ const PendingDelivery = () => {
       <Container>
         <div className="d-flex justify-content-between align-items-center mb-4">
           <div>
+            <h2 className="fw-bold mb-1 pt-5">{t('pending.title')}</h2>
           </div>
-          <small className="text-muted mt-4 ">Auto-refresh 10s</small>
+          <small className="text-muted">{t('pending.autoRefresh')}</small>
         </div>
         
-        {/* ✅ ZAIN DAUDEN */}
+        {/* ZAIN DAUDEN */}
         <div className="mb-5">
-          <h4 className="fw-bold mb-3 text-danger">Zain dauden eskaerak</h4>
+          <h4 className="fw-bold mb-3 text-danger">{t('pending.zainTitle')}</h4>
           <Row xs={1} sm={2} lg={3} className="g-4">
             {zainOrders.length === 0 ? (
               <Col xs={12} className="text-center py-5">
-                <div className="text-muted">Ez dago eskaerarik zain</div>
+                <div className="text-muted">{t('pending.noZain')}</div>
               </Col>
             ) : (
               zainOrders.map(order => (
@@ -84,15 +84,15 @@ const PendingDelivery = () => {
           </Row>
         </div>
 
-        {/* ✅ BIDALKETAN DAUDEN */}
+        {/* BIDALKETAN DAUDEN */}
         <div>
           <h4 className="fw-bold mb-3 text-info">
-            Bidalketan dauden eskaerak <Badge bg="info">{bidalketanOrders.length}</Badge>
+            {t('pending.bidalketaTitle')} <Badge bg="info">{bidalketanOrders.length}</Badge>
           </h4>
           <Row xs={1} sm={2} lg={3} className="g-4">
             {bidalketanOrders.length === 0 ? (
               <Col xs={12} className="text-center py-5">
-                <div className="text-muted">Ez dago bidalketarik</div>
+                <div className="text-muted">{t('pending.noBidalketa')}</div>
               </Col>
             ) : (
               bidalketanOrders.map(order => (

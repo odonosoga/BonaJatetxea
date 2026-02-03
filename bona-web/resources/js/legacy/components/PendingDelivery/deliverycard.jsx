@@ -20,7 +20,7 @@ const DeliveryCard = ({ delivery, onAccept, accepted = false }) => {
           <div>
             <div className="fw-bold small text-white"># {delivery.id_eskaera}</div>
             <Badge bg={delivery.eskaerarenEgoera === 'bidalketan' ? "info" : "warning"}>
-              {delivery.eskaerarenEgoera === 'bidalketan' ? 'Bidalketan' : 'Zain'}
+              {delivery.eskaerarenEgoera === 'bidalketan' ? t('delivery.bidalketan') : t('delivery.zain')}
             </Badge>
           </div>
         </Stack>
@@ -42,7 +42,7 @@ const DeliveryCard = ({ delivery, onAccept, accepted = false }) => {
         
         <div className="d-flex justify-content-between align-items-end mt-auto">
           <small className="text-muted">
-            {delivery.eskaerarenEgoera}
+            {t('delivery.status', { status: delivery.eskaerarenEgoera })}
           </small>
           <div className="text-end">
             <Button 
@@ -51,7 +51,7 @@ const DeliveryCard = ({ delivery, onAccept, accepted = false }) => {
               onClick={onAccept}
               disabled={accepted}
             >
-              {accepted ? 'Bidalketan' : t("delivery.acceptButton", { defaultValue: 'Onartu' })}
+              {accepted ? t('delivery.inDelivery') : t('delivery.acceptButton')}
             </Button>
           </div>
         </div>
