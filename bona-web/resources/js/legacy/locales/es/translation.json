@@ -353,7 +353,7 @@
    "profile": {
     "title": "Tu perfil",
     "subtitle": "Aquí puedes ver y actualizar tus datos personales",
-    "name": "Nombre",
+    "name": "Nombre y apellidos",
     "phone": "Teléfono",
     "birthDate": "Fecha de nacimiento",
     "address": "Dirección",
