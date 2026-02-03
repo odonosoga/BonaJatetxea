@@ -205,7 +205,7 @@ const Header = () => {
                                         <Dropdown.Item onClick={handleLogout}>
                                             <span className="d-flex align-items-center">
                                                 <BoxArrowRight className="me-2" size={16} />
-                                                {t('nav.logout') || 'Logout'}
+                                                {'Logout'}
                                             </span>
                                         </Dropdown.Item>
                                     </>
