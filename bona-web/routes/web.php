@@ -10,6 +10,7 @@ use App\Models\PendingRegistration;
 use App\Models\User;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\KontsultaController;
+use App\Http\Controllers\EskaeraController;  // ✅ NUEVO
 use Illuminate\Support\Facades\Auth;
 
 // ============================================================================
@@ -36,6 +37,12 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
 // Reservas (YA FUNCIONA)
 Route::get('/erreserbak', [ReservationController::class, 'index'])->name('erreserbak.index');
 Route::post('/erreserbak/validate', [ReservationController::class, 'store'])->name('erreserbak.validate');
+
+// ============================================================================
+// ✅ ESKAERAK - PEDIDOS DELIVERY (NUEVO)
+// ============================================================================
+Route::get('/eskaerak', [EskaeraController::class, 'index']);                    // ✅ LISTAR
+Route::patch('/eskaerak/{id}', [EskaeraController::class, 'updateStatus'])->name('eskaerak.update');  // ✅ ACTUALIZAR
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -90,4 +97,4 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 // ✅ 404 CATCH-ALL (BAJA PRIORIDAD - AL FINAL)
 // ============================================================================
 Route::get('/{any}', fn () => Inertia::render('legacy'))
-    ->where('any', '^(?!api|login|logout|erregistratu|registration|erreserbak|admin).*$');
+    ->where('any', '^(?!api|login|logout|erregistratu|registration|erreserbak|admin|eskaerak).*$');  // ✅ Añadido eskaerak

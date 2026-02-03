@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
            LangileakSeeder::class,          
         LokalenKokapenakSeeder::class,       
         LangileLokalenKokapenaSeeder::class,
-            LangileSeeder::class
+            LangileSeeder::class,
+            EskaerakSeeder::class
         ]);
     }
 }
