@@ -1,6 +1,5 @@
 .reservation-section {
   background: linear-gradient(135deg, #F8D4BA 0%, #ffffff 100%);
-  padding-top: 190px;
 }
 
 /* Tarjeta lateral */
@@ -89,7 +88,6 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  margin-top: 85px; 
 }
 
 .hero-reserva .hero-overlay {

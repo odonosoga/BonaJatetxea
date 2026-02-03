@@ -54,4 +54,21 @@ class User extends Authenticatable implements MustVerifyEmail
             'two_factor_confirmed_at' => 'datetime',
         ];
     }
+
+    // Relación con langileak (ya la tienes, pero corregida la foreign key)
+    public function langile()
+    {
+        return $this->hasOne(Langile::class, 'user_id', 'id');
+    }
+
+    // Scopes para filtrar por role (NUEVO - esencial para los listados)
+    public function scopeBezero($query)
+    {
+        return $query->where('role', 'Bezero');
+    }
+
+    public function scopeLangile($query)
+    {
+        return $query->where('role', 'Langile');
+    }
 }

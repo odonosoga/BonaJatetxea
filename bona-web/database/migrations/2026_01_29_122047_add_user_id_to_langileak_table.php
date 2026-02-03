@@ -8,14 +8,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('bezeroak', function (Blueprint $table) {
-            $table->foreignId('user_id')->nullable()->constrained('users');
+        Schema::table('langileak', function (Blueprint $table) {
+            $table->foreignId('user_id')
+                  ->unique()                             
+                  ->constrained('users')                
+                  ->onDelete('cascade');                 
         });
     }
 
     public function down(): void
     {
-        Schema::table('bezeroak', function (Blueprint $table) {
+        Schema::table('langileak', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
             $table->dropColumn('user_id');
         });

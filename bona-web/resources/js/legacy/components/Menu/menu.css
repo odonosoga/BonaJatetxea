@@ -7,7 +7,6 @@
   justify-content: flex-start;
   min-height: 80vh;
   padding: 2rem 0;
-  padding-top: 120px;
 }
 
 .menu-cards-wrapper {
@@ -51,6 +50,26 @@
   object-fit: cover;
   border-radius: 10%;
   display: block;
+}
+
+.hero-menu {
+  position: relative;
+  height: 60vh;
+  min-height: 320px;
+ 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-menu .hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.45),
+    rgba(0, 0, 0, 0.65)
+  );
 }
 
 @media (min-width: 992px) {

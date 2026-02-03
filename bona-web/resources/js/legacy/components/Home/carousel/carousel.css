@@ -1,0 +1,186 @@
+/* ✨ GLASSMORPHISM BLANCO - MEJORADO */
+.glass-card {
+  background: rgba(255, 255, 255, 0.18) !important;
+  backdrop-filter: blur(30px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 
+    0 30px 70px rgba(0,0,0,0.45), 
+    inset 0 1px 0 rgba(255,255,255,0.4) !important;
+  position: relative !important;
+}
+
+/* ✅ BOTONES ANCHO FIJO SIEMPRE - RESPONSIVE MEJORADO */
+.equal-width-btn {
+  width: 240px !important; /* Ancho fijo base */
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important; /* NO crece */
+  display: flex !important;
+  justify-content: center !important;
+  text-align: center !important;
+  min-height: 60px !important;
+  max-width: 240px !important; /* NUNCA más ancho */
+}
+
+/* 📱 RESPONSIVE BOTONES */
+@media (max-width: 992px) {
+  .equal-width-btn {
+    width: 220px !important;
+    max-width: 220px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .equal-width-btn {
+    width: 100% !important;
+    max-width: 280px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .equal-width-btn {
+    width: 95vw !important;
+    max-width: 320px !important;
+    min-height: 55px !important;
+  }
+}
+
+/* ✅ CONTENEDOR BOTONES - CENTRA PERFECTAMENTE */
+.d-flex.justify-content-center {
+  width: 75% !important;
+  max-width: 600px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* 📍 POSICIÓN MÁS ARRIBA */
+.carousel-caption {
+  margin-bottom: 150px;
+}
+
+/* 🔴 BOTONES DE EMPRESA */
+.btn-company {
+  background: #c8102e !important;
+  border-color: #c8102e !important;
+  color: white !important;
+  transition: all 0.3s ease !important;
+}
+
+.btn-company:hover {
+  background: #a30d24 !important;
+  border-color: #a30d24 !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 15px 40px rgba(200, 16, 46, 0.4) !important;
+}
+
+.btn-outline-company {
+  color: white !important;
+  border-color: rgba(255,255,255,0.6) !important;
+  background: rgba(255,255,255,0.1) !important;
+  backdrop-filter: blur(20px) !important;
+  transition: all 0.3s ease !important;
+}
+
+.btn-outline-company:hover {
+  background: #c8102e !important;
+  border-color: #c8102e !important;
+  color: white !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 15px 40px rgba(200, 16, 46, 0.4) !important;
+}
+
+.company-btn {
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+}
+
+/* 🎯 BOTONES CARRUSEL CON COLOR EMPRESA */
+.company-control-prev,
+.company-control-next {
+  width: 5% !important;
+  opacity: 0.9 !important;
+}
+
+.company-control-prev-icon,
+.company-control-next-icon {
+  background-image: none !important;
+  width: 50px !important;
+  height: 50px !important;
+  background: #c8102e !important;
+  border-radius: 50% !important;
+  box-shadow: 0 8px 25px rgba(200, 16, 46, 0.5) !important;
+  filter: brightness(0) invert(1) !important;
+  transition: all 0.3s ease !important;
+}
+
+.company-control-prev:hover .company-control-prev-icon,
+.company-control-next:hover .company-control-next-icon {
+  transform: scale(1.1) !important;
+  box-shadow: 0 12px 35px rgba(200, 16, 46, 0.6) !important;
+}
+
+/* 🟡 INDICADORES CON COLOR EMPRESA */
+.company-indicator {
+  width: 15px !important;
+  height: 15px !important;
+  border-radius: 50% !important;
+  background-color: rgba(200, 16, 46, 0.6) !important;
+  border: 2px solid rgba(255,255,255,0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.company-indicator.active {
+  background: #c8102e !important;
+  transform: scale(1.2) !important;
+  box-shadow: 0 0 15px rgba(200, 16, 46, 0.7) !important;
+}
+
+/* TEXTO BLANCO CON SOMBRA */
+.drop-shadow-text {
+  text-shadow: 
+    0 3px 6px rgba(0,0,0,0.85),
+    0 2px 4px rgba(0,0,0,0.7),
+    0 0 15px rgba(0,0,0,0.5) !important;
+}
+
+/* ANIMACIÓN MEJORADA */
+@keyframes floatIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(40px) scale(0.92); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
+}
+
+.glass-card {
+  animation: floatIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+/* 📱 RESPONSIVE GENERAL */
+@media (max-width: 1200px) {
+  .glass-card {
+    width: 9% !important;
+    max-width: 950px !important;
+    min-width: 700px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-caption {
+  }
+  .glass-card {
+    width: 105vw !important;
+    min-width: unset !important;
+    padding: 2rem 1.5rem !important;
+  }
+ 
+  .btn-xl { 
+    font-size: 1.1rem !important; 
+    padding: 0.75rem 1.75rem !important; 
+  }
+  .display-2 { font-size: 2.5rem !important; }
+  .fs-3 { font-size: 1.25rem !important; }
+}

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('erreserbak', function (Blueprint $table) {
             $table->id('id_erreserba');
-            $table->foreignId('id_bezero')
-                  ->constrained('bezeroak', 'id_bezero');
+            $table->foreignId('idUser')
+                  ->constrained('users', 'id');
             $table->foreignId('idLokala')
                   ->constrained('lokalen_kokapenak', 'idLokala');
             $table->date('data');

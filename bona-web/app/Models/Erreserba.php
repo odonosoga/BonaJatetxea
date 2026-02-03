@@ -1,29 +1,24 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\User;  // Añade esta importación
 
 class Erreserba extends Model
 {
     protected $table = 'erreserbak';
     protected $primaryKey = 'id_erreserba';
-
-    protected $fillable = ['user_id', 'idLokala', 'data', 'ordua', 'pertsona_Kop'];
-
-    protected $casts = [
-        'data' => 'date',
-        'ordua' => 'datetime:H:i',
+    protected $fillable = [
+        'idUser', 'idLokala', 'data', 'ordua', 'pertsona_Kop',
     ];
 
-    public function user(): BelongsTo
+    public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'idUser');
     }
 
-    public function lokala(): BelongsTo
+    public function lokala()
     {
-        return $this->belongsTo(Lokala::class, 'idLokala', 'idLokala');
+        return $this->belongsTo(Lokala::class, 'idLokala');
     }
 }

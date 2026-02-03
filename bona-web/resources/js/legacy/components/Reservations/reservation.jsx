@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import { BsTelephone, BsEnvelope, BsGeoAlt, BsClock } from 'react-icons/bs';
 import { useTranslation } from 'react-i18next';
-import { useForm } from '@inertiajs/react';
+import { usePage, useForm} from '@inertiajs/react';
 import heroImg from '../../img/reservation.jpg';
 import './reservation.css';
 
@@ -39,10 +39,11 @@ const Reserva = () => {
   const [timeError, setTimeError] = useState(false);
   const [hasTimeMorningNight, setTime] = useState(null);
   const [validated, setValidated] = useState(false);
-
+  const { auth } = usePage().props;
+  const userEmail = auth?.user?.email || '';
   const { data, setData, post, processing, errors } = useForm({
-    email: '',
-    email_confirmation: '',
+    email: userEmail,
+    email_confirmation: userEmail,
     name: '',
     surname: '',
     people: '',
@@ -498,7 +499,7 @@ const Reserva = () => {
 
                     <Button
                       type="submit"
-                      className="w-100 btn-contact py-3 fw-bold"
+                      className="w-100 btn-reservation py-3 fw-bold"
                       disabled={processing}
                     >
                       {t('reservation.submitButton')}

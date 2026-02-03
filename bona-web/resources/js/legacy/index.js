@@ -10,6 +10,7 @@ import { BrowserRouter } from 'react-router-dom';
 import ScrollToTop from './components/Utilities/ScrollToTop';
 import './i18n';   // ← ESTA ES LA CLAVE, inicializa i18next
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
