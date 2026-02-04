@@ -1,396 +1,472 @@
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import {
-    Alert,
-    Button,
-    Card,
-    Col,
-    Container,
-    Dropdown,
-    Form,
-    Modal,
-    Nav,
-    Navbar,
-    Row,
+   Alert,
+   Button,
+   Card,
+   Col,
+   Container,
+   Dropdown,
+   Form,
+   Modal,
+   Nav,
+   Navbar,
+   Row,
+   Badge,
 } from 'react-bootstrap';
 import {
-    BoxArrowRight,
-    FilePersonFill,
-    Globe,
-    Key,
-    PersonFill,
-    Trash3,
+   BoxArrowRight,
+   FilePersonFill,
+   Globe,
+   Key,
+   PersonFill,
+   Trash3,
 } from 'react-bootstrap-icons';
 import { useTranslation } from 'react-i18next';
 import { BsClock } from 'react-icons/bs';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { RiDashboardFill } from 'react-icons/ri';
 import './header.css';
-
 import BonaLogoa from '../../img/BonaLogoa.png';
-import postre2 from '../../img/postre2.jpg';
+import { useCart } from '../cartcontext/CartContext';
 
 const Header = () => {
-    const { auth, flash } = usePage().props;
-    const user = auth?.user;
-    const role = user?.role || null;
+   const { auth, flash } = usePage().props;
+   const user = auth?.user;
+   const role = user?.role || null;
 
-    const { t, i18n } = useTranslation();
-    const [login, setLogin] = useState(false);
-    const [cart, setCart] = useState(false);
-    const [expanded, setExpanded] = useState(false);
+   const { t, i18n } = useTranslation();
 
-    const { data, setData, post, processing, errors, reset } = useForm({
-        email: '',
-        password: '',
-    });
+   const [login, setLogin] = useState(false);
+   const [cart, setCart] = useState(false);
+   const [expanded, setExpanded] = useState(false);
 
-    // Auto-open login modal
-    useEffect(() => {
-        if (flash?.require_auth) {
-            setLogin(true);
-        }
-    }, [flash?.require_auth]);
+   const { cartItems, removeFromCart, cartTotal, totalItems, clearCart } = useCart();
 
-    // Listen for carousel login events
-    useEffect(() => {
-        const handleOpenLogin = () => setLogin(true);
-        document.addEventListener('open-login-modal', handleOpenLogin);
-        return () => document.removeEventListener('open-login-modal', handleOpenLogin);
-    }, []);
+   const { data, setData, post, processing, errors, reset } = useForm({
+       email: '',
+       password: '',
+   });
 
-    // Active nav link highlighting
-    useEffect(() => {
-        const updateActiveLink = () => {
-            const navLinks = document.querySelectorAll('.nav-link-custom');
-            navLinks.forEach((link) => link.classList.remove('active'));
+   useEffect(() => {
+       if (flash?.require_auth) {
+           setLogin(true);
+       }
+   }, [flash?.require_auth]);
 
-            const currentPath = window.location.pathname;
-            const currentLink = Array.from(navLinks).find((link) => {
-                const href = link.getAttribute('href') || '';
-                return href === currentPath;
-            });
+   useEffect(() => {
+       const handleOpenLogin = () => setLogin(true);
+       document.addEventListener('open-login-modal', handleOpenLogin);
+       return () => document.removeEventListener('open-login-modal', handleOpenLogin);
+   }, []);
 
-            if (currentLink) {
-                currentLink.classList.add('active');
-            }
-        };
+   useEffect(() => {
+       const updateActiveLink = () => {
+           const navLinks = document.querySelectorAll('.nav-link-custom');
+           navLinks.forEach((link) => link.classList.remove('active'));
 
-        updateActiveLink();
-        window.addEventListener('popstate', updateActiveLink);
-        return () => window.removeEventListener('popstate', updateActiveLink);
-    }, []);
+           const currentPath = window.location.pathname;
+           const currentLink = Array.from(navLinks).find((link) => {
+               const href = link.getAttribute('href') || '';
+               return href === currentPath;
+           });
 
-    const handleLogout = () => {
-        post('/logout', {
-            onSuccess: () => {
-                window.location.href = '/';
-            },
-        });
-    };
+           if (currentLink) {
+               currentLink.classList.add('active');
+           }
+       };
 
-    const handleCloseLogin = () => {
-        setLogin(false);
-        reset();
-    };
+       updateActiveLink();
+       window.addEventListener('popstate', updateActiveLink);
+       return () => window.removeEventListener('popstate', updateActiveLink);
+   }, []);
 
-    const handleSubmitLogin = (e) => {
-        e.preventDefault();
-        post('/login', {
-            onSuccess: () => {
-                handleCloseLogin();
-                window.location.reload();
-            },
-        });
-    };
+   const handleLogout = () => {
+       post('/logout', {
+           onSuccess: () => {
+               window.location.href = '/';
+           },
+       });
+   };
 
-    const handleShowCart = () => setCart(true);
-    const handleCloseCart = () => setCart(false);
+   const handleCloseLogin = () => {
+       setLogin(false);
+       reset();
+   };
 
-    const changeLanguage = (lng) => i18n.changeLanguage(lng);
+   const handleSubmitLogin = (e) => {
+       e.preventDefault();
+       post('/login', {
+           onSuccess: () => {
+               handleCloseLogin();
+               window.location.reload();
+           },
+       });
+   };
 
-    return (
-        <>
-            {/* HEADER TOPBAR */}
-            <section className="header-section text-white shadow-sm">
-                <div className="topbar d-flex justify-content-between align-items-center px-4 py-2">
-                    <div className="topbar-left d-flex flex-column flex-sm-row align-items-center gap-3">
-                        <img src={BonaLogoa} alt="Logo" height="90" width={120} />
-                    </div>
+   const handleShowCart = () => setCart(true);
+   const handleCloseCart = () => setCart(false);
 
-                    <div className="topbar-right d-flex align-items-center gap-3">
-                        <div className="topbar-hours d-none d-md-flex flex-column me-2 text-end">
-                            <div className="d-flex align-items-center justify-content-end gap-2">
-                                <BsClock size={18} />
-                                <small>{t('hours.lunch')}</small>
-                            </div>
-                            <div className="d-flex align-items-center justify-content-end gap-2">
-                                <BsClock size={18} />
-                                <small>{t('hours.dinner')}</small>
-                            </div>
-                        </div>
+   const changeLanguage = (lng) => i18n.changeLanguage(lng);
 
-                        {/* Language Dropdown */}
-                        <Dropdown align="end">
-                            <Dropdown.Toggle
-                                id="dropdown-language"
-                                variant="outline-light"
-                                size="sm"
-                                className="header-btn language-dropdown-toggle d-inline-flex align-items-center"
-                            >
-                                <Globe size={18} className="me-2" />
-                                <span className="d-none d-sm-inline">{t('nav.language')}</span>
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu className="language-dropdown-menu">
-                                <Dropdown.Item onClick={() => changeLanguage('es')}>
-                                    <span className="d-flex align-items-center">
-                                        <Globe className="me-2" size={16} />
-                                        Castellano
-                                    </span>
-                                </Dropdown.Item>
-                                <Dropdown.Item onClick={() => changeLanguage('eu')}>
-                                    <span className="d-flex align-items-center">
-                                        <Globe className="me-2" size={16} />
-                                        Euskara
-                                    </span>
-                                </Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
+   return (
+       <>
+           {/* HEADER TOPBAR */}
+           <section className="header-section text-white shadow-sm">
+               <div className="topbar d-flex justify-content-between align-items-center px-4 py-2">
+                   <div className="topbar-left d-flex flex-column flex-sm-row align-items-center gap-3">
+                       <Link href="/">
+                           <img src={BonaLogoa} alt="Bona Jatetxea" height="90" width={120} />
+                       </Link>
+                   </div>
 
-                        {/* User Dropdown - CORREGIDO */}
-                        <Dropdown align="end">
-                            <Dropdown.Toggle
-                                id="dropdown-user"
-                                variant="outline-light"
-                                size="sm"
-                                className="header-btn user-dropdown-toggle d-inline-flex align-items-center"
-                            >
-                                <FaUser size={18} className="me-2" />
-                                <span>{auth?.user ? auth.user.name : t('nav.account')}</span>
-                            </Dropdown.Toggle>
+                   <div className="topbar-right d-flex align-items-center gap-3">
+                       
 
-                            <Dropdown.Menu className="user-dropdown-menu">
-                                {/* Carrito siempre visible */}
-                                <Dropdown.Item onClick={handleShowCart}>
-                                    <span className="d-flex align-items-center">
-                                        <FaShoppingCart className="me-2" size={16} />
-                                        {t('cart.title')}
-                                    </span>
-                                </Dropdown.Item>
-                                <Dropdown.Divider />
+                       {/* Language Dropdown */}
+                       <Dropdown align="end">
+                           <Dropdown.Toggle
+                               id="dropdown-language"
+                               variant="outline-light"
+                               size="sm"
+                               className="header-btn language-dropdown-toggle d-inline-flex align-items-center"
+                           >
+                               <Globe size={18} className="me-2" />
+                               <span className="d-none d-sm-inline">{t('nav.language')}</span>
+                           </Dropdown.Toggle>
+                           <Dropdown.Menu className="language-dropdown-menu">
+                               <Dropdown.Item onClick={() => changeLanguage('es')}>
+                                   <span className="d-flex align-items-center">
+                                       <Globe className="me-2" size={16} />
+                                       Castellano
+                                   </span>
+                               </Dropdown.Item>
+                               <Dropdown.Item onClick={() => changeLanguage('eu')}>
+                                   <span className="d-flex align-items-center">
+                                       <Globe className="me-2" size={16} />
+                                       Euskara
+                                   </span>
+                               </Dropdown.Item>
+                           </Dropdown.Menu>
+                       </Dropdown>
 
-                                {/* Usuario logueado */}
-                                {auth?.user ? (
-                                    <>
-                                        <Dropdown.Item as={Link} href="/profile">
-                                            <span className="d-flex align-items-center">
-                                                <PersonFill className="me-2" size={16} />
-                                                {auth.user.name}
-                                            </span>
-                                        </Dropdown.Item>
+                       {/* User Dropdown */}
+                       <Dropdown align="end">
+                           <Dropdown.Toggle
+                               id="dropdown-user"
+                               variant="outline-light"
+                               size="sm"
+                               className="header-btn user-dropdown-toggle d-inline-flex align-items-center position-relative"
+                           >
+                               <FaUser size={18} className="me-2" />
+                               <span>{auth?.user ? auth.user.name : t('nav.account')}</span>
 
-                                        {role === 'Admin' && (
-                                            <>
-                                                <Dropdown.Divider />
-                                                <Dropdown.Item as={Link} href="/admin">
-                                                    <span className="d-flex align-items-center">
-                                                        <RiDashboardFill className="me-2" size={16} />
-                                                        Dashboard
-                                                    </span>
-                                                </Dropdown.Item>
-                                            </>
-                                        )}
+                               {totalItems > 0 && (
+                                   <Badge
+                                       pill
+                                       bg="danger"
+                                       className="position-absolute top-0 start-100 translate-middle"
+                                       style={{ fontSize: '0.65rem' }}
+                                   >
+                                       {totalItems}
+                                   </Badge>
+                               )}
+                           </Dropdown.Toggle>
 
-                                        <Dropdown.Divider />
-                                        <Dropdown.Item onClick={handleLogout}>
-                                            <span className="d-flex align-items-center">
-                                                <BoxArrowRight className="me-2" size={16} />
-                                                {'Logout'}
-                                            </span>
-                                        </Dropdown.Item>
-                                    </>
-                                ) : (
-                                    /* Sin usuario */
-                                    <>
-                                        <Dropdown.Item onClick={() => setLogin(true)}>
-                                            <span className="d-flex align-items-center">
-                                                <Key className="me-2" size={16} />
-                                                {t('login.button')}
-                                            </span>
-                                        </Dropdown.Item>
-                                        <Dropdown.Item className="dropdown-register-cta" as={Link} href="/erregistroa">
-                                            <span className="d-flex align-items-center">
-                                                <FilePersonFill className="me-2" size={16} />
-                                                {t('login.registerHere')}
-                                            </span>
-                                        </Dropdown.Item>
-                                    </>
-                                )}
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </div>
-                </div>
+                           <Dropdown.Menu className="user-dropdown-menu">
+                               <Dropdown.Item onClick={handleShowCart}>
+                                   <span className="d-flex align-items-center justify-content-between">
+                                       <span className="d-flex align-items-center">
+                                           <FaShoppingCart className="me-2" size={16} />
+                                           {t('cart.title')}
+                                       </span>
+                                       {totalItems > 0 && <Badge bg="dark">{totalItems}</Badge>}
+                                   </span>
+                               </Dropdown.Item>
+                               <Dropdown.Divider />
 
-                {/* NAVBAR */}
-                <Navbar
-                    expand="lg"
-                    className="border-top border-dark-subtle"
-                    expanded={expanded}
-                    onToggle={(val) => setExpanded(val)}
-                >
-                    <Container fluid className="nav-container px-4">
-                        <Navbar.Toggle aria-controls="main-navbar" />
-                        <Navbar.Collapse id="main-navbar">
-                            <Nav className="mx-auto text-center">
-                                {role === 'Langile' && auth?.user ? (
-                                    <>
-                                        <Nav.Link
-                                            as={Link}
-                                            href="/ordutegia"
-                                            className="nav-link-custom px-3"
-                                            onClick={() => setExpanded(false)}
-                                        >
-                                            {t('nav.schedule')}
-                                        </Nav.Link>
-                                        <Nav.Link
-                                            as={Link}
-                                            href="/bidalketak"
-                                            className="nav-link-custom px-3"
-                                            onClick={() => setExpanded(false)}
-                                        >
-                                            {t('nav.delivery')}
-                                        </Nav.Link>
-                                    </>
-                                ) : (
-                                    <>
-                                        <Nav.Link as={Link} href="/" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
-                                            {t('nav.home')}
-                                        </Nav.Link>
-                                        <Nav.Link as={Link} href="/kontaktua" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
-                                            {t('nav.contact')}
-                                        </Nav.Link>
-                                        <Nav.Link as={Link} href="/menu" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
-                                            {t('nav.menu')}
-                                        </Nav.Link>
-                                        {role === 'Bezero' && (
-                                            <Nav.Link
-                                                as={Link}
-                                                href="/erreserba"
-                                                className="nav-link-custom px-3"
-                                                onClick={(e) => {
-                                                    if (!auth?.user || role !== 'Bezero') {
-                                                        e.preventDefault();
-                                                        setLogin(true);
-                                                        return;
-                                                    }
-                                                    setExpanded(false);
-                                                }}
-                                            >
-                                                {t('nav.reservations')}
-                                            </Nav.Link>
-                                        )}
-                                        {role !== 'Bezero' && role !== 'Langile' && auth?.user && (
-                                            <>
-                                                <Nav.Link as={Link} href="/ordutegia" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
-                                                    {t('nav.schedule')}
-                                                </Nav.Link>
-                                                <Nav.Link as={Link} href="/bidalketak" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
-                                                    {t('nav.delivery')}
-                                                </Nav.Link>
-                                            </>
-                                        )}
-                                    </>
-                                )}
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Container>
-                </Navbar>
-            </section>
+                               {auth?.user ? (
+                                   <>
+                                       <Dropdown.Item as={Link} href="/profile">
+                                           <span className="d-flex align-items-center">
+                                               <PersonFill className="me-2" size={16} />
+                                               {auth.user.name}
+                                           </span>
+                                       </Dropdown.Item>
 
-            {/* Login Modal */}
-            <Modal show={login} onHide={handleCloseLogin} centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>{t('login.modalTitle')}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {errors.email && <Alert variant="danger">{errors.email}</Alert>}
-                    <Form onSubmit={handleSubmitLogin}>
-                        <Form.Group className="mb-3" controlId="email">
-                            <Form.Label>{t('login.email')}</Form.Label>
-                            <Form.Control
-                                type="email"
-                                value={data.email}
-                                onChange={(e) => setData('email', e.target.value)}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="password">
-                            <Form.Label>{t('login.password')}</Form.Label>
-                            <Form.Control
-                                type="password"
-                                value={data.password}
-                                onChange={(e) => setData('password', e.target.value)}
-                            />
-                        </Form.Group>
-                        <Form.Label className="d-flex justify-content-center">
-                            {t('login.noAccount')}{' '}
-                            <Link href="/erregistroa" className="ms-1 text-primary" onClick={handleCloseLogin}>
-                                {t('login.registerHere')}
-                            </Link>
-                        </Form.Label>
-                        <Button type="submit" className="hasi-btn fw-bold w-100" disabled={processing}>
-                            {t('login.submit')}
-                        </Button>
-                    </Form>
-                </Modal.Body>
-            </Modal>
+                                       {role === 'Admin' && (
+                                           <>
+                                               <Dropdown.Divider />
+                                               <Dropdown.Item as={Link} href="/admin">
+                                                   <span className="d-flex align-items-center">
+                                                       <RiDashboardFill className="me-2" size={16} />
+                                                       Dashboard
+                                                   </span>
+                                               </Dropdown.Item>
+                                           </>
+                                       )}
 
-            {/* Cart Modal */}
-            <Modal show={cart} onHide={handleCloseCart} centered size="lg">
-                <Modal.Header closeButton>
-                    <Modal.Title>{t('cart.title')}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Container>
-                        <Row className="justify-content-center">
-                            <Col md={12}>
-                                <Card className="mb-3 p-2 shadow-sm">
-                                    <Row className="align-items-center g-0 d-flex justify-content-between">
-                                        <Col md={8} className="d-flex">
-                                            <img
-                                                src={postre2}
-                                                alt="Postre"
-                                                style={{
-                                                    width: '175px',
-                                                    height: '125px',
-                                                    objectFit: 'cover',
-                                                    marginRight: '10px',
-                                                    borderRadius: '20px',
-                                                }}
-                                            />
-                                            <div className="d-flex flex-column justify-content-center">
-                                                <label>{t('cart.itemName')}: Postre</label>
-                                                <label>{t('cart.quantity')}: 1</label>
-                                                <label>{t('cart.price')}: 5€</label>
-                                            </div>
-                                        </Col>
-                                        <Col md={4} className="d-flex justify-content-end">
-                                            <div className="align-self-center trash-icon">
-                                                <Trash3 size={24} />
-                                            </div>
-                                        </Col>
-                                    </Row>
-                                </Card>
-                                <h4 className="fw-bold mt-3 text-center">{t('cart.total')}: 5€</h4>
-                                <div className="d-flex justify-content-center mt-3">
-                                    <Button className="konf-btn">{t('cart.confirmButton')}</Button>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Container>
-                </Modal.Body>
-            </Modal>
-        </>
-    );
+                                       <Dropdown.Divider />
+                                       <Dropdown.Item onClick={handleLogout} className="text-danger">
+                                           <span className="d-flex align-items-center">
+                                               <BoxArrowRight className="me-2" size={16} />
+                                               Logout
+                                           </span>
+                                       </Dropdown.Item>
+                                   </>
+                               ) : (
+                                   <>
+                                       <Dropdown.Item onClick={() => setLogin(true)}>
+                                           <span className="d-flex align-items-center">
+                                               <Key className="me-2" size={16} />
+                                               {t('login.button')}
+                                           </span>
+                                       </Dropdown.Item>
+                                       <Dropdown.Item className="dropdown-register-cta" as={Link} href="/erregistroa">
+                                           <span className="d-flex align-items-center">
+                                               <FilePersonFill className="me-2" size={16} />
+                                               {t('login.registerHere')}
+                                           </span>
+                                       </Dropdown.Item>
+                                   </>
+                               )}
+                           </Dropdown.Menu>
+                       </Dropdown>
+                   </div>
+               </div>
+
+               {/* NAVBAR */}
+               <Navbar
+                   expand="lg"
+                   className="border-top border-dark-subtle"
+                   expanded={expanded}
+                   onToggle={(val) => setExpanded(val)}
+               >
+                   <Container fluid className="nav-container px-4">
+                       <Navbar.Toggle aria-controls="main-navbar" />
+                       <Navbar.Collapse id="main-navbar">
+                           <Nav className="mx-auto text-center">
+                               {role === 'Langile' && auth?.user ? (
+                                   <>
+                                       <Nav.Link
+                                           as={Link}
+                                           href="/ordutegia"
+                                           className="nav-link-custom px-3"
+                                           onClick={() => setExpanded(false)}
+                                       >
+                                           {t('nav.schedule')}
+                                       </Nav.Link>
+                                       <Nav.Link
+                                           as={Link}
+                                           href="/bidalketak"
+                                           className="nav-link-custom px-3"
+                                           onClick={() => setExpanded(false)}
+                                       >
+                                           {t('nav.delivery')}
+                                       </Nav.Link>
+                                   </>
+                               ) : (
+                                   <>
+                                       <Nav.Link
+                                           as={Link}
+                                           href="/"
+                                           className="nav-link-custom px-3"
+                                           onClick={() => setExpanded(false)}
+                                       >
+                                           {t('nav.home')}
+                                       </Nav.Link>
+                                       <Nav.Link
+                                           as={Link}
+                                           href="/kontaktua"
+                                           className="nav-link-custom px-3"
+                                           onClick={() => setExpanded(false)}
+                                       >
+                                           {t('nav.contact')}
+                                       </Nav.Link>
+                                       <Nav.Link
+                                           as={Link}
+                                           href="/menu"
+                                           className="nav-link-custom px-3"
+                                           onClick={() => setExpanded(false)}
+                                       >
+                                           {t('nav.menu')}
+                                       </Nav.Link>
+                                       {role === 'Bezero' && (
+                                           <Nav.Link
+                                               as={Link}
+                                               href="/erreserba"
+                                               className="nav-link-custom px-3"
+                                               onClick={(e) => {
+                                                   if (!auth?.user || role !== 'Bezero') {
+                                                       e.preventDefault();
+                                                       setLogin(true);
+                                                       return;
+                                                   }
+                                                   setExpanded(false);
+                                               }}
+                                           >
+                                               {t('nav.reservations')}
+                                           </Nav.Link>
+                                       )}
+                                       {role !== 'Bezero' &&
+                                           role !== 'Langile' &&
+                                           auth?.user && (
+                                               <>
+                                                   <Nav.Link
+                                                       as={Link}
+                                                       href="/ordutegia"
+                                                       className="nav-link-custom px-3"
+                                                       onClick={() => setExpanded(false)}
+                                                   >
+                                                       {t('nav.schedule')}
+                                                   </Nav.Link>
+                                                   <Nav.Link
+                                                       as={Link}
+                                                       href="/bidalketak"
+                                                       className="nav-link-custom px-3"
+                                                       onClick={() => setExpanded(false)}
+                                                   >
+                                                       {t('nav.delivery')}
+                                                   </Nav.Link>
+                                               </>
+                                           )}
+                                   </>
+                               )}
+                           </Nav>
+                       </Navbar.Collapse>
+                   </Container>
+               </Navbar>
+           </section>
+
+           {/* Login Modal */}
+           <Modal show={login} onHide={handleCloseLogin} centered>
+               <Modal.Header closeButton>
+                   <Modal.Title>{t('login.modalTitle')}</Modal.Title>
+               </Modal.Header>
+               <Modal.Body>
+                   {errors.email && <Alert variant="danger">{errors.email}</Alert>}
+                   {errors.password && <Alert variant="danger">{errors.password}</Alert>}
+                   <Form onSubmit={handleSubmitLogin}>
+                       <Form.Group className="mb-3" controlId="email">
+                           <Form.Label>{t('login.email')}</Form.Label>
+                           <Form.Control
+                               type="email"
+                               placeholder={t('login.emailPlaceholder')}
+                               value={data.email}
+                               onChange={(e) => setData('email', e.target.value)}
+                           />
+                       </Form.Group>
+                       <Form.Group className="mb-3" controlId="password">
+                           <Form.Label>{t('login.password')}</Form.Label>
+                           <Form.Control
+                               type="password"
+                               placeholder={t('login.passwordPlaceholder')}
+                               value={data.password}
+                               onChange={(e) => setData('password', e.target.value)}
+                           />
+                       </Form.Group>
+                       <Form.Label className="d-flex justify-content-center">
+                           {t('login.noAccount')}{' '}
+                           <Link
+                               href="/erregistroa"
+                               className="ms-1 text-primary"
+                               onClick={handleCloseLogin}
+                           >
+                               {t('login.registerHere')}
+                           </Link>
+                       </Form.Label>
+                       <Button
+                           type="submit"
+                           className="hasi-btn fw-bold w-100 mt-3"
+                           disabled={processing}
+                       >
+                           {t('login.submit')}
+                       </Button>
+                   </Form>
+               </Modal.Body>
+           </Modal>
+
+           {/* Cart Modal - 100% i18n con tus keys + nuevas */}
+           <Modal show={cart} onHide={handleCloseCart} centered size="lg">
+               <Modal.Header closeButton>
+                   <Modal.Title>{t('cart.title')}</Modal.Title>
+               </Modal.Header>
+               <Modal.Body className="text-dark">
+                   {cartItems.length === 0 ? (
+                       <div className="text-center py-4 text-muted">
+                           <h5>{t('cart.empty')}</h5>
+                           <p className="mb-0">{t('cart.emptyMessage')}</p>
+                       </div>
+                   ) : (
+                       <>
+                           <div style={{ maxHeight: '450px', overflowY: 'auto' }}>
+                               {cartItems.map((item) => (
+                                   <Card
+                                       key={item.id}
+                                       className="mb-3 p-2 shadow-sm bg-light border-0 overflow-hidden"
+                                   >
+                                       <Row className="align-items-center g-0 d-flex justify-content-between">
+                                           <Col md={8} className="d-flex align-items-center">
+                                               <img
+                                                   src={item.img}
+                                                   alt={item.name}
+                                                   style={{
+                                                       width: '200px',
+                                                       height: '150px',
+                                                       objectFit: 'cover',
+                                                       marginRight: '10px',
+                                                       borderRadius: '20px',
+                                                   }}
+                                               />
+                                               <div className="d-flex flex-column justify-content-center">
+                                                   <h6 className="fw-bold mb-1">{item.name}</h6>
+                                                   <div className="d-flex align-items-center mb-1">
+                                                       <label className="me-2">{t('cart.quantity')}:</label>
+                                                       <span className="fw-bold">{item.quantity}</span>
+                                                   </div>
+                                                   <label className="fw-bold">
+                                                       {t('cart.price')}: {item.price * item.quantity}€
+                                                   </label>
+                                               </div>
+                                           </Col>
+                                           <Col md={4} className="d-flex justify-content-end">
+                                               <div className="align-self-center trash-icon">
+                                                   <Trash3
+                                                       size={24}
+                                                       className="text-danger"
+                                                       style={{ cursor: 'pointer' }}
+                                                       title={t('cart.removeItem')}
+                                                       onClick={() => removeFromCart(item.id)}
+                                                   />
+                                               </div>
+                                           </Col>
+                                       </Row>
+                                   </Card>
+                               ))}
+                           </div>
+                           <div className="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
+                               <h4 className="fw-bold mb-0">
+                                   {t('cart.total')}: <span className="text-primary">{cartTotal}€</span>
+                               </h4>
+                               <div className="d-flex gap-2">
+                                   <Button
+                                       variant="outline-secondary"
+                                       size="sm"
+                                       onClick={clearCart}
+                                   >
+                                       {t('cart.clearButton')}
+                                   </Button>
+                                   <Button className="konf-btn px-4 fw-bold">
+                                       {t('cart.confirmButton')}
+                                   </Button>
+                               </div>
+                           </div>
+                       </>
+                   )}
+               </Modal.Body>
+           </Modal>
+       </>
+   );
 };
 
 export default Header;
