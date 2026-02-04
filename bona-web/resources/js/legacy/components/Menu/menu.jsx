@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import heroImg from "../../img/menu.jpeg";
+import MenuCard from './menucard';
 import './menu.css';
 
+// Importación de imágenes
+import heroImg from "../../img/menu.jpeg";
 import sopa from "../../img/lentejas.jpg";
 import crema from "../../img/crema.jpg";
 import pollo from "../../img/pollo.jpg";
@@ -16,23 +18,17 @@ import pasta from "../../img/pasta.jpeg";
 import arroz from "../../img/arroz.jpg";
 import postre1 from "../../img/postre1.jpg";
 import postre2 from "../../img/postre2.jpg";
-import MenuCard from './menucard';
 
 const HeroMenu = () => {
   const { t } = useTranslation();
 
   return (
-    <section
-      className="hero-menu"
-      style={{ backgroundImage: `url(${heroImg})` }}
-    >
+    <section className="hero-menu" style={{ backgroundImage: `url(${heroImg})` }}>
       <div className="hero-overlay">
         <Container className="h-100">
           <Row className="h-100 align-items-center justify-content-center">
             <Col md={8} className="text-center text-white">
-              <h1 className="display-4 fw-bold mb-3">
-                {t("menu.heroTitle")}
-              </h1>
+              <h1 className="display-4 fw-bold mb-3">{t("menu.heroTitle")}</h1>
             </Col>
           </Row>
         </Container>
@@ -59,14 +55,10 @@ const Menu = () => {
     { id: 12, img: postre2, sectionKey: "desserts", key: "frenchToast", price: 4, cantidad: 1 },
   ]);
 
-  // ✅ TRADUCE sectionKey → sectionName
   const grouped = platos.reduce((acc, dish) => {
     const sectionKey = dish.sectionKey;
     const sectionName = t(`menu.section${sectionKey.charAt(0).toUpperCase() + sectionKey.slice(1)}`);
-    
-    if (!acc[sectionName]) {
-      acc[sectionName] = [];
-    }
+    if (!acc[sectionName]) acc[sectionName] = [];
     acc[sectionName].push(dish);
     return acc;
   }, {});
@@ -74,14 +66,12 @@ const Menu = () => {
   return (
     <>
       <HeroMenu />
-
       <section id="menua" className="menu-section">
         <Container fluid className="p-4 d-flex flex-column align-items-center">
           <div className="menu-cards-wrapper w-100">
             {Object.keys(grouped).map((sectionName) => (
               <div key={sectionName} className="mb-5">
-                {/* ✅ sectionName YA TRADUCIDO */}
-                <h3 className="text-center mb-4">{sectionName}</h3>
+                <h3 className="text-center mb-4 text-dark">{sectionName}</h3>
                 <Row className="g-4 justify-content-center">
                   {grouped[sectionName].map(dish => (
                     <Col key={dish.id} md={6} lg={4}>

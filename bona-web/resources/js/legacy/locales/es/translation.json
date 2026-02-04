@@ -7,7 +7,9 @@
     "schedule": "Horarios",
     "delivery": "Delivery",
     "account": "Cuenta",
-    "language": "Idioma"
+    "language": "Idioma",
+    "logout": "Cerrar Sesión",
+    "dashboard": "Dashboard"
   },
   "hours": {
     "lunch": "12:00–16:00",
@@ -17,22 +19,29 @@
     "button": "Login",
     "modalTitle": "Iniciar sesión",
     "email": "Email",
-    "emailPlaceholder": "Email",
+    "emailPlaceholder": "tu@email.com",
     "password": "Contraseña",
-    "passwordPlaceholder": "Contraseña",
+    "passwordPlaceholder": "••••••••",
     "noAccount": "¿No tienes cuenta?",
     "registerHere": "Regístrate aquí",
-    "submit": "Entrar",
-    "error": "Por favor, completa el Email y la Contraseña"
+    "submit": "Entrar"
   },
   "cart": {
     "title": "Resumen",
-    "itemName": "Nombre",
     "quantity": "Cantidad",
     "price": "Precio",
     "total": "Total",
-    "confirmButton": "Confirmar pedido"
+    "confirmButton": "Confirmar pedido",
+    "empty": "Carrito vacío",
+    "emptyMessage": "Añade productos desde el menú",
+    "clearButton": "Vaciar",
+    "removeItem": "Eliminar"
   },
+  "languages": {
+    "spanish": "Castellano",
+    "basque": "Euskara"
+  },
+
   "about": {
     "title": "Sobre nosotros",
     "description": "En el corazón de Donostia, con más de 20 años de experiencia. Cocina vasca tradicional, con recetas de siempre.",

@@ -2,37 +2,46 @@
   "nav": {
     "home": "Hasiera",
     "contact": "Kontaktu",
-    "reservations": "Erreserbak", 
+    "reservations": "Erreserbak",
     "menu": "Karta",
     "schedule": "Ordutegia",
     "delivery": "Delivery",
     "account": "Kontua",
-    "language": "Hizkuntza"
+    "language": "Hizkuntza",
+    "logout": "Saioa Itxi",
+    "dashboard": "Aginte Panela"
   },
   "hours": {
     "lunch": "12:00–16:00",
     "dinner": "19:00–23:00"
   },
   "login": {
-    "button": "Login",
+    "button": "Saioa Hasi",
     "modalTitle": "Saioa Hasi",
     "email": "Emaila",
-    "emailPlaceholder": "Emaila",
+    "emailPlaceholder": "zure@emaila.eus",
     "password": "Pasahitza",
-    "passwordPlaceholder": "Pasahitza",
+    "passwordPlaceholder": "••••••••",
     "noAccount": "Ez daukazu kontua?",
     "registerHere": "Erregistratu hemen",
-    "submit": "Hasi",
-    "error": "Mesedez, Emaila eta Pasahitza bete itzazu!!"
+    "submit": "Hasi"
   },
   "cart": {
     "title": "Laburpena",
-    "itemName": "Izena",
     "quantity": "Kopurua",
     "price": "Prezioa",
     "total": "Totala",
-    "confirmButton": "Bidalketa Konfirmatu"
+    "confirmButton": "Bidalketa Konfirmatu",
+    "empty": "Karrito hutsa",
+    "emptyMessage": "Menutik produktuak gehitu",
+    "clearButton": "Hustu",
+    "removeItem": "Ezabatu"
   },
+  "languages": {
+    "spanish": "Gaztelania",
+    "basque": "Euskara"
+  },
+
   "about": {
     "title": "Guri buruz",
     "description": "Donostiako bihotzean, 20 urte baino gehiagoko esperientziarekin. Euskal sukaldaritza goxoa, lehengoen errezetekin.",
