@@ -27,60 +27,43 @@ import { BsClock } from 'react-icons/bs';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { RiDashboardFill } from 'react-icons/ri';
 import './header.css';
-
-
 import BonaLogoa from '../../img/BonaLogoa.png';
-// IMPORTANTE: ahora usamos el contexto de carrito
 import { useCart } from '../cartcontext/CartContext';
-
 
 const Header = () => {
    const { auth, flash } = usePage().props;
    const user = auth?.user;
    const role = user?.role || null;
 
-
    const { t, i18n } = useTranslation();
 
-
-   // Mantengo tus nombres de estado originales
    const [login, setLogin] = useState(false);
    const [cart, setCart] = useState(false);
    const [expanded, setExpanded] = useState(false);
 
-
-   // Contexto del carrito (nuevo)
-   const { cartItems, removeFromCart, cartTotal, totalItems, clearCart } = useCart(); //[cite:21]
-
+   const { cartItems, removeFromCart, cartTotal, totalItems, clearCart } = useCart();
 
    const { data, setData, post, processing, errors, reset } = useForm({
        email: '',
        password: '',
    });
 
-
-   // Auto-open login modal (flash.require_auth)
    useEffect(() => {
        if (flash?.require_auth) {
            setLogin(true);
        }
    }, [flash?.require_auth]);
 
-
-   // Escuchar evento personalizado para abrir login (MenuCard, etc.)
    useEffect(() => {
        const handleOpenLogin = () => setLogin(true);
        document.addEventListener('open-login-modal', handleOpenLogin);
        return () => document.removeEventListener('open-login-modal', handleOpenLogin);
    }, []);
 
-
-   // Active nav link highlighting
    useEffect(() => {
        const updateActiveLink = () => {
            const navLinks = document.querySelectorAll('.nav-link-custom');
            navLinks.forEach((link) => link.classList.remove('active'));
-
 
            const currentPath = window.location.pathname;
            const currentLink = Array.from(navLinks).find((link) => {
@@ -88,18 +71,15 @@ const Header = () => {
                return href === currentPath;
            });
 
-
            if (currentLink) {
                currentLink.classList.add('active');
            }
        };
 
-
        updateActiveLink();
        window.addEventListener('popstate', updateActiveLink);
        return () => window.removeEventListener('popstate', updateActiveLink);
    }, []);
-
 
    const handleLogout = () => {
        post('/logout', {
@@ -109,12 +89,10 @@ const Header = () => {
        });
    };
 
-
    const handleCloseLogin = () => {
        setLogin(false);
        reset();
    };
-
 
    const handleSubmitLogin = (e) => {
        e.preventDefault();
@@ -126,13 +104,10 @@ const Header = () => {
        });
    };
 
-
    const handleShowCart = () => setCart(true);
    const handleCloseCart = () => setCart(false);
 
-
    const changeLanguage = (lng) => i18n.changeLanguage(lng);
-
 
    return (
        <>
@@ -140,12 +115,10 @@ const Header = () => {
            <section className="header-section text-white shadow-sm">
                <div className="topbar d-flex justify-content-between align-items-center px-4 py-2">
                    <div className="topbar-left d-flex flex-column flex-sm-row align-items-center gap-3">
-                       {/* opcional: si quieres que el logo sea Link como en el segundo header */}
                        <Link href="/">
-                           <img src={BonaLogoa} alt="Logo" height="90" width={120} />
+                           <img src={BonaLogoa} alt="Bona Jatetxea" height="90" width={120} />
                        </Link>
                    </div>
-
 
                    <div className="topbar-right d-flex align-items-center gap-3">
                        <div className="topbar-hours d-none d-md-flex flex-column me-2 text-end">
@@ -159,8 +132,7 @@ const Header = () => {
                            </div>
                        </div>
 
-
-                       {/* Language Dropdown (respetando tu estilo original) */}
+                       {/* Language Dropdown */}
                        <Dropdown align="end">
                            <Dropdown.Toggle
                                id="dropdown-language"
@@ -187,8 +159,7 @@ const Header = () => {
                            </Dropdown.Menu>
                        </Dropdown>
 
-
-                       {/* User Dropdown con badge del carrito (nuevo) */}
+                       {/* User Dropdown */}
                        <Dropdown align="end">
                            <Dropdown.Toggle
                                id="dropdown-user"
@@ -199,8 +170,6 @@ const Header = () => {
                                <FaUser size={18} className="me-2" />
                                <span>{auth?.user ? auth.user.name : t('nav.account')}</span>
 
-
-                               {/* Badge número de items (igual idea que el segundo header) */}
                                {totalItems > 0 && (
                                    <Badge
                                        pill
@@ -213,24 +182,18 @@ const Header = () => {
                                )}
                            </Dropdown.Toggle>
 
-
                            <Dropdown.Menu className="user-dropdown-menu">
-                               {/* Entrada carrito siempre visible, mostrando contador */}
                                <Dropdown.Item onClick={handleShowCart}>
                                    <span className="d-flex align-items-center justify-content-between">
                                        <span className="d-flex align-items-center">
                                            <FaShoppingCart className="me-2" size={16} />
                                            {t('cart.title')}
                                        </span>
-                                       {totalItems > 0 && (
-                                           <Badge bg="dark">{totalItems}</Badge>
-                                       )}
+                                       {totalItems > 0 && <Badge bg="dark">{totalItems}</Badge>}
                                    </span>
                                </Dropdown.Item>
                                <Dropdown.Divider />
 
-
-                               {/* Usuario logueado */}
                                {auth?.user ? (
                                    <>
                                        <Dropdown.Item as={Link} href="/profile">
@@ -239,7 +202,6 @@ const Header = () => {
                                                {auth.user.name}
                                            </span>
                                        </Dropdown.Item>
-
 
                                        {role === 'Admin' && (
                                            <>
@@ -253,17 +215,15 @@ const Header = () => {
                                            </>
                                        )}
 
-
                                        <Dropdown.Divider />
                                        <Dropdown.Item onClick={handleLogout} className="text-danger">
                                            <span className="d-flex align-items-center">
                                                <BoxArrowRight className="me-2" size={16} />
-                                               {t('nav.logout') || 'Logout'}
+                                               Cerrar Sesión
                                            </span>
                                        </Dropdown.Item>
                                    </>
                                ) : (
-                                   /* Sin usuario */
                                    <>
                                        <Dropdown.Item onClick={() => setLogin(true)}>
                                            <span className="d-flex align-items-center">
@@ -271,11 +231,7 @@ const Header = () => {
                                                {t('login.button')}
                                            </span>
                                        </Dropdown.Item>
-                                       <Dropdown.Item
-                                           className="dropdown-register-cta"
-                                           as={Link}
-                                           href="/erregistroa"
-                                       >
+                                       <Dropdown.Item className="dropdown-register-cta" as={Link} href="/erregistroa">
                                            <span className="d-flex align-items-center">
                                                <FilePersonFill className="me-2" size={16} />
                                                {t('login.registerHere')}
@@ -288,8 +244,7 @@ const Header = () => {
                    </div>
                </div>
 
-
-               {/* NAVBAR (igual que el primero, respetando roles) */}
+               {/* NAVBAR */}
                <Navbar
                    expand="lg"
                    className="border-top border-dark-subtle"
@@ -392,19 +347,20 @@ const Header = () => {
                </Navbar>
            </section>
 
-
-           {/* Login Modal (igual que el primero, solo nombres) */}
+           {/* Login Modal */}
            <Modal show={login} onHide={handleCloseLogin} centered>
                <Modal.Header closeButton>
                    <Modal.Title>{t('login.modalTitle')}</Modal.Title>
                </Modal.Header>
                <Modal.Body>
                    {errors.email && <Alert variant="danger">{errors.email}</Alert>}
+                   {errors.password && <Alert variant="danger">{errors.password}</Alert>}
                    <Form onSubmit={handleSubmitLogin}>
                        <Form.Group className="mb-3" controlId="email">
                            <Form.Label>{t('login.email')}</Form.Label>
                            <Form.Control
                                type="email"
+                               placeholder={t('login.emailPlaceholder')}
                                value={data.email}
                                onChange={(e) => setData('email', e.target.value)}
                            />
@@ -413,6 +369,7 @@ const Header = () => {
                            <Form.Label>{t('login.password')}</Form.Label>
                            <Form.Control
                                type="password"
+                               placeholder={t('login.passwordPlaceholder')}
                                value={data.password}
                                onChange={(e) => setData('password', e.target.value)}
                            />
@@ -429,7 +386,7 @@ const Header = () => {
                        </Form.Label>
                        <Button
                            type="submit"
-                           className="hasi-btn fw-bold w-100"
+                           className="hasi-btn fw-bold w-100 mt-3"
                            disabled={processing}
                        >
                            {t('login.submit')}
@@ -438,8 +395,7 @@ const Header = () => {
                </Modal.Body>
            </Modal>
 
-
-           {/* Cart Modal - ahora dinámico usando CartContext */}
+           {/* Cart Modal - 100% i18n con tus keys + nuevas */}
            <Modal show={cart} onHide={handleCloseCart} centered size="lg">
                <Modal.Header closeButton>
                    <Modal.Title>{t('cart.title')}</Modal.Title>
@@ -448,6 +404,7 @@ const Header = () => {
                    {cartItems.length === 0 ? (
                        <div className="text-center py-4 text-muted">
                            <h5>{t('cart.empty')}</h5>
+                           <p className="mb-0">{t('cart.emptyMessage')}</p>
                        </div>
                    ) : (
                        <>
@@ -458,10 +415,7 @@ const Header = () => {
                                        className="mb-3 p-2 shadow-sm bg-light border-0 overflow-hidden"
                                    >
                                        <Row className="align-items-center g-0 d-flex justify-content-between">
-                                           <Col
-                                               md={8}
-                                               className="d-flex align-items-center"
-                                           >
+                                           <Col md={8} className="d-flex align-items-center">
                                                <img
                                                    src={item.img}
                                                    alt={item.name}
@@ -474,33 +428,24 @@ const Header = () => {
                                                    }}
                                                />
                                                <div className="d-flex flex-column justify-content-center">
+                                                   <h6 className="fw-bold mb-1">{item.name}</h6>
+                                                   <div className="d-flex align-items-center mb-1">
+                                                       <label className="me-2">{t('cart.quantity')}:</label>
+                                                       <span className="fw-bold">{item.quantity}</span>
+                                                   </div>
                                                    <label className="fw-bold">
-                                                       {item.name}
-                                                   </label>
-                                                   <label>
-                                                       {t('cart.quantity')}:{' '}
-                                                       <span className="fw-bold">
-                                                           {item.quantity}
-                                                       </span>
-                                                   </label>
-                                                   <label className="fw-bold">
-                                                       {t('cart.price')}:{' '}
-                                                       {item.price * item.quantity}€
+                                                       {t('cart.price')}: {item.price * item.quantity}€
                                                    </label>
                                                </div>
                                            </Col>
-                                           <Col
-                                               md={4}
-                                               className="d-flex justify-content-end"
-                                           >
+                                           <Col md={4} className="d-flex justify-content-end">
                                                <div className="align-self-center trash-icon">
                                                    <Trash3
                                                        size={24}
                                                        className="text-danger"
                                                        style={{ cursor: 'pointer' }}
-                                                       onClick={() =>
-                                                           removeFromCart(item.id)
-                                                       }
+                                                       title={t('cart.removeItem')}
+                                                       onClick={() => removeFromCart(item.id)}
                                                    />
                                                </div>
                                            </Col>
@@ -510,7 +455,7 @@ const Header = () => {
                            </div>
                            <div className="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
                                <h4 className="fw-bold mb-0">
-                                   {t('cart.total')}: {cartTotal}€
+                                   {t('cart.total')}: <span className="text-primary">{cartTotal}€</span>
                                </h4>
                                <div className="d-flex gap-2">
                                    <Button
@@ -518,7 +463,7 @@ const Header = () => {
                                        size="sm"
                                        onClick={clearCart}
                                    >
-                                       {t('cart.clear', 'Vaciar')}
+                                       {t('cart.clearButton')}
                                    </Button>
                                    <Button className="konf-btn px-4 fw-bold">
                                        {t('cart.confirmButton')}
@@ -532,6 +477,5 @@ const Header = () => {
        </>
    );
 };
-
 
 export default Header;
