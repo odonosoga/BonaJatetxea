@@ -121,16 +121,7 @@ const Header = () => {
                    </div>
 
                    <div className="topbar-right d-flex align-items-center gap-3">
-                       <div className="topbar-hours d-none d-md-flex flex-column me-2 text-end">
-                           <div className="d-flex align-items-center justify-content-end gap-2">
-                               <BsClock size={18} />
-                               <small>{t('hours.lunch')}</small>
-                           </div>
-                           <div className="d-flex align-items-center justify-content-end gap-2">
-                               <BsClock size={18} />
-                               <small>{t('hours.dinner')}</small>
-                           </div>
-                       </div>
+                       
 
                        {/* Language Dropdown */}
                        <Dropdown align="end">
@@ -219,7 +210,7 @@ const Header = () => {
                                        <Dropdown.Item onClick={handleLogout} className="text-danger">
                                            <span className="d-flex align-items-center">
                                                <BoxArrowRight className="me-2" size={16} />
-                                               Cerrar Sesión
+                                               Logout
                                            </span>
                                        </Dropdown.Item>
                                    </>
