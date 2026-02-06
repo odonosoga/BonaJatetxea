@@ -10,14 +10,14 @@ use App\Models\PendingRegistration;
 use App\Models\User;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\KontsultaController;
-use App\Http\Controllers\EskaeraController;  // ✅ NUEVO
+use App\Http\Controllers\EskaeraController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 // ============================================================================
-// ✅ RUTAS ESPECÍFICAS (ALTO PRIORIDAD - PRIMERO)
+// ✅ RUTAS ESPECÍFICAS
 // ============================================================================
 
-// Home y páginas principales
 Route::get('/', fn () => Inertia::render('home'))->name('home');
 Route::get('/menu', fn () => Inertia::render('menu'));
 Route::get('/kontaktua', fn () => Inertia::render('contact'));
@@ -25,38 +25,39 @@ Route::post('/kontaktua', [KontsultaController::class, 'store'])->name('kontaktu
 Route::get('/ordutegia', fn () => Inertia::render('schedule'));
 Route::get('/bidalketak', fn () => Inertia::render('pendingdelivery'));
 Route::get('/erreserba', fn () => Inertia::render('reservation'));
+Route::get('/payform', fn () => Inertia::render('payform'));
 
-// Registro (YA FUNCIONA)
+Route::post('/ordainketa-prozesatu', function (Request $request) {
+    return redirect()->back()->with('success', 'Eskerrik asko! Zure eskaera ongi jaso dugu.');
+})->name('payform.store');
+
+// Registro
 Route::get('/erregistratu', fn () => Inertia::render('Register'))->name('register');
 Route::post('/erregistratu', [RegisterController::class, 'store'])->name('register.store');
 
-// Login/Logout (YA FUNCIONA)
+// Auth
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
 
-// Reservas (YA FUNCIONA)
+// Reservas
 Route::get('/erreserbak', [ReservationController::class, 'index'])->name('erreserbak.index');
 Route::post('/erreserbak/validate', [ReservationController::class, 'store'])->name('erreserbak.validate');
 
-// ============================================================================
-// ✅ ESKAERAK - PEDIDOS DELIVERY (NUEVO)
-// ============================================================================
-Route::get('/eskaerak', [EskaeraController::class, 'index']);                    // ✅ LISTAR
-Route::patch('/eskaerak/{id}', [EskaeraController::class, 'updateStatus'])->name('eskaerak.update');  // ✅ ACTUALIZAR
+// Eskaerak
+Route::get('/eskaerak', [EskaeraController::class, 'index']);
+Route::patch('/eskaerak/{id}', [EskaeraController::class, 'updateStatus'])->name('eskaerak.update');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
-// Verificación email (YA FUNCIONA)
+// Verificación email
 Route::get('/registration/verify/{id}/{hash}', function ($id, $hash) {
     $pending = PendingRegistration::findOrFail($id);
-
     if ($pending->expires_at->isPast() || sha1($pending->email) !== $hash) {
         return redirect('/erregistratu')->with('error', 'Enlace expirado');
     }
-
     $user = User::create([
         'name'        => $pending->name . ' ' . ($pending->surname ?? ''),
         'email'       => $pending->email,
@@ -68,33 +69,23 @@ Route::get('/registration/verify/{id}/{hash}', function ($id, $hash) {
         'role'        => 'Bezero',
         'email_verified_at' => now(),
     ]);
-
     $pending->delete();
     Auth::login($user);
-
     return redirect('/')->with('success', 'Verificado! Bienvenido');
 })->name('registration.verify');
 
-// Registro alternativo (mantenido)
 Route::get('/erregistroa', fn () => Inertia::render('register'));
 
-// ============================================================================
-// ⭐ GRUPO ADMIN COMPLETO (PROTEGIDO + DASHBOARD)
-// ============================================================================
+// Admin
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-    // ✅ Principal: carga TODOS los usuarios para React tabs
     Route::get('/', [UserController::class, 'index'])->name('users.index');
-    
-    // CRUD Users (para React)
     Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-    
-    // ⭐ CREAR NUEVO LANGILE (tu método existente)
     Route::post('/users/langile', [UserController::class, 'storeLangile'])->name('users.langile.store');
 });
 
 // ============================================================================
-// ✅ 404 CATCH-ALL (BAJA PRIORIDAD - AL FINAL)
+// ✅ 404 CATCH-ALL
 // ============================================================================
 Route::get('/{any}', fn () => Inertia::render('legacy'))
-    ->where('any', '^(?!api|login|logout|erregistratu|registration|erreserbak|admin|eskaerak).*$');  // ✅ Añadido eskaerak
+    ->where('any', '^(?!api|login|logout|erregistratu|registration|erreserbak|admin|eskaerak|payform|ordainketa-prozesatu).*$');

@@ -1,4 +1,4 @@
-import { Link, useForm, usePage } from '@inertiajs/react';
+import { Link, useForm, usePage, router } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import {
    Alert,
@@ -27,6 +27,7 @@ import { BsClock } from 'react-icons/bs';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { RiDashboardFill } from 'react-icons/ri';
 import './header.css';
+
 import BonaLogoa from '../../img/BonaLogoa.png';
 import { useCart } from '../cartcontext/CartContext';
 
@@ -107,11 +108,16 @@ const Header = () => {
    const handleShowCart = () => setCart(true);
    const handleCloseCart = () => setCart(false);
 
+   // FUNCIÓN CORREGIDA: Redirige a la página de pago
+   const handleConfirmCheckout = () => {
+       setCart(false); // Cierra el modal
+       router.visit('/payform'); // Asegúrate de que esta ruta existe en tu web.php
+   };
+
    const changeLanguage = (lng) => i18n.changeLanguage(lng);
 
    return (
        <>
-           {/* HEADER TOPBAR */}
            <section className="header-section text-white shadow-sm">
                <div className="topbar d-flex justify-content-between align-items-center px-4 py-2">
                    <div className="topbar-left d-flex flex-column flex-sm-row align-items-center gap-3">
@@ -121,9 +127,17 @@ const Header = () => {
                    </div>
 
                    <div className="topbar-right d-flex align-items-center gap-3">
-                      
+                       <div className="topbar-hours d-none d-md-flex flex-column me-2 text-end">
+                           <div className="d-flex align-items-center justify-content-end gap-2">
+                               <BsClock size={18} />
+                               <small>{t('hours.lunch')}</small>
+                           </div>
+                           <div className="d-flex align-items-center justify-content-end gap-2">
+                               <BsClock size={18} />
+                               <small>{t('hours.dinner')}</small>
+                           </div>
+                       </div>
 
-                       {/* Language Dropdown */}
                        <Dropdown align="end">
                            <Dropdown.Toggle
                                id="dropdown-language"
@@ -150,7 +164,6 @@ const Header = () => {
                            </Dropdown.Menu>
                        </Dropdown>
 
-                       {/* User Dropdown */}
                        <Dropdown align="end">
                            <Dropdown.Toggle
                                id="dropdown-user"
@@ -235,7 +248,6 @@ const Header = () => {
                    </div>
                </div>
 
-               {/* NAVBAR */}
                <Navbar
                    expand="lg"
                    className="border-top border-dark-subtle"
@@ -248,47 +260,22 @@ const Header = () => {
                            <Nav className="mx-auto text-center">
                                {role === 'Langile' && auth?.user ? (
                                    <>
-                                       <Nav.Link
-                                           as={Link}
-                                           href="/ordutegia"
-                                           className="nav-link-custom px-3"
-                                           onClick={() => setExpanded(false)}
-                                       >
+                                       <Nav.Link as={Link} href="/ordutegia" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
                                            {t('nav.schedule')}
                                        </Nav.Link>
-                                       <Nav.Link
-                                           as={Link}
-                                           href="/bidalketak"
-                                           className="nav-link-custom px-3"
-                                           onClick={() => setExpanded(false)}
-                                       >
+                                       <Nav.Link as={Link} href="/bidalketak" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
                                            {t('nav.delivery')}
                                        </Nav.Link>
                                    </>
                                ) : (
                                    <>
-                                       <Nav.Link
-                                           as={Link}
-                                           href="/"
-                                           className="nav-link-custom px-3"
-                                           onClick={() => setExpanded(false)}
-                                       >
+                                       <Nav.Link as={Link} href="/" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
                                            {t('nav.home')}
                                        </Nav.Link>
-                                       <Nav.Link
-                                           as={Link}
-                                           href="/kontaktua"
-                                           className="nav-link-custom px-3"
-                                           onClick={() => setExpanded(false)}
-                                       >
+                                       <Nav.Link as={Link} href="/kontaktua" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
                                            {t('nav.contact')}
                                        </Nav.Link>
-                                       <Nav.Link
-                                           as={Link}
-                                           href="/menu"
-                                           className="nav-link-custom px-3"
-                                           onClick={() => setExpanded(false)}
-                                       >
+                                       <Nav.Link as={Link} href="/menu" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
                                            {t('nav.menu')}
                                        </Nav.Link>
                                        {role === 'Bezero' && (
@@ -308,28 +295,16 @@ const Header = () => {
                                                {t('nav.reservations')}
                                            </Nav.Link>
                                        )}
-                                       {role !== 'Bezero' &&
-                                           role !== 'Langile' &&
-                                           auth?.user && (
-                                               <>
-                                                   <Nav.Link
-                                                       as={Link}
-                                                       href="/ordutegia"
-                                                       className="nav-link-custom px-3"
-                                                       onClick={() => setExpanded(false)}
-                                                   >
-                                                       {t('nav.schedule')}
-                                                   </Nav.Link>
-                                                   <Nav.Link
-                                                       as={Link}
-                                                       href="/bidalketak"
-                                                       className="nav-link-custom px-3"
-                                                       onClick={() => setExpanded(false)}
-                                                   >
-                                                       {t('nav.delivery')}
-                                                   </Nav.Link>
-                                               </>
-                                           )}
+                                       {role !== 'Bezero' && role !== 'Langile' && auth?.user && (
+                                           <>
+                                               <Nav.Link as={Link} href="/ordutegia" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
+                                                   {t('nav.schedule')}
+                                               </Nav.Link>
+                                               <Nav.Link as={Link} href="/bidalketak" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
+                                                   {t('nav.delivery')}
+                                               </Nav.Link>
+                                           </>
+                                       )}
                                    </>
                                )}
                            </Nav>
@@ -338,7 +313,6 @@ const Header = () => {
                </Navbar>
            </section>
 
-           {/* Login Modal */}
            <Modal show={login} onHide={handleCloseLogin} centered>
                <Modal.Header closeButton>
                    <Modal.Title>{t('login.modalTitle')}</Modal.Title>
@@ -386,7 +360,6 @@ const Header = () => {
                </Modal.Body>
            </Modal>
 
-           {/* Cart Modal - 100% i18n con tus keys + nuevas */}
            <Modal show={cart} onHide={handleCloseCart} centered size="lg">
                <Modal.Header closeButton>
                    <Modal.Title>{t('cart.title')}</Modal.Title>
@@ -411,32 +384,37 @@ const Header = () => {
                                                    src={item.img}
                                                    alt={item.name}
                                                    style={{
-                                                       width: '200px',
-                                                       height: '150px',
+                                                       width: '150px',
+                                                       height: '110px',
                                                        objectFit: 'cover',
-                                                       marginRight: '10px',
-                                                       borderRadius: '20px',
+                                                       marginRight: '15px',
+                                                       borderRadius: '12px',
                                                    }}
                                                />
                                                <div className="d-flex flex-column justify-content-center">
-                                                   <h6 className="fw-bold mb-1">{item.name}</h6>
-                                                   <div className="d-flex align-items-center mb-1">
-                                                       <label className="me-2">{t('cart.quantity')}:</label>
-                                                       <span className="fw-bold">{item.quantity}</span>
-                                                   </div>
-                                                   <label className="fw-bold">
-                                                       {t('cart.price')}: {item.price * item.quantity}€
+                                                   <label className="fw-bold fs-5">
+                                                       {item.name}
+                                                   </label>
+                                                   <label>
+                                                       {t('cart.quantity')}:{' '}
+                                                       <span className="fw-bold">
+                                                           {item.quantity}
+                                                       </span>
+                                                   </label>
+                                                   <label className="fw-bold text-primary">
+                                                       {item.price * item.quantity}€
                                                    </label>
                                                </div>
                                            </Col>
                                            <Col md={4} className="d-flex justify-content-end">
-                                               <div className="align-self-center trash-icon">
+                                               <div className="align-self-center px-3">
                                                    <Trash3
                                                        size={24}
                                                        className="text-danger"
                                                        style={{ cursor: 'pointer' }}
-                                                       title={t('cart.removeItem')}
-                                                       onClick={() => removeFromCart(item.id)}
+                                                       onClick={() =>
+                                                           removeFromCart(item.id)
+                                                       }
                                                    />
                                                </div>
                                            </Col>
@@ -456,7 +434,10 @@ const Header = () => {
                                    >
                                        {t('cart.clearButton')}
                                    </Button>
-                                   <Button className="konf-btn px-4 fw-bold">
+                                   <Button 
+                                       className="konf-btn px-4 fw-bold"
+                                       onClick={handleConfirmCheckout}
+                                   >
                                        {t('cart.confirmButton')}
                                    </Button>
                                </div>
