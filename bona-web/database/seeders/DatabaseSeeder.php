@@ -7,14 +7,11 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {  
-
         $this->call([
-           UsersSeeder::class,             
-           LangileUsersSeeder::class,
-           LangileakSeeder::class,          
-        LokalenKokapenakSeeder::class,       
-        LangileLokalenKokapenaSeeder::class,
-            LangileSeeder::class,
+            UsersSeeder::class,             
+            LangileSeeder::class,          
+            LokalenKokapenakSeeder::class,  
+            LangileLokalenKokapenaSeeder::class,
             EskaerakSeeder::class
         ]);
     }

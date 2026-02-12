@@ -1,168 +1,113 @@
-// PÁGINA: Schedule / Ordutegia (Langileen ordutegiak)
-// Traducciones necesarias: schedule.title, schedule.description, schedule.tableWeek,
-// schedule.columnWorker, schedule.columnRole, schedule.days.monday, schedule.days.tuesday,
-// schedule.days.wednesday, schedule.days.thursday, schedule.days.friday, schedule.days.saturday,
-// schedule.days.sunday, schedule.formTitle, schedule.nameLabel, schedule.namePlaceholder,
-// schedule.roleLabel, schedule.rolePlaceholder, schedule.roleOptions.*,
-// schedule.daySelectPlaceholder, schedule.submitButton
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Form, Button, Table } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { usePage } from '@inertiajs/react';
 import "./Schedule.css";
 
 const Schedule = () => {
   const { t } = useTranslation();
-
-  const [workers, setWorkers] = useState([
-    // Sukaldaria
-    {
-      id: 1,
-      name: "Langile 1",
-      role: "Sukaldaria",
-      monday: "Libre",
-      tuesday: "12:00–16:00 / 19:00–23:00",
-      wednesday: "12:00–16:00",
-      thursday: "19:00–23:00",
-      friday: "12:00–16:00 / 19:00–23:00",
-      saturday: "12:00–16:00",
-      sunday: "Libre",
-    },
-    {
-      id: 2,
-      name: "Langile 2",
-      role: "Sukaldaria",
-      monday: "12:00–16:00 / 19:00–23:00",
-      tuesday: "Libre",
-      wednesday: "19:00–23:00",
-      thursday: "12:00–16:00",
-      friday: "19:00–23:00",
-      saturday: "12:00–16:00 / 19:00–23:00",
-      sunday: "Libre",
-    },
-
-    // Zerbitzaria
-    {
-      id: 3,
-      name: "Langile 3",
-      role: "Zerbitzaria",
-      monday: "12:00–16:00",
-      tuesday: "19:00–23:00",
-      wednesday: "Libre",
-      thursday: "12:00–16:00 / 19:00–23:00",
-      friday: "12:00–16:00",
-      saturday: "19:00–23:00",
-      sunday: "Libre",
-    },
-    {
-      id: 4,
-      name: "Langile 4",
-      role: "Zerbitzaria",
-      monday: "19:00–23:00",
-      tuesday: "12:00–16:00",
-      wednesday: "12:00–16:00 / 19:00–23:00",
-      thursday: "Libre",
-      friday: "19:00–23:00",
-      saturday: "12:00–16:00",
-      sunday: "Libre",
-    },
-
-    // Banatzailea
-    {
-      id: 5,
-      name: "Langile 5",
-      role: "Banatzailea",
-      monday: "Libre",
-      tuesday: "Libre",
-      wednesday: "12:00–16:00",
-      thursday: "19:00–23:00",
-      friday: "12:00–16:00 / 19:00–23:00",
-      saturday: "12:00–16:00",
-      sunday: "19:00–23:00",
-    },
-    {
-      id: 6,
-      name: "Langile 6",
-      role: "Banatzailea",
-      monday: "12:00–16:00 / 19:00–23:00",
-      tuesday: "12:00–16:00",
-      wednesday: "19:00–23:00",
-      thursday: "Libre",
-      friday: "Libre",
-      saturday: "19:00–23:00",
-      sunday: "12:00–16:00",
-    },
-
-    // Garbitzailea
-    {
-      id: 7,
-      name: "Langile 7",
-      role: "Garbitzailea",
-      monday: "12:00–16:00",
-      tuesday: "12:00–16:00 / 19:00–23:00",
-      wednesday: "Libre",
-      thursday: "19:00–23:00",
-      friday: "12:00–16:00",
-      saturday: "Libre",
-      sunday: "19:00–23:00",
-    },
-    {
-      id: 8,
-      name: "Langile 8",
-      role: "Garbitzailea",
-      monday: "19:00–23:00",
-      tuesday: "Libre",
-      wednesday: "12:00–16:00 / 19:00–23:00",
-      thursday: "12:00–16:00",
-      friday: "19:00–23:00",
-      saturday: "12:00–16:00 / 19:00–23:00",
-      sunday: "Libre",
-    },
-  ]);
+  const pageProps = usePage().props;
+  const { langileak = [] } = pageProps;
 
   const [newWorker, setNewWorker] = useState({
-    name: "",
-    role: "",
-    monday: "",
-    tuesday: "",
-    wednesday: "",
-    thursday: "",
-    friday: "",
-    saturday: "",
-    sunday: "",
+    name: "", role: "",
+    monday: "", tuesday: "", wednesday: "",
+    thursday: "", friday: "", saturday: "", sunday: ""
   });
+
+  // ✅ ORDENAR langileak del seeder: mota → name
+  const sortedLangileak = [...langileak].sort((a, b) => {
+    const roleA = (a.mota || a.role || '').toLowerCase();
+    const roleB = (b.mota || b.role || '').toLowerCase();
+    if (roleA < roleB) return -1;
+    if (roleA > roleB) return 1;
+
+    const nameA = (a.name || '').toLowerCase();
+    const nameB = (b.name || '').toLowerCase();
+    if (nameA < nameB) return -1;
+    if (nameA > nameB) return 1;
+    return 0;
+  });
+
+  // ✅ INICIALIZAR workers CON DATOS REALES del seeder
+  const [workers, setWorkers] = useState(
+    sortedLangileak.map(worker => ({
+      id: worker.id,
+      name: worker.name,
+      role: worker.mota,
+      mota: worker.mota,
+      monday: worker.monday || "",
+      tuesday: worker.tuesday || "",
+      wednesday: worker.wednesday || "",
+      thursday: worker.thursday || "",
+      friday: worker.friday || "",
+      saturday: worker.saturday || "",
+      sunday: worker.sunday || ""
+    }))
+  );
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setNewWorker((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setNewWorker(prev => ({ ...prev, [name]: value }));
   };
 
   const handleAddWorker = (e) => {
     e.preventDefault();
-
     if (!newWorker.name || !newWorker.role) return;
 
-    setWorkers((prev) => [
-      ...prev,
-      {
-        id: Date.now(),
-        ...newWorker,
-      },
-    ]);
+    const workerData = sortedLangileak.find(w => w.id == newWorker.name);
+    if (!workerData) return;
+
+    const exists = workers.some(w => w.id == newWorker.name);
+    if (exists) {
+      alert(`${workerData.name} ${t("schedule.workerAlreadyAdded")}`);
+      return;
+    }
+
+    setWorkers(prev => [...prev, {
+      id: newWorker.name, 
+      name: workerData.name,
+      role: newWorker.role,
+      mota: newWorker.role,
+      monday: newWorker.monday,
+      tuesday: newWorker.tuesday,
+      wednesday: newWorker.wednesday,
+      thursday: newWorker.thursday,
+      friday: newWorker.friday,
+      saturday: newWorker.saturday,
+      sunday: newWorker.sunday
+    }]);
 
     setNewWorker({
-      name: "",
-      role: "",
-      monday: "",
-      tuesday: "",
-      wednesday: "",
-      thursday: "",
-      friday: "",
-      saturday: "",
-      sunday: "",
+      name: "", role: "", monday: "", tuesday: "", wednesday: "",
+      thursday: "", friday: "", saturday: "", sunday: ""
+    });
+  };
+
+  const handleSaveTable = () => {
+    if (workers.length === 0) {
+      alert('Añade trabajadores primero');
+      return;
+    }
+
+    fetch(route('ordutegia.store'), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      },
+      body: JSON.stringify({ workers })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        alert('¡Guardado correctamente!');
+      } else {
+        alert('Error: ' + data.message);
+      }
+    })
+    .catch(error => {
+      alert('Error de conexión');
     });
   };
 
@@ -181,19 +126,13 @@ const Schedule = () => {
         </Row>
 
         <Row className="g-4">
-          {/* Tabla de horarios */}
+          {/* Tabla con DATOS REALES del seeder */}
           <Col lg={8}>
             <Card className="border-0 shadow-sm h-100 schedule-card-table">
               <Card.Body className="p-3 p-lg-4">
                 <h5 className="fw-bold mb-3">{t("schedule.tableWeek")}</h5>
                 <div className="table-responsive">
-                  <Table
-                    striped
-                    bordered
-                    hover
-                    size="sm"
-                    className="schedule-table"
-                  >
+                  <Table striped bordered hover size="sm" className="schedule-table">
                     <thead className="text-center align-middle">
                       <tr>
                         <th>{t("schedule.columnWorker")}</th>
@@ -210,15 +149,15 @@ const Schedule = () => {
                     <tbody>
                       {workers.map((w) => (
                         <tr key={w.id}>
-                          <td>{w.name}</td>
+                          <td><strong>{w.name}</strong></td>
                           <td>{w.role}</td>
-                          <td>{w.monday}</td>
-                          <td>{w.tuesday}</td>
-                          <td>{w.wednesday}</td>
-                          <td>{w.thursday}</td>
-                          <td>{w.friday}</td>
-                          <td>{w.saturday}</td>
-                          <td>{w.sunday}</td>
+                          <td>{w.monday || "—"}</td>
+                          <td>{w.tuesday || "—"}</td>
+                          <td>{w.wednesday || "—"}</td>
+                          <td>{w.thursday || "—"}</td>
+                          <td>{w.friday || "—"}</td>
+                          <td>{w.saturday || "—"}</td>
+                          <td>{w.sunday || "—"}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -228,7 +167,7 @@ const Schedule = () => {
             </Card>
           </Col>
 
-          {/* Formulario para añadir langilea */}
+          {/* Formulario CON NUEVO BOTÓN */}
           <Col lg={4}>
             <Card className="border-0 shadow-sm h-100 schedule-card-form">
               <Card.Body className="p-3 p-lg-4">
@@ -236,23 +175,26 @@ const Schedule = () => {
                   {t("schedule.formTitle")}
                 </h5>
                 <Form onSubmit={handleAddWorker}>
-                  {/* Izena */}
                   <Form.Group className="mb-3">
                     <Form.Label className="schedule-form-label text-white">
                       {t("schedule.nameLabel")}
                     </Form.Label>
-                    <Form.Control
-                      type="text"
+                    <Form.Select
                       name="name"
                       value={newWorker.name}
                       onChange={handleChange}
-                      placeholder={t("schedule.namePlaceholder")}
                       required
-                      className="schedule-form-input"
-                    />
+                      className="schedule-form-select"
+                    >
+                      <option value="">{t("schedule.namePlaceholder")}</option>
+                      {sortedLangileak.map((worker) => (
+                        <option key={worker.id} value={worker.id}>
+                          {worker.name} ({worker.mota || worker.role})
+                        </option>
+                      ))}
+                    </Form.Select>
                   </Form.Group>
 
-                  {/* Rola */}
                   <Form.Group className="mb-3">
                     <Form.Label className="schedule-form-label text-white">
                       {t("schedule.roleLabel")}
@@ -265,14 +207,13 @@ const Schedule = () => {
                       className="schedule-form-select"
                     >
                       <option value="">{t("schedule.rolePlaceholder")}</option>
-                      <option value="Sukaldaria">{t("schedule.roleOptions.cook")}</option>
-                      <option value="Zerbitzaria">{t("schedule.roleOptions.waiter")}</option>
-                      <option value="Banatzailea">{t("schedule.roleOptions.delivery")}</option>
+                      <option value="Sukaldari">{t("schedule.roleOptions.cook")}</option>
+                      <option value="Zerbitzari">{t("schedule.roleOptions.waiter")}</option>
+                      <option value="Banatzaile">{t("schedule.roleOptions.delivery")}</option>
                       <option value="Garbitzailea">{t("schedule.roleOptions.cleaner")}</option>
                     </Form.Select>
                   </Form.Group>
 
-                  {/* Días de la semana (todos iguales) */}
                   {["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"].map((day) => (
                     <Form.Group key={day} className="mb-2">
                       <Form.Label className="schedule-form-label text-white">
@@ -282,24 +223,18 @@ const Schedule = () => {
                         name={day}
                         value={newWorker[day]}
                         onChange={handleChange}
-                        required
                         className="schedule-form-select"
                       >
                         <option value="">{t("schedule.daySelectPlaceholder")}</option>
                         <option value="12:00–16:00">12:00–16:00</option>
                         <option value="19:00–23:00">19:00–23:00</option>
-                        <option value="12:00–16:00 / 19:00–23:00">
-                          12:00–16:00 / 19:00–23:00
-                        </option>
+                        <option value="12:00–16:00 / 19:00–23:00">12:00–16:00 / 19:00–23:00</option>
                         <option value="Libre">Libre</option>
                       </Form.Select>
                     </Form.Group>
                   ))}
-
-                  <Button
-                    type="submit"
-                    className="w-100 schedule-save-button fw-bold"
-                  >
+                  {/* Botón original */}
+                  <Button type="submit" className="w-100 schedule-save-button fw-bold">
                     {t("schedule.submitButton")}
                   </Button>
                 </Form>

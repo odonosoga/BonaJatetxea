@@ -8,7 +8,11 @@ class Langile extends Model
 {
     protected $table = 'langileak';
     protected $primaryKey = 'idLangile';
-    protected $fillable = ['mota', 'user_id'];
+    protected $fillable = [
+        'mota', 'user_id', 
+        'monday', 'tuesday', 'wednesday', 
+        'thursday', 'friday', 'saturday', 'sunday'
+    ];
 
     public function user()
     {
