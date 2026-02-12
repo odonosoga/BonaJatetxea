@@ -83,7 +83,7 @@ const Reserva = () => {
     <>
       <HeroReserva />
 
-      <section id="reservation" className="pb-2 reservation-section">
+      <section id="reservation" className="pb-5 pt-5 reservation-section">
         <Container>
           <Row className="g-5">
             {/* Columna info */}

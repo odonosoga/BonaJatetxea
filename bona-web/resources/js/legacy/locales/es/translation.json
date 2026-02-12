@@ -269,25 +269,29 @@
     "daySelectPlaceholder": "- Seleccionar -",
     "submitButton": "Añadir trabajador al horario"
   },
-
- "delivery": {
+  "delivery": {
     "zain": "PENDIENTE",
+    "bidalketan": "EN REPARTO",
+    "entregatuta": "ENTREGADO",
     "itemsLabel": "Número de productos", 
     "acceptButton": "Aceptar pedido",
-    "bidalketan": "EN REPARTO",
+    "deliverButton": "Marcar entregado",
     "inDelivery": "En reparto",
+    "delivered": "¡Entregado!",
     "status": "Estado: {{status}}"
   },
   "pending": {
     "title": "Pedidos pendientes",
     "badgeAvailable": "{{count}} disponibles",
     "lastUpdated": "Actualizado hace 2 min",
-    "zainTitle": " Pedidos pendientes",
-    "bidalketaTitle": " Pedidos en reparto",
+    "zainTitle": "Pedidos pendientes",
+    "bidalketaTitle": "Pedidos en reparto",
+    "entregatutaTitle": "Pedidos entregados",
     "loading": "Cargando pedidos...",
     "autoRefresh": "Auto-refresh 10s",
     "noZain": "No hay pedidos pendientes",
-    "noBidalketa": "No hay pedidos en reparto"
+    "noBidalketa": "No hay pedidos en reparto",
+    "noEntregatuta": "No hay pedidos entregados"
   },
 
   "register": {

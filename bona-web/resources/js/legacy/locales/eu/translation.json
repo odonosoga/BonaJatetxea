@@ -269,26 +269,31 @@
     "daySelectPlaceholder": "- Aukeratu -",
     "submitButton": "Gehitu langilea ordutegian"
   },
+
   "delivery": {
     "zain": "ZAIN",
-    "itemsLabel": "Produktu kopurua",
-    "acceptButton": "Onartu eskaera",
     "bidalketan": "BIDALKETAN",
+    "entregatuta": "ENTREGATUTA",
+    "itemsLabel": "Produktu kopurua", 
+    "acceptButton": "Onartu eskaera",
+    "deliverButton": "Markatu entregatuta",
     "inDelivery": "Bidalketan",
+    "delivered": "Entregatuta!",
     "status": "Egoera: {{status}}"
   },
   "pending": {
     "title": "Eskaerak",
     "badgeAvailable": "{{count}} zain",
     "lastUpdated": "Orain 2 min",
-    "zainTitle": " Zain dauden eskaerak",
-    "bidalketaTitle": " Bidalketan dauden eskaerak",
+    "zainTitle": "Zain dauden eskaerak",
+    "bidalketaTitle": "Bidalketan dauden eskaerak",
+    "entregatutaTitle": "Entregatutako eskaerak",
     "loading": "Kargatzen eskaerak...",
     "autoRefresh": "Auto-refresh 10s",
     "noZain": "Ez dago eskaerarik zain",
-    "noBidalketa": "Ez dago bidalketarik"
+    "noBidalketa": "Ez dago bidalketarik",
+    "noEntregatuta": "Ez dago entregatutakorik"
   },
-
   "register": {
     "title": "Erregistratu",
     "name": "Izena",
