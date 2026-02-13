@@ -15,10 +15,7 @@ use App\Http\Controllers\EskaeraController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-// ============================================================================
 // ✅ RUTAS ESPECÍFICAS
-// ============================================================================
-
 Route::get('/', fn () => Inertia::render('home'))->name('home');
 Route::get('/menu', fn () => Inertia::render('menu'));
 Route::get('/kontaktua', fn () => Inertia::render('contact'));
@@ -29,9 +26,8 @@ Route::get('/bidalketak', fn () => Inertia::render('pendingdelivery'));
 Route::get('/erreserba', fn () => Inertia::render('reservation'));
 Route::get('/payform', fn () => Inertia::render('payform'));
 
-Route::post('/ordainketa-prozesatu', function (Request $request) {
-    return redirect()->back()->with('success', 'Eskerrik asko! Zure eskaera ongi jaso dugu.');
-})->name('payform.store');
+// CAMBIO: Ahora apunta al controlador para guardar en la BD
+Route::post('/eskaerak', [EskaeraController::class, 'store'])->name('eskaerak.store');
 
 // Registro
 Route::get('/erregistratu', fn () => Inertia::render('Register'))->name('register');
@@ -86,8 +82,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::post('/users/langile', [UserController::class, 'storeLangile'])->name('users.langile.store');
 });
 
-// ============================================================================
-// ✅ 404 CATCH-ALL
-// ============================================================================
+// ✅ 404 CATCH-ALL (He añadido eskaerak.store a la lista de exclusión)
 Route::get('/{any}', fn () => Inertia::render('legacy'))
-    ->where('any', '^(?!api|login|logout|erregistratu|registration|erreserbak|admin|eskaerak|payform|ordainketa-prozesatu).*$');
+    ->where('any', '^(?!api|login|logout|erregistratu|registration|erreserbak|admin|eskaerak|payform|ordainketa-prozesatu).*$');    

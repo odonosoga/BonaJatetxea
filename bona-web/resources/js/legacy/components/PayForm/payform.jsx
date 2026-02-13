@@ -7,12 +7,40 @@ import { useCart } from '../cartcontext/CartContext';
 
 const PayForm = () => {
     const { cartItems, cartTotal, clearCart } = useCart(); 
-    const { data, setData } = useForm({ payment_method: 'visa' });
+    
+    // Vinculamos los campos necesarios para la base de datos y el email
+    const { data, setData, post, processing } = useForm({ 
+        payment_method: 'visa',
+        address: '', 
+        name: '',
+        surname: '',
+        email: '',
+        postal_code: '',
+        // Pasamos el carrito dentro del objeto data para que Inertia lo envíe
+        cartItems: [], 
+        cartTotal: 0
+    });
+    
     const [showModal, setShowModal] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setShowModal(true);
+        
+        // Enviamos los datos a la ruta definida en web.php
+        // Incluimos manualmente el estado actual del carrito
+        post('/eskaerak', {
+            data: {
+                ...data,
+                cartItems: cartItems,
+                cartTotal: cartTotal
+            },
+            onSuccess: () => {
+                setShowModal(true);
+            },
+            onError: (errors) => {
+                console.error("Error al procesar el pedido:", errors);
+            }
+        });
     };
 
     const handleFinalize = () => {
@@ -24,7 +52,6 @@ const PayForm = () => {
         <section id="ordainketa" className="register-section py-5">
             <Container>
                 <Row className="align-items-end">
-                    {/* COLUMNA IZQUIERDA: FORMULARIO */}
                     <Col xs={12} lg={7}>
                         <div className="register-form w-100 shadow-sm bg-white p-4" style={{ borderRadius: '15px' }}>
                             <h2 className="fw-bold text-dark fs-4 mb-4 text-center">
@@ -34,18 +61,63 @@ const PayForm = () => {
                             <Form onSubmit={handleSubmit}>
                                 <h6 className="text-uppercase fw-bold text-muted small mb-3">Bidalketa Datuak</h6>
                                 <Row className="g-2">
-                                    <Col md={6}><Form.Group className="mb-3"><Form.Label className="fw-medium">Izena</Form.Label><Form.Control type="text" required /></Form.Group></Col>
-                                    <Col md={6}><Form.Group className="mb-3"><Form.Label className="fw-medium">Abizena</Form.Label><Form.Control type="text" required /></Form.Group></Col>
+                                    <Col md={6}>
+                                        <Form.Group className="mb-3">
+                                            <Form.Label className="fw-medium">Izena</Form.Label>
+                                            <Form.Control 
+                                                type="text" 
+                                                required 
+                                                value={data.name}
+                                                onChange={(e) => setData('name', e.target.value)}
+                                            />
+                                        </Form.Group>
+                                    </Col>
+                                    <Col md={6}>
+                                        <Form.Group className="mb-3">
+                                            <Form.Label className="fw-medium">Abizena</Form.Label>
+                                            <Form.Control 
+                                                type="text" 
+                                                required 
+                                                value={data.surname}
+                                                onChange={(e) => setData('surname', e.target.value)}
+                                            />
+                                        </Form.Group>
+                                    </Col>
                                 </Row>
 
                                 <Form.Group className="mb-3">
                                     <Form.Label className="fw-medium">Email Helbidea</Form.Label>
-                                    <Form.Control type="email" required />
+                                    <Form.Control 
+                                        type="email" 
+                                        required 
+                                        value={data.email}
+                                        onChange={(e) => setData('email', e.target.value)}
+                                    />
                                 </Form.Group>
 
                                 <Row className="g-2">
-                                    <Col md={8}><Form.Group className="mb-3"><Form.Label className="fw-medium">Helbidea</Form.Label><Form.Control type="text" required /></Form.Group></Col>
-                                    <Col md={4}><Form.Group className="mb-3"><Form.Label className="fw-medium">Posta Kodea</Form.Label><Form.Control type="text" required /></Form.Group></Col>
+                                    <Col md={8}>
+                                        <Form.Group className="mb-3">
+                                            <Form.Label className="fw-medium">Helbidea</Form.Label>
+                                            <Form.Control 
+                                                type="text" 
+                                                required 
+                                                value={data.address}
+                                                onChange={(e) => setData('address', e.target.value)}
+                                            />
+                                        </Form.Group>
+                                    </Col>
+                                    <Col md={4}>
+                                        <Form.Group className="mb-3">
+                                            <Form.Label className="fw-medium">Posta Kodea</Form.Label>
+                                            <Form.Control 
+                                                type="text" 
+                                                required 
+                                                value={data.postal_code}
+                                                onChange={(e) => setData('postal_code', e.target.value)}
+                                            />
+                                        </Form.Group>
+                                    </Col>
                                 </Row>
 
                                 <hr className="my-4" />
@@ -55,7 +127,10 @@ const PayForm = () => {
 
                                 <Form.Group className="mb-3">
                                     <Form.Label className="fw-medium">Txartel Mota</Form.Label>
-                                    <Form.Select value={data.payment_method} onChange={(e) => setData('payment_method', e.target.value)}>
+                                    <Form.Select 
+                                        value={data.payment_method} 
+                                        onChange={(e) => setData('payment_method', e.target.value)}
+                                    >
                                         <option value="visa">Visa</option>
                                         <option value="mastercard">Mastercard</option>
                                         <option value="amex">American Express</option>
@@ -86,14 +161,17 @@ const PayForm = () => {
                                     <LockFill className="me-1 text-success" /> Ordainketa segurua eta enkriptatua.
                                 </div>
 
-                                <button type="submit" className="btn-register fw-bold w-100 py-3">
-                                    Bidalketa Konfirmatu
+                                <button 
+                                    type="submit" 
+                                    className="btn-register fw-bold w-100 py-3"
+                                    disabled={processing}
+                                >
+                                    {processing ? 'Prozesatzen...' : 'Bidalketa Konfirmatu'}
                                 </button>
                             </Form>
                         </div>
                     </Col>
 
-                    {/* COLUMNA DERECHA: RESUMEN DEL PEDIDO */}
                     <Col xs={12} lg={5} className="mt-4 mt-lg-0">
                         <Card className="shadow-sm border-0" style={{ borderRadius: '15px' }}>
                             <Card.Header className="bg-register text-white py-3" style={{ borderRadius: '15px 15px 0 0' }}>
@@ -138,7 +216,6 @@ const PayForm = () => {
                 </Row>
             </Container>
 
-            {/* MODAL DE AGRADECIMIENTO */}
             <Modal show={showModal} onHide={() => setShowModal(false)} centered backdrop="static">
                 <Modal.Body className="text-center py-5">
                     <h2 className="fw-bold mb-3" style={{ color: '#8d3236' }}>
