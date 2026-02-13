@@ -2,7 +2,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Langile;
+use App\Models\Lokala;
 class LangileLokalenKokapena extends Model
 {
  

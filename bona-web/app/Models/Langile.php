@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\User;
+use App\Models\Lokala;
+use App\Models\LangileLokalenKokapena;
 class Langile extends Model
 {
     protected $table = 'langileak';
