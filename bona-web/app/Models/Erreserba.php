@@ -2,8 +2,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;  // Añade esta importación
-
+use App\Models\User; 
+use App\Models\Lokala; 
 class Erreserba extends Model
 {
     protected $table = 'erreserbak';
