@@ -1,4 +1,4 @@
-import { Link, useForm, usePage } from '@inertiajs/react';
+import { Link, useForm, usePage, router } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import {
    Alert,
@@ -23,10 +23,11 @@ import {
    Trash3,
 } from 'react-bootstrap-icons';
 import { useTranslation } from 'react-i18next';
-import { BsClock } from 'react-icons/bs';
+import { BsClockFill, BsClockHistory } from 'react-icons/bs';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { RiDashboardFill } from 'react-icons/ri';
 import './header.css';
+
 import BonaLogoa from '../../img/BonaLogoa.png';
 import { useCart } from '../cartcontext/CartContext';
 
@@ -40,6 +41,7 @@ const Header = () => {
    const [login, setLogin] = useState(false);
    const [cart, setCart] = useState(false);
    const [expanded, setExpanded] = useState(false);
+   const [status, setStatus] = useState(null);
 
    const { cartItems, removeFromCart, cartTotal, totalItems, clearCart } = useCart();
 
@@ -47,6 +49,61 @@ const Header = () => {
        email: '',
        password: '',
    });
+
+   // 🔥 FUNCIÓN que calcula el estado del restaurante (con i18n)
+   const getRestaurantStatus = () => {
+      const now = new Date();
+      const day = now.getDay(); 
+      const hour = now.getHours();
+      const minute = now.getMinutes();
+      const currentTime = hour * 60 + minute;
+
+      const schedules = {
+         // Lun-Jue: 13:00-16:00 | 20:30-23:00
+         1: [[13*60, 16*60], [20.5*60, 23*60]],  // Lunes
+         2: [[13*60, 16*60], [20.5*60, 23*60]],  // Martes  
+         3: [[13*60, 16*60], [20.5*60, 23*60]],  // Miércoles
+         4: [[13*60, 16*60], [20.5*60, 23*60]],  // Jueves
+
+         // Vie-Sáb: 13:00-16:30 | 20:30-23:30
+         5: [[13*60, 16.5*60], [20.5*60, 23.5*60]],  // Viernes
+         6: [[13*60, 16.5*60], [20.5*60, 23.5*60]],  // Sábado
+
+         // Dom: SOLO 13:00-16:00
+         0: [[13*60, 16*60]]  // Domingo
+      };
+
+      const daySchedule = schedules[day] || [];
+      const closeSoonMinutes = 5;
+
+      // Verificar cada franja horaria
+      for (let i = 0; i < daySchedule.length; i++) {
+         const [open, close] = daySchedule[i];
+         const closeSoon = close - closeSoonMinutes;
+
+         if (currentTime >= open && currentTime < close) {
+            if (currentTime >= closeSoon) {
+               return { 
+                  status: 'closesSoon', 
+                  text: t('schedule.closesSoon'),  // ✅ i18n
+                  timeLeft: Math.round(close - currentTime),
+                  period: i === 0 ? 'lunch' : 'dinner'
+               };
+            }
+            return { 
+               status: 'open', 
+               text: t('schedule.openNow'),     // ✅ i18n
+               period: i === 0 ? 'lunch' : 'dinner'
+            };
+         }
+      }
+
+      return { 
+         status: 'closed', 
+         text: t('schedule.closed'),       // ✅ i18n
+         nextOpen: '13:00'
+      };
+   };
 
    useEffect(() => {
        if (flash?.require_auth) {
@@ -59,6 +116,16 @@ const Header = () => {
        document.addEventListener('open-login-modal', handleOpenLogin);
        return () => document.removeEventListener('open-login-modal', handleOpenLogin);
    }, []);
+
+   // 🔥 FIX: Reacciona a cambios de idioma + actualiza cada minuto
+   useEffect(() => {
+      const updateStatus = () => {
+         setStatus(getRestaurantStatus());
+      };
+      updateStatus();
+      const interval = setInterval(updateStatus, 60000); // Cada minuto
+      return () => clearInterval(interval);
+   }, [i18n.language, t]);  // ✅ Dependencias clave: idioma + función t
 
    useEffect(() => {
        const updateActiveLink = () => {
@@ -107,11 +174,15 @@ const Header = () => {
    const handleShowCart = () => setCart(true);
    const handleCloseCart = () => setCart(false);
 
+   const handleConfirmCheckout = () => {
+       setCart(false);
+       router.visit('/payform');
+   };
+
    const changeLanguage = (lng) => i18n.changeLanguage(lng);
 
    return (
        <>
-           {/* HEADER TOPBAR */}
            <section className="header-section text-white shadow-sm">
                <div className="topbar d-flex justify-content-between align-items-center px-4 py-2">
                    <div className="topbar-left d-flex flex-column flex-sm-row align-items-center gap-3">
@@ -122,8 +193,35 @@ const Header = () => {
 
                    <div className="topbar-right d-flex align-items-center gap-3">
                        
+                       {/* 🔥 HORARIO DINÁMICO MULTIIDIOMA */}
+                       <div className="topbar-hours d-none d-md-flex flex-column me-2 text-end">
+                           <div 
+                               className="status-badge p-2 rounded-3 mb-1" 
+                               style={{
+                                 background: status?.status === 'open' ? '#dcfce7' : 
+                                            status?.status === 'closesSoon' ? '#fef3c7' : '#fee2e2',
+                                 border: `2px solid ${
+                                   status?.status === 'open' ? '#22c55e' : 
+                                   status?.status === 'closesSoon' ? '#f59e0b' : '#ef4444'
+                                 }`,
+                                 color: status?.status === 'closed' ? '#dc2626' : '#1f2937',
+                                 fontSize: '0.85rem',
+                                 minWidth: '140px',
+                                 fontWeight: '600'
+                               }}
+                           >
+                               {status?.status === 'open' && <BsClockFill className="me-1 text-success" size={14} />}
+                               {status?.status === 'closesSoon' && <BsClockHistory className="me-1 text-warning" size={14} />}
+                               {status?.status === 'closed' && <BsClockFill className="me-1 text-danger" size={14} />}
+                               <span>{status?.text}</span>
+                           </div>
+                           {status?.status === 'closesSoon' && (
+                               <small className="text-warning fw-bold fs-6">
+                                   ⏰ {status.timeLeft} min
+                               </small>
+                           )}
+                       </div>
 
-                       {/* Language Dropdown */}
                        <Dropdown align="end">
                            <Dropdown.Toggle
                                id="dropdown-language"
@@ -150,7 +248,6 @@ const Header = () => {
                            </Dropdown.Menu>
                        </Dropdown>
 
-                       {/* User Dropdown */}
                        <Dropdown align="end">
                            <Dropdown.Toggle
                                id="dropdown-user"
@@ -235,7 +332,6 @@ const Header = () => {
                    </div>
                </div>
 
-               {/* NAVBAR */}
                <Navbar
                    expand="lg"
                    className="border-top border-dark-subtle"
@@ -248,47 +344,22 @@ const Header = () => {
                            <Nav className="mx-auto text-center">
                                {role === 'Langile' && auth?.user ? (
                                    <>
-                                       <Nav.Link
-                                           as={Link}
-                                           href="/ordutegia"
-                                           className="nav-link-custom px-3"
-                                           onClick={() => setExpanded(false)}
-                                       >
+                                       <Nav.Link as={Link} href="/ordutegia" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
                                            {t('nav.schedule')}
                                        </Nav.Link>
-                                       <Nav.Link
-                                           as={Link}
-                                           href="/bidalketak"
-                                           className="nav-link-custom px-3"
-                                           onClick={() => setExpanded(false)}
-                                       >
+                                       <Nav.Link as={Link} href="/bidalketak" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
                                            {t('nav.delivery')}
                                        </Nav.Link>
                                    </>
                                ) : (
                                    <>
-                                       <Nav.Link
-                                           as={Link}
-                                           href="/"
-                                           className="nav-link-custom px-3"
-                                           onClick={() => setExpanded(false)}
-                                       >
+                                       <Nav.Link as={Link} href="/" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
                                            {t('nav.home')}
                                        </Nav.Link>
-                                       <Nav.Link
-                                           as={Link}
-                                           href="/kontaktua"
-                                           className="nav-link-custom px-3"
-                                           onClick={() => setExpanded(false)}
-                                       >
+                                       <Nav.Link as={Link} href="/kontaktua" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
                                            {t('nav.contact')}
                                        </Nav.Link>
-                                       <Nav.Link
-                                           as={Link}
-                                           href="/menu"
-                                           className="nav-link-custom px-3"
-                                           onClick={() => setExpanded(false)}
-                                       >
+                                       <Nav.Link as={Link} href="/menu" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
                                            {t('nav.menu')}
                                        </Nav.Link>
                                        {role === 'Bezero' && (
@@ -308,28 +379,16 @@ const Header = () => {
                                                {t('nav.reservations')}
                                            </Nav.Link>
                                        )}
-                                       {role !== 'Bezero' &&
-                                           role !== 'Langile' &&
-                                           auth?.user && (
-                                               <>
-                                                   <Nav.Link
-                                                       as={Link}
-                                                       href="/ordutegia"
-                                                       className="nav-link-custom px-3"
-                                                       onClick={() => setExpanded(false)}
-                                                   >
-                                                       {t('nav.schedule')}
-                                                   </Nav.Link>
-                                                   <Nav.Link
-                                                       as={Link}
-                                                       href="/bidalketak"
-                                                       className="nav-link-custom px-3"
-                                                       onClick={() => setExpanded(false)}
-                                                   >
-                                                       {t('nav.delivery')}
-                                                   </Nav.Link>
-                                               </>
-                                           )}
+                                       {role !== 'Bezero' && role !== 'Langile' && auth?.user && (
+                                           <>
+                                               <Nav.Link as={Link} href="/ordutegia" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
+                                                   {t('nav.schedule')}
+                                               </Nav.Link>
+                                               <Nav.Link as={Link} href="/bidalketak" className="nav-link-custom px-3" onClick={() => setExpanded(false)}>
+                                                   {t('nav.delivery')}
+                                               </Nav.Link>
+                                           </>
+                                       )}
                                    </>
                                )}
                            </Nav>
@@ -338,7 +397,7 @@ const Header = () => {
                </Navbar>
            </section>
 
-           {/* Login Modal */}
+           {/* MODAL LOGIN */}
            <Modal show={login} onHide={handleCloseLogin} centered>
                <Modal.Header closeButton>
                    <Modal.Title>{t('login.modalTitle')}</Modal.Title>
@@ -386,7 +445,7 @@ const Header = () => {
                </Modal.Body>
            </Modal>
 
-           {/* Cart Modal - 100% i18n con tus keys + nuevas */}
+           {/* MODAL CARRITO */}
            <Modal show={cart} onHide={handleCloseCart} centered size="lg">
                <Modal.Header closeButton>
                    <Modal.Title>{t('cart.title')}</Modal.Title>
@@ -411,32 +470,37 @@ const Header = () => {
                                                    src={item.img}
                                                    alt={item.name}
                                                    style={{
-                                                       width: '200px',
-                                                       height: '150px',
+                                                       width: '150px',
+                                                       height: '110px',
                                                        objectFit: 'cover',
-                                                       marginRight: '10px',
-                                                       borderRadius: '20px',
+                                                       marginRight: '15px',
+                                                       borderRadius: '12px',
                                                    }}
                                                />
                                                <div className="d-flex flex-column justify-content-center">
-                                                   <h6 className="fw-bold mb-1">{item.name}</h6>
-                                                   <div className="d-flex align-items-center mb-1">
-                                                       <label className="me-2">{t('cart.quantity')}:</label>
-                                                       <span className="fw-bold">{item.quantity}</span>
-                                                   </div>
-                                                   <label className="fw-bold">
-                                                       {t('cart.price')}: {item.price * item.quantity}€
+                                                   <label className="fw-bold fs-5">
+                                                       {item.name}
+                                                   </label>
+                                                   <label>
+                                                       {t('cart.quantity')}:{' '}
+                                                       <span className="fw-bold">
+                                                           {item.quantity}
+                                                       </span>
+                                                   </label>
+                                                   <label className="fw-bold text-primary">
+                                                       {item.price * item.quantity}€
                                                    </label>
                                                </div>
                                            </Col>
                                            <Col md={4} className="d-flex justify-content-end">
-                                               <div className="align-self-center trash-icon">
+                                               <div className="align-self-center px-3">
                                                    <Trash3
                                                        size={24}
                                                        className="text-danger"
                                                        style={{ cursor: 'pointer' }}
-                                                       title={t('cart.removeItem')}
-                                                       onClick={() => removeFromCart(item.id)}
+                                                       onClick={() =>
+                                                           removeFromCart(item.id)
+                                                       }
                                                    />
                                                </div>
                                            </Col>
@@ -456,7 +520,10 @@ const Header = () => {
                                    >
                                        {t('cart.clearButton')}
                                    </Button>
-                                   <Button className="konf-btn px-4 fw-bold">
+                                   <Button 
+                                       className="konf-btn px-4 fw-bold"
+                                       onClick={handleConfirmCheckout}
+                                   >
                                        {t('cart.confirmButton')}
                                    </Button>
                                </div>

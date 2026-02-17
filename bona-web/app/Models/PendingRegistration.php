@@ -11,7 +11,7 @@ class PendingRegistration extends Model {
     protected $casts = [
         'expires_at' => 'datetime',
         'birth_date' => 'date',
-        // QUITA password de casts (no timestamp)
+
     ];
     
     public function isExpired() {

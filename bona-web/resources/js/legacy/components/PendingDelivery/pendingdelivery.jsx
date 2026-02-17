@@ -39,8 +39,21 @@ const PendingDelivery = () => {
     }
   };
 
+  const handleDeliver = async (id) => {
+    try {
+      await axios.patch(`/eskaerak/${id}`, {
+        eskaerarenEgoera: 'entregatuta'
+      });
+      fetchOrders();
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  // Filtrar por estados
   const zainOrders = Array.isArray(orders) ? orders.filter(o => o.eskaerarenEgoera === 'zain') : [];
   const bidalketanOrders = Array.isArray(orders) ? orders.filter(o => o.eskaerarenEgoera === 'bidalketan') : [];
+  const entregatutaOrders = Array.isArray(orders) ? orders.filter(o => o.eskaerarenEgoera === 'entregatuta') : [];
 
   if (loading) {
     return (
@@ -63,9 +76,11 @@ const PendingDelivery = () => {
           <small className="text-muted">{t('pending.autoRefresh')}</small>
         </div>
         
-        {/* ZAIN DAUDEN */}
+        {/* ZAIN DAUDEN - Pendientes */}
         <div className="mb-5">
-          <h4 className="fw-bold mb-3 text-danger">{t('pending.zainTitle')}</h4>
+          <h4 className="fw-bold mb-3 text-danger">
+            {t('pending.zainTitle')} <Badge bg="danger">{zainOrders.length}</Badge>
+          </h4>
           <Row xs={1} sm={2} lg={3} className="g-4">
             {zainOrders.length === 0 ? (
               <Col xs={12} className="text-center py-5">
@@ -84,8 +99,8 @@ const PendingDelivery = () => {
           </Row>
         </div>
 
-        {/* BIDALKETAN DAUDEN */}
-        <div>
+        {/* BIDALKETAN DAUDEN - En entrega */}
+        <div className="mb-5">
           <h4 className="fw-bold mb-3 text-info">
             {t('pending.bidalketaTitle')} <Badge bg="info">{bidalketanOrders.length}</Badge>
           </h4>
@@ -97,7 +112,31 @@ const PendingDelivery = () => {
             ) : (
               bidalketanOrders.map(order => (
                 <Col key={order.id_eskaera}>
-                  <DeliveryCard delivery={order} accepted={true} />
+                  <DeliveryCard 
+                    delivery={order} 
+                    accepted={true}
+                    onDeliver={() => handleDeliver(order.id_eskaera)}
+                  />
+                </Col>
+              ))
+            )}
+          </Row>
+        </div>
+
+        {/* ENTREGATUTA DAUDEN - Ya entregados (ABAJO) */}
+        <div>
+          <h4 className="fw-bold mb-3 text-success">
+            {t('pending.entregatutaTitle')} <Badge bg="success">{entregatutaOrders.length}</Badge>
+          </h4>
+          <Row xs={1} sm={2} lg={3} className="g-4">
+            {entregatutaOrders.length === 0 ? (
+              <Col xs={12} className="text-center py-5">
+                <div className="text-muted">{t('pending.noEntregatuta')}</div>
+              </Col>
+            ) : (
+              entregatutaOrders.map(order => (
+                <Col key={order.id_eskaera}>
+                  <DeliveryCard delivery={order} delivered={true} />
                 </Col>
               ))
             )}

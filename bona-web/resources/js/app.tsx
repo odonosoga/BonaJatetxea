@@ -7,11 +7,10 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import React from 'react';
 
-// Importaciones corregidas
+// Importaciones
 import i18n from './legacy/i18n.js'; 
 import { I18nextProvider } from 'react-i18next';
 import { CartProvider } from './legacy/components/cartcontext/CartContext';
-import Header from './legacy/components/Header/header';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -19,8 +18,12 @@ createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
     resolve: async (name) => {
         let page;
+        
+        // Excepciones para archivos que están fuera de la carpeta /pages
         if (name === 'Register') {
             page = await import('./legacy/components/Register/register.jsx');
+        } else if (name === 'PayForm') {
+            page = await import('./legacy/components/PayForm/payform.jsx');
         } else {
             page = await resolvePageComponent(
                 `./pages/${name}.jsx`,
@@ -28,12 +31,12 @@ createInertiaApp({
             );
         }
 
-        // ✅ TRUCO MAESTRO: Envolvemos cada página con el Header y el Provider aquí mismo
-        // Esto garantiza que usePage() funcione siempre.
+        // ✅ LAYOUT GLOBAL CORREGIDO: Ahora incluye Header y Footer
         page.default.layout = page.default.layout || ((page) => (
             <CartProvider>
-                <div className="App">
-                    <main className="content-wrapper">
+                {/* min-vh-100 y flex-column aseguran que el footer se quede abajo si hay poco contenido */}
+                <div className="App d-flex flex-column min-vh-100">
+                    <main className="content-wrapper flex-grow-1">
                         {page}
                     </main>
                 </div>

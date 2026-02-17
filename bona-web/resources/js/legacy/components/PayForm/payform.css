@@ -1,0 +1,78 @@
+/* Estructura Principal con el degradado de Register */
+.register-section {
+    background: linear-gradient(135deg, #F8D4BA 0%, #ffffff 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido */
+}
+
+/* Contenedor del Formulario */
+.register-form {
+    width: 80%; /* Mantiene la proporción de Register */
+    max-width: 600px; /* Un poco más ancho para los campos dobles de Payform */
+    padding-top: 50px;
+    padding-bottom: 2rem;
+    margin: 0 auto; /* Asegura el centrado si no hay columnas de Bootstrap */
+}
+
+/* Título del Formulario */
+.register-form h2 {
+    color: #8d3236;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Estilo de los Inputs al hacer focus */
+.form-control:focus {
+    border-color: #8d3236 !important;
+    box-shadow: 0 0 0 0.2rem rgba(141, 50, 54, 0.25) !important;
+}
+
+/* Botón de Confirmar Pago con la estética de Register */
+.btn-register {
+    background: #8d3236 !important;
+    border: 2px solid #541412 !important;
+    border-radius: 12px !important;
+    font-size: 1.1rem !important;
+    color: #fff !important;
+    font-weight: 600;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px !important;
+}
+
+.btn-register:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(84, 20, 18, 0.4) !important;
+    filter: brightness(1.1); /* Mejora el feedback visual */
+    color: #fff !important;
+}
+
+/* Estilos para el Modal (Éxito) */
+.modal-content {
+    border-radius: 16px !important;
+    border: none !important;
+    box-shadow: 0 20px 60px rgba(141, 50, 54, 0.15) !important;
+}
+
+.bg-register {
+    background: linear-gradient(135deg, #8d3236 0%, #a83f42 100%) !important;
+    border-radius: 16px 16px 0 0 !important;
+    color: white !important;
+}
+
+/* Imagen lateral (si la usas) */
+.register-section Col[style*="backgroundImage"] {
+    min-height: 100%;
+    box-shadow: inset 10px 0 15px -10px rgba(0,0,0,0.1);
+}
+
+/* Ajuste para dispositivos móviles */
+@media (max-width: 768px) {
+    .register-form {
+        width: 90%;
+        padding: 20px;
+    }
+}
