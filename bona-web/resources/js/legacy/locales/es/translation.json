@@ -267,7 +267,10 @@
       "cleaner": "Personal de limpieza"
     },
     "daySelectPlaceholder": "- Seleccionar -",
-    "submitButton": "Añadir trabajador al horario"
+    "submitButton": "Añadir trabajador al horario",
+    "openNow": "✅ Abierto ahora",
+    "closesSoon": "Cierra pronto", 
+    "closed": "❌ Cerrado"
   },
   "delivery": {
     "zain": "PENDIENTE",

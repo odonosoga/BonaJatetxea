@@ -23,7 +23,7 @@ import {
    Trash3,
 } from 'react-bootstrap-icons';
 import { useTranslation } from 'react-i18next';
-import { BsClock } from 'react-icons/bs';
+import { BsClockFill, BsClockHistory } from 'react-icons/bs';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { RiDashboardFill } from 'react-icons/ri';
 import './header.css';
@@ -41,6 +41,7 @@ const Header = () => {
    const [login, setLogin] = useState(false);
    const [cart, setCart] = useState(false);
    const [expanded, setExpanded] = useState(false);
+   const [status, setStatus] = useState(null);
 
    const { cartItems, removeFromCart, cartTotal, totalItems, clearCart } = useCart();
 
@@ -48,6 +49,61 @@ const Header = () => {
        email: '',
        password: '',
    });
+
+   // 🔥 FUNCIÓN que calcula el estado del restaurante (con i18n)
+   const getRestaurantStatus = () => {
+      const now = new Date();
+      const day = now.getDay(); 
+      const hour = now.getHours();
+      const minute = now.getMinutes();
+      const currentTime = hour * 60 + minute;
+
+      const schedules = {
+         // Lun-Jue: 13:00-16:00 | 20:30-23:00
+         1: [[13*60, 16*60], [20.5*60, 23*60]],  // Lunes
+         2: [[13*60, 16*60], [20.5*60, 23*60]],  // Martes  
+         3: [[13*60, 16*60], [20.5*60, 23*60]],  // Miércoles
+         4: [[13*60, 16*60], [20.5*60, 23*60]],  // Jueves
+
+         // Vie-Sáb: 13:00-16:30 | 20:30-23:30
+         5: [[13*60, 16.5*60], [20.5*60, 23.5*60]],  // Viernes
+         6: [[13*60, 16.5*60], [20.5*60, 23.5*60]],  // Sábado
+
+         // Dom: SOLO 13:00-16:00
+         0: [[13*60, 16*60]]  // Domingo
+      };
+
+      const daySchedule = schedules[day] || [];
+      const closeSoonMinutes = 5;
+
+      // Verificar cada franja horaria
+      for (let i = 0; i < daySchedule.length; i++) {
+         const [open, close] = daySchedule[i];
+         const closeSoon = close - closeSoonMinutes;
+
+         if (currentTime >= open && currentTime < close) {
+            if (currentTime >= closeSoon) {
+               return { 
+                  status: 'closesSoon', 
+                  text: t('schedule.closesSoon'),  // ✅ i18n
+                  timeLeft: Math.round(close - currentTime),
+                  period: i === 0 ? 'lunch' : 'dinner'
+               };
+            }
+            return { 
+               status: 'open', 
+               text: t('schedule.openNow'),     // ✅ i18n
+               period: i === 0 ? 'lunch' : 'dinner'
+            };
+         }
+      }
+
+      return { 
+         status: 'closed', 
+         text: t('schedule.closed'),       // ✅ i18n
+         nextOpen: '13:00'
+      };
+   };
 
    useEffect(() => {
        if (flash?.require_auth) {
@@ -60,6 +116,16 @@ const Header = () => {
        document.addEventListener('open-login-modal', handleOpenLogin);
        return () => document.removeEventListener('open-login-modal', handleOpenLogin);
    }, []);
+
+   // 🔥 FIX: Reacciona a cambios de idioma + actualiza cada minuto
+   useEffect(() => {
+      const updateStatus = () => {
+         setStatus(getRestaurantStatus());
+      };
+      updateStatus();
+      const interval = setInterval(updateStatus, 60000); // Cada minuto
+      return () => clearInterval(interval);
+   }, [i18n.language, t]);  // ✅ Dependencias clave: idioma + función t
 
    useEffect(() => {
        const updateActiveLink = () => {
@@ -108,10 +174,9 @@ const Header = () => {
    const handleShowCart = () => setCart(true);
    const handleCloseCart = () => setCart(false);
 
-   // FUNCIÓN CORREGIDA: Redirige a la página de pago
    const handleConfirmCheckout = () => {
-       setCart(false); // Cierra el modal
-       router.visit('/payform'); // Asegúrate de que esta ruta existe en tu web.php
+       setCart(false);
+       router.visit('/payform');
    };
 
    const changeLanguage = (lng) => i18n.changeLanguage(lng);
@@ -127,15 +192,34 @@ const Header = () => {
                    </div>
 
                    <div className="topbar-right d-flex align-items-center gap-3">
+                       
+                       {/* 🔥 HORARIO DINÁMICO MULTIIDIOMA */}
                        <div className="topbar-hours d-none d-md-flex flex-column me-2 text-end">
-                           <div className="d-flex align-items-center justify-content-end gap-2">
-                               <BsClock size={18} />
-                               <small>{t('hours.lunch')}</small>
+                           <div 
+                               className="status-badge p-2 rounded-3 mb-1" 
+                               style={{
+                                 background: status?.status === 'open' ? '#dcfce7' : 
+                                            status?.status === 'closesSoon' ? '#fef3c7' : '#fee2e2',
+                                 border: `2px solid ${
+                                   status?.status === 'open' ? '#22c55e' : 
+                                   status?.status === 'closesSoon' ? '#f59e0b' : '#ef4444'
+                                 }`,
+                                 color: status?.status === 'closed' ? '#dc2626' : '#1f2937',
+                                 fontSize: '0.85rem',
+                                 minWidth: '140px',
+                                 fontWeight: '600'
+                               }}
+                           >
+                               {status?.status === 'open' && <BsClockFill className="me-1 text-success" size={14} />}
+                               {status?.status === 'closesSoon' && <BsClockHistory className="me-1 text-warning" size={14} />}
+                               {status?.status === 'closed' && <BsClockFill className="me-1 text-danger" size={14} />}
+                               <span>{status?.text}</span>
                            </div>
-                           <div className="d-flex align-items-center justify-content-end gap-2">
-                               <BsClock size={18} />
-                               <small>{t('hours.dinner')}</small>
-                           </div>
+                           {status?.status === 'closesSoon' && (
+                               <small className="text-warning fw-bold fs-6">
+                                   ⏰ {status.timeLeft} min
+                               </small>
+                           )}
                        </div>
 
                        <Dropdown align="end">
@@ -313,6 +397,7 @@ const Header = () => {
                </Navbar>
            </section>
 
+           {/* MODAL LOGIN */}
            <Modal show={login} onHide={handleCloseLogin} centered>
                <Modal.Header closeButton>
                    <Modal.Title>{t('login.modalTitle')}</Modal.Title>
@@ -360,6 +445,7 @@ const Header = () => {
                </Modal.Body>
            </Modal>
 
+           {/* MODAL CARRITO */}
            <Modal show={cart} onHide={handleCloseCart} centered size="lg">
                <Modal.Header closeButton>
                    <Modal.Title>{t('cart.title')}</Modal.Title>

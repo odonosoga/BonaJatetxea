@@ -267,7 +267,10 @@
       "cleaner": "Garbitzailea"
     },
     "daySelectPlaceholder": "- Aukeratu -",
-    "submitButton": "Gehitu langilea ordutegian"
+    "submitButton": "Gehitu langilea ordutegian",
+    "openNow": "✅ Irekita orain",
+    "closesSoon": "🤏 Lasaitzen", 
+    "closed": "❌ Itxita"
   },
 
   "delivery": {
