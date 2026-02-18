@@ -74,7 +74,7 @@ const Header = () => {
       };
 
       const daySchedule = schedules[day] || [];
-      const closeSoonMinutes = 5;
+      const closeSoonMinutes = 30;
 
       // Verificar cada franja horaria
       for (let i = 0; i < daySchedule.length; i++) {

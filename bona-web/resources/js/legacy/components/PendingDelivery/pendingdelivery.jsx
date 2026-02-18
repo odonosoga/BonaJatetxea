@@ -39,6 +39,7 @@ const PendingDelivery = () => {
     }
   };
 
+  // ✅ handleDeliver simplificado - DeliveryCard valida el código
   const handleDeliver = async (id) => {
     try {
       await axios.patch(`/eskaerak/${id}`, {
@@ -99,7 +100,7 @@ const PendingDelivery = () => {
           </Row>
         </div>
 
-        {/* BIDALKETAN DAUDEN - En entrega */}
+        {/* BIDALKETAN DAUDEN - En entrega CON CÓDIGO */}
         <div className="mb-5">
           <h4 className="fw-bold mb-3 text-info">
             {t('pending.bidalketaTitle')} <Badge bg="info">{bidalketanOrders.length}</Badge>
@@ -115,7 +116,7 @@ const PendingDelivery = () => {
                   <DeliveryCard 
                     delivery={order} 
                     accepted={true}
-                    onDeliver={() => handleDeliver(order.id_eskaera)}
+                    onDeliver={handleDeliver}  // ✅ Pasa handleDeliver (validación en DeliveryCard)
                   />
                 </Col>
               ))
@@ -123,7 +124,7 @@ const PendingDelivery = () => {
           </Row>
         </div>
 
-        {/* ENTREGATUTA DAUDEN - Ya entregados (ABAJO) */}
+        {/* ENTREGATUTA DAUDEN - Ya entregados */}
         <div>
           <h4 className="fw-bold mb-3 text-success">
             {t('pending.entregatutaTitle')} <Badge bg="success">{entregatutaOrders.length}</Badge>

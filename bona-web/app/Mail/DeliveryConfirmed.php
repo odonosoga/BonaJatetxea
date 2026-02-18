@@ -37,7 +37,12 @@ class DeliveryConfirmed extends Mailable
     public function build()
     {
         return $this->subject('Bona Jatetxea - Eskaera Konfirmatua')
-                    // Corregido para que coincida con: resources/views/emails/delivery-confirmation.blade.php
-                    ->view('emails.delivery-confirmation');
+                    ->view('emails.delivery-confirmation')
+                    ->with([
+                        'entregaKodea' => $this->data['entrega_kodea'] ?? null,  // 🔑 AGREGADO
+                        'data' => $this->data,
+                        'cartItems' => $this->cartItems,
+                        'total' => $this->total
+                    ]);
     }
 }
