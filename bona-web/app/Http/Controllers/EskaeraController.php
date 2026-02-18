@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Mail\DeliveryConfirmed;
@@ -12,49 +11,59 @@ class EskaeraController extends Controller
 {
     public function index()
     {
-        $orders = DB::table('eskaerak')->orderBy('updated_at', 'desc')->get();
-        return response()->json($orders);
+        return DB::table('eskaerak')->orderBy('updated_at', 'desc')->get();
     }
 
-    /**
-     * Guarda el pedido en la base de datos y envía email de confirmación.
-     */
     public function store(Request $request)
     {
-        // 1. Guardar en la base de datos
-        DB::table('eskaerak')->insert([
-            'eskaeraData'      => now()->toDateString(),      
-            'eskaerarenEgoera' => 'zain',                     
-            'ordainketaMota'   => $request->payment_method,   
-            'entregaHelbidea'  => $request->address,          
-            'created_at'       => now(),                      
-            'updated_at'       => null,                       
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
+            'email' => 'required|email',
+            'address' => 'required|string|max:255',
+            'cartItems' => 'required|array|min:1',
+            'cartTotal' => 'required|numeric|min:0.01'
         ]);
 
-        // 2. Preparar datos para el envío de Email
+        // 🎫 CÓDIGO 5 DÍGITOS
+        $entregaKodea = str_pad(rand(0, 99999), 5, '0', STR_PAD_LEFT);
+
+        // GUARDAR
+        $eskaeraId = DB::table('eskaerak')->insertGetId([
+            'eskaeraData' => now()->toDateString(),
+            'eskaerarenEgoera' => 'zain',
+            'ordainketaMota' => $request->payment_method,
+            'entregaHelbidea' => $request->address,
+            'entregaKodea' => $entregaKodea,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        // 📧 EMAIL
         $customerData = [
-            'name'    => $request->name,
+            'name' => $request->name . ' ' . $request->surname,
             'address' => $request->address,
-            'email'   => $request->email
+            'email' => $request->email,
+            'entrega_kodea' => $entregaKodea
         ];
-        
-        $cartItems = $request->cartItems;
-        $cartTotal = $request->cartTotal;
 
         try {
-            // El Mailable DeliveryConfirmed usará la vista delivery-confirmation
-            Mail::to($request->email)->send(new DeliveryConfirmed($customerData, $cartItems, $cartTotal));
+            Mail::to($request->email)->send(
+                new DeliveryConfirmed($customerData, $request->cartItems, $request->cartTotal)
+            );
+            Log::info("Email enviado a {$request->email} - Código: {$entregaKodea}");
         } catch (\Exception $e) {
-            Log::error("Error enviando email de pedido: " . $e->getMessage());
+            Log::error("Email falló ID {$eskaeraId}: " . $e->getMessage());
         }
 
-        return redirect()->back()->with('success', 'Eskerrik asko! Zure eskaera ongi jaso dugu.');
+        // ✅ RESPUESTA Inertia
+        return back()->with('success', 'Eskaera ongi sortua!');
     }
 
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
-            'eskaerarenEgoera' => 'required|in:zain,bidalketan,entregatua'
+            'eskaerarenEgoera' => 'required|in:zain,bidalketan,entregatuta'
         ]);
 
         DB::table('eskaerak')

@@ -1,10 +1,11 @@
+/* TUS ESTILOS ORIGINALES */
 .delivery-card {
   border-radius: 16px !important;
   transition: all 0.3s ease;
   overflow: hidden;
 }
-.card-header
-{
+
+.card-header {
   background-color: #8d3236 !important;
 }
 
@@ -13,15 +14,57 @@
   box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
 }
 
-/* Botoia  */
 .delivery-btn {
-  background: #8d3236 !important;
+  background: linear-gradient(135deg, #8d3236, #a83f42) !important;
   border: 2px solid #541412 !important;
   transition: all 0.3s ease !important;
+  color: white !important;
+  font-weight: 700 !important;
 }
 
 .delivery-btn:hover {
   transform: translateY(-2px);
+  background: linear-gradient(135deg, #a83f42, #b94a4e) !important;
 }
 
+/* 🔐 CÓDIGO INTEGRADO LIMPIO */
+.info-section {
+  background: rgba(248,249,250,0.7);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
 
+.info-row {
+  display: flex;
+  align-items: center;
+}
+
+.code-section {
+  background: rgba(248,249,250,0.9) !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(0,0,0,0.05) !important;
+}
+
+.code-input {
+  font-family: 'Courier New', monospace !important;
+  font-weight: 700 !important;
+  font-size: 1.4rem !important;
+  letter-spacing: 3px !important;
+  border-right: none !important;
+  border-radius: 10px 0 0 10px !important;
+}
+
+.code-input:focus {
+  box-shadow: 0 0 0 0.25rem rgba(13,110,253,0.25) !important;
+}
+
+.is-invalid {
+  border-color: #dc3545 !important;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}

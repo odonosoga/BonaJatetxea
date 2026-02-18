@@ -13,7 +13,6 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\KontsultaController;
 use App\Http\Controllers\EskaeraController;  
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 
 // ✅ RUTAS ESPECÍFICAS
 Route::get('/', fn () => Inertia::render('home'))->name('home');
