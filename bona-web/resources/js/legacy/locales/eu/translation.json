@@ -273,30 +273,42 @@
     "closed": "❌ Itxita"
   },
 
-  "delivery": {
-    "zain": "ZAIN",
+ "delivery": {
+  "status": {
     "bidalketan": "BIDALKETAN",
     "entregatuta": "ENTREGATUTA",
-    "itemsLabel": "Produktu kopurua", 
-    "acceptButton": "Onartu eskaera",
-    "deliverButton": "Markatu entregatuta",
-    "inDelivery": "Bidalketan",
-    "delivered": "Entregatuta!",
-    "status": "Egoera: {{status}}"
+    "zain": "ZAIN",
+    "delivered": "Entregatuta!"
   },
-  "pending": {
-    "title": "Eskaerak",
-    "badgeAvailable": "{{count}} zain",
-    "lastUpdated": "Orain 2 min",
-    "zainTitle": "Zain dauden eskaerak",
-    "bidalketaTitle": "Bidalketan dauden eskaerak",
-    "entregatutaTitle": "Entregatutako eskaerak",
-    "loading": "Kargatzen eskaerak...",
-    "autoRefresh": "Auto-refresh 10s",
-    "noZain": "Ez dago eskaerarik zain",
-    "noBidalketa": "Ez dago bidalketarik",
-    "noEntregatuta": "Ez dago entregatutakorik"
+  "code": {
+    "verify": "Kodea baieztatu",
+    "askCustomer": "Bezeroari eska 5 digituen kodea",
+    "errorTitle": "Kode okerra",
+    "errorMessage": "Berriro eska bezeroari"
   },
+  "actions": {
+    "accept": "Onartu",
+    "deliver": "Entregatu"
+  },
+  "itemsLabel": "Produktu kopurua",
+  "acceptButton": "Onartu eskaera",
+  "deliverButton": "Markatu entregatuta",
+  "inDelivery": "Bidalketan",
+  "currentStatus": "Egoera: {{status}}"
+},
+"pending": {
+  "title": "Eskaerak",
+  "badgeAvailable": "{{count}} zain",
+  "lastUpdated": "Orain 2 min",
+  "zainTitle": "Zain dauden eskaerak",
+  "bidalketaTitle": "Bidalketan dauden eskaerak",
+  "entregatutaTitle": "Entregatutako eskaerak",
+  "loading": "Kargatzen eskaerak...",
+  "autoRefresh": "Auto-refresh 10s",
+  "noZain": "Ez dago eskaerarik zain",
+  "noBidalketa": "Ez dago bidalketarik",
+  "noEntregatuta": "Ez dago entregatutakorik"
+},
   "register": {
     "title": "Erregistratu",
     "name": "Izena",
@@ -391,12 +403,76 @@
     "cancel": "Ezeztatu",
     "save": "Gorde aldaketak",
     "saving": "Gordetzen..."
+  },
+  "payform": {
+    "title": "Ordainketa Formularioa",
+    "shipping": {
+      "title": "Bidalketa Datuak"
+    },
+    "fields": {
+      "name": {
+        "label": "Izena"
+      },
+      "surname": {
+        "label": "Abizena"
+      },
+      "email": {
+        "label": "Email Helbidea"
+      },
+      "address": {
+        "label": "Helbidea",
+        "placeholder": "Idatzi zure helbidea",
+        "hint": "Idazten hasten zarenean iradokizunak agertuko dira"
+      },
+      "postal_code": {
+        "label": "Posta Kodea"
+      }
+    },
+    "payment": {
+      "title": "Ordainketa Metodoa",
+      "cardType": "Txartel Mota",
+      "methods": {
+        "visa": "Visa",
+        "mastercard": "Mastercard",
+        "amex": "American Express"
+      },
+      "cardNumber": "Txartel Zenbakia",
+      "cardNumberPlaceholder": "0000 0000 0000 0000",
+      "expiry": "Iraungitze-data",
+      "expiryPlaceholder": "MM/YY",
+      "cvv": "CVV",
+      "cvvPlaceholder": "123",
+      "secureText": "Ordainketa segurua eta enkriptatua."
+    },
+    "validation": {
+      "cardIncomplete": "Txartela 16 digitu izan behar ditu",
+      "invalidMonth": "Hilabetea 01 eta 12 artean egon behar da",
+      "cardExpired": "Txartela iraungita dago",
+      "expiryIncomplete": "Sartu data osoa (MM/YY)"
+    },
+    "actions": {
+      "processing": "Prozesatzen...",
+      "confirmShipping": "Bidalketa Konfirmatu"
+    },
+    "summary": {
+      "title": "Eskaeraren Laburpena",
+      "quantity": "Kopurua: {{quantity}}",
+      "totalLabel": "GUZTIRA:"
+    },
+    "modal": {
+      "thanksTitle": "Eskerrik asko zure erosketarengatik!",
+      "emailSent": "Email bat bidali dizugu entrega-kodearekin.",
+      "shippingSoon": "Ahalik eta azkarren iritsiko da.",
+      "backHome": "Hasierara Itzuli"
+    },
+  "validation": {
+  "postalCodeIncomplete":"Kode postala 5 digitukoa izan behar da",
+  "cardIncomplete": "Txartela 16 digitu izan behar ditu",
+  "invalidMonth": "Hilabetea 01 eta 12 artean egon behar da",
+  "cardExpired": "Txartela iraungita dago",
+  "expiryIncomplete": "Sartu data osoa (MM/YY)"
   }
 }
-
-  
-
-  
-
+}
   
 

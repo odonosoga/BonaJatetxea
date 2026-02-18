@@ -40,11 +40,11 @@ const DeliveryCard = ({
   const getStatusText = () => {
     switch (delivery.eskaerarenEgoera) {
       case 'bidalketan':
-        return t('delivery.bidalketan');
+        return t('delivery.status.bidalketan');
       case 'entregatuta':
-        return t('delivery.entregatuta');
+        return t('delivery.status.entregatuta');
       default:
-        return t('delivery.zain');
+        return t('delivery.status.zain');
     }
   };
 
@@ -124,8 +124,8 @@ const DeliveryCard = ({
             <div className="d-flex align-items-center mb-3">
               <BsKeyFill size={18} className="me-3 text-primary fw-bold fs-5" />
               <div>
-                <h6 className="mb-1 fw-bold text-dark">Kodea baieztatu</h6>
-                <small className="text-muted">Bezeroari eska 5 digituen kodea</small>
+                <h6 className="mb-1 fw-bold text-dark">{t('delivery.code.verify')}</h6>
+                <small className="text-muted">{t('delivery.code.askCustomer')}</small>
               </div>
             </div>
             
@@ -146,13 +146,13 @@ const DeliveryCard = ({
                 onClick={handleDeliverWithCode}
                 disabled={codigoInput.length !== 5}
               >
-                Entregatu
+                {t('delivery.actions.deliver')}
               </Button>
             </InputGroup>
             
             {codigoError && (
               <div className="alert alert-danger p-2 small mb-0 border-0">
-                <strong>Kode okerra</strong> - Berriro eska bezeroari
+                <strong>{t('delivery.code.errorTitle')}</strong> - {t('delivery.code.errorMessage')}
               </div>
             )}
           </div>
@@ -161,7 +161,7 @@ const DeliveryCard = ({
         {/* BOTONES ABAJO */}
         <div className="d-flex justify-content-between align-items-end mt-auto">
           <small className="text-muted fw-medium">
-            {t('delivery.status', { status: delivery.eskaerarenEgoera })}
+            {t('delivery.currentStatus', { status: delivery.eskaerarenEgoera })}
           </small>
           <div className="text-end">
             {showAcceptButton && (
@@ -170,14 +170,14 @@ const DeliveryCard = ({
                 className="delivery-btn fw-bold px-4 py-2 text-white border-0 w-100"
                 onClick={onAccept}
               >
-                Onartu
+                {t('delivery.actions.accept')}
               </Button>
             )}
             
             {delivered && (
               <div className="p-3 bg-success bg-opacity-10 rounded-3">
                 <Badge bg="success" className="fs-5 px-4 py-2 fw-bold w-100">
-                  Entregatuta
+                  {t('delivery.status.delivered')}
                 </Badge>
               </div>
             )}
