@@ -268,9 +268,9 @@
     },
     "daySelectPlaceholder": "- Seleccionar -",
     "submitButton": "Añadir trabajador al horario",
-    "openNow": "✅ Abierto ahora",
+    "openNow": "Abierto ahora",
     "closesSoon": "Cierra pronto", 
-    "closed": "❌ Cerrado"
+    "closed": "Cerrado"
   },
   "delivery": {
   "status": {

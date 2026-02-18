@@ -268,9 +268,9 @@
     },
     "daySelectPlaceholder": "- Aukeratu -",
     "submitButton": "Gehitu langilea ordutegian",
-    "openNow": "✅ Irekita orain",
-    "closesSoon": "🤏 Lasaitzen", 
-    "closed": "❌ Itxita"
+    "openNow": "Irekita orain",
+    "closesSoon": "Lasaitzen", 
+    "closed": "Itxita"
   },
 
  "delivery": {
