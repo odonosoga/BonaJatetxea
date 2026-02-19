@@ -11,20 +11,29 @@ use Inertia\Inertia;
 
 class UserController extends Controller
 {
-    // ✅ MÉTODO PRINCIPAL (CORREGIDO: Carga TODOS los usuarios)
-    public function index()
+    // ✅ MÉTODO PRINCIPAL (ACTUALIZADO con tabs)
+    public function index(Request $request)
     {
-        // CAMBIO CLAVE: Usamos get() en lugar de paginate() para traer TODOS los registros.
-        // React se encarga de paginarlos de 10 en 10.
-        $allUsers = User::with('langile')->orderBy('name')->get();
+        $tab = $request->get('tab', 'langile');
+        
+        $query = User::with('langile');
+        
+        // LOGICA PARA TABS
+        if ($tab === 'eliminados') {
+            $query->onlyTrashed();
+        } else {
+            $query->withTrashed(); // Para que React vea deleted_at
+        }
+        
+        $allUsers = $query->orderBy('name')->get();
 
-        // Envolvemos en 'data' para mantener compatibilidad con admin.jsx (que espera users.data)
         return Inertia::render('admin', [
-            'users' => ['data' => $allUsers]
+            'users' => ['data' => $allUsers],
+            'activeTab' => $tab // ← AÑADIDO
         ]);
     }
 
-    // ✅ TU MÉTODO EXISTENTE (intacto)
+    // ✅ storeLangile (INTACTO)
     public function storeLangile(Request $request)
     {
         $data = $request->validate([
@@ -56,7 +65,7 @@ class UserController extends Controller
         return back()->with('success', 'Langile creado correctamente.');
     }
 
-    // ✅ UPDATE (intacto)
+    // ✅ update (INTACTO)
     public function update(Request $request, User $user)
     {
         $data = $request->validate([
@@ -78,14 +87,41 @@ class UserController extends Controller
         return back()->with('success', 'Usuario actualizado correctamente.');
     }
 
-    // ✅ DESTROY (intacto)
+    // ✅ destroy (ACTUALIZADO: soft delete)
     public function destroy(User $user)
     {
         if ($user->role === 'Langile') {
             $user->langile()->delete();
         }
-        $user->delete();
+        $user->delete(); // ← Ahora es SOFT DELETE automático
 
-        return back()->with('success', 'Usuario eliminado correctamente.');
+        return back()->with('success', 'Usuario movido a Eliminados.');
+    }
+
+    // 🆕 NUEVO: Restaurar usuario
+    public function restore(User $user)
+    {
+        $user->restore();
+        
+        // Restaurar langile si existía
+        if ($user->role === 'Langile') {
+            Langile::updateOrCreate(
+                ['user_id' => $user->id],
+                ['mota' => $user->langile?->mota ?? ''] // Mantiene datos previos si existen
+            );
+        }
+
+        return back()->with('success', 'Usuario recuperado exitosamente.');
+    }
+
+    // 🆕 NUEVO: Eliminar permanente
+    public function forceDelete(User $user)
+    {
+        if ($user->role === 'Langile') {
+            $user->langile()->forceDelete();
+        }
+        $user->forceDelete();
+
+        return back()->with('success', 'Usuario eliminado PERMANENTEMENTE.');
     }
 }

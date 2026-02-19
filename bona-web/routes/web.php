@@ -79,6 +79,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::post('/users/langile', [UserController::class, 'storeLangile'])->name('users.langile.store');
+    
+    // 🆕 PARA USUARIOS ELIMINADOS (con {id} en vez de {user})
+    Route::post('/users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
+    Route::delete('/users/{id}/force-delete', [UserController::class, 'forceDelete'])->name('users.force-delete');
 });
 
 // ✅ 404 CATCH-ALL (He añadido eskaerak.store a la lista de exclusión)
