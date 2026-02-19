@@ -15,6 +15,7 @@ class UserController extends Controller
     public function index()
     {
         $allUsers = User::with('langile')->orderBy('name')->get();
+
         $recoveryUsers = RecoveryUser::orderBy('id', 'desc')->get()->map(function ($user) {
             return [
                 'id'          => $user->id,
@@ -27,9 +28,9 @@ class UserController extends Controller
                 'postal_code' => $user->postal_code,
                 'birth_date'  => $user->birth_date,
                 'mota'        => $user->mota,
-                'deleted_at'  => $user->deleted_at,
+                'deleted_at'  => $user->deleted_at ?? null,
             ];
-        })->values()->toArray();
+        })->values()->all();
 
         return Inertia::render('admin', [
             'users'         => ['data' => $allUsers],
@@ -119,8 +120,12 @@ class UserController extends Controller
             ->with('success', 'Erabiltzailea ezabatu eta berreskuratze zerrendan gorde da.');
     }
 
-    public function restore($id)
+    public function restore(Request $request, $id)
     {
+        $request->validate([
+            'password' => 'required|string|min:8',
+        ]);
+
         $recovery = RecoveryUser::findOrFail($id);
 
         if (User::where('email', $recovery->email)->exists()) {
@@ -131,7 +136,7 @@ class UserController extends Controller
         $user = User::create([
             'name'        => $recovery->name,
             'email'       => $recovery->email,
-            'password'    => Hash::make(\Illuminate\Support\Str::random(16)),
+            'password'    => Hash::make($request->password), // ← contraseña del admin
             'role'        => $recovery->role,
             'phone'       => $recovery->phone,
             'address'     => $recovery->address,
@@ -148,7 +153,7 @@ class UserController extends Controller
         $recovery->delete();
 
         return redirect()->route('admin.users.index')
-            ->with('success', 'Erabiltzailea berreskuratu da. Pasahitza berrezarri behar da.');
+            ->with('success', 'Erabiltzailea berreskuratu da.');
     }
 
     public function forceDelete($id)
