@@ -1,35 +1,37 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\EskaeraController;
+use App\Http\Controllers\KontsultaController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ScheduleController;
+use App\Models\PendingRegistration;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\ProfileController;
-use App\Models\PendingRegistration;
-use App\Http\Controllers\ScheduleController;
-use App\Models\User;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\KontsultaController;
-use App\Http\Controllers\EskaeraController;  
-use Illuminate\Support\Facades\Auth;
 
 // ✅ RUTAS ESPECÍFICAS
-Route::get('/', fn () => Inertia::render('home'))->name('home');
-Route::get('/menu', fn () => Inertia::render('menu'));
-Route::get('/kontaktua', fn () => Inertia::render('contact'));
-Route::post('/kontaktua', [KontsultaController::class, 'store'])->name('kontaktua.store');  
+Route::get('/', fn() => Inertia::render('home'))->name('home');
+Route::get('/menu', fn() => Inertia::render('menu'));
+Route::get('/kontaktua', fn() => Inertia::render('contact'));
+Route::post('/kontaktua', [KontsultaController::class, 'store'])->name('kontaktua.store');
 Route::get('/ordutegia', [ScheduleController::class, 'index'])->name('schedule.index');
 Route::post('/ordutegia/store', [ScheduleController::class, 'store'])->name('ordutegia.store');
-Route::get('/bidalketak', fn () => Inertia::render('pendingdelivery'));
-Route::get('/erreserba', fn () => Inertia::render('reservation'));
-Route::get('/payform', fn () => Inertia::render('payform'));
+Route::get('/bidalketak', fn() => Inertia::render('pendingdelivery'));
+Route::get('/erreserba', fn() => Inertia::render('reservation'));
+Route::get('/payform', fn() => Inertia::render('payform'));
 
-// CAMBIO: Ahora apunta al controlador para guardar en la BD
+// Eskaerak
 Route::post('/eskaerak', [EskaeraController::class, 'store'])->name('eskaerak.store');
+Route::get('/eskaerak', [EskaeraController::class, 'index']);
+Route::patch('/eskaerak/{id}', [EskaeraController::class, 'updateStatus'])->name('eskaerak.update');
 
 // Registro
-Route::get('/erregistratu', fn () => Inertia::render('Register'))->name('register');
+Route::get('/erregistratu', fn() => Inertia::render('Register'))->name('register');
 Route::post('/erregistratu', [RegisterController::class, 'store'])->name('register.store');
 
 // Auth
@@ -40,10 +42,7 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
 Route::get('/erreserbak', [ReservationController::class, 'index'])->name('erreserbak.index');
 Route::post('/erreserbak/validate', [ReservationController::class, 'store'])->name('erreserbak.validate');
 
-// Eskaerak
-Route::get('/eskaerak', [EskaeraController::class, 'index']);
-Route::patch('/eskaerak/{id}', [EskaeraController::class, 'updateStatus'])->name('eskaerak.update');
-
+// Profile
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -52,35 +51,43 @@ Route::middleware(['auth'])->group(function () {
 // Verificación email
 Route::get('/registration/verify/{id}/{hash}', function ($id, $hash) {
     $pending = PendingRegistration::findOrFail($id);
+
     if ($pending->expires_at->isPast() || sha1($pending->email) !== $hash) {
         return redirect('/erregistratu')->with('error', 'Enlace expirado');
     }
+
     $user = User::create([
-        'name'        => $pending->name . ' ' . ($pending->surname ?? ''),
-        'email'       => $pending->email,
-        'password'    => $pending->password,
-        'phone'       => $pending->phone,
-        'birth_date'  => $pending->birth_date,
-        'address'     => $pending->address,
-        'postal_code' => $pending->postal_code,
-        'role'        => 'Bezero',
+        'name'              => $pending->name . ' ' . ($pending->surname ?? ''),
+        'email'             => $pending->email,
+        'password'          => $pending->password,
+        'phone'             => $pending->phone,
+        'birth_date'        => $pending->birth_date,
+        'address'           => $pending->address,
+        'postal_code'       => $pending->postal_code,
+        'role'              => 'Bezero',
         'email_verified_at' => now(),
     ]);
+
     $pending->delete();
     Auth::login($user);
+
     return redirect('/')->with('success', 'Verificado! Bienvenido');
 })->name('registration.verify');
 
-Route::get('/erregistroa', fn () => Inertia::render('register'));
+Route::get('/erregistroa', fn() => Inertia::render('register'));
 
-// Admin
+// ✅ ADMIN
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('users.index');
     Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::post('/users/langile', [UserController::class, 'storeLangile'])->name('users.langile.store');
+
+    // Erabiltzaileak Berreskuratu (Recovery)
+    Route::post('/users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
+    Route::delete('/users/{id}/force-delete', [UserController::class, 'forceDelete'])->name('users.forceDelete');
 });
 
-// ✅ 404 CATCH-ALL (He añadido eskaerak.store a la lista de exclusión)
-Route::get('/{any}', fn () => Inertia::render('legacy'))
-    ->where('any', '^(?!api|login|logout|erregistratu|registration|erreserbak|admin|eskaerak|payform|ordainketa-prozesatu).*$');    
+// ✅ 404 CATCH-ALL
+Route::get('/{any}', fn() => Inertia::render('legacy'))
+    ->where('any', '^(?!api|login|logout|erregistratu|registration|erreserbak|admin|eskaerak|payform|ordainketa-prozesatu).*$');

@@ -2,24 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Nav, Tab, Table, Button, Modal, Form, Alert, Badge, Card, Pagination, InputGroup, FormControl } from 'react-bootstrap';
 import { Head, Link, usePage, router, useForm } from '@inertiajs/react';
 import { GrUserWorker } from "react-icons/gr";
-import { FaUser, FaSearch } from "react-icons/fa";
+import { FaUser, FaSearch, FaTrashRestore } from "react-icons/fa";
 import { useTranslation } from 'react-i18next';
 import './admin.css';
 
 const route = window.route;
 
-const AdminComponent = ({ users, activeTab = 'langile' }) => {
+const AdminComponent = ({ users, recoveryUsers = [], activeTab = 'langile' }) => {
     const { t } = useTranslation();
     const { flash } = usePage().props;
     const [key, setKey] = useState(activeTab);
     const [editingUser, setEditingUser] = useState(null);
     const [showEditModal, setShowEditModal] = useState(false);
 
-    // ✅ ESTADOS PARA BUSCADOR Y PAGINACIÓN
+    // ESTADOS PARA BUSCADOR Y PAGINACIÓN
     const [searchLangile, setSearchLangile] = useState('');
     const [searchBezero, setSearchBezero] = useState('');
+    const [searchRecovery, setSearchRecovery] = useState('');
     const [currentPageLangile, setCurrentPageLangile] = useState(1);
     const [currentPageBezero, setCurrentPageBezero] = useState(1);
+    const [currentPageRecovery, setCurrentPageRecovery] = useState(1);
     const itemsPerPage = 10;
 
     // Form para EDITAR
@@ -33,26 +35,19 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
         birth_date: '', address: '', postal_code: '', mota: ''
     });
 
-    // ✅ LÓGICA DE FILTRADO Y PAGINACIÓN (Cliente)
+    // LÓGICA DE FILTRADO Y PAGINACIÓN (Cliente)
     const filterAndPaginate = (data, search, currentPage) => {
-        // 1. Filtrar por nombre (case insensitive)
         const filtered = data.filter(user => 
             user.name.toLowerCase().includes(search.toLowerCase())
         );
-        
-        // 2. Ordenar alfabéticamente
         const sorted = filtered.sort((a, b) => a.name.localeCompare(b.name));
-        
-        // 3. Paginar
         const totalPages = Math.ceil(sorted.length / itemsPerPage);
         const start = (currentPage - 1) * itemsPerPage;
         const end = start + itemsPerPage;
         const paginated = sorted.slice(start, end);
-        
         return { paginated, totalPages, totalCount: sorted.length };
     };
 
-    // Obtener datos procesados para cada tabla
     const langileData = filterAndPaginate(
         users.data.filter(u => u.role === 'Langile'), 
         searchLangile, 
@@ -65,25 +60,27 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
         currentPageBezero
     );
 
-    // Cambiar de página
+    const recoveryData = filterAndPaginate(
+        recoveryUsers,
+        searchRecovery,
+        currentPageRecovery
+    );
+
     const handlePageChange = (newPage, type) => {
         if (type === 'langile') setCurrentPageLangile(newPage);
-        else setCurrentPageBezero(newPage);
+        else if (type === 'bezero') setCurrentPageBezero(newPage);
+        else setCurrentPageRecovery(newPage);
     };
 
-    // Renderizar controles de paginación
     const renderPagination = (totalPages, currentPage, type) => {
         if (totalPages <= 1) return null;
-        
         return (
             <Pagination className="justify-content-center mt-4">
                 <Pagination.Prev 
                     onClick={() => handlePageChange(currentPage - 1, type)}
                     disabled={currentPage === 1}
                 />
-                {/* Lógica simple de paginación: mostrar todos los números o rango limitado */}
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => {
-                    // Mostrar solo páginas cercanas a la actual para no saturar si hay muchas
                     if (
                         page === 1 || 
                         page === totalPages || 
@@ -98,11 +95,8 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
                                 {page}
                             </Pagination.Item>
                         );
-                    } else if (
-                        page === currentPage - 3 || 
-                        page === currentPage + 3
-                    ) {
-                         return <Pagination.Ellipsis key={page} disabled />;
+                    } else if (page === currentPage - 3 || page === currentPage + 3) {
+                        return <Pagination.Ellipsis key={page} disabled />;
                     }
                     return null;
                 })}
@@ -114,9 +108,33 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
         );
     };
 
+    // Eliminar usuario: lo mueve a recovery_users
     const deleteUser = (userId) => {
         if (confirm(t('admin.confirmDelete'))) {
-            router.delete(route ? route('admin.users.destroy', userId) : `/admin/users/${userId}`);
+            router.delete(route ? route('admin.users.destroy', userId) : `/admin/users/${userId}`, {
+                preserveScroll: true,
+            });
+        }
+    };
+
+    // Restaurar usuario desde recovery_users
+    const restoreUser = (userId) => {
+        if (confirm('Erabiltzailea berreskuratu nahi duzu?')) {
+            router.post(
+                route ? route('admin.users.restore', userId) : `/admin/users/${userId}/restore`,
+                {},
+                { preserveScroll: true }
+            );
+        }
+    };
+
+    // Eliminar permanentemente desde recovery_users
+    const permanentDelete = (userId) => {
+        if (confirm('Erabiltzailea betirako ezabatu nahi duzu? Ekintza hau ezin da desegin.')) {
+            router.delete(
+                route ? route('admin.users.forceDelete', userId) : `/admin/users/${userId}/force-delete`,
+                { preserveScroll: true }
+            );
         }
     };
 
@@ -145,7 +163,6 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
     const handleUpdate = (e) => {
         e.preventDefault();
         if (!editingUser) return;
-
         const url = route ? route('admin.users.update', editingUser.id) : `/admin/users/${editingUser.id}`;
         editForm.put(url, {
             onSuccess: () => handleCloseModal(),
@@ -159,16 +176,11 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
             createForm.setError('password_confirmation', t('admin.passwordsDontMatch') || 'Las contraseñas no coinciden');
             return;
         }
-
         const url = route ? route('admin.users.langile.store') : '/admin/users/langile';
         createForm.post(url, {
             preserveScroll: true,
-            onSuccess: () => {
-                createForm.reset();
-            },
-            onError: (errors) => {
-                console.error("Errores de validación:", errors);
-            }
+            onSuccess: () => { createForm.reset(); },
+            onError: (errors) => { console.error("Errores de validación:", errors); }
         });
     };
 
@@ -204,6 +216,19 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
                                     <div className="d-flex align-items-center gap-2">
                                         <FaUser size={20} />
                                         <span>{t('admin.customers')}</span>
+                                    </div>
+                                </Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link eventKey="recovery" className="admin-nav-link text-white">
+                                    <div className="d-flex align-items-center gap-2">
+                                        <FaTrashRestore size={20} />
+                                        <span>Erabiltzaileak Berreskuratu</span>
+                                        {recoveryUsers.length > 0 && (
+                                            <Badge bg="danger" pill className="ms-1">
+                                                {recoveryUsers.length}
+                                            </Badge>
+                                        )}
                                     </div>
                                 </Nav.Link>
                             </Nav.Item>
@@ -246,9 +271,7 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
                                                             isInvalid={!!createForm.errors.name}
                                                             required 
                                                         />
-                                                        <Form.Control.Feedback type="invalid">
-                                                            {createForm.errors.name}
-                                                        </Form.Control.Feedback>
+                                                        <Form.Control.Feedback type="invalid">{createForm.errors.name}</Form.Control.Feedback>
                                                     </Col>
                                                     <Col md={6}>
                                                         <Form.Label className="fw-medium text-secondary small text-uppercase">
@@ -262,9 +285,7 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
                                                             isInvalid={!!createForm.errors.email}
                                                             required 
                                                         />
-                                                        <Form.Control.Feedback type="invalid">
-                                                            {createForm.errors.email}
-                                                        </Form.Control.Feedback>
+                                                        <Form.Control.Feedback type="invalid">{createForm.errors.email}</Form.Control.Feedback>
                                                     </Col>
                                                     <Col md={6}>
                                                         <Form.Label className="fw-medium text-secondary small text-uppercase">
@@ -278,9 +299,7 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
                                                             isInvalid={!!createForm.errors.password}
                                                             required 
                                                         />
-                                                        <Form.Control.Feedback type="invalid">
-                                                            {createForm.errors.password}
-                                                        </Form.Control.Feedback>
+                                                        <Form.Control.Feedback type="invalid">{createForm.errors.password}</Form.Control.Feedback>
                                                     </Col>
                                                     <Col md={6}>
                                                         <Form.Label className="fw-medium text-secondary small text-uppercase">
@@ -294,9 +313,7 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
                                                             isInvalid={!!createForm.errors.password_confirmation}
                                                             required 
                                                         />
-                                                        <Form.Control.Feedback type="invalid">
-                                                            {createForm.errors.password_confirmation}
-                                                        </Form.Control.Feedback>
+                                                        <Form.Control.Feedback type="invalid">{createForm.errors.password_confirmation}</Form.Control.Feedback>
                                                     </Col>
                                                     <Col md={6}>
                                                         <Form.Label className="fw-medium text-secondary small text-uppercase">
@@ -309,9 +326,7 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
                                                             isInvalid={!!createForm.errors.phone}
                                                             required 
                                                         />
-                                                        <Form.Control.Feedback type="invalid">
-                                                            {createForm.errors.phone}
-                                                        </Form.Control.Feedback>
+                                                        <Form.Control.Feedback type="invalid">{createForm.errors.phone}</Form.Control.Feedback>
                                                     </Col>
                                                     <Col md={6}>
                                                         <Form.Label className="fw-medium text-secondary small text-uppercase">
@@ -325,9 +340,7 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
                                                             isInvalid={!!createForm.errors.birth_date}
                                                             required 
                                                         />
-                                                        <Form.Control.Feedback type="invalid">
-                                                            {createForm.errors.birth_date}
-                                                        </Form.Control.Feedback>
+                                                        <Form.Control.Feedback type="invalid">{createForm.errors.birth_date}</Form.Control.Feedback>
                                                     </Col>
                                                     <Col md={12}>
                                                         <Form.Label className="fw-medium text-secondary small text-uppercase">
@@ -342,14 +355,10 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
                                                         >
                                                             <option value="">{t('admin.selectType') || 'Seleccionar tipo...'}</option>
                                                             {tipoTrabajadorOptions.map((option) => (
-                                                                <option key={option.value} value={option.value}>
-                                                                    {option.label}
-                                                                </option>
+                                                                <option key={option.value} value={option.value}>{option.label}</option>
                                                             ))}
                                                         </Form.Select>
-                                                        <Form.Control.Feedback type="invalid">
-                                                            {createForm.errors.mota}
-                                                        </Form.Control.Feedback>
+                                                        <Form.Control.Feedback type="invalid">{createForm.errors.mota}</Form.Control.Feedback>
                                                     </Col>
                                                     <Col md={6}>
                                                         <Form.Label className="fw-medium text-secondary small text-uppercase">
@@ -362,9 +371,7 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
                                                             isInvalid={!!createForm.errors.address}
                                                             required 
                                                         />
-                                                        <Form.Control.Feedback type="invalid">
-                                                            {createForm.errors.address}
-                                                        </Form.Control.Feedback>
+                                                        <Form.Control.Feedback type="invalid">{createForm.errors.address}</Form.Control.Feedback>
                                                     </Col>
                                                     <Col md={6}>
                                                         <Form.Label className="fw-medium text-secondary small text-uppercase">
@@ -377,9 +384,7 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
                                                             isInvalid={!!createForm.errors.postal_code}
                                                             required 
                                                         />
-                                                        <Form.Control.Feedback type="invalid">
-                                                            {createForm.errors.postal_code}
-                                                        </Form.Control.Feedback>
+                                                        <Form.Control.Feedback type="invalid">{createForm.errors.postal_code}</Form.Control.Feedback>
                                                     </Col>
                                                     <Col md={12} className="mt-4">
                                                         <Form.Control 
@@ -394,7 +399,7 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
                                         </Card.Body>
                                     </Card>
 
-                                    {/* ✅ BUSCADOR LANGILE */}
+                                    {/* BUSCADOR LANGILE */}
                                     <InputGroup className="mb-4" style={{ maxWidth: '400px' }}>
                                         <InputGroup.Text className="bg-white border-end-0">
                                             <FaSearch className="text-muted" />
@@ -405,7 +410,7 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
                                             value={searchLangile}
                                             onChange={(e) => {
                                                 setSearchLangile(e.target.value);
-                                                setCurrentPageLangile(1); // Reset a pág 1 al buscar
+                                                setCurrentPageLangile(1);
                                             }}
                                         />
                                     </InputGroup>
@@ -457,7 +462,6 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
                                         </Table>
                                     </div>
                                     
-                                    {/* ✅ PAGINACIÓN LANGILE */}
                                     {renderPagination(langileData.totalPages, currentPageLangile, 'langile')}
                                     {langileData.totalCount > 0 && (
                                         <div className="text-center text-muted mt-2 small">
@@ -470,7 +474,7 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
                                 <Tab.Pane eventKey="bezero">
                                     <h2 className="text-dark fw-bold mb-4">{t('admin.customerManagement')}</h2>
                                     
-                                    {/* ✅ BUSCADOR BEZERO */}
+                                    {/* BUSCADOR BEZERO */}
                                     <InputGroup className="mb-4" style={{ maxWidth: '400px' }}>
                                         <InputGroup.Text className="bg-white border-end-0">
                                             <FaSearch className="text-muted" />
@@ -529,7 +533,6 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
                                         </Table>
                                     </div>
 
-                                    {/* ✅ PAGINACIÓN BEZERO */}
                                     {renderPagination(bezeroData.totalPages, currentPageBezero, 'bezero')}
                                     {bezeroData.totalCount > 0 && (
                                         <div className="text-center text-muted mt-2 small">
@@ -537,6 +540,109 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
                                         </div>
                                     )}
                                 </Tab.Pane>
+
+                                {/* TAB: ERABILTZAILEAK BERRESKURATU (Recuperar Usuarios) */}
+                                <Tab.Pane eventKey="recovery">
+                                    <div className="d-flex align-items-center gap-3 mb-4">
+                                        <FaTrashRestore size={28} className="text-warning" />
+                                        <h2 className="text-dark fw-bold mb-0">Erabiltzaileak Berreskuratu</h2>
+                                    </div>
+
+                                    <Alert variant="warning" className="border-0 rounded-3 mb-4 shadow-sm">
+                                        <strong>⚠️ Oharra:</strong> Hemen ezabatutako erabiltzaileak agertzen dira. 
+                                        Berreskuratu edo betirako ezabatu ditzakezu.
+                                    </Alert>
+
+                                    {/* BUSCADOR RECOVERY */}
+                                    <InputGroup className="mb-4" style={{ maxWidth: '400px' }}>
+                                        <InputGroup.Text className="bg-white border-end-0">
+                                            <FaSearch className="text-muted" />
+                                        </InputGroup.Text>
+                                        <FormControl
+                                            className="border-start-0 ps-0"
+                                            placeholder="Bilatu izena..."
+                                            value={searchRecovery}
+                                            onChange={(e) => {
+                                                setSearchRecovery(e.target.value);
+                                                setCurrentPageRecovery(1);
+                                            }}
+                                        />
+                                    </InputGroup>
+
+                                    {/* TABLA RECOVERY */}
+                                    <div className="table-responsive bg-white rounded-4 shadow-sm p-3">
+                                        <Table hover className="align-middle mb-0 table-borderless">
+                                            <thead className="bg-light text-secondary border-bottom">
+                                                <tr>
+                                                    <th className="ps-3">ID</th>
+                                                    <th className="ps-3">Izena</th>
+                                                    <th>Rola</th>
+                                                    <th>Email</th>
+                                                    <th>Ezabatze Data</th>
+                                                    <th className="text-end pe-3">Ekintzak</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {recoveryData.paginated.map(user => (
+                                                    <tr key={user.id} className="border-bottom">
+                                                        <td className="fw-bold ps-3 text-dark fs-6">{user.id}</td>
+                                                        <td className="fw-bold ps-3 text-dark">{user.name}</td>
+                                                        <td>
+                                                            <Badge 
+                                                                bg={user.role === 'Langile' ? 'warning' : 'info'} 
+                                                                text="dark" 
+                                                                className="px-3 py-2 rounded-pill"
+                                                            >
+                                                                {user.role || 'N/A'}
+                                                            </Badge>
+                                                        </td>
+                                                        <td className="text-muted">{user.email}</td>
+                                                        <td className="text-muted small">
+                                                            {user.deleted_at 
+                                                                ? new Date(user.deleted_at).toLocaleDateString('eu-ES')
+                                                                : '-'
+                                                            }
+                                                        </td>
+                                                        <td className="text-end pe-3">
+                                                            <Button 
+                                                                variant="link" 
+                                                                className="text-success text-decoration-none fw-bold me-2" 
+                                                                onClick={() => restoreUser(user.id)}
+                                                            >
+                                                                Berreskuratu
+                                                            </Button>
+                                                            <Button 
+                                                                variant="link" 
+                                                                className="text-danger text-decoration-none fw-bold" 
+                                                                onClick={() => permanentDelete(user.id)}
+                                                            >
+                                                                Betirako Ezabatu
+                                                            </Button>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                                {recoveryData.paginated.length === 0 && (
+                                                    <tr>
+                                                        <td colSpan="6" className="text-center py-5 text-muted">
+                                                            {searchRecovery 
+                                                                ? 'Ez da emaitzarik aurkitu'
+                                                                : 'Ez dago erabiltzaile ezabaturik'
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                )}
+                                            </tbody>
+                                        </Table>
+                                    </div>
+
+                                    {renderPagination(recoveryData.totalPages, currentPageRecovery, 'recovery')}
+                                    {recoveryData.totalCount > 0 && (
+                                        <div className="text-center text-muted mt-2 small">
+                                            {recoveryData.paginated.length} / {recoveryData.totalCount} erabiltzaile erakusten
+                                        </div>
+                                    )}
+                                </Tab.Pane>
+
                             </Tab.Content>
                         </Tab.Container>
                     </Col>
@@ -554,23 +660,17 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
                     <Form onSubmit={handleUpdate}>
                         <Row className="g-3">
                             <Col md={6}>
-                                <Form.Label className="fw-medium text-secondary small text-uppercase">
-                                    {t('admin.name')}
-                                </Form.Label>
+                                <Form.Label className="fw-medium text-secondary small text-uppercase">{t('admin.name')}</Form.Label>
                                 <Form.Control 
                                     value={editForm.data.name} 
                                     onChange={e => editForm.setData('name', e.target.value)} 
                                     isInvalid={!!editForm.errors.name}
                                     required 
                                 />
-                                <Form.Control.Feedback type="invalid">
-                                    {editForm.errors.name}
-                                </Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">{editForm.errors.name}</Form.Control.Feedback>
                             </Col>
                             <Col md={6}>
-                                <Form.Label className="fw-medium text-secondary small text-uppercase">
-                                    {t('admin.email')}
-                                </Form.Label>
+                                <Form.Label className="fw-medium text-secondary small text-uppercase">{t('admin.email')}</Form.Label>
                                 <Form.Control 
                                     type="email" 
                                     value={editForm.data.email} 
@@ -578,39 +678,27 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
                                     isInvalid={!!editForm.errors.email}
                                     required 
                                 />
-                                <Form.Control.Feedback type="invalid">
-                                    {editForm.errors.email}
-                                </Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">{editForm.errors.email}</Form.Control.Feedback>
                             </Col>
                             <Col md={6}>
-                                <Form.Label className="fw-medium text-secondary small text-uppercase">
-                                    {t('admin.phone')}
-                                </Form.Label>
+                                <Form.Label className="fw-medium text-secondary small text-uppercase">{t('admin.phone')}</Form.Label>
                                 <Form.Control 
                                     value={editForm.data.phone} 
                                     onChange={e => editForm.setData('phone', e.target.value)} 
                                     isInvalid={!!editForm.errors.phone}
                                 />
-                                <Form.Control.Feedback type="invalid">
-                                    {editForm.errors.phone}
-                                </Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">{editForm.errors.phone}</Form.Control.Feedback>
                             </Col>
                             <Col md={6}>
-                                <Form.Label className="fw-medium text-secondary small text-uppercase">
-                                    {t('admin.birthDate')}
-                                </Form.Label>
+                                <Form.Label className="fw-medium text-secondary small text-uppercase">{t('admin.birthDate')}</Form.Label>
                                 <Form.Control 
                                     type="date" 
                                     value={editForm.data.birth_date} 
                                     onChange={e => editForm.setData('birth_date', e.target.value)} 
                                     isInvalid={!!editForm.errors.birth_date}
                                 />
-                                <Form.Control.Feedback type="invalid">
-                                    {editForm.errors.birth_date}
-                                </Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">{editForm.errors.birth_date}</Form.Control.Feedback>
                             </Col>
-                            
-                            {/* Campos específicos para Langile - CORREGIDO */}
                             {editingUser?.role === 'Langile' && (
                                 <Col md={12}>
                                     <Form.Label className="fw-medium text-secondary small text-uppercase">
@@ -623,42 +711,29 @@ const AdminComponent = ({ users, activeTab = 'langile' }) => {
                                     >
                                         <option value="">{t('admin.selectType') || 'Seleccionar tipo...'}</option>
                                         {tipoTrabajadorOptions.map((option) => (
-                                            <option key={option.value} value={option.value}>
-                                                {option.label}
-                                            </option>
+                                            <option key={option.value} value={option.value}>{option.label}</option>
                                         ))}
                                     </Form.Select>
-                                    <Form.Control.Feedback type="invalid">
-                                        {editForm.errors.mota}
-                                    </Form.Control.Feedback>
+                                    <Form.Control.Feedback type="invalid">{editForm.errors.mota}</Form.Control.Feedback>
                                 </Col>
                             )}
-                            
                             <Col md={6}>
-                                <Form.Label className="fw-medium text-secondary small text-uppercase">
-                                    {t('admin.address')}
-                                </Form.Label>
+                                <Form.Label className="fw-medium text-secondary small text-uppercase">{t('admin.address')}</Form.Label>
                                 <Form.Control 
                                     value={editForm.data.address} 
                                     onChange={e => editForm.setData('address', e.target.value)} 
                                     isInvalid={!!editForm.errors.address}
                                 />
-                                <Form.Control.Feedback type="invalid">
-                                    {editForm.errors.address}
-                                </Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">{editForm.errors.address}</Form.Control.Feedback>
                             </Col>
                             <Col md={6}>
-                                <Form.Label className="fw-medium text-secondary small text-uppercase">
-                                    {t('admin.postalCode')}
-                                </Form.Label>
+                                <Form.Label className="fw-medium text-secondary small text-uppercase">{t('admin.postalCode')}</Form.Label>
                                 <Form.Control 
                                     value={editForm.data.postal_code} 
                                     onChange={e => editForm.setData('postal_code', e.target.value)} 
                                     isInvalid={!!editForm.errors.postal_code}
                                 />
-                                <Form.Control.Feedback type="invalid">
-                                    {editForm.errors.postal_code}
-                                </Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">{editForm.errors.postal_code}</Form.Control.Feedback>
                             </Col>
                         </Row>
                         <div className="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
