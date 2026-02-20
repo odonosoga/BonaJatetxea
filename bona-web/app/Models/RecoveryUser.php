@@ -12,6 +12,7 @@ class RecoveryUser extends Model
         'original_id',
         'name',
         'email',
+        'password',
         'role',
         'phone',
         'address',

@@ -10,16 +10,17 @@ return new class extends Migration
     {
         Schema::create('recovery_users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('original_id');   // ID original del usuario eliminado
+            $table->unsignedBigInteger('original_id');
             $table->string('name');
             $table->string('email');
-            $table->string('role')->nullable();           // 'Langile' o 'Bezero'
+            $table->string('password'); // ← AÑADIR
+            $table->string('role')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('postal_code')->nullable();
             $table->date('birth_date')->nullable();
-            $table->string('mota')->nullable();           // Solo para Langile
-            $table->timestamp('deleted_at')->nullable();  // Cuándo fue eliminado
+            $table->string('mota')->nullable();
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

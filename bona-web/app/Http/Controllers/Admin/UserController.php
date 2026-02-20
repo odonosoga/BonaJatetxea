@@ -97,10 +97,12 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        // ✅ Guardamos también la contraseña hasheada
         RecoveryUser::create([
             'original_id' => $user->id,
             'name'        => $user->name,
             'email'       => $user->email,
+            'password'    => $user->password,
             'role'        => $user->role,
             'phone'       => $user->phone,
             'address'     => $user->address,
@@ -120,12 +122,8 @@ class UserController extends Controller
             ->with('success', 'Erabiltzailea ezabatu eta berreskuratze zerrendan gorde da.');
     }
 
-    public function restore(Request $request, $id)
+    public function restore($id)
     {
-        $request->validate([
-            'password' => 'required|string|min:8',
-        ]);
-
         $recovery = RecoveryUser::findOrFail($id);
 
         if (User::where('email', $recovery->email)->exists()) {
@@ -133,10 +131,11 @@ class UserController extends Controller
                 ->with('error', 'Email hori dagoeneko erabiltzen ari da. Ezin da berreskuratu.');
         }
 
+        // ✅ Restauramos con la contraseña original (ya hasheada, sin Hash::make)
         $user = User::create([
             'name'        => $recovery->name,
             'email'       => $recovery->email,
-            'password'    => Hash::make($request->password), // ← contraseña del admin
+            'password'    => $recovery->password,
             'role'        => $recovery->role,
             'phone'       => $recovery->phone,
             'address'     => $recovery->address,

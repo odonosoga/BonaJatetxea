@@ -24,13 +24,7 @@ const AdminComponent = ({ users, recoveryUsers = [], activeTab = 'langile' }) =>
     const [currentPageRecovery, setCurrentPageRecovery] = useState(1);
     const itemsPerPage = 10;
 
-    // Estados modal restaurar con contraseña
-    const [showRestoreModal, setShowRestoreModal] = useState(false);
-    const [restoreTarget, setRestoreTarget] = useState(null);
-    const [restorePassword, setRestorePassword] = useState('');
-    const [restorePasswordConfirm, setRestorePasswordConfirm] = useState('');
-    const [restoreError, setRestoreError] = useState('');
-    const [restoreProcessing, setRestoreProcessing] = useState(false);
+
 
     // Forms
     const editForm = useForm({
@@ -94,40 +88,15 @@ const AdminComponent = ({ users, recoveryUsers = [], activeTab = 'langile' }) =>
         }
     };
 
-    // Abrir modal de restaurar
-    const handleRestoreClick = (user) => {
-        setRestoreTarget(user);
-        setRestorePassword('');
-        setRestorePasswordConfirm('');
-        setRestoreError('');
-        setShowRestoreModal(true);
-    };
-
-    // Confirmar restauración con contraseña
-    const handleRestoreConfirm = () => {
-        if (restorePassword.length < 8) {
-            setRestoreError('Pasahitzak 8 karaktere izan behar ditu gutxienez.');
-            return;
+    // Restaurar usuario
+    const restoreUser = (userId) => {
+        if (confirm('Erabiltzailea berreskuratu nahi duzu?')) {
+            router.post(
+                route ? route('admin.users.restore', userId) : `/admin/users/${userId}/restore`,
+                {},
+                { preserveScroll: true }
+            );
         }
-        if (restorePassword !== restorePasswordConfirm) {
-            setRestoreError('Pasahitzak ez datoz bat.');
-            return;
-        }
-        setRestoreProcessing(true);
-        router.post(
-            route ? route('admin.users.restore', restoreTarget.id) : `/admin/users/${restoreTarget.id}/restore`,
-            { password: restorePassword },
-            {
-                onSuccess: () => {
-                    setShowRestoreModal(false);
-                    setRestoreProcessing(false);
-                },
-                onError: () => {
-                    setRestoreProcessing(false);
-                    setRestoreError('Errorea gertatu da. Saiatu berriro.');
-                }
-            }
-        );
     };
 
     const permanentDelete = (userId) => {
@@ -431,7 +400,7 @@ const AdminComponent = ({ users, recoveryUsers = [], activeTab = 'langile' }) =>
                                                         </td>
                                                         <td className="text-muted">{user.email}</td>
                                                         <td className="text-end pe-3">
-                                                            <Button variant="link" className="text-success text-decoration-none fw-bold me-2" onClick={() => handleRestoreClick(user)}>
+                                                            <Button variant="link" className="text-success text-decoration-none fw-bold me-2" onClick={() => restoreUser(user.id)}>
                                                                 Berreskuratu
                                                             </Button>
                                                             <Button variant="link" className="text-danger text-decoration-none fw-bold" onClick={() => permanentDelete(user.id)}>
@@ -519,55 +488,6 @@ const AdminComponent = ({ users, recoveryUsers = [], activeTab = 'langile' }) =>
                         </div>
                     </Form>
                 </Modal.Body>
-            </Modal>
-
-            {/* MODAL BERRESKURATU - Pedir contraseña nueva */}
-            <Modal show={showRestoreModal} onHide={() => setShowRestoreModal(false)} centered className="admin-modal">
-                <Modal.Header closeButton className="bg-success text-white border-0">
-                    <Modal.Title className="fw-bold fs-5">
-                        Berreskuratu: {restoreTarget?.name}
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body className="p-4 bg-white">
-                    <p className="text-muted mb-4">
-                        Erabiltzailearen kontu berria sortzeko, pasahitz berri bat ezarri behar duzu.
-                    </p>
-                    {restoreError && (
-                        <Alert variant="danger" className="border-0 rounded-3">{restoreError}</Alert>
-                    )}
-                    <Row className="g-3">
-                        <Col md={12}>
-                            <Form.Label className="fw-medium text-secondary small text-uppercase">Pasahitz Berria *</Form.Label>
-                            <Form.Control
-                                type="password"
-                                placeholder="Gutxienez 8 karaktere..."
-                                value={restorePassword}
-                                onChange={e => { setRestorePassword(e.target.value); setRestoreError(''); }}
-                            />
-                        </Col>
-                        <Col md={12}>
-                            <Form.Label className="fw-medium text-secondary small text-uppercase">Pasahitza Berretsi *</Form.Label>
-                            <Form.Control
-                                type="password"
-                                placeholder="Errepikatu pasahitza..."
-                                value={restorePasswordConfirm}
-                                onChange={e => { setRestorePasswordConfirm(e.target.value); setRestoreError(''); }}
-                            />
-                        </Col>
-                    </Row>
-                </Modal.Body>
-                <Modal.Footer className="border-0 bg-white px-4 pb-4">
-                    <Button variant="light" onClick={() => setShowRestoreModal(false)} className="px-4 rounded-3 fw-bold text-muted">
-                        Utzi
-                    </Button>
-                    <Button
-                        className="btn-register px-5 py-2"
-                        onClick={handleRestoreConfirm}
-                        disabled={restoreProcessing}
-                    >
-                        {restoreProcessing ? 'Berreskuratzen...' : 'Berreskuratu'}
-                    </Button>
-                </Modal.Footer>
             </Modal>
 
         </section>
